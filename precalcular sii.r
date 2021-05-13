@@ -46,6 +46,7 @@ actividad_elegida <- actividad_filtradas[1]
 #región ----
 #total empresas región
 datos_sii$empresas %>%
+  filter(año == 2019) %>%
   summarize(n = sum(empresas, na.rm = T))
 
 
@@ -374,14 +375,16 @@ datos_sii$trabajadores %>%
 
 
 # género: comunas ----
-datos_sii$trabajadores %>%
+trabajadores_genero_comunas <- datos_sii$trabajadores %>%
   filter(año == 2019,
          género != "total",
          tipo == "dependencia",
          calculo == "total") %>%
   group_by(comuna, género) %>%
   summarize(n = sum(valor, na.rm = T)) %>%
-  pivot_wider(values_from = n, names_from = género)
+  pivot_wider(values_from = n, names_from = género) %>%
+  mutate(femenino_p = femenino/(femenino + masculino),
+         masculino_p = masculino/(femenino + masculino))
 
 # género: comuna elegida ----
 #trabajadores rubro elegido por género
@@ -408,6 +411,18 @@ datos_sii$trabajadores %>%
   group_by(género) %>%
   summarize(n = sum(valor, na.rm = T)) %>%
   pivot_wider(values_from = n, names_from = género)
+
+#género: rubros ----
+trabajadores_genero_rubros <- datos_sii$trabajadores %>%
+  filter(año == 2019,
+         género != "total",
+         tipo == "dependencia",
+         calculo == "total") %>%
+  group_by(rubro, género) %>%
+  summarize(n = sum(valor, na.rm = T)) %>%
+  pivot_wider(values_from = n, names_from = género) %>%
+  mutate(femenino_p = femenino/(femenino + masculino),
+         masculino_p = masculino/(femenino + masculino))
 
 #g género: rubro elegido ----
 datos_sii$trabajadores %>%
@@ -438,6 +453,20 @@ datos_sii$trabajadores %>%
   summarize(femenino = sum(femenino),
             masculino = sum(masculino))
 
+#género: rubros y comunas ----
+trabajadores_genero_rubros_comunas <- datos_sii$trabajadores %>%
+  filter(año == 2019) %>%
+  filter(tipo == "dependencia",
+         calculo == "total",
+         género != "total") %>%
+  select(-dato, -tipo, -empresas, -calculo) %>%
+  pivot_wider(values_from = valor, names_from = género) %>%
+  group_by(comuna, rubro) %>%
+  summarize(femenino = sum(femenino),
+            masculino = sum(masculino)) %>%
+  ungroup() %>%
+  mutate(femenino_p = femenino/(femenino + masculino),
+         masculino_p = masculino/(femenino + masculino))
 
 #ponderados
 #La columna “Trabajadores ponderados por meses trabajados” corresponde a la suma, por cada una de las empresas, de cada uno los trabajadores informados multiplicados por el número de meses trabajados y dividido por 12.
@@ -800,10 +829,32 @@ datos_sii$renta_act %>%
 #transformar porcentajes en 10 filas,
 #asignar cada fila a un grupo, y colorear en base a eso
 
+#—----
+#TRAMOS ----
 
+#tramos comuna  ----
+tramos_comuna <- datos_sii$tramos_comuna %>%
+  filter(año == 2019) %>%
+  group_by(comuna) %>%
+  mutate(porcentaje = empresas/sum(empresas)) %>%
+  select(comuna, tramo, empresas, porcentaje)
+
+#tramos región ----
+tramos_region <- datos_sii$tramos_comuna %>%
+  group_by(tramo) %>%
+  summarize(empresas = sum(empresas)) %>%
+  mutate(porcentaje = empresas/sum(empresas))
+
+#tramos rubro ----
+tramos_rubro <- datos_sii$tramos_rubro %>%
+  filter(año == 2019) %>%
+  group_by(rubro) %>%
+  mutate(porcentaje = empresas/sum(empresas)) %>%
+  select(rubro, tramo, empresas, porcentaje)
 
 #—----
 
+#COMPILAR ----
 #E1 empresas region rubro elegido:            empresas_rubros
 #E2 empresas rubro elegido comuna elegida:    empresas_comunas
 #E3 empresas subrubros:                       empresas_subrubros
@@ -825,6 +876,13 @@ datos <- list("empresas_rubros" = empresas_rubros,
               ##
               "trabajadores_rubros" = trabajadores_rubros,
               "trabajadores_comuna_rubro" = trabajadores_comuna_rubro,
-              "trabajadores_comuna_subrubro" = trabajadores_comuna_subrubro)
+              "trabajadores_comuna_subrubro" = trabajadores_comuna_subrubro,
+              "trabajadores_genero_comunas" = trabajadores_genero_comunas,
+              "trabajadores_genero_rubros" = trabajadores_genero_rubros,
+              "trabajadores_genero_rubros_comunas" = trabajadores_genero_rubros_comunas,
+              ##
+              "tramos_comuna" = tramos_comuna,
+              "tramos_region" = tramos_region,
+              "tramos_rubro" = tramos_rubro)
 
-
+save(datos, file = "datos_precalculados.rdata")
