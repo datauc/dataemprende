@@ -1,6 +1,6 @@
-library(dplyr)
-
 shinyServer(function(input, output, session) {
+    
+    #observe(startAnim(session, 'selectores', 'bounceInRight'))
 
     #filtrar selector de subrubros
     observeEvent(input$rubro, {
@@ -134,6 +134,45 @@ shinyServer(function(input, output, session) {
         }
         return(t)
     })
-}
+    
+    
+    
+    #empresas ----
+    
+    #gráfico de logos de empresas en tres filas
+    output$g_empresas_comuna <- renderPlot({
+        p <- graficar_empresas(input$comuna)
+        return(p)
+    })
+    
+    
+    #trabajadores ----
+    
+    #gráfico de logos del género de trabajadores de la comuna
+    output$g_trabajadores_comuna <- renderPlot({
+        
+        porcentaje_trabajadores_hombres_comuna <- filter(datos$trabajadores_genero_comunas, comuna == input$comuna)$masculino_p
+        porcentaje_trabajadores_mujeres_comuna <- filter(datos$trabajadores_genero_comunas, comuna == input$comuna)$femenino_p
+        
+        p <- graficar_genero(porcentaje_trabajadores_hombres_comuna,
+                             porcentaje_trabajadores_mujeres_comuna) +
+            scale_color_manual(values = c("lightblue", "pink"))
+        
+        return(p)
+    })
+    
+    #gráfico de logos del género de trabajadores de la comuna por el rubro
+    output$g_trabajadores_comuna_rubro <- renderPlot({
+        
+        porcentaje_trabajadores_hombres_rubro_comuna <- filter(datos$trabajadores_genero_rubros_comunas, rubro == input$rubro, comuna == input$comuna)$masculino_p 
+        porcentaje_trabajadores_mujeres_rubro_comuna <- filter(datos$trabajadores_genero_rubros_comunas, rubro == input$rubro, comuna == input$comuna)$femenino_p 
+        
+        p <- graficar_genero(porcentaje_trabajadores_hombres_rubro_comuna,
+                             porcentaje_trabajadores_mujeres_rubro_comuna) +
+            scale_color_manual(values = c("lightblue", "pink"))
+        
+        return(p)
+    })
 
-)
+    
+    })
