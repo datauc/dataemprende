@@ -22,6 +22,12 @@ pesos <- function(x) {
   return(y)
 }
 
+#pone los porcentajes en el formato correcto
+porcentaje <- function(x, z = 0.1) {
+ y <- scales::percent(x, decimal.mark = ",", big.mark =".", accuracy = z)
+  return(y) 
+}
+
 #pone la palabra "ninguna" si al cifra es cero o nula
 ninguna <- function(x, palabra = "ninguna") {
   #si es null o numeric(0)
@@ -111,3 +117,10 @@ graficar_empresas <- function(input_comuna = "Iquique") {
 # graficar_empresas("Colchane")
 # graficar_empresas("Pica")
 # graficar_empresas("Huara")
+
+
+#agrega el estilo css al texto
+cifra <- function(x) {
+  y <- paste0("<span class='cifra'>", x , "</span>")
+  return(y)
+}

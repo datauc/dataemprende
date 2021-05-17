@@ -20,16 +20,18 @@ shinyServer(function(input, output, session) {
     #texto párrafo 1
     #párrafo empresas/rubros y tramos ----
     output$parrafo1 <- reactive({
-        t <- paste(
-            "En la región de Tarapacá existen 22.047 empresas.", 
-            filter(datos$empresas_rubros, rubro == input$rubro) %>% pull() %>% puntos() %>% ninguna(), 
+        t <- HTML(
+            "En la región de Tarapacá existen",
+            cifra(22.047),
+            "empresas.", 
+            cifra(filter(datos$empresas_rubros, rubro == input$rubro) %>% pull() %>% puntos() %>% ninguna()), 
             "de ellas son empresas dedicadas a su mismo rubro, equivalentes al",
-            (filter(datos$empresas_rubros, rubro == input$rubro)$n/22047) %>% scales::percent(decimal.mark = ",", accuracy = 0.1) %>% paste0("."),
+            cifra((filter(datos$empresas_rubros, rubro == input$rubro)$n/22047) %>% porcentaje() %>% paste0(".")),
             
             "A nivel regional, un",
-            filter(datos$tramos_region, tramo == "Pequeña")$porcentaje %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(filter(datos$tramos_region, tramo == "Pequeña")$porcentaje %>% porcentaje()),
             "de las empresas son pequeñas empresas, y un",
-            filter(datos$tramos_region, tramo == "Micro")$porcentaje %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(filter(datos$tramos_region, tramo == "Micro")$porcentaje %>% porcentaje()),
             "microempresas."
         )
         return(t)
@@ -37,21 +39,21 @@ shinyServer(function(input, output, session) {
     
     #párrafo tramos/comuna, tramos/rubro ----
     output$parrafo2 <- reactive({
-        t <- paste(
+        t <- HTML(
             "En la comuna de", paste0(input$comuna, ","), 
             "un",
-            filter(datos$tramos_comuna, comuna == input$comuna, tramo == "Pequeña")$porcentaje %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(filter(datos$tramos_comuna, comuna == input$comuna, tramo == "Pequeña")$porcentaje %>% porcentaje()),
             "de las empresas son pequeñas, y",
-            filter(datos$tramos_comuna, comuna == input$comuna, tramo == "Micro")$porcentaje %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(filter(datos$tramos_comuna, comuna == input$comuna, tramo == "Micro")$porcentaje %>% porcentaje()),
             "son microempresas.",
-            filter(datos$empresas_comunas, comuna == input$comuna) %>% pull() %>% puntos() %>% ninguna(), 
+            cifra(filter(datos$empresas_comunas, comuna == input$comuna) %>% pull() %>% puntos() %>% ninguna()),
             "empresas se dedican a su rubro.",
             "A nivel nacional, un",
-            filter(datos$tramos_rubro, rubro == input$rubro, tramo == "Pequeña")$porcentaje %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(filter(datos$tramos_rubro, rubro == input$rubro, tramo == "Pequeña")$porcentaje %>% porcentaje()),
             "de las empresas del rubro",
             #paste(tolower(input$rubro)),
             "son pequeñas, mientras que un",
-            filter(datos$tramos_rubro, rubro == input$rubro, tramo == "Micro")$porcentaje %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(filter(datos$tramos_rubro, rubro == input$rubro, tramo == "Micro")$porcentaje %>% porcentaje()),
             "corresponden a microempresas."
         )
         return(t)
@@ -59,9 +61,9 @@ shinyServer(function(input, output, session) {
             
     #párrafo trabajadores/rubro ----
     output$parrafo3 <- reactive({
-        t <- paste(
+        t <- HTML(
             "En total,",
-            filter(datos$trabajadores_rubros, rubro == input$rubro) %>% pull() %>% puntos() %>% ninguna(), 
+            cifra(filter(datos$trabajadores_rubros, rubro == input$rubro) %>% pull() %>% puntos() %>% ninguna()),
             "personas trabajan en el rubro de",
             paste(tolower(input$rubro)) %>% paste0(".")
         )
@@ -77,15 +79,15 @@ shinyServer(function(input, output, session) {
         
             if (isTruthy(trabajadores_comuna_rubro) == TRUE) {
                 t <- paste(paste0(t, ","), 
-                           trabajadores_comuna_rubro %>% puntos() %>% ninguna(),
+                           cifra(trabajadores_comuna_rubro %>% puntos() %>% ninguna()),
                            "trabajadores se desempeñan en su rubro, y",
-                           trabajadores_comuna_subrubro %>% puntos() %>% ninguna(palabra = "ninguno"),
+                           cifra(trabajadores_comuna_subrubro %>% puntos() %>% ninguna(palabra = "ninguno")),
                            "en su subrubro.")
             } else {
                 t <- paste(t, "no hay trabajadores que se desempeñen en este rubro.")
             }
 
-        return(t)
+        return(HTML(t))
     })
     
     #párrafos trabajadores/género ----
@@ -103,16 +105,16 @@ shinyServer(function(input, output, session) {
         t <- paste(
             #género por comuna
             "En su comuna, el porcentaje de trabajadores hombres y mujeres es de",
-            porcentaje_trabajadores_hombres_comuna %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(porcentaje_trabajadores_hombres_comuna %>% porcentaje()),
             "y",
-            porcentaje_trabajadores_mujeres_comuna %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(porcentaje_trabajadores_mujeres_comuna %>% porcentaje()),
             "respectivamente.", 
             
             #género por region y rubro
             "A nivel regional, la distribución de hombres y mujeres en su rubro es de",
-            porcentaje_trabajadores_hombres_rubro_region %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+            cifra(porcentaje_trabajadores_hombres_rubro_region %>% porcentaje()),
             "y",
-            porcentaje_trabajadores_mujeres_rubro_region %>% scales::percent(decimal.mark = ",", accuracy = 0.1)
+            cifra(porcentaje_trabajadores_mujeres_rubro_region %>% porcentaje())
         )
          
         #género por comuna y rubro
@@ -121,9 +123,9 @@ shinyServer(function(input, output, session) {
                        "mientras que, específicamente, en la comuna de",
                        paste(input$comuna),
                        "la distribución de género es de",
-                       porcentaje_trabajadores_hombres_rubro_comuna %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+                       cifra(porcentaje_trabajadores_hombres_rubro_comuna %>% porcentaje()),
                        "hombres y",
-                       porcentaje_trabajadores_mujeres_rubro_comuna %>% scales::percent(decimal.mark = ",", accuracy = 0.1),
+                       cifra(porcentaje_trabajadores_mujeres_rubro_comuna %>% porcentaje()),
                        "mujeres."
             )
         } else {
@@ -132,7 +134,7 @@ shinyServer(function(input, output, session) {
                        tolower(input$rubro) %>% paste0(".")
             )
         }
-        return(t)
+        return(HTML(t))
     })
     
     
