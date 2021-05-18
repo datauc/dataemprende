@@ -124,3 +124,13 @@ cifra <- function(x) {
   y <- paste0("<span class='cifra'>", x , "</span>")
   return(y)
 }
+
+
+espaciador <- function() {
+ 
+  y <- list(br(),br(),
+  br(),br(),
+  br(),br(),
+  p(" "))
+  return(y)
+}

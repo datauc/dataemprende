@@ -28,15 +28,66 @@ body {
   font-family: 'Montserrat', cursive;
   font-weight: 300;
   background-color: #457B9D;/*#fff;*/
-  color: white;
+  color: #F1FAEE;
 }
 
 .fondo {
-  background-image: url("fondo_iquique_azul.jpg"); /* The image used */
-  background-color: #1D3557; /* Used if the image is unavailable */
+  /*background-image: url("fondo_iquique_azul.jpg"); /* The image used */
+  background-color: #2D668E;/*#1D3557; /* Used if the image is unavailable */
   /*opacity: 0.2;*/
   /*height: 200px; /* You must set a specified height */
   background-position: 100% 0%; /*top-right; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+
+/* SELECTORES */
+
+/* color del texto */
+.selectize-input {
+  font-size: 10pt; 
+  color: #F1FAEE; !important
+  
+} 
+
+/* color del selector cuando está activo */
+.selectize-input.input-active {
+  font-size: 10pt; 
+  color: #F1FAEE; !important
+  /*background-color: transparent; !important
+  border-color: #1D3557; !important #no puedo cambiar el color blanco de fondo */
+} 
+  
+/* color del fondo y del borde */    
+.selectize-input.items {
+  background-color: #2D668E; 
+  border-color: #2D668E; !important
+} 
+
+/* color del fondo y del borde en hover*/
+.selectize-input.items:hover {
+  background-color: #1D3557; 
+  border-color: #1D3557; !important
+  
+} 
+
+.selectize-control.single .selectize-input:after {
+  border-color: #F1FAEE transparent transparent transparent; !important
+}
+  /*texto del selector, texto del selector cuando está desplegado, fondo del selector, fondo hover, color del triangulo */
+
+/* elementos del desplegable*/ 
+.selectize-dropdown {
+  font-size: 10pt; 
+  color: #F1FAEE; 
+  border-color: #1D3557;
+  background-color: #1D3557; !important
+}
+
+/*elementos del desplegable hover*/
+.selectize-dropdown .active {
+  color: #F1FAEE; 
+  background: #2D668E !important;
+  
 }

@@ -1,6 +1,6 @@
 library(dplyr)
 
-shinyUI(fluidPage(
+shinyUI(fluidPage(#shinymaterial::material_page(#
   #shinyanimate::withAnim(), #animación shinyanimate
   aos::use_aos(), #animación en scroll
   includeCSS("estilos.css"), #estilos css
@@ -23,21 +23,18 @@ shinyUI(fluidPage(
            p("Para asesorarte, necesitamos que respondas algunas preguntas...") %>% 
              aos(animation = "fade-down", duration = "2000", delay = 400),
            
-           br(),br(),
-           br(),br(),
-           p(" "),
+           espaciador(),
     ),
     
   ),
   
-  
   #preguntas ----
   
+  espaciador(),
+  
   fluidRow(
-
+    
     column(12,
-           br(),br(),
-           br(),br(),
            
            div(id = "selectores",
                #input$comuna
@@ -56,14 +53,13 @@ shinyUI(fluidPage(
                            label = "Subrubro de su negocio o emprendimiento", 
                            choices = NULL,
                            width = "100%"),
+               
            )
     ) %>% aos(animation = "fade-down", duration = "2000", delay = 0),
     
-    br(),br(),
-    br(),br(),
-    br(),br(),
-    
   ),
+  
+  espaciador(),
   
   #resultados ----
   
@@ -80,11 +76,11 @@ shinyUI(fluidPage(
            htmlOutput("parrafo4")%>% aos(animation = "fade-down", delay = "300"),
            br(),br(),
            htmlOutput("parrafo5")%>% aos(animation = "fade-down", delay = "400"),
-           br(),br(),
-           br(),br(),
     ),
     
   ),
+  
+  espaciador(),
   
   # empresas ----
   fluidRow(
@@ -97,8 +93,7 @@ shinyUI(fluidPage(
     )
   ),
   
-  br(),br(),
-  br(),br(),
+  espaciador(),
   
   # trabajadores ----
   fluidRow(
@@ -117,8 +112,7 @@ shinyUI(fluidPage(
     )
   ),
   
-  br(),br(),
-  br(),br(),
+  espaciador(),
   
   # ventas ----
   fluidRow(
@@ -127,8 +121,7 @@ shinyUI(fluidPage(
     )
   ),
   
-  br(),br(),
-  br(),br(),
+  espaciador(),
   
 )
 )
