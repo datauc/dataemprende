@@ -1,14 +1,23 @@
-@import url("//fonts.googleapis.com/css?family=Lobster|Cabin:400,700");
-
-@import url("//fonts.googleapis.com/css?family=Dosis|600,800");
+/*@import url("//fonts.googleapis.com/css?family=Dosis");*/
 @import url("//fonts.googleapis.com/css?family=Montserrat|300");
 
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;500;600&display=swap');
+
 h1 {
-  font-family: 'Dosis', cursive;
+  font-family: 'Dosis', sans-serif;
   font-weight: 600;
   line-height: 1.1;
   color: #A8DADC;
 }
+
+.h1b {
+  font-family: 'Dosis', sans-serif;;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.1;
+  color: #A8DADC;
+}
+
 
 h2 {
   font-family: 'Dosis', cursive;
@@ -32,13 +41,13 @@ body {
 }
 
 .fondo {
-  /*background-image: url("fondo_iquique_azul.jpg"); /* The image used */
+  background-image: url("anim3_comp.gif"); /* The image used */
   background-color: #2D668E;/*#1D3557; /* Used if the image is unavailable */
   /*opacity: 0.2;*/
   /*height: 200px; /* You must set a specified height */
   background-position: 100% 0%; /*top-right; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  /*background-size: cover;  Resize the background image to cover the entire container */
 }
 
 

@@ -1,3 +1,5 @@
+#http://dataintelligence.cl/shiny/dataemprende_datos
+
 library(dplyr)
 
 shinyUI(fluidPage(#shinymaterial::material_page(#
@@ -15,7 +17,10 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            
            br(),br(),
            
-           h1("DataEmprende") %>% 
+           div(
+             h1("DataEmprende", style = "display:inline-block;"),
+             div("Tarapacá", class = "h1b", style = "display:inline-block;")
+             ) %>% 
              aos(animation = "fade-down", duration = "2000"),
            
            br(),br(),
