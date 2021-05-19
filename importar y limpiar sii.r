@@ -2,7 +2,8 @@
 ####
 ####
 #este archivo importa las bases del sii (alternativamente las descarga) y limpia los datos
-#también se genera la lista datos_sii.rdata que junta las bases en un solo objeto
+#también se genera la lista datos_sii.rdata que junta las bases en un solo objeto.
+#el siguiente paso es el script "precalcular sii.r"
 ####
 ####
 ####
@@ -18,17 +19,6 @@ library(tidyverse)
 #uf2019 <- mean(valores_uf_2019$valor)
 #27851
 uf2019 <- 27851
-
-# importar tablas
-# url <- "https://www.sii.cl/sobre_el_sii/estadisticas/empresas/202010_PUB_COMU_RUBR.xlsb"
-# 
-# download.file(url = url,
-#               destfile = "~/SII/Datos/202010_PUB_COMU_RUBR.xlsx")
-# 
-# sii_comu_rubr <- readxlsb::read_xlsb("~/SII/Datos/202010_PUB_COMU_RUBR.xlsb", range = "A1:Z999", sheet = 1)
-# 
-# glimpse(sii_comu_rubr)
-
 
 
 #descargar todas las tablas ----
@@ -52,7 +42,9 @@ sii_comu_act <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_COMU_ACT.tx
   mutate(`Rubro economico` = str_remove_all(`Rubro economico`, ". - "),
          `Subrubro economico` = str_remove_all(`Subrubro economico`, ".* - "))
 
-#sii_tramo_rubr <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_RUBR.txt", local = locale(encoding = "latin1"))
+sii_tram_comu <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_COMU.txt", local = locale(encoding = "latin1"))
+
+sii_tram_rubr <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_RUBR.txt", local = locale(encoding = "latin1"))
 
 
 # glimpse(sii_reg_rubr)
@@ -268,40 +260,6 @@ sii_trabajadores %>%
 #comparar con fuerza de trabajo de la comuna
 #los promedios son inútiles porque hay demasiadas empresas sin trabajadores
 
-# #subrubro
-# sii_trabajadores_subr <- sii_comu_subr %>%
-#   #filtro inicial de región y año
-#   filter(`Region del domicilio o casa matriz` == "Región de Tarapacá") %>%
-#   #seleccionar columnas relevantes
-#   select(1:7, starts_with("Número de trabajadores"), starts_with("Trabajadores")) %>%
-#   #dividir datos por cantidad de empresas para obtener promedios de empresas
-#   mutate(across(c(starts_with("Número de trabajadores"), starts_with("Trabajadores")), 
-#                 list("promedio" = ~ .x/`Número de empresas`), #poner sufijo a las columnas nuevas
-#                 .names = "{col} {fn}")) %>% #formato del nombre nuevo
-#   #pivotar a formato long
-#   pivot_longer(cols = 8:length(.), names_to = "dato", values_to = "valor") %>%
-#   #sacar columnas innecesarias
-#   select(-3, -4) %>%
-#   #filter(`Comuna del domicilio o casa matriz` == "Huara") %>%
-#   #select(-3) %>%
-#   #mutate(`Rubro economico` = str_trunc(`Rubro economico`, 20)) %>%
-#   mutate(tipo = case_when(str_detect(dato, regex("ponderados", ignore_case = T)) ~ "ponderados",
-#                           str_detect(dato, regex("honorarios|dependientes", ignore_case = T)) ~ "dependencia",
-#                           str_detect(dato, regex("género", ignore_case = T)) ~ "género",
-#                           TRUE ~ "otros")) %>%
-#   mutate(género = case_when(str_detect(dato, "femenino") ~ "femenino",
-#                             str_detect(dato, "masculino") ~ "masculino",
-#                             TRUE ~ "total")) %>%
-#   mutate(dependencia = case_when(str_detect(dato, "honorario") ~ "honorarios",
-#                                  str_detect(dato, "dependiente") ~ "dependientes")) %>%
-#   mutate(calculo = case_when(str_detect(dato, "promedio") ~ "promedio",
-#                              TRUE ~ "total")) %>%
-#   rename(año = 1,
-#          comuna = 2,
-#          subrubro = 3,
-#          rubro = 4,
-#          empresas = 5) %>%
-#   print()
 
 sii_trabajadores_act <- sii_comu_act %>%
   #filtro inicial de región y año
@@ -342,10 +300,6 @@ sii_trabajadores_act <- sii_comu_act %>%
 #—----
 
 #tramo  ----
-sii_tram_comu <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_COMU.txt", local = locale(encoding = "latin1"))
-
-sii_tram_rubr <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_RUBR.txt", local = locale(encoding = "latin1"))
-
 names(sii_tram_comu)
 
 tramos_comuna <- sii_tram_comu %>% 
@@ -421,5 +375,3 @@ datos_sii <- list("empresas" = sii_empresas,
                   "tramos_rubro" = tramos_rubro)
 
 save(datos_sii, file = "datos_sii_act.rdata")
-
-

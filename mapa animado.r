@@ -1,3 +1,5 @@
+#el mapa animado que aparece de fondo en el header de la página
+
 library(dplyr)
 library(ggplot2)
 library(gganimate)

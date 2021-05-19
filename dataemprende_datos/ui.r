@@ -7,10 +7,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   aos::use_aos(), #animación en scroll
   includeCSS("estilos.css"), #estilos css
   #tags$link(rel = "stylesheet", type = "text/css", href = "estilos.css"),
-  
-  # Application title
-  #titlePanel(windowTitle = "Dataemprende", title = NULL),
-  
+
   fluidRow(
     column(12, class = "fondo",
            #style = "padding-bottom: 30px;",
