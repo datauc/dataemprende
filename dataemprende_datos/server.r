@@ -168,6 +168,16 @@ shinyServer(function(input, output, session) {
     })
     
     
+    #grafico cantidad empresas ----
+    output$g_cantidad_empresas <- renderPlot({
+        p <- datos$empresas_año_rubro_comuna %>%
+            filter(comuna == input$comuna) %>% #picker
+            filter(rubro == input$rubro) %>% #picker
+            graficar_lineas_degradado()
+        return(p)
+    }, res = 100)
+    
+    
     #trabajadores ----
     
     #gráfico de logos del género de trabajadores de la comuna

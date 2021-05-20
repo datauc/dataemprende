@@ -98,7 +98,6 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            br(),
            
            #crecimiento del subrubro
-           
              p("En comparación con", 
                style = "display:inline-block; vertical-align: middle;"),
              div(
@@ -112,7 +111,15 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
              
              div(
                htmlOutput("crecimiento_subrubros_empresas"),
-               style = "display:inline-block; vertical-align: middle; margin-bottom: 15px;")
+               style = "display:inline-block; vertical-align: middle; margin-bottom: 15px;"),
+           
+           br(),
+           br(),
+           
+           #grafico cantidad empresas ----
+           plotOutput("g_cantidad_empresas", height = "300px") %>% 
+             aos(animation = "fade-down"),
+           
     ) 
   ),
   

@@ -1,7 +1,7 @@
 library(dplyr)
 library(ggplot2)
 library(aos)
-
+#library(grid)
 
 #importar variables y listas necesarias
 source("variables.r")
@@ -10,6 +10,10 @@ source("variables.r")
 load("datos_precalculados.rdata")
 
 color_fondo <- "#457B9D"
+color_claro <- "#A8DADC"
+color_blanco <- "#F1FAEE"
+color_oscuro <- "#2D668E"
+color_negro <- "#1D3557"
 
 #funciones ----
 #pone puntos de miles a una cifra
@@ -138,3 +142,88 @@ espaciador <- function() {
   p(" "))
   return(y)
 }
+
+
+#https://stackoverflow.com/questions/30136725/plot-background-colour-in-gradient
+gg.background.fill <- function(gg.plot, cols = "white", which = "x") {
+  #does not work with facets
+  
+  stopifnot(which %in% c("x", "y"))
+  which1 <- if (which == "x") "width" else "height"
+  
+  require(gridExtra)
+  
+  g <- ggplotGrob(gg.plot)
+  #g <- ggplotGrob(p)
+  gg <- g$grobs      
+  findIt <- vapply(gg, function(x) grepl("GRID.gTree", x$name, fixed = TRUE), TRUE)
+  n1 <- getGrob(gg[findIt][[1]], "grill.gTree", grep=TRUE)$name
+  n2 <- getGrob(gg[findIt][[1]], "panel.background.rect", grep=TRUE)$name
+  gg[findIt][[1]]$children[[n1]]$children[[n2]]$gp$fill <- cols
+  x <- gg[findIt][[1]]$children[[n1]]$children[[n2]][[which]]
+  w <- gg[findIt][[1]]$children[[n1]]$children[[n2]][[which1]]
+  attr <- attributes(x)
+  x <- seq(0 + c(w)/length(cols)/2, 1 - c(w)/length(cols)/2, length.out = length(cols))
+  attributes(x) <- attr
+  gg[findIt][[1]]$children[[n1]]$children[[n2]][[which]] <- x
+  w <- c(w)/length(cols) 
+  attributes(w) <- attr
+  gg[findIt][[1]]$children[[n1]]$children[[n2]][[which1]] <- w
+  g$grobs <- gg
+  class(g) = c("arrange", "ggplot", class(g)) 
+  g
+}
+
+
+
+
+graficar_lineas_degradado <- function(data, texto_y = "Cantidad de empresas"){
+  #fondo degradado https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
+  colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
+  fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
+  
+  #graficar
+  p <- data %>%
+    ggplot(aes(año, empresas, col=rubro)) +
+    #fondo degradado
+    annotation_custom(fondo_degradado, xmin=2005, xmax=2019, ymin=0, ymax=Inf) +
+    geom_segment(col = color_fondo, size=1, aes(x=año, y=Inf, yend=empresas, xend=año), show.legend = F) + #parche de líneas hacia arriba para tapar el fondo de degradado que se le escapa al geom_ribbon
+    #líneas de fondo
+    geom_segment(col = color_claro, alpha = 0.3, aes(x=año, y=0, yend=empresas, xend=año), show.legend = F) +
+    #colores de fondo arriba/abajo
+    geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = empresas, ymax = Inf), show.legend = F) + #fondo oscuro (arriba) para tapar el degradado
+    geom_area(fill = color_fondo, alpha = 0.2, show.legend = F) + #fondo claro (abajo)
+    #línea
+    geom_line(color = color_claro, size = 1.2, show.legend = F, ) +
+    #punto
+    #geom_point(col=color_negro, alpha=0.6, size=3) + #punto chico negro
+    geom_point(color = color_blanco, size=1.5) + #punto chico claro
+    geom_point(color = color_blanco, size=6, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande claro
+    geom_point(color = color_claro, size=4, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande blanco
+    #líneas del gráfico
+    #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(empresas))) +
+    #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=max(año)+0.2, yend=0)) +
+    scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2))) +
+    #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
+    #texto
+    geom_text(color = color_blanco, aes(label = paste0(" ", max(empresas)), x = max(año)+0.5, y=max(empresas)),
+              hjust=0, inherit.aes = F, check_overlap = T, data = . %>% filter(año == 2019)) +
+    #tema
+    coord_cartesian(clip="off") +
+    labs(y = texto_y) +
+    theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
+          panel.background = element_rect(fill = color_fondo, color = color_fondo),
+          text = element_text(color = color_oscuro),
+          axis.text = element_text(color = color_negro),
+          axis.ticks = element_blank(), panel.grid = element_blank(), axis.title.x = element_blank(),
+          axis.text.x = element_text(margin=margin(t = -8)),
+          axis.text.y = element_text(margin=margin(r = 4)))
+  
+  return(p)
+}
+
+# datos_sii$empresas %>%
+#   filter(comuna == comunas_sii[5]) %>% #picker
+#   filter(rubro == rubros_sii[3]) %>% #picker
+#   graficar_lineas_degradado()

@@ -143,13 +143,57 @@ datos_sii$empresas_act %>%
 
 #g evolución rubro ----
 #gráfico aumento empresas del rubro
+#pasado a global como funcion graficar_lineas_degradado()
+#https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
+colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
+
+fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
+
+empresas_año_rubro_comuna <- datos_sii$empresas
+
 datos_sii$empresas %>%
   filter(comuna == comuna_elegida) %>% #picker
-  filter(rubro == rubro_elegido) %>% #picker
+  filter(rubro == rubros_sii[2]) %>% #picker
   ggplot(aes(año, empresas, col=rubro)) +
-  geom_line(show.legend=F) +
-  scale_x_continuous(breaks = años_sii) +
-  theme(axis.text.x = element_text(angle=90, vjust=0.5))
+  #fondo degradado
+  annotation_custom(fondo_degradado, xmin=2005+0.008, xmax=2019-0.008, ymin=0, ymax=Inf) +
+  #líneas de fondo
+  geom_segment(col = color_claro, alpha = 0.15, aes(x=año, y=0, yend=empresas, xend=año), show.legend = F) +
+  #colores de fondo arriba/abajo
+  geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = empresas, ymax = Inf), show.legend = F) + #fondo oscuro (arriba)
+  geom_area(fill = color_fondo, alpha = 0.1, show.legend = F) + #fondo claro (abajo)
+  #línea
+  geom_line(color = color_claro, size = 1.2, show.legend = F, ) +
+  #punto
+  #geom_point(col=color_negro, alpha=0.6, size=3) + #punto chico negro
+  geom_point(color = color_blanco, size=1.5) + #punto chico claro
+  geom_point(color = color_blanco, size=6, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande claro
+  geom_point(color = color_claro, size=2, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande blanco
+  #líneas del gráfico
+  #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(empresas))) +
+  #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=max(año)+0.2, yend=0)) +
+  scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 3))) +
+  #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
+  #texto
+  geom_text(inherit.aes = F, aes(x = max(año)+0.3, y=max(empresas), label = max(empresas)), color=color_blanco,
+            hjust=0, check_overlap = T) +
+  #tema
+  theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
+  theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
+        panel.background = element_rect(fill = color_fondo, color = color_fondo),
+        text = element_text(color = color_oscuro),
+        axis.text = element_text(color = color_negro),
+        axis.ticks = element_blank(), panel.grid = element_blank(), axis.title.x = element_blank(),
+        axis.text.x = element_text(margin=margin(t=-5)),
+        axis.text.y = element_text(margin=margin(r=1)))
+
+
+
+datos_sii$empresas %>%
+  filter(comuna == comunas_sii[5]) %>% #picker
+  filter(rubro == rubros_sii[2]) %>% #picker
+  graficar_lineas_degradado()
+
 
 #g evolución subrubros ----
 #gráfico empresas por subrubros, destacando el seleccionado
@@ -984,7 +1028,9 @@ tramos_rubro <- datos_sii$tramos_rubro %>%
 #V3 ventas rubro e comuna e % del total de ventas
 
 
-datos <- list("empresas_rubros" = empresas_rubros,
+datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_sii$empresas
+              ##
+              "empresas_rubros" = empresas_rubros,
               "empresas_comunas" = empresas_comunas,
               "empresas_subrubros" = empresas_subrubros,
               ##
@@ -1002,3 +1048,6 @@ datos <- list("empresas_rubros" = empresas_rubros,
               "crecimiento_subrubros_region" = crecimiento_subrubros_region)
 
 save(datos, file = "dataemprende_datos/datos_precalculados.rdata")
+
+
+datos$
