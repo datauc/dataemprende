@@ -2,7 +2,7 @@
 # Script de prueba --------------------------------------------------------
 
 
-perro_verde <- rnorm(100)
+gatitos  <- rnorm(100)
 
 remove(perro_verde)
 
