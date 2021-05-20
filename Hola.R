@@ -2,6 +2,20 @@
 # Script de prueba --------------------------------------------------------
 
 
-perro_verde <- rnorm(100)
+gatitos  <- rnorm(100)
 
 remove(perro_verde)
+
+
+# Holi, teni pololi
+
+
+
+# Estoy jugando en mi nueva rama, holi, como estan
+
+
+
+# 2 + 2 son 4
+
+
+# que me veni a decir aweonao
