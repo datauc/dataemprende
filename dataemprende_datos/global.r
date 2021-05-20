@@ -9,6 +9,8 @@ source("variables.r")
 #cargar datos
 load("datos_precalculados.rdata")
 
+color_fondo <- "#457B9D"
+
 #funciones ----
 #pone puntos de miles a una cifra
 puntos <- function(x) {
@@ -61,7 +63,8 @@ graficar_genero <- function(dato_hombres = 0.5,
     ggplot(aes(x = id, y = 1, label = logo, fill = genero, col = genero)) +
     geom_text(size = 8, family = 'FontAwesome', show.legend=F) +
     #geom_point(size = 5, show.legend = F) +
-    theme_void()
+    theme_void() +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo))
   
   return(p)
 }
@@ -107,7 +110,8 @@ graficar_empresas <- function(input_comuna = "Iquique") {
     scale_y_discrete(drop=F) +
     scale_x_continuous(limits = c(1, 9)) +
     coord_cartesian(clip = "off") +
-    theme(axis.text.y = element_text(hjust = 1, margin = margin(r = 10)))
+    theme(axis.text.y = element_text(hjust = 1, margin = margin(r = 10))) +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo))
   
   return(p)
 }

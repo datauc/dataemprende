@@ -7,9 +7,9 @@ library(tidyverse)
 library(sgs)
 library(leaflet)
 
-df <- readxl::read_xlsx("mapa claudio/Empresas_Tarapaca_v2.xlsx")
+df <- readxl::read_xlsx("mapa claudio/Empresas_Tarapaca.xlsx")
 
-options(digits=3)
+#options(digits=3)
 start = list(as.numeric(df$X),as.numeric(df$Y))
 
 p <- sgs_points(start, epsg=3857)

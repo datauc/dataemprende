@@ -7,7 +7,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   aos::use_aos(), #animación en scroll
   includeCSS("estilos.css"), #estilos css
   #tags$link(rel = "stylesheet", type = "text/css", href = "estilos.css"),
-
+  
   fluidRow(
     column(12, class = "fondo",
            #style = "padding-bottom: 30px;",
@@ -17,7 +17,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            div(
              h1("DataEmprende", style = "display:inline-block;"),
              div("Tarapacá", class = "h1b", style = "display:inline-block;")
-             ) %>% 
+           ) %>% 
              aos(animation = "fade-down", duration = "2000"),
            
            br(),br(),
@@ -89,10 +89,31 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
     column(12,
            h2("Empresas") %>% aos(animation = "fade-down", duration = "1000"),
            br(),
-           plotOutput("empresas_comuna", height = "200px") %>% 
+           
+           #gráfico de logos de empresas en tres filas
+           plotOutput("g_empresas_comuna", height = "200px") %>% 
              aos(animation = "fade-down"),
            
-    )
+           br(),
+           br(),
+           
+           #crecimiento del subrubro
+           
+             p("En comparación con", 
+               style = "display:inline-block; vertical-align: middle;"),
+             div(
+               selectInput(inputId = "comparacion_crecimiento", 
+                           label = NULL,
+                           choices = c("el año pasado" = 1,
+                                       "cinco años atrás" = 5,
+                                       "diez años atrás" = 10),
+                           width = "100%"),
+               style = "display:inline-block; width: 160px; margin-left: 8px; margin-right: 8px; vertical-align: middle;"),
+             
+             div(
+               htmlOutput("crecimiento_subrubros_empresas"),
+               style = "display:inline-block; vertical-align: middle; margin-bottom: 15px;")
+    ) 
   ),
   
   espaciador(),

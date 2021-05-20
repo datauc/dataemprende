@@ -148,6 +148,26 @@ shinyServer(function(input, output, session) {
     })
     
     
+    
+    #crecimiento del subrubro
+    
+    output$crecimiento_subrubros_empresas <- reactive({
+        if (input$comparacion_crecimiento == 1){
+    t <- HTML("el subrubro ha crecido en un",
+        cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_1 %>% porcentaje()))
+        }
+        else if (input$comparacion_crecimiento == 5) {
+            t <- HTML("el subrubro ha crecido en un",
+                cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_5 %>% porcentaje()))
+        }
+        else if (input$comparacion_crecimiento == 10) {
+            t <- HTML("el subrubro ha crecido en un",
+                cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_10 %>% porcentaje()))
+        }
+    return(t)
+    })
+    
+    
     #trabajadores ----
     
     #gráfico de logos del género de trabajadores de la comuna

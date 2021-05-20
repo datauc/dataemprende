@@ -11,16 +11,23 @@ library(tidyverse)
 load("datos_sii_act.rdata")
 #datos vienen del archivo "~/SII/SII 2019.R"
 
-source("variables.r")
+source("dataemprende_datos/variables.r")
 
 comuna_elegida <- comunas_sii[2]
-rubro_elegido <- rubros_sii[4]
+rubro_elegido <- rubros_sii[1]
+
+subrubros_sii <- datos_sii$ventas_act %>%
+  #filtrar subrubros sin ventas anuales
+  #filter(ventas_anuales_uf > 0) %>%
+  select(subrubro) %>%
+  distinct() %>%
+  pull()
 
 #filtrar subrubros a partir de rubro
 subrubros_filtrados <- datos_sii$ventas_act %>%
   filter(rubro == rubro_elegido) %>%
   #filtrar subrubros sin ventas anuales
-  filter(ventas_anuales_uf > 0) %>%
+  #filter(ventas_anuales_uf > 0) %>%
   select(subrubro) %>%
   distinct() %>%
   pull()
@@ -31,7 +38,7 @@ subrubro_elegido <- subrubros_filtrados[2]
 actividad_filtradas <- datos_sii$ventas_act %>%
   filter(subrubro == subrubro_elegido) %>%
   #filtrar subrubros sin ventas anuales
-  filter(ventas_anuales_uf > 0) %>%
+  #filter(ventas_anuales_uf > 0) %>%
   select(actividad) %>%
   distinct() %>%
   pull()
@@ -213,6 +220,113 @@ datos_sii$empresas_act %>%
 #   theme_void()
 
 
+#crecimiento subrubros region ----
+datos_sii$empresas_act %>%
+  #filter(comuna == comuna_elegida) %>% #picker
+  filter(rubro == rubro_elegido) %>% #picker
+  group_by(año, rubro, subrubro) %>%
+  summarize(empresas = sum(empresas)) %>%
+  filter(subrubro == subrubro_elegido) %>%
+  ungroup() %>%
+  arrange(desc(año)) %>%
+  slice(1:2) %>%
+  mutate(lag = lead(empresas),
+         dif = empresas-lag,
+         crecimiento = dif/empresas) %>%
+  select(-año) %>%
+  slice(1)
+#las empresas del subrubro crecieron un xxx% en el último año
+
+lista <- list()
+for (i in subrubros_sii) {
+  cat(i, fill=T)
+  parte <- datos_sii$empresas_act %>%
+    #filter(comuna == comuna_elegida) %>% #picker
+    #filter(rubro == rubro_elegido) %>% #picker
+    group_by(año, rubro, subrubro) %>%
+    summarize(empresas = sum(empresas), .groups = "drop_last") %>%
+    filter(subrubro == i) %>%
+    ungroup() %>%
+    arrange(desc(año)) %>%
+    slice(1:2) %>%
+    mutate(lag = lead(empresas),
+           dif = empresas-lag,
+           crecimiento = dif/empresas) %>%
+    select(-año) %>%
+    slice(1)
+  #print(parte)
+  
+  lista[[i]] <- parte
+}
+crecimiento_subrubros_1_region <- bind_rows(lista)
+
+
+#crecimiento 5 años
+lista <- list()
+for (i in subrubros_sii) {
+  cat(i, fill=T)
+parte <- datos_sii$empresas_act %>%
+  #filter(comuna == comuna_elegida) %>% #picker
+  #filter(rubro == rubro_elegido) %>% #picker
+  group_by(año, rubro, subrubro) %>%
+  summarize(empresas = sum(empresas), .groups = "drop_last") %>%
+  filter(subrubro == i) %>%
+  ungroup() %>%
+  arrange(desc(año)) %>%
+  slice(1, 6:7) %>% #2019-5= año 2014 como referencia
+  mutate(lag = lead(empresas),
+         dif = empresas-lag,
+         crecimiento = dif/empresas) %>%
+  select(-año) %>%
+  slice(1)
+#print(parte)
+
+lista[[i]] <- parte
+}
+crecimiento_subrubros_5_region <- bind_rows(lista)
+
+
+#crecimiento 10 años
+lista <- list()
+for (i in subrubros_sii) {
+  cat(i, fill=T)
+  parte <- datos_sii$empresas_act %>%
+  #filter(comuna == comuna_elegida) %>% #picker
+  #filter(rubro == rubro_elegido) %>% #picker
+  group_by(año, rubro, subrubro) %>%
+  summarize(empresas = sum(empresas), .groups = "drop_last") %>%
+  filter(subrubro == i) %>%
+  ungroup() %>%
+  arrange(desc(año)) %>%
+  slice(1, 10:11) %>% #2019 vs 2009
+  mutate(lag = lead(empresas),
+         dif = empresas-lag,
+         crecimiento = dif/empresas) %>%
+  select(-año) %>%
+  slice(1)
+#print(parte)
+
+lista[[i]] <- parte
+}
+crecimiento_subrubros_10_region <- bind_rows(lista)
+
+
+#combinar
+crecimiento_subrubros_region <- crecimiento_subrubros_1_region %>%
+  select(rubro, subrubro) %>%
+  arrange(rubro) %>%
+  left_join(crecimiento_subrubros_1_region %>%
+              rename_with(where(is.numeric), .fn = ~ paste0(.x, "_1"))
+            ) %>%
+  left_join(crecimiento_subrubros_5_region %>%
+              rename_with(where(is.numeric), .fn = ~ paste0(.x, "_5"))
+            ) %>%
+  left_join(crecimiento_subrubros_10_region %>%
+              rename_with(where(is.numeric), .fn = ~ paste0(.x, "_10")))
+
+#probar
+(crecimiento_subrubros_region %>%
+  filter(subrubro == subrubro_elegido))$crecimiento_5
 #—----
 
 #TRABAJADORES ----
@@ -883,6 +997,8 @@ datos <- list("empresas_rubros" = empresas_rubros,
               ##
               "tramos_comuna" = tramos_comuna,
               "tramos_region" = tramos_region,
-              "tramos_rubro" = tramos_rubro)
+              "tramos_rubro" = tramos_rubro,
+              ##
+              "crecimiento_subrubros_region" = crecimiento_subrubros_region)
 
-save(datos, file = "datos_precalculados.rdata")
+save(datos, file = "dataemprende_datos/datos_precalculados.rdata")

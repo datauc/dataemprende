@@ -4,7 +4,9 @@ library(tidyverse)
 library(sgs)
 
 #importar datos de Diego
-load("datos diego/Empresas_Taparaca.Rdata")
+#load("datos diego/Empresas_Taparaca.Rdata")
+
+df <- readxl::read_xlsx("mapa claudio/Empresas_Tarapaca.xlsx")
 
 df
 
@@ -33,23 +35,64 @@ mapa_tarapaca <- chilemapas::mapa_comunas %>%
 # puntos_empresas_2 <- sf::st_as_sf(puntos_empresas, coords = c("x", "y"), 
 #                crs = 4326, agr = "constant")
 
-puntos_empresas_2 <- puntos_empresas %>% mutate(across(x:y, ~ (.x/100000)),
-                           x = x+8,
-                           y = y+2) #%>%
-  #select(x, y)
 
-ggplot() +
-  geom_point(data = puntos_empresas, aes(x=x, y=y)) +
-  geom_sf(data = mapa_tarapaca, aes(geometry = geometry), alpha = 0.5) +
-  coord_sf(xlim = c(-70.5, -69),#c(-79, -68), 
-           ylim = c(-20.6, -20),#c(-24, -18),
-           expand = FALSE)
-# #zoom en iquique
-#     coord_sf(xlim = c(-71, -68),#c(-79, -68), 
-#              ylim = c(-22, -18),#c(-24, -18),
-#              expand = FALSE)
+puntos_empresas %>% glimpse()
+
+p <- ggplot() +
+  geom_sf(data = mapa_tarapaca, aes(geometry = geometry)) +
+  geom_point(data = puntos_empresas %>% filter(seccion_ciiu4cl == "D"), 
+                                               aes(x=x, y=y, col = glosa_seccion), 
+             alpha = 0.1, show.legend = F) +
+# #zoom en iquique y alto hospicio
+# coord_sf(xlim = c(-70.18, -70.07),
+#          ylim = c(-20.31, -20.19),
+#          expand = FALSE)
+#zoom en tarapacá
+    coord_sf(xlim = c(-70.5, -68.25),
+             ylim = c(-21.7, -18.8),
+             expand = FALSE)
   
 
+
+ggplot() +
+  geom_sf(data = mapa_tarapaca, aes(geometry = geometry)) +
+  geom_point(data = puntos_empresas %>% filter(seccion_ciiu4cl == "D"), 
+             aes(x=x, y=y, col = glosa_seccion), 
+             alpha = 0.1, show.legend = F) +
+  # #zoom en iquique y alto hospicio
+  # coord_sf(xlim = c(-70.18, -70.07),
+  #          ylim = c(-20.31, -20.19),
+  #          expand = FALSE)
+  #zoom en tarapacá
+  coord_sf(xlim = c(-70.5, -68.25),
+           ylim = c(-21.7, -18.8),
+           expand = FALSE)
+
+
+
+mapa_tarapaca %>%
+  mutate(
+    CENTROID = map(geometry, st_centroid),
+    COORDS = map(CENTROID, st_coordinates),
+    long = map_dbl(COORDS, 1),
+    lat = map_dbl(COORDS, 2)
+  ) %>%
+ggplot(aes(geometry = geometry, long, lat)) +
+  geom_sf() +
+  # geom_point(data = puntos_empresas %>% filter(seccion_ciiu4cl == "D"), 
+  #            aes(x=x, y=y, col = glosa_seccion), 
+  #            alpha = 0.1, show.legend = F) +
+    # coord_sf(xlim = c(-70.5, -68.25),
+    #          ylim = c(-21.7, -18.8),
+    #          expand = FALSE)
+  stat_maptiles(zoom = 7,
+                url = "http://tile.stamen.com/terrain/%d/%d/%d.png",
+                #url = "http://tile.stamen.com/watercolor/%d/%d/%d.jpg",
+                force = T) +
+  coord_sf(clip = "off", expand = F,
+           xlim = c(-70.5, -68.25),
+           ylim = c(-21.7, -16.8)) +
+  mapview()
 
 #—----
 #agregar calles, mar, y zonas protegidas al gráfico
