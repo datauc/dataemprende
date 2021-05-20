@@ -14,6 +14,7 @@ remove(perro_verde)
 
 library(ggplot2)
 library(dplyr)
+library(stringr)
 
 ####################################
 
@@ -26,7 +27,7 @@ library(dplyr)
 
 
 # 2 + 2 son 4
-
+6+6
 
 # que me veni a decir aweonao
 >>>>>>> Diego
