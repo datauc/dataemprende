@@ -7,3 +7,6 @@ perro_verde <- rnorm(100)
 
 remove(perro_verde)
 
+
+# Holi, teni pololi
+
