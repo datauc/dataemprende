@@ -2,4 +2,6 @@
 # Script de prueba --------------------------------------------------------
 
 
-rnorm(100)
+perro <- rnorm(100)
+
+remove(perro)
