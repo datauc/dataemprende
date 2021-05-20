@@ -13,6 +13,7 @@ remove(perro_verde)
 # Nuevo mapa
 
 library(ggplot2)
+library(dplyr)
 
 ####################################
 
@@ -29,3 +30,6 @@ library(ggplot2)
 
 # que me veni a decir aweonao
 >>>>>>> Diego
+
+
+plot(2,3)
