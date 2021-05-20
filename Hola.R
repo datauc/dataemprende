@@ -6,6 +6,12 @@ gatitos  <- rnorm(100)
 
 remove(perro_verde)
 
+#####################################
+# Nuevo mapa
+
+library(ggplot2)
+
+####################################
 
 # Holi, teni pololi
 
