@@ -149,6 +149,10 @@ colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
 
 fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
 
+empresas_año_rubro_region <- datos_sii$empresas %>%
+  group_by(año, rubro) %>%
+  summarize(empresas = sum(empresas))
+
 empresas_año_rubro_comuna <- datos_sii$empresas
 
 datos_sii$empresas %>%
@@ -1029,6 +1033,7 @@ tramos_rubro <- datos_sii$tramos_rubro %>%
 
 
 datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_sii$empresas
+              "empresas_año_rubro_region" = empresas_año_rubro_region,
               ##
               "empresas_rubros" = empresas_rubros,
               "empresas_comunas" = empresas_comunas,
@@ -1048,6 +1053,3 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               "crecimiento_subrubros_region" = crecimiento_subrubros_region)
 
 save(datos, file = "dataemprende_datos/datos_precalculados.rdata")
-
-
-datos$

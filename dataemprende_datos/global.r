@@ -242,14 +242,14 @@ graficar_mapa_rubros <- function(datos_filtrados) {
     #geom_sf(data = datos_mapas$mar, colour = "transparent", fill = "lightblue1") + #mar
     #calles
     geom_sf(data = datos_mapas$calles_medianas$osm_lines,
-            color = color_claro, size = .3, alpha = .3, inherit.aes = F) +
+            color = color_claro, size = .3, alpha = .2, inherit.aes = F) +
     geom_sf(data = datos_mapas$calles_chicas$osm_lines,
             color = color_negro, size = .2, alpha = .3, inherit.aes = F) +
     geom_sf(data = datos_mapas$calles_grandes$osm_lines,
             color = color_negro, size = .5, alpha = .8, inherit.aes = F) +
     #puntos
-    geom_point(data = datos_filtrados, aes(x=x, y=y, col = glosa_seccion), 
-               alpha = 0.4, size = 1, col = color_claro, show.legend = F) +
+    geom_point(data = datos_filtrados, aes(x=x, y=y),
+              alpha = 0.3, size = 1, col = color_claro, show.legend = F) +
     #zoom en iquique y alto hospicio
     coord_sf(xlim = c(-70.17, -70.06),
              ylim = c(-20.31, -20.195),
@@ -259,7 +259,7 @@ graficar_mapa_rubros <- function(datos_filtrados) {
           panel.background = element_rect(fill = color_fondo, color = color_fondo))
   
   #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
-  p <- cowplot::ggdraw(p) + 
-    theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  #p <- cowplot::ggdraw(p) + 
+  #  theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
   return(p)
 }

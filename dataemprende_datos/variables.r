@@ -41,3 +41,6 @@ rubros_sii <- c("Comercio al por mayor y al por menor; reparación de vehículos
 #   distinct()
 #save(subrubros_sii, file = "subrubros.rdata")
 load("subrubros.rdata")
+
+#cargar cruce entre ciiu y subrubros del sii para mapa de puntos de empresas
+load("cruce_ciiuu_sii.rdata")

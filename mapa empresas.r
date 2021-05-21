@@ -2,49 +2,15 @@
 #genera un mapa con puntos por cada empresa
 library(tidyverse)
 
+#importar ----
 #importar datos de Diego
 #load("datos diego/Empresas_Taparaca.Rdata")
 
 base_puntos_empresas_tarapaca <- readxl::read_xlsx("mapa claudio/Empresas_Tarapaca.xlsx")
 
-#surubros con letra 
-#importar para hacer join con la base de puntos
-# rubros_sii_letra <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_COMU_RUBR.txt", local = locale(encoding = "latin1")) %>%
-#   rename(rubro = `Rubro economico`) %>%
-#   select(rubro) %>%
-#   distinct() %>%
-#   mutate(letra = stringr::str_extract(rubro, "."),
-#          rubro = stringr::str_remove_all(rubro, ". - "))
+source("subrubros y ciiu.r")
 
-#datapasta::tribble_paste(rubros_sii_letra)
-
-rubros_sii_letra <- tibble::tribble(
-                                                                                        ~rubro, ~letra,
-                                  "Actividades de organizaciones y órganos extraterritoriales",    "U",
-                                    "Actividades artísticas, de entretenimiento y recreativas",    "R",
-                                                        "Actividades financieras y de seguros",    "K",
-                                         "Actividades de servicios administrativos y de apoyo",    "N",
-                                         "Actividades de alojamiento y de servicio de comidas",    "I",
-                                           "Actividades profesionales, científicas y técnicas",    "M",
-                                                                     "Industria manufacturera",    "C",
-                                                             "Explotación de minas y canteras",    "B",
-                                                                                "Construcción",    "F",
-                                                                   "Actividades inmobiliarias",    "L",
-                           "Actividades de atención de la salud humana y de asistencia social",    "Q",
-    "Comercio al por mayor y al por menor; reparación de vehículos automotores y motocicletas",    "G",
-                                                                 "Transporte y almacenamiento",    "H",
-  "Suministro de agua; evacuación de aguas residuales, gestión de desechos y descontaminación",    "E",
-                                                                                   "Enseñanza",    "P",
-                                                "Agricultura, ganadería, silvicultura y pesca",    "A",
-                                                                "Información y comunicaciones",    "J",
-    "Actividades de los hogares como empleadores; actividades no diferenciadas de los hogares",    "T",
-                                                              "Otras actividades de servicios",    "S",
-                                                                             "Sin información",    "S",
-      "Administración pública y defensa; planes de seguridad social de afiliación obligatoria",    "O",
-                                 "Suministro de electricidad, gas, vapor y aire acondicionado",    "D"
-  )
-
-
+#preparar base ----
 
 puntos_empresas <- base_puntos_empresas_tarapaca %>%
   mutate(across(c(X, Y), ~ as.numeric(.x))) %>%
@@ -58,7 +24,10 @@ puntos_empresas <- base_puntos_empresas_tarapaca %>%
   #agregar nombres de rubros correctos
   rename(letra = seccion_ciiu4cl) %>%
   left_join(rubros_sii_letra) %>%
-  select(comuna, rubro, letra, x, y)
+  #anexar subrubros del sii
+  mutate(division_ciiu4cl = as.numeric(division_ciiu4cl)) %>%
+  left_join(cruce_ciiuu_sii) %>%
+  select(rubro, glosa_division, subrubro, x, y)
 
 save(puntos_empresas, file = "dataemprende_datos/puntos_empresas.rdata")
 
@@ -140,68 +109,68 @@ ggplot() +
 #rmapzen ----
 #agregar calles, mar, y zonas protegidas al gráfico
 
-#https://www.dshkol.com/2018/better-maps-with-vector-tiles/
-#install.packages("rmapzen")
-library(rmapzen)
-options(nextzen_API_key="wkUP5UE4TDu92Vg14jut9A")
-mz_set_tile_host_nextzen(key = getOption("nextzen_API_key"))
-
-get_vector_tiles <- function(bbox){
-  mz_box=mz_rect(bbox$xmin,bbox$ymin,bbox$xmax,bbox$ymax)
-  mz_vector_tiles(mz_box)
-}
-
-library(sf)
-bbox <- st_bbox(mapa_tarapaca$geometry)
-bbox$xmin <- bbox$xmin-0.2
-vector_tiles <- get_vector_tiles(bbox)
-
-names(vector_tiles)
-
-water <- as_sf(vector_tiles$water)
-roads <- as_sf(vector_tiles$roads)
-earth <- as_sf(vector_tiles$earth)
-land <- as_sf(vector_tiles$landuse) #uso de tierra (parques y zonas protegidas)
-boundaries <- as_sf(vector_tiles$boundaries) #son muy aproximados
-
-table(land$kind)
-
-ggplot(boundaries) + 
-  geom_sf() + 
-  theme_void() + 
-  coord_sf(datum = NA)
-
-
-names(roads)
-
-roads$kind
-
-ggplot() + 
-  #geom_sf(data = roads %>% filter(kind == "ferry"), colour = "red") +
-  #geom_sf(data = roads %>% filter(kind == "highway"), colour = "blue") +
-  geom_sf(data = roads %>% filter(kind == "minor_road"), colour = "green") +
-  geom_sf(data = roads %>% filter(kind == "major_road"), colour = "darkgrey") +
-  #geom_sf(data = roads %>% filter(cycleway == "lane"), colour = "orange") +
-  theme_void() + 
-  coord_sf(datum = NA)
-
-ggplot() +
-  geom_sf(data = earth, colour = "transparent", fill="grey90") + #tierra
-  geom_sf(data = water, colour = "transparent", fill = "lightblue1") + #mar
-  geom_sf(data = mapa_tarapaca, aes(geometry=geometry), fill = "grey95", col = NA) + #fondo región
-  geom_sf(data = roads %>% filter(kind == "minor_road"), colour = "grey80") +
-  geom_sf(data = roads %>% filter(kind == "major_road"), colour = "grey70") +
-  geom_sf(data = mapa_tarapaca, aes(geometry=geometry), fill = NA, col = "grey30", alpha=0.5, size = 0.2) + #bordes región
-  geom_point(data = puntos_empresas, aes(x=x, y=y), size = 1, alpha = 0.1) +
-  geom_sf(data = land %>% filter(kind != "urban_area"), alpha = 0.2, 
-          fill = "forestgreen", col = NA) +
-  scale_fill_viridis_c() +
-  guides(fill = guide_legend()) + 
-  #coord_sf(datum = NA) +
-  coord_sf(xlim = c(-71, -68.35),
-          ylim = c(-21.7, -18.9),
-                        expand = FALSE) +
-  theme_void()
+##https://www.dshkol.com/2018/better-maps-with-vector-tiles/
+##install.packages("rmapzen")
+# library(rmapzen)
+# options(nextzen_API_key="wkUP5UE4TDu92Vg14jut9A")
+# mz_set_tile_host_nextzen(key = getOption("nextzen_API_key"))
+# 
+# get_vector_tiles <- function(bbox){
+#   mz_box=mz_rect(bbox$xmin,bbox$ymin,bbox$xmax,bbox$ymax)
+#   mz_vector_tiles(mz_box)
+# }
+# 
+# library(sf)
+# bbox <- st_bbox(mapa_tarapaca$geometry)
+# bbox$xmin <- bbox$xmin-0.2
+# vector_tiles <- get_vector_tiles(bbox)
+# 
+# names(vector_tiles)
+# 
+# water <- as_sf(vector_tiles$water)
+# roads <- as_sf(vector_tiles$roads)
+# earth <- as_sf(vector_tiles$earth)
+# land <- as_sf(vector_tiles$landuse) #uso de tierra (parques y zonas protegidas)
+# boundaries <- as_sf(vector_tiles$boundaries) #son muy aproximados
+# 
+# table(land$kind)
+# 
+# ggplot(boundaries) + 
+#   geom_sf() + 
+#   theme_void() + 
+#   coord_sf(datum = NA)
+# 
+# 
+# names(roads)
+# 
+# roads$kind
+# 
+# ggplot() + 
+#   #geom_sf(data = roads %>% filter(kind == "ferry"), colour = "red") +
+#   #geom_sf(data = roads %>% filter(kind == "highway"), colour = "blue") +
+#   geom_sf(data = roads %>% filter(kind == "minor_road"), colour = "green") +
+#   geom_sf(data = roads %>% filter(kind == "major_road"), colour = "darkgrey") +
+#   #geom_sf(data = roads %>% filter(cycleway == "lane"), colour = "orange") +
+#   theme_void() + 
+#   coord_sf(datum = NA)
+# 
+# ggplot() +
+#   geom_sf(data = earth, colour = "transparent", fill="grey90") + #tierra
+#   geom_sf(data = water, colour = "transparent", fill = "lightblue1") + #mar
+#   geom_sf(data = mapa_tarapaca, aes(geometry=geometry), fill = "grey95", col = NA) + #fondo región
+#   geom_sf(data = roads %>% filter(kind == "minor_road"), colour = "grey80") +
+#   geom_sf(data = roads %>% filter(kind == "major_road"), colour = "grey70") +
+#   geom_sf(data = mapa_tarapaca, aes(geometry=geometry), fill = NA, col = "grey30", alpha=0.5, size = 0.2) + #bordes región
+#   geom_point(data = puntos_empresas, aes(x=x, y=y), size = 1, alpha = 0.1) +
+#   geom_sf(data = land %>% filter(kind != "urban_area"), alpha = 0.2, 
+#           fill = "forestgreen", col = NA) +
+#   scale_fill_viridis_c() +
+#   guides(fill = guide_legend()) + 
+#   #coord_sf(datum = NA) +
+#   coord_sf(xlim = c(-71, -68.35),
+#           ylim = c(-21.7, -18.9),
+#                         expand = FALSE) +
+#   theme_void()
 
 
 

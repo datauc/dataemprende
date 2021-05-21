@@ -1,7 +1,7 @@
 shinyServer(function(input, output, session) {
     
     #observe(startAnim(session, 'selectores', 'bounceInRight'))
-
+    
     #filtrar selector de subrubros
     observeEvent(input$rubro, {
         subrubros_filtrados <- subrubros_sii %>%
@@ -35,7 +35,7 @@ shinyServer(function(input, output, session) {
             "microempresas."
         )
         return(t)
-            })
+    })
     
     #párrafo tramos/comuna, tramos/rubro ----
     output$parrafo2 <- reactive({
@@ -58,7 +58,7 @@ shinyServer(function(input, output, session) {
         )
         return(t)
     })
-            
+    
     #párrafo trabajadores/rubro ----
     output$parrafo3 <- reactive({
         t <- HTML(
@@ -77,16 +77,16 @@ shinyServer(function(input, output, session) {
         
         t <- "En la comuna donde se ubica su negocio"
         
-            if (isTruthy(trabajadores_comuna_rubro) == TRUE) {
-                t <- paste(paste0(t, ","), 
-                           cifra(trabajadores_comuna_rubro %>% puntos() %>% ninguna()),
-                           "trabajadores se desempeñan en su rubro, y",
-                           cifra(trabajadores_comuna_subrubro %>% puntos() %>% ninguna(palabra = "ninguno")),
-                           "en su subrubro.")
-            } else {
-                t <- paste(t, "no hay trabajadores que se desempeñen en este rubro.")
-            }
-
+        if (isTruthy(trabajadores_comuna_rubro) == TRUE) {
+            t <- paste(paste0(t, ","), 
+                       cifra(trabajadores_comuna_rubro %>% puntos() %>% ninguna()),
+                       "trabajadores se desempeñan en su rubro, y",
+                       cifra(trabajadores_comuna_subrubro %>% puntos() %>% ninguna(palabra = "ninguno")),
+                       "en su subrubro.")
+        } else {
+            t <- paste(t, "no hay trabajadores que se desempeñen en este rubro.")
+        }
+        
         return(HTML(t))
     })
     
@@ -116,7 +116,7 @@ shinyServer(function(input, output, session) {
             "y",
             cifra(porcentaje_trabajadores_mujeres_rubro_region %>% porcentaje())
         )
-         
+        
         #género por comuna y rubro
         if (isTruthy(porcentaje_trabajadores_hombres_rubro_comuna) == TRUE) {
             t <- paste(paste0(t, ";"), 
@@ -138,54 +138,99 @@ shinyServer(function(input, output, session) {
     })
     
     
+    #—----
     
-    #empresas ----
+    #EMPRESAS ----
     
+    #tamaños de empresas ----
     #gráfico de logos de empresas en tres filas
     output$g_empresas_comuna <- renderPlot({
         p <- graficar_empresas(input$comuna)
         return(p)
     })
     
-    
-    
-    #crecimiento del subrubro
-    
+
+    #crecimiento del subrubro ----
+    #textos que comparan cantidad de empresas hace 1, 5 o 10 años y muestran porcentaje de cambio
     output$crecimiento_subrubros_empresas <- reactive({
+        #hace 1 año
         if (input$comparacion_crecimiento == 1){
-    t <- HTML("el subrubro ha crecido en un",
-        cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_1 %>% porcentaje()))
+            t <- HTML("el subrubro ha crecido en un",
+                      cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_1 %>% porcentaje()),
+                      "a nivel regional.")
         }
+        #hace 5 años
         else if (input$comparacion_crecimiento == 5) {
             t <- HTML("el subrubro ha crecido en un",
-                cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_5 %>% porcentaje()))
+                      cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_5 %>% porcentaje()),
+                      "a nivel regional.")
         }
+        #hace 10 años
         else if (input$comparacion_crecimiento == 10) {
             t <- HTML("el subrubro ha crecido en un",
-                cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_10 %>% porcentaje()))
+                      cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_10 %>% porcentaje()),
+                      "a nivel regional.")
         }
-    return(t)
+        return(t)
     })
     
     
     #grafico cantidad empresas ----
+    #gráfico de líneas con degradado
     output$g_cantidad_empresas <- renderPlot({
-        p <- datos$empresas_año_rubro_comuna %>%
-            filter(comuna == input$comuna) %>% #picker
-            filter(rubro == input$rubro) %>% #picker
+        #lógica para la botonera de comuna o región:
+        
+        #filtrar por comuna si se elige comuna en el selector
+        if (input$selector_g_cantidad_empresas == "Comuna") {
+            d <- datos$empresas_año_rubro_comuna %>%
+                filter(rubro == input$rubro,
+                       comuna == input$comuna)
+        } #si se selecciona region, usar datos sin comuna precalculados
+        else { 
+            d <- datos$empresas_año_rubro_region %>%
+                filter(rubro == input$rubro)
+        }
+        #graficar
+        p <- d %>%
             graficar_lineas_degradado()
         return(p)
     }, res = 100)
     
+    #hacer el cruce entre el subrubro y el ciiu que le corresponde para filtrar el mapa de puntos de empresas
+    subrubro_en_ciiu <- reactive({
+        cruce_ciiuu_sii %>%
+            filter(subrubro == input$subrubro) %>%
+            select(glosa_division) %>%
+            pull()
+    })
+    
+    #output de texto del ciiu correspondiente
+    output$subrubro_en_ciiu <- renderText({ subrubro_en_ciiu() })
+    
+    
     #mapa empresas rubro ----
+    #mapa de puntos de empresas
     output$m_iquique_empresas_rubro <- renderPlot({
-        p <- puntos_empresas %>% 
-            filter(rubro == input$rubro) %>%
+        #condición para graficar puntos del rubro entero, o del ciuu que corresponde al surubro elegido
+        #subsubro
+        if (input$selector_m_iquique_empresas_rubro == "Subrubro") {
+            d <- puntos_empresas %>% 
+                filter(rubro == input$rubro,
+                       glosa_division == subrubro_en_ciiu()) #usar función que ya hizo la correspondencia entre ciuu y subrubro
+        } #rubro, sin filtrar subrubro
+        else {
+            d <- puntos_empresas %>% 
+                filter(rubro == input$rubro)
+        }
+        #graficar
+        p <- d %>%
             graficar_mapa_rubros()  
         return(p)
     }, res = 100)
     
-    #trabajadores ----
+    
+    #—----
+    #TRABAJADORES ----
     
     #gráfico de logos del género de trabajadores de la comuna
     output$g_trabajadores_comuna <- renderPlot({
@@ -212,6 +257,6 @@ shinyServer(function(input, output, session) {
         
         return(p)
     })
-
     
-    })
+    
+})

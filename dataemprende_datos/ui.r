@@ -84,7 +84,8 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   
   espaciador(),
   
-  # empresas ----
+  #—----
+  # EMPRESAS ----
   fluidRow(
     column(12,
            h2("Empresas") %>% aos(animation = "fade-down", duration = "1000"),
@@ -93,11 +94,13 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            #gráfico de logos de empresas en tres filas
            plotOutput("g_empresas_comuna", height = "200px") %>% 
              aos(animation = "fade-down"),
-           
-           br(),
-           br(),
-           
-           #crecimiento del subrubro
+    )),
+  
+  espaciador(),
+
+  #crecimiento del subrubro ----
+  fluidRow(
+    column(12,
              p("En comparación con", 
                style = "display:inline-block; vertical-align: middle;"),
              div(
@@ -107,29 +110,67 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                                        "cinco años atrás" = 5,
                                        "diez años atrás" = 10),
                            width = "100%"),
-               style = "display:inline-block; width: 160px; margin-left: 8px; margin-right: 8px; vertical-align: middle;"),
+               style = "display:inline-block; width: 160px; margin-bottom: 0px; margin-top: 0px; margin-left: 8px; margin-right: 8px; vertical-align: middle;"),
              
              div(
                htmlOutput("crecimiento_subrubros_empresas"),
-               style = "display:inline-block; vertical-align: middle; margin-bottom: 15px;"),
+               style = "display:inline-block; vertical-align: middle; margin-top: 0px; margin-bottom: 18px;"),
            
-           br(),
-           br(),
+    )
+  ),
+  espaciador(),
+  
+  #grafico cantidad empresas ----
+  fluidRow(
+    column(12,
+           h3("Evolución de las empresas del rubro"),
            
-           #grafico cantidad empresas ----
+           shinyWidgets::radioGroupButtons("selector_g_cantidad_empresas",
+                                           label = NULL,
+                                           choices = c("Región", "Comuna"),
+                                           selected = "Región",
+                                           justified = TRUE,
+                                           width = "90%"),
+           
            plotOutput("g_cantidad_empresas", height = "300px") %>% 
              aos(animation = "fade-down"),
-           
+    )
+  ),
+  espaciador(),
+  
            #mapa empresas rubro ----
-           plotOutput("m_iquique_empresas_rubro", height = "400px") %>% 
+  fluidRow(#style = "margin-right: 0px; padding-right: 0px; float: right; border: 0px; align-items: right;border-radius: 0px;",
+    column(7,
+           h3("Ubicación de las empresas"),
+           
+           
+           shinyWidgets::radioGroupButtons("selector_m_iquique_empresas_rubro",
+                        label = NULL,
+                        choices = c("Rubro", "Subrubro"),
+                        selected = "Rubro",
+                        justified = TRUE,
+                        width = "90%"),
+           #texto descriptivo
+           
+           #texto del ciiu que se muestra a partir del subrubro
+           conditionalPanel("input.selector_m_iquique_empresas_rubro == 'Subrubro'",
+                            
+                            textOutput("subrubro_en_ciiu")
+           )
+           ),
+           
+    column(5, #style = "margin-right: 0px; padding-right: 0px; float: right; border: 0px; align-items: right;border-radius: 0px;",
+           plotOutput("m_iquique_empresas_rubro", height = "400px", width = "359px") %>% #width exacto para que no tenga borde blanco
              shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo) #%>%
              #aos(animation = "fade-down"),
+           #poner hacia el lado derecho, ojalá fondo oscuro hacia esa esquina
     ) 
   ),
   
   espaciador(),
   
-  # trabajadores ----
+  #—----
+  # TRABAJADORES ----
   fluidRow(
     column(12,
            h2("Trabajadores") %>% aos(animation = "fade-down", duration = "1000"),
@@ -148,7 +189,8 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   
   espaciador(),
   
-  # ventas ----
+  #—----
+  # VENTAS ----
   fluidRow(
     column(12,
            h2("Ventas") %>% aos(animation = "fade-down", duration = "1000"),
