@@ -177,6 +177,13 @@ shinyServer(function(input, output, session) {
         return(p)
     }, res = 100)
     
+    #mapa empresas rubro ----
+    output$m_iquique_empresas_rubro <- renderPlot({
+        p <- puntos_empresas %>% 
+            filter(rubro == input$rubro) %>%
+            graficar_mapa_rubros()  
+        return(p)
+    }, res = 100)
     
     #trabajadores ----
     

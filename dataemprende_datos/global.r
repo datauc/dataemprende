@@ -8,6 +8,8 @@ source("variables.r")
 
 #cargar datos
 load("datos_precalculados.rdata")
+load("puntos_empresas.rdata")
+load("datos_mapas.rdata")
 
 color_fondo <- "#457B9D"
 color_claro <- "#A8DADC"
@@ -227,3 +229,37 @@ graficar_lineas_degradado <- function(data, texto_y = "Cantidad de empresas"){
 #   filter(comuna == comunas_sii[5]) %>% #picker
 #   filter(rubro == rubros_sii[3]) %>% #picker
 #   graficar_lineas_degradado()
+
+
+#graficar mapa rubros 
+graficar_mapa_rubros <- function(datos_filtrados) {
+  p <- ggplot() +
+    #mapa de base
+    geom_sf(data = datos_mapas$región, aes(geometry = geometry),
+            fill = color_oscuro, col = color_oscuro) +
+    #agua y tierra
+    #geom_sf(data = datos_mapas$tierra, colour = "transparent", fill="grey90") + #tierra
+    #geom_sf(data = datos_mapas$mar, colour = "transparent", fill = "lightblue1") + #mar
+    #calles
+    geom_sf(data = datos_mapas$calles_medianas$osm_lines,
+            color = color_claro, size = .3, alpha = .3, inherit.aes = F) +
+    geom_sf(data = datos_mapas$calles_chicas$osm_lines,
+            color = color_negro, size = .2, alpha = .3, inherit.aes = F) +
+    geom_sf(data = datos_mapas$calles_grandes$osm_lines,
+            color = color_negro, size = .5, alpha = .8, inherit.aes = F) +
+    #puntos
+    geom_point(data = datos_filtrados, aes(x=x, y=y, col = glosa_seccion), 
+               alpha = 0.4, size = 1, col = color_claro, show.legend = F) +
+    #zoom en iquique y alto hospicio
+    coord_sf(xlim = c(-70.17, -70.06),
+             ylim = c(-20.31, -20.195),
+             expand = FALSE) +
+    theme_void() +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
+          panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  
+  #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
+  p <- cowplot::ggdraw(p) + 
+    theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  return(p)
+}

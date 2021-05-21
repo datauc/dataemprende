@@ -120,6 +120,10 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            plotOutput("g_cantidad_empresas", height = "300px") %>% 
              aos(animation = "fade-down"),
            
+           #mapa empresas rubro ----
+           plotOutput("m_iquique_empresas_rubro", height = "400px") %>% 
+             shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo) #%>%
+             #aos(animation = "fade-down"),
     ) 
   ),
   
