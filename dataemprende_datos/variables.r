@@ -16,8 +16,8 @@ años_sii <- c(2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014,
 
 #comunas_sii <- distinct(datos_sii$empresas, comuna) %>% pull()
 #dput(comunas_sii)
-comunas_sii <- c("Alto Hospicio", "Camiña", 
-                 "Colchane", "Huara", "Iquique", 
+comunas_sii <- c("Iquique", "Alto Hospicio", "Camiña", 
+                 "Colchane", "Huara",  
                  "Pica", "Pozo Almonte")
 
 #rubros_sii <- distinct(datos_sii$empresas, rubro) %>% pull()

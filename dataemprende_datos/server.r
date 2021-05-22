@@ -4,14 +4,16 @@ shinyServer(function(input, output, session) {
     
     #filtrar selector de subrubros
     observeEvent(input$rubro, {
-        subrubros_filtrados <- subrubros_sii %>%
-            filter(rubro == input$rubro) %>%
-            select(subrubro) %>%
-            pull()
+        # subrubros_filtrados <- subrubros_sii %>%
+        #     filter(rubro == input$rubro) %>%
+        #     select(subrubro) %>%
+        #     pull()
+        
+        subrubros_filtrados <- subrubros_sii$subrubro[subrubros_sii$rubro == input$rubro]
         
         updateSelectInput(session, "subrubro",
                           choices = subrubros_filtrados)
-    })
+    }) #%>% bindCache(input$rubro)
     
     #texto ----
     ####poner un if else "ninguno" en rubros y subrubros sin gente 
@@ -178,6 +180,7 @@ shinyServer(function(input, output, session) {
     #grafico cantidad empresas ----
     #gráfico de líneas con degradado
     output$g_cantidad_empresas <- renderPlot({
+        req(input$rubro != "")
         #lógica para la botonera de comuna o región:
         
         #filtrar por comuna si se elige comuna en el selector
@@ -194,7 +197,10 @@ shinyServer(function(input, output, session) {
         p <- d %>%
             graficar_lineas_degradado()
         return(p)
-    }, res = 100)
+    }, res = 100) #%>%
+        # bindCache(input$selector_g_cantidad_empresas,
+        #           input$rubro,
+        #           input$comuna)
     
     #hacer el cruce entre el subrubro y el ciiu que le corresponde para filtrar el mapa de puntos de empresas
     subrubro_en_ciiu <- reactive({
@@ -202,7 +208,8 @@ shinyServer(function(input, output, session) {
             filter(subrubro == input$subrubro) %>%
             select(glosa_division) %>%
             pull()
-    })
+    }) #%>%
+        #bindCache(input$subrubro)
     
     #output de texto del ciiu correspondiente
     output$subrubro_en_ciiu <- renderText({ subrubro_en_ciiu() })
@@ -210,28 +217,37 @@ shinyServer(function(input, output, session) {
     
     #mapa empresas rubro ----
     #mapa de puntos de empresas
-    output$m_iquique_empresas_rubro <- renderPlot({
+    d_iquique_empresas_rubro <- reactive({
+        req(input$rubro != "")
+        
         #condición para graficar puntos del rubro entero, o del ciuu que corresponde al surubro elegido
         #subsubro
         if (input$selector_m_iquique_empresas_rubro == "Subrubro") {
             d <- puntos_empresas %>% 
                 filter(rubro == input$rubro,
+                       subrubro == input$subrubro,
                        glosa_division == subrubro_en_ciiu()) #usar función que ya hizo la correspondencia entre ciuu y subrubro
         } #rubro, sin filtrar subrubro
         else {
             d <- puntos_empresas %>% 
                 filter(rubro == input$rubro)
         }
+    }) %>%
+        bindCache(input$selector_m_iquique_empresas_rubro, input$rubro, input$subrubro)
+    
+    output$m_iquique_empresas_rubro <- renderPlot({
         #graficar
-        p <- d %>%
+        p <- d_iquique_empresas_rubro() %>%
             graficar_mapa_rubros()  
         return(p)
-    }, res = 100)
+    }, res = 100) %>%
+        bindCache(input$selector_m_iquique_empresas_rubro, input$rubro, input$subrubro)
     
     
     #—----
     #TRABAJADORES ----
     
+    #grafico genero ----
     #gráfico de logos del género de trabajadores de la comuna
     output$g_trabajadores_comuna <- renderPlot({
         
@@ -247,6 +263,7 @@ shinyServer(function(input, output, session) {
     
     #gráfico de logos del género de trabajadores de la comuna por el rubro
     output$g_trabajadores_comuna_rubro <- renderPlot({
+        req(input$rubro != "")
         
         porcentaje_trabajadores_hombres_rubro_comuna <- filter(datos$trabajadores_genero_rubros_comunas, rubro == input$rubro, comuna == input$comuna)$masculino_p 
         porcentaje_trabajadores_mujeres_rubro_comuna <- filter(datos$trabajadores_genero_rubros_comunas, rubro == input$rubro, comuna == input$comuna)$femenino_p 

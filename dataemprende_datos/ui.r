@@ -5,6 +5,7 @@ library(dplyr)
 shinyUI(fluidPage(#shinymaterial::material_page(#
   #shinyanimate::withAnim(), #animación shinyanimate
   aos::use_aos(), #animación en scroll
+  includeScript("scripts.js"),
   includeCSS("estilos.css"), #estilos css
   #tags$link(rel = "stylesheet", type = "text/css", href = "estilos.css"),
   
@@ -43,12 +44,13 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                selectInput(inputId = "comuna", 
                            label = "Comuna donde se ubica su negocio o emprendimiento", 
                            choices = comunas_sii,
+                           selected = "Iquique",
                            width = "100%"),
                
                #input$rubro
                selectInput(inputId = "rubro", 
                            label = "Rubro principal de su negocio o emprendimiento", 
-                           choices = rubros_sii,
+                           choices = c("", rubros_sii),
                            width = "100%"),
                #input$subrubro
                selectInput(inputId = "subrubro", 
@@ -56,6 +58,10 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                            choices = NULL,
                            width = "100%"),
                
+               conditionalPanel("input.rubro == '' || input.subrubro == ''",
+                                #id = "condicional_rubro_elegido",
+                                em("Por favor, rellene todos los campos")
+               )
            )
     ) %>% aos(animation = "fade-down", duration = "2000", delay = 0),
     
@@ -63,21 +69,29 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   
   espaciador(),
   
+  #—----
   #resultados ----
   
   fluidRow(
     column(12,
-           #párrafo empresas/rubros y tramos
-           htmlOutput("parrafo1")%>% aos(animation = "fade-down", delay = "0"),
-           br(),br(),
-           #párrafo tramos/comuna, tramos/rubro
-           htmlOutput("parrafo2")%>% aos(animation = "fade-down", delay = "100"),
-           br(),br(),
-           htmlOutput("parrafo3")%>% aos(animation = "fade-down", delay = "200"),
-           br(),br(),
-           htmlOutput("parrafo4")%>% aos(animation = "fade-down", delay = "300"),
-           br(),br(),
-           htmlOutput("parrafo5")%>% aos(animation = "fade-down", delay = "400"),
+           
+           h3("Resumen") %>% aos(animation = "fade-down", duration = "1000"),
+           br(),
+           
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            #párrafo empresas/rubros y tramos
+                            htmlOutput("parrafo1")%>% aos(animation = "fade-down", delay = "0"),
+                            br(),br(),
+                            #párrafo tramos/comuna, tramos/rubro
+                            htmlOutput("parrafo2")%>% aos(animation = "fade-down", delay = "100"),
+                            br(),br(),
+                            htmlOutput("parrafo3")%>% aos(animation = "fade-down", delay = "200"),
+                            br(),br(),
+                            htmlOutput("parrafo4")%>% aos(animation = "fade-down", delay = "300"),
+                            br(),br(),
+                            htmlOutput("parrafo5")%>% aos(animation = "fade-down", delay = "400")
+           ),
     ),
     
   ),
@@ -91,31 +105,48 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            h2("Empresas") %>% aos(animation = "fade-down", duration = "1000"),
            br(),
            
-           #gráfico de logos de empresas en tres filas
-           plotOutput("g_empresas_comuna", height = "200px") %>% 
-             aos(animation = "fade-down"),
+           #casitas empresas ----
+           h3("Tamaño de las empresas") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
+           
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            #gráfico de logos de empresas en tres filas
+                            plotOutput("g_empresas_comuna", height = "200px") %>% 
+                              aos(animation = "fade-down", delay = "0")
+           ),
     )),
   
   espaciador(),
-
+  
   #crecimiento del subrubro ----
   fluidRow(
     column(12,
-             p("En comparación con", 
-               style = "display:inline-block; vertical-align: middle;"),
-             div(
-               selectInput(inputId = "comparacion_crecimiento", 
-                           label = NULL,
-                           choices = c("el año pasado" = 1,
-                                       "cinco años atrás" = 5,
-                                       "diez años atrás" = 10),
-                           width = "100%"),
-               style = "display:inline-block; width: 160px; margin-bottom: 0px; margin-top: 0px; margin-left: 8px; margin-right: 8px; vertical-align: middle;"),
-             
-             div(
-               htmlOutput("crecimiento_subrubros_empresas"),
-               style = "display:inline-block; vertical-align: middle; margin-top: 0px; margin-bottom: 18px;"),
+           h3("Crecimiento de las empresas del subrubro") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
            
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            div(
+                              p("En comparación con", 
+                                style = "display:inline-block; vertical-align: middle;"),
+                              div(
+                                selectInput(inputId = "comparacion_crecimiento", 
+                                            label = NULL,
+                                            choices = c("el año pasado" = 1,
+                                                        "cinco años atrás" = 5,
+                                                        "diez años atrás" = 10),
+                                            width = "100%"),
+                                style = "display:inline-block; width: 160px; margin-bottom: 0px; margin-top: 0px; margin-left: 8px; margin-right: 8px; vertical-align: middle;"),
+                              
+                              div(
+                                htmlOutput("crecimiento_subrubros_empresas"),
+                                style = "display:inline-block; vertical-align: middle; margin-top: 0px; margin-bottom: 18px;"),
+                            ) %>% 
+                              aos(animation = "fade-down", delay = "0")
+           )
     )
   ),
   espaciador(),
@@ -123,48 +154,65 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   #grafico cantidad empresas ----
   fluidRow(
     column(12,
-           h3("Evolución de las empresas del rubro"),
+           h3("Evolución de las empresas del rubro") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
            
-           shinyWidgets::radioGroupButtons("selector_g_cantidad_empresas",
-                                           label = NULL,
-                                           choices = c("Región", "Comuna"),
-                                           selected = "Región",
-                                           justified = TRUE,
-                                           width = "90%"),
-           
-           plotOutput("g_cantidad_empresas", height = "300px") %>% 
-             aos(animation = "fade-down"),
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            
+                            shinyWidgets::radioGroupButtons("selector_g_cantidad_empresas",
+                                                            label = NULL,
+                                                            choices = c("Región", "Comuna"),
+                                                            selected = "Región",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            plotOutput("g_cantidad_empresas", height = "300px") %>% 
+                              aos(animation = "fade-down", delay = "200")
+           ),
     )
   ),
   espaciador(),
   
-           #mapa empresas rubro ----
+  #mapa empresas rubro ----
   fluidRow(#style = "margin-right: 0px; padding-right: 0px; float: right; border: 0px; align-items: right;border-radius: 0px;",
     column(7,
-           h3("Ubicación de las empresas"),
+           h3("Ubicación de las empresas") %>% 
+             aos(animation = "fade-down", delay = "0"),
+           br(),
            
-           
-           shinyWidgets::radioGroupButtons("selector_m_iquique_empresas_rubro",
-                        label = NULL,
-                        choices = c("Rubro", "Subrubro"),
-                        selected = "Rubro",
-                        justified = TRUE,
-                        width = "90%"),
-           #texto descriptivo
-           
-           #texto del ciiu que se muestra a partir del subrubro
-           conditionalPanel("input.selector_m_iquique_empresas_rubro == 'Subrubro'",
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
                             
-                            textOutput("subrubro_en_ciiu")
+                            shinyWidgets::radioGroupButtons("selector_m_iquique_empresas_rubro",
+                                                            label = NULL,
+                                                            choices = c("Rubro", "Subrubro"),
+                                                            selected = "Rubro",
+                                                            justified = TRUE,
+                                                            width = "90%"),
+                            #texto descriptivo
+                            
+                            #texto del ciiu que se muestra a partir del subrubro
+                            conditionalPanel("input.selector_m_iquique_empresas_rubro == 'Subrubro'",
+                                             id = "condicional_rubro_elegido",
+                                             textOutput("subrubro_en_ciiu")
+                            )
            )
-           ),
-           
+    ),
+    
     column(5, #style = "margin-right: 0px; padding-right: 0px; float: right; border: 0px; align-items: right;border-radius: 0px;",
-           plotOutput("m_iquique_empresas_rubro", height = "400px", width = "359px") %>% #width exacto para que no tenga borde blanco
-             shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo) #%>%
-             #aos(animation = "fade-down"),
-           #poner hacia el lado derecho, ojalá fondo oscuro hacia esa esquina
-    ) 
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            
+                            plotOutput("m_iquique_empresas_rubro", height = "400px", width = "359px") %>% #width exacto para que no tenga borde blanco
+                              aos(animation = "fade-down", delay = "0") %>%
+                              shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo) #%>%
+                            #aos(animation = "fade-down"),
+                            #poner hacia el lado derecho, ojalá fondo oscuro hacia esa esquina
+           ) 
+    )
   ),
   
   espaciador(),
@@ -176,14 +224,17 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            h2("Trabajadores") %>% aos(animation = "fade-down", duration = "1000"),
            br(),
            
-           #gráfico de logos del género de trabajadores de la comuna
-           plotOutput("g_trabajadores_comuna", height = "50px") %>% 
-             aos(animation = "fade-down"),
-           br(),br(),
-           
-           #gráfico de logos del género de trabajadores de la comuna por el rubro
-           plotOutput("g_trabajadores_comuna_rubro", height = "50px") %>% 
-             aos(animation = "fade-down"),
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            #gráfico de logos del género de trabajadores de la comuna
+                            plotOutput("g_trabajadores_comuna", height = "50px") %>% 
+                              aos(animation = "fade-down"),
+                            br(),br(),
+                            
+                            #gráfico de logos del género de trabajadores de la comuna por el rubro
+                            plotOutput("g_trabajadores_comuna_rubro", height = "50px") %>% 
+                              aos(animation = "fade-down")
+           )
     )
   ),
   

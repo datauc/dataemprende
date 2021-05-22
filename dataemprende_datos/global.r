@@ -55,41 +55,57 @@ ninguna <- function(x, palabra = "ninguna") {
 graficar_genero <- function(dato_hombres = 0.5,
                             dato_mujeres = 0.5){
   
-  cant_hombres <- dato_hombres %>% round(1)*10
-  cant_mujeres <- dato_mujeres %>% round(1)*10
+  cant_hombres_g <- dato_hombres %>% round(1)*10
+  cant_mujeres_g <- dato_mujeres %>% round(1)*10
   
-  distribucion <- c(rep("Hombre", cant_hombres),
-                    rep("Mujer", cant_mujeres)
+  distribucion_g <- c(rep("Hombres", cant_hombres_g),
+                    rep("Mujeres", cant_mujeres_g)
   )
   
-  datos <- tibble(genero = distribucion, id = 1:10)
+  datos_g <- tibble(genero = distribucion_g, id = 1:10) %>%
+    #posicion del texto
+    group_by(genero) %>%
+    mutate(id = as.numeric(id)) %>%
+    mutate(posicion = mean(id)) %>%
+    #porcentajes
+    mutate(porcentaje = case_when(genero == "Hombres" ~ dato_hombres,
+                                  genero == "Mujeres" ~ dato_mujeres))
   
-  p <- datos %>%
-    mutate(logo = ifelse(genero == "Hombre", "\uF183", "\uF182")) %>%
-    ggplot(aes(x = id, y = 1, label = logo, fill = genero, col = genero)) +
-    geom_text(size = 8, family = 'FontAwesome', show.legend=F) +
-    #geom_point(size = 5, show.legend = F) +
+  p <- datos_g %>%
+    mutate(logo = ifelse(genero == "Hombres", "\uF183", "\uF182")) %>%
+    ggplot(aes(x = id, y = 1, label = logo, fill = genero, col = genero, alpha = genero)) +
+    geom_text(size = 8, family = 'FontAwesome', col = color_claro, show.legend=F) +
+    geom_text(family = "Montserrat", aes(x = posicion, label = genero), y = 1.02, col = color_negro, alpha = 1, show.legend = F) +
+    geom_text(family = "Dosis", aes(x = posicion, label = scales::percent(porcentaje, 0.1)), y = 0.975, col = color_negro, alpha = 1, show.legend = F) +
+    scale_alpha_manual(values = c(0.6, 1)) +
     theme_void() +
+    coord_cartesian(clip = "off") +
     theme(plot.background = element_rect(fill = color_fondo, color = color_fondo))
   
+  #p
   return(p)
 }
+
+#graficar_genero()
 
 #grafica empresas por comuna
 graficar_empresas <- function(input_comuna = "Iquique") {
   
   cifras <- datos$tramos_comuna %>%
     filter(comuna == input_comuna,
-           #filter(comuna == "Pica",
+           #comuna == "Pica",
            tramo != "Grande") %>%
+    #condición para agregar casitas para números chicos pero no tan chicos
     mutate(cant = round(porcentaje, 1) * 10,
            cant = ifelse(porcentaje > 0.01 & porcentaje <= 0.1, 1, cant)) #poner una aunque sean menos del 10%
   
+  #condición para agregar tramo mediano si no está en los datos
   if (any(cifras$tramo == "Mediana") == FALSE) { 
     cifras <- cifras %>%
       bind_rows(tibble(tramo = "Mediana", cant = 0))
   }
   
+  #crear dataframe repitiendo hacia abajo una casa por cada 10%
   distribucion <- c(rep("Micro", cifras$cant[cifras$tramo == "Micro"]),
                     rep("Pequeña", cifras$cant[cifras$tramo == "Pequeña"]),
                     rep("Mediana", cifras$cant[cifras$tramo == "Mediana"])) %>%
@@ -101,6 +117,7 @@ graficar_empresas <- function(input_comuna = "Iquique") {
                                         "Pequeña",
                                         "Mediana")) 
   
+  #agregar logotipos
   distribucion2 <- distribucion %>%
     group_by(tramo) %>%
     mutate(orden = 1:n()) %>%
@@ -108,22 +125,38 @@ graficar_empresas <- function(input_comuna = "Iquique") {
                             tramo == "Pequeña" ~ "\uF54E", #tienda con techo
                             tramo == "Mediana" ~ "\uF1AD")) #edificio
   
-  p <- distribucion2 %>%
+  #agregar porcentajes
+  distribucion3 <- distribucion2 %>%
+    mutate(porcentaje = case_when(tramo == "Micro" ~ cifras$porcentaje[cifras$tramo=="Micro"],
+                                  tramo == "Pequeña" ~ cifras$porcentaje[cifras$tramo=="Pequeña"],
+                                  tramo == "Mediana" ~ cifras$porcentaje[cifras$tramo=="Mediana"],
+                                  TRUE ~ 0)) %>%
+    #agregar orden para el texto
+    group_by(tramo) %>%
+    mutate(posicion = max(orden)+0.6)
+
+  p <- distribucion3 %>%
     ggplot(aes(x = orden, y = tramo, label = logo, fill = tramo, col = tramo)) +
-    geom_text(size = 7, family = 'FontAwesome', show.legend=F) +
-    #geom_point(size = 5, show.legend = F) +
+    geom_text(size = 7, family = 'FontAwesome', col = color_claro, show.legend=F) +
+    geom_text(aes(x = posicion, label=scales::percent(porcentaje, accuracy = 0.1)), 
+              col=color_negro, hjust=0, family = "Dosis", check_overlap = T, show.legend=F) +
     theme_void() +
     scale_y_discrete(drop=F) +
-    scale_x_continuous(limits = c(1, 9)) +
+    scale_x_continuous(limits = c(1, 10.5)) +
     coord_cartesian(clip = "off") +
-    theme(axis.text.y = element_text(hjust = 1, margin = margin(r = 10))) +
+    theme(axis.text.y = element_text(hjust = 1, 
+                                     color = color_blanco,
+                                     family = "Montserrat",
+                                     margin = margin(r = 10))) +
     theme(plot.background = element_rect(fill = color_fondo, color = color_fondo))
   
+  #p
   return(p)
 }
 
 # graficar_empresas("Iquique")
 # graficar_empresas("Alto Hospicio")
+# graficar_empresas("Pozo Almonte")
 # graficar_empresas("Colchane")
 # graficar_empresas("Pica")
 # graficar_empresas("Huara")
@@ -139,6 +172,8 @@ cifra <- function(x) {
 espaciador <- function() {
  
   y <- list(br(),br(),
+  br(),br(),
+  br(),br(),
   br(),br(),
   br(),br(),
   p(" "))
@@ -208,7 +243,7 @@ graficar_lineas_degradado <- function(data, texto_y = "Cantidad de empresas"){
     scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2))) +
     #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
     #texto
-    geom_text(color = color_blanco, aes(label = paste0(" ", max(empresas)), x = max(año)+0.5, y=max(empresas)),
+    geom_text(color = color_blanco, family = "Montserrat", aes(label = paste0(" ", max(empresas)), x = max(año)+0.5, y=max(empresas)),
               hjust=0, inherit.aes = F, check_overlap = T, data = . %>% filter(año == 2019)) +
     #tema
     coord_cartesian(clip="off") +
@@ -216,7 +251,7 @@ graficar_lineas_degradado <- function(data, texto_y = "Cantidad de empresas"){
     theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
     theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
           panel.background = element_rect(fill = color_fondo, color = color_fondo),
-          text = element_text(color = color_oscuro),
+          text = element_text(color = color_oscuro, family = "Montserrat"),
           axis.text = element_text(color = color_negro),
           axis.ticks = element_blank(), panel.grid = element_blank(), axis.title.x = element_blank(),
           axis.text.x = element_text(margin=margin(t = -8)),
@@ -229,6 +264,10 @@ graficar_lineas_degradado <- function(data, texto_y = "Cantidad de empresas"){
 #   filter(comuna == comunas_sii[5]) %>% #picker
 #   filter(rubro == rubros_sii[3]) %>% #picker
 #   graficar_lineas_degradado()
+
+datos$empresas_año_rubro_region %>%
+  filter(rubro ==rubros_sii[2]) %>%
+  graficar_lineas_degradado()
 
 
 #graficar mapa rubros 
@@ -259,7 +298,7 @@ graficar_mapa_rubros <- function(datos_filtrados) {
           panel.background = element_rect(fill = color_fondo, color = color_fondo))
   
   #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
-  #p <- cowplot::ggdraw(p) + 
-  #  theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  p <- cowplot::ggdraw(p) +
+   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
   return(p)
 }

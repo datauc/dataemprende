@@ -40,6 +40,7 @@ body {
   color: #F1FAEE;
 }
 
+/*fondo principal con el mapa en gif*/
 .fondo {
   background-image: url("anim3_comp.gif"); /* The image used */
   background-color: #2D668E;/*#1D3557; /* Used if the image is unavailable */
@@ -49,6 +50,8 @@ body {
   background-repeat: no-repeat; /* Do not repeat the image */
   /*background-size: cover;  Resize the background image to cover the entire container */
 }
+
+
 
 
 /* SELECTORES */
