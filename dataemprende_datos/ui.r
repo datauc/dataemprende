@@ -110,7 +110,6 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                             id = "condicional_rubro_elegido",
                             #párrafo empresas/rubros y tramos
                             htmlOutput("t_empresas_rubro_1")%>% aos(animation = "fade-down", delay = "0"),
-                            br(),br()
            ),
            #cantidad de empresas
            #cuántas del rubro hay en la región
@@ -121,6 +120,8 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            #como se divide el rubro (porcentaje empresas por subrubros)
            
            #principales actividades del rubro/subrubro
+           
+           espaciador_interior(),
            
            #casitas empresas ----
            h3("Tamaño de las empresas") %>%
@@ -135,7 +136,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            ),
     )),
   
-  espaciador(),
+  espaciador_interior(),
   
   #crecimiento del subrubro ----
   fluidRow(
@@ -166,7 +167,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            )
     )
   ),
-  espaciador(),
+  espaciador_interior(),
   
   #grafico crecimiento empresas rubro ----
   fluidRow(
@@ -192,7 +193,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
     )
   ),
   
-  espaciador(),
+  espaciador_interior(),
   
   #grafico crecimiento empresas subrubro ----
   fluidRow(
@@ -219,7 +220,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   ),
   
   
-  espaciador(),
+  espaciador_interior(),
   
   #mapa empresas rubro ----
   fluidRow(#style = "margin-right: 0px; padding-right: 0px; float: right; border: 0px; align-items: right;border-radius: 0px;",
@@ -260,7 +261,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
     )
   ),
   
-  espaciador(),
+  espaciador_interior(),
   
   
   #grafico barras empresas subrubro ----
@@ -281,7 +282,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                                                             width = "90%") %>%
                               aos(animation = "fade-down", delay = "100"),
                             
-                            plotOutput("g_barras_empresas_subrubro", height = "300px") %>% 
+                            plotOutput("g_barras_empresas_subrubro", height = "350px") %>% 
                               aos(animation = "fade-down", delay = "200")
            ),
     )
@@ -296,15 +297,21 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            h2("Trabajadores") %>% aos(animation = "fade-down", duration = "1000"),
            br(),
            
+           #gráfico género ----
            conditionalPanel("input.rubro != '' && input.subrubro != ''",
                             id = "condicional_rubro_elegido",
+                            
                             #gráfico de logos del género de trabajadores de la comuna
-                            plotOutput("g_trabajadores_comuna", height = "50px") %>% 
+                            h3("Distribución de género promedio en la comuna"),
+                            
+                            plotOutput("g_trabajadores_comuna", height = "120px") %>% 
                               aos(animation = "fade-down"),
-                            br(),br(),
+                            
+                            espaciador_interior(),
                             
                             #gráfico de logos del género de trabajadores de la comuna por el rubro
-                            plotOutput("g_trabajadores_comuna_rubro", height = "50px") %>% 
+                            h3("Distribución de género del rubro en la comuna"),
+                            plotOutput("g_trabajadores_comuna_rubro", height = "120px") %>% 
                               aos(animation = "fade-down")
            )
     )

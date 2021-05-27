@@ -75,18 +75,24 @@ graficar_genero <- function(dato_hombres = 0.5,
     mutate(logo = ifelse(genero == "Hombres", "\uF183", "\uF182")) %>%
     ggplot(aes(x = id, y = 1, label = logo, fill = genero, col = genero, alpha = genero)) +
     geom_text(size = 8, family = 'FontAwesome', col = color_claro, show.legend=F) +
-    geom_text(family = "Montserrat", aes(x = posicion, label = genero), y = 1.02, col = color_negro, alpha = 1, show.legend = F, check_overlap = T) +
-    geom_text(family = "Dosis", aes(x = posicion, label = scales::percent(porcentaje, 0.1)), y = 0.975, col = color_negro, alpha = 1, show.legend = F, check_overlap = T) +
-    scale_alpha_manual(values = c(0.6, 1)) +
+    geom_text(family = "Montserrat", y = 1.02*1.01, aes(x = posicion, label = genero), 
+              col = color_negro, alpha = 1, show.legend = F, check_overlap = T) +
+    geom_text(family = "Dosis ExtraLight SemiBold", y = 0.975*0.99, aes(x = posicion, label = scales::percent(porcentaje, 0.1)),
+              col = color_negro, alpha = 1, size = 5, show.legend = F, check_overlap = T) +
+    scale_alpha_manual(values = c(0.5, 1)) +
     theme_void() +
     coord_cartesian(clip = "off") +
-    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo))
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo)) +
+    theme(plot.margin = margin(7, 14, 7, 14))
   
   #p
   return(p)
 }
 
 #graficar_genero()
+
+
+
 
 #grafica empresas por comuna
 graficar_empresas <- function(input_comuna = "Iquique") {
@@ -139,7 +145,7 @@ graficar_empresas <- function(input_comuna = "Iquique") {
     ggplot(aes(x = orden, y = tramo, label = logo, fill = tramo, col = tramo)) +
     geom_text(size = 7, family = 'FontAwesome', col = color_claro, show.legend=F) +
     geom_text(aes(x = posicion, label=scales::percent(porcentaje, accuracy = 0.1)), 
-              col=color_negro, hjust=0, family = "Dosis", check_overlap = T, show.legend=F) +
+              col=color_negro, hjust=0, family = "Dosis ExtraLight SemiBold", size = 5, check_overlap = T, show.legend=F) +
     theme_void() +
     scale_y_discrete(drop=F) +
     scale_x_continuous(limits = c(1, 10.5)) +
@@ -177,6 +183,15 @@ espaciador <- function() {
   br(),br(),
   br(),br(),
   p(" "))
+  return(y)
+}
+
+espaciador_interior <- function() {
+  
+  y <- list(br(),br(),
+            br(),br(),
+            br(),
+            p(" "))
   return(y)
 }
 
@@ -247,7 +262,7 @@ graficar_lineas_degradado <- function(data, variable = "rubro", texto_y = "Canti
     scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2))) +
     #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
     #texto
-    geom_text(color = color_blanco, family = "Montserrat", aes(label = paste0(" ", max(empresas)), x = max(año)+0.5, y=max(empresas)),
+    geom_text(color = color_blanco, family = "Dosis ExtraLight SemiBold", size = 5, aes(label = paste0(" ", max(empresas)), x = max(año)+0.5, y=max(empresas)),
               hjust=0, inherit.aes = F, check_overlap = T, data = . %>% filter(año == 2019)) +
     #tema
     coord_cartesian(clip="off") +
@@ -269,9 +284,9 @@ graficar_lineas_degradado <- function(data, variable = "rubro", texto_y = "Canti
 #   filter(rubro == rubros_sii[3]) %>% #picker
 #   graficar_lineas_degradado()
 
-datos$empresas_año_rubro_region %>%
-  filter(rubro ==rubros_sii[2]) %>%
-  graficar_lineas_degradado()
+# datos$empresas_año_rubro_region %>%
+#   filter(rubro ==rubros_sii[2]) %>%
+#   graficar_lineas_degradado()
 
 
 #graficar mapa rubros 
@@ -320,8 +335,9 @@ graficar_barras_horizontales <- function(data, variable="subrubro", slice=8, str
            !!variable := forcats::fct_reorder(!!variable, empresas),
            id = 1:n()) %>%
     ggplot(aes(x=empresas, y = !!variable)) +
-    geom_col(fill = color_claro, width = 0.4, aes(alpha = id), show.legend = F) +
-    geom_text(aes(label = empresas), size = 3, col = color_blanco, hjust=-0.9) +
+    geom_col(fill = color_claro, width = 0.3, aes(alpha = id), show.legend = F) +
+    geom_text(aes(label = paste0(" ", empresas)), size = 5, family = "Dosis ExtraLight SemiBold", col = color_blanco, 
+              hjust = 0) +
     #scale_fill_gradient(high = color_claro, low= color_blanco) +
     scale_alpha_continuous(range = c(1, 0.2)) +
     scale_x_continuous(expand = expansion(mult = c(0, 0.4))) +

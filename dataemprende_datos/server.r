@@ -317,7 +317,7 @@ shinyServer(function(input, output, session) {
                 select(-año, -rubro, -comuna)
         }
 
-        p <- graficar_barras_horizontales(d, slice=6, str_wrap=30, str_trunc=60)
+        p <- graficar_barras_horizontales(d, slice=6, str_wrap=30, str_trunc=50)
         return(p)
     }, res = 100)
     
@@ -337,7 +337,7 @@ shinyServer(function(input, output, session) {
             scale_color_manual(values = c("lightblue", "pink"))
         
         return(p)
-    })
+    }, res = 100)
     
     #gráfico de logos del género de trabajadores de la comuna por el rubro
     output$g_trabajadores_comuna_rubro <- renderPlot({
@@ -351,7 +351,7 @@ shinyServer(function(input, output, session) {
             scale_color_manual(values = c("lightblue", "pink"))
         
         return(p)
-    })
+    }, res = 100)
     
     
 })
