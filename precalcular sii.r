@@ -215,6 +215,126 @@ datos_sii$empresas_act %>%
   scale_alpha_manual(values = c(1, 0.5)) +
   theme(axis.text.x = element_text(angle=90, vjust=0.5))
 
+#empresas_año_subrubro_comuna
+#empresas_año_subrubro_region
+
+#precalcular crecimieto de empresas por subrubro por region
+empresas_año_subrubro_region <- datos_sii$empresas_act %>%
+  group_by(año, rubro, subrubro) %>%
+  summarize(empresas = sum(empresas)) %>%
+  mutate(subrubro = as.factor(subrubro),
+         rubro = as.factor(rubro))
+
+#graficar
+empresas_año_subrubro_region %>%
+  filter(subrubro == subrubro_elegido) %>%
+  graficar_lineas_degradado(variable="subrubro")
+
+
+#precalcular crecimiento de empresas por subrubro por comuna
+empresas_año_subrubro_comuna <- datos_sii$empresas_act %>%
+  group_by(año, comuna, rubro, subrubro) %>%
+  summarize(empresas = sum(empresas)) %>%
+  mutate(subrubro = as.factor(subrubro),
+         rubro = as.factor(rubro),
+         comuna = as.factor(comuna))
+
+#graficar
+empresas_año_subrubro_comuna %>%
+  filter(subrubro == subrubro_elegido,
+         comuna == comuna_elegida) %>%
+  graficar_lineas_degradado(variable="subrubro")
+
+
+#g torta subrubros ----
+#es mala idea visualizarlo como torta
+datos_torta <- empresas_año_subrubro_region %>%
+  ungroup() %>%
+  filter(rubro == rubros_sii[5],
+         año == max(año)) %>%
+  select(-año, -rubro)
+
+datos_torta
+
+torta_vinculacion <- function(datos, variable, peso, numero = 100, nombre, calcular=TRUE) {
+  variable <-  sym(variable)
+  variable_elegida <- as.character(variable)
+  numero_elegido <- numero
+  peso <-  sym(peso)
+  
+  if (calcular==TRUE) {
+    p <- datos %>%
+      mutate(!!variable := forcats::fct_lump(!!variable, n=numero_elegido, w = !!peso, other_level = "Otros")#,
+             #!!variable := stringr::str_to_sentence(!!variable)
+      ) %>%
+      count(!!variable) %>%
+      mutate(porcentaje = n/sum(n))
+    
+  } else{
+    p <- datos
+  }
+  
+  #graficar
+  p <- p %>%
+    ggplot(aes(y=porcentaje, 
+               fill=forcats::fct_reorder(!!variable, porcentaje), 
+               col=forcats::fct_reorder(!!variable, porcentaje),
+               x=1)) +
+    geom_col(show.legend=F,
+                         aes(#tooltip = paste0(!!variable, ": ", scales::percent(porcentaje, 1.1))
+                         )) +
+    geom_point(alpha=0, size=0) +
+    # geom_text(aes(x=1.2, label = scales::percent(porcentaje, 1.1)),
+    #           position = position_stack(vjust = 0.5),
+    #           col = "black", show.legend = F) +
+    coord_polar(theta = "y", direction = -1, start = 5.7, clip = "off") +
+    theme_void() +
+    theme(plot.background = element_rect(fill = color_fondo, 
+                                         color= color_fondo)) +
+    fishualize::scale_fill_fish_d(option = "Oncorhynchus_keta", direction = -1) +
+    fishualize::scale_color_fish_d(option = "Oncorhynchus_keta", direction = -1) +
+    labs(fill = nombre,
+         col = nombre) +
+    guides(fill = guide_legend(reverse = TRUE),
+           col = guide_legend(reverse = TRUE,
+                              override.aes = list(size=5, alpha=1, fill=NA, text=NA))) +
+    theme(text = element_text(family = "Open Sans", size = 11, color = color_negro),
+          legend.position = "bottom",
+          legend.direction = "vertical",
+          legend.title = element_text(face = "bold"),
+          legend.text = element_text(size=11, margin = margin(t=2, b=2)),
+          legend.margin = margin(-10, 10, 5, 10),
+          plot.margin = margin(-10, #arriba
+                               40, #derecha
+                               0, #abajo
+                               -40)) #izquierda
+  
+  return(p)
+}
+
+
+datos_torta %>%
+torta_vinculacion(variable ="subrubro", peso="empresas", numero=6, nombre="mapaches") +
+  theme(legend.position ="none")
+
+
+#g barras subrubros ----
+datos$empresas_año_subrubro_region %>%
+  ungroup() %>%
+  filter(rubro == rubros_sii[5],
+         año == max(año)) %>%
+  select(-año, -rubro) %>%
+  graficar_barras_horizontales(slice=6)
+
+datos$empresas_año_subrubro_comuna %>%
+  ungroup() %>%
+  filter(rubro == rubros_sii[2],
+         comuna == comuna_elegida,
+         año == max(año)) %>%
+  select(-año, -rubro, -comuna) %>%
+  graficar_barras_horizontales(slice=6, str_trunc=80)
+
+
 #g evolución actividades ----
 #gráfico empresas por actividades
 datos_sii$empresas_act %>%
@@ -1034,6 +1154,9 @@ tramos_rubro <- datos_sii$tramos_rubro %>%
 
 datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_sii$empresas
               "empresas_año_rubro_region" = empresas_año_rubro_region,
+              #
+              "empresas_año_subrubro_region" = empresas_año_subrubro_region,
+              "empresas_año_subrubro_comuna" = empresas_año_subrubro_comuna,
               ##
               "empresas_rubros" = empresas_rubros,
               "empresas_comunas" = empresas_comunas,

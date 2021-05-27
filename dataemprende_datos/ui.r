@@ -105,6 +105,23 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            h2("Empresas") %>% aos(animation = "fade-down", duration = "1000"),
            br(),
            
+           #textos ----
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            #párrafo empresas/rubros y tramos
+                            htmlOutput("t_empresas_rubro_1")%>% aos(animation = "fade-down", delay = "0"),
+                            br(),br()
+           ),
+           #cantidad de empresas
+           #cuántas del rubro hay en la región
+            #porcentaje de las empresas  
+           #cuántas del rubro hay en la comuna
+            #porcentaje de las empresas  
+           
+           #como se divide el rubro (porcentaje empresas por subrubros)
+           
+           #principales actividades del rubro/subrubro
+           
            #casitas empresas ----
            h3("Tamaño de las empresas") %>%
              aos(animation = "fade-down", delay = "0"),
@@ -151,7 +168,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   ),
   espaciador(),
   
-  #grafico cantidad empresas ----
+  #grafico crecimiento empresas rubro ----
   fluidRow(
     column(12,
            h3("Evolución de las empresas del rubro") %>%
@@ -161,7 +178,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            conditionalPanel("input.rubro != '' && input.subrubro != ''",
                             id = "condicional_rubro_elegido",
                             
-                            shinyWidgets::radioGroupButtons("selector_g_cantidad_empresas",
+                            shinyWidgets::radioGroupButtons("selector_g_crecimiento_empresas_rubro",
                                                             label = NULL,
                                                             choices = c("Región", "Comuna"),
                                                             selected = "Región",
@@ -169,11 +186,39 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                                                             width = "90%") %>%
                               aos(animation = "fade-down", delay = "100"),
                             
-                            plotOutput("g_cantidad_empresas", height = "300px") %>% 
+                            plotOutput("g_crecimiento_empresas_rubro", height = "300px") %>% 
                               aos(animation = "fade-down", delay = "200")
            ),
     )
   ),
+  
+  espaciador(),
+  
+  #grafico crecimiento empresas subrubro ----
+  fluidRow(
+    column(12,
+           h3("Evolución de las empresas del subrubro") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
+           
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            
+                            shinyWidgets::radioGroupButtons("selector_g_crecimiento_empresas_subrubro",
+                                                            label = NULL,
+                                                            choices = c("Región", "Comuna"),
+                                                            selected = "Región",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            plotOutput("g_crecimiento_empresas_subrubro", height = "300px") %>% 
+                              aos(animation = "fade-down", delay = "200")
+           ),
+    )
+  ),
+  
+  
   espaciador(),
   
   #mapa empresas rubro ----
@@ -212,6 +257,33 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                             #aos(animation = "fade-down"),
                             #poner hacia el lado derecho, ojalá fondo oscuro hacia esa esquina
            ) 
+    )
+  ),
+  
+  espaciador(),
+  
+  
+  #grafico barras empresas subrubro ----
+  fluidRow(
+    column(12,
+           h3("Empresas por subrubro") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
+           
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            
+                            shinyWidgets::radioGroupButtons("selector_g_barras_empresas_subrubro",
+                                                            label = NULL,
+                                                            choices = c("Región", "Comuna"),
+                                                            selected = "Región",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            plotOutput("g_barras_empresas_subrubro", height = "300px") %>% 
+                              aos(animation = "fade-down", delay = "200")
+           ),
     )
   ),
   

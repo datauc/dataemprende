@@ -22,6 +22,8 @@ shinyServer(function(input, output, session) {
     #texto párrafo 1
     #párrafo empresas/rubros y tramos ----
     output$parrafo1 <- reactive({
+        req(input$rubro != "")
+        
         t <- HTML(
             "En la región de Tarapacá existen",
             cifra(22.047),
@@ -41,6 +43,8 @@ shinyServer(function(input, output, session) {
     
     #párrafo tramos/comuna, tramos/rubro ----
     output$parrafo2 <- reactive({
+        req(input$rubro != "")
+        
         t <- HTML(
             "En la comuna de", paste0(input$comuna, ","), 
             "un",
@@ -63,6 +67,8 @@ shinyServer(function(input, output, session) {
     
     #párrafo trabajadores/rubro ----
     output$parrafo3 <- reactive({
+        req(input$rubro != "")
+        
         t <- HTML(
             "En total,",
             cifra(filter(datos$trabajadores_rubros, rubro == input$rubro) %>% pull() %>% puntos() %>% ninguna()),
@@ -74,6 +80,9 @@ shinyServer(function(input, output, session) {
     
     #párrafos trabajadores/rubro y subrubro ----
     output$parrafo4 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        
         trabajadores_comuna_rubro <- filter(datos$trabajadores_comuna_rubro, comuna == input$comuna, rubro == input$rubro) %>% pull()
         trabajadores_comuna_subrubro <- filter(datos$trabajadores_comuna_subrubro, comuna == input$comuna, subrubro == input$subrubro) %>% pull()
         
@@ -94,6 +103,8 @@ shinyServer(function(input, output, session) {
     
     #párrafos trabajadores/género ----
     output$parrafo5 <- reactive({
+        req(input$rubro != "")
+        
         #género en porcentajes
         porcentaje_trabajadores_hombres_comuna <- filter(datos$trabajadores_genero_comunas, comuna == input$comuna)$masculino_p
         porcentaje_trabajadores_mujeres_comuna <- filter(datos$trabajadores_genero_comunas, comuna == input$comuna)$femenino_p
@@ -144,6 +155,21 @@ shinyServer(function(input, output, session) {
     
     #EMPRESAS ----
     
+    #texto empresas rubro ----
+    output$t_empresas_rubro_1 <- reactive({
+        req(input$rubro != "")
+        
+        t <- HTML(
+            "En la región existen",
+            cifra(filter(datos$empresas_rubros, rubro == input$rubro) %>% pull() %>% puntos() %>% ninguna()), 
+            "empresas dedicadas a su mismo rubro, equivalentes al",
+            cifra((filter(datos$empresas_rubros, rubro == input$rubro)$n/22047) %>% porcentaje() %>% paste0(".")),
+        )
+        return(t)
+    })
+        
+    
+    
     #tamaños de empresas ----
     #gráfico de logos de empresas en tres filas
     output$g_empresas_comuna <- renderPlot({
@@ -155,6 +181,8 @@ shinyServer(function(input, output, session) {
     #crecimiento del subrubro ----
     #textos que comparan cantidad de empresas hace 1, 5 o 10 años y muestran porcentaje de cambio
     output$crecimiento_subrubros_empresas <- reactive({
+        req(input$rubro != "")
+        
         #hace 1 año
         if (input$comparacion_crecimiento == 1){
             t <- HTML("el subrubro ha crecido en un",
@@ -177,14 +205,14 @@ shinyServer(function(input, output, session) {
     })
     
     
-    #grafico cantidad empresas ----
+    #grafico crecimiento rubro region/comuna----
     #gráfico de líneas con degradado
-    output$g_cantidad_empresas <- renderPlot({
+    output$g_crecimiento_empresas_rubro <- renderPlot({
         req(input$rubro != "")
         #lógica para la botonera de comuna o región:
         
         #filtrar por comuna si se elige comuna en el selector
-        if (input$selector_g_cantidad_empresas == "Comuna") {
+        if (input$selector_g_crecimiento_empresas_rubro == "Comuna") {
             d <- datos$empresas_año_rubro_comuna %>%
                 filter(rubro == input$rubro,
                        comuna == input$comuna)
@@ -201,6 +229,31 @@ shinyServer(function(input, output, session) {
         # bindCache(input$selector_g_cantidad_empresas,
         #           input$rubro,
         #           input$comuna)
+    
+    
+    #grafico crecimiento subrubro region/comuna----
+    #gráfico de líneas con degradado
+    output$g_crecimiento_empresas_subrubro <- renderPlot({
+        req(input$rubro != "",
+            input$subrubro != "")
+        #lógica para la botonera de comuna o región:
+        
+        #filtrar por comuna si se elige comuna en el selector
+        if (input$selector_g_crecimiento_empresas_subrubro == "Comuna") {
+            d <- datos$empresas_año_subrubro_comuna %>%
+                filter(subrubro == input$subrubro,
+                       comuna == input$comuna)
+        } #si se selecciona region, usar datos sin comuna precalculados
+        else { 
+            d <- datos$empresas_año_subrubro_region %>%
+                filter(subrubro == input$subrubro)
+        }
+        #graficar
+        p <- d %>%
+            graficar_lineas_degradado(variable = "subrubro")
+        return(p)
+    }, res = 100)
+    
     
     #hacer el cruce entre el subrubro y el ciiu que le corresponde para filtrar el mapa de puntos de empresas
     subrubro_en_ciiu <- reactive({
@@ -242,6 +295,31 @@ shinyServer(function(input, output, session) {
         return(p)
     }, res = 100) %>%
         bindCache(input$selector_m_iquique_empresas_rubro, input$rubro, input$subrubro)
+    
+    
+    #grafico horizontal ----
+    output$g_barras_empresas_subrubro <- renderPlot({
+        req(input$rubro != "")
+        
+        if (input$selector_g_barras_empresas_subrubro == "Región") {
+            d <- datos$empresas_año_subrubro_region %>%
+                ungroup() %>%
+                filter(rubro == input$rubro,
+                       año == max(año)) %>%
+                select(-año, -rubro)
+            
+        } else if (input$selector_g_barras_empresas_subrubro == "Comuna") {
+            d <- datos$empresas_año_subrubro_comuna %>%
+                ungroup() %>%
+                filter(rubro == input$rubro,
+                       comuna == input$comuna,
+                       año == max(año)) %>%
+                select(-año, -rubro, -comuna)
+        }
+
+        p <- graficar_barras_horizontales(d, slice=6, str_wrap=30, str_trunc=60)
+        return(p)
+    }, res = 100)
     
     
     #—----

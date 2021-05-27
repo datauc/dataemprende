@@ -75,8 +75,8 @@ graficar_genero <- function(dato_hombres = 0.5,
     mutate(logo = ifelse(genero == "Hombres", "\uF183", "\uF182")) %>%
     ggplot(aes(x = id, y = 1, label = logo, fill = genero, col = genero, alpha = genero)) +
     geom_text(size = 8, family = 'FontAwesome', col = color_claro, show.legend=F) +
-    geom_text(family = "Montserrat", aes(x = posicion, label = genero), y = 1.02, col = color_negro, alpha = 1, show.legend = F) +
-    geom_text(family = "Dosis", aes(x = posicion, label = scales::percent(porcentaje, 0.1)), y = 0.975, col = color_negro, alpha = 1, show.legend = F) +
+    geom_text(family = "Montserrat", aes(x = posicion, label = genero), y = 1.02, col = color_negro, alpha = 1, show.legend = F, check_overlap = T) +
+    geom_text(family = "Dosis", aes(x = posicion, label = scales::percent(porcentaje, 0.1)), y = 0.975, col = color_negro, alpha = 1, show.legend = F, check_overlap = T) +
     scale_alpha_manual(values = c(0.6, 1)) +
     theme_void() +
     coord_cartesian(clip = "off") +
@@ -181,49 +181,53 @@ espaciador <- function() {
 }
 
 
-#https://stackoverflow.com/questions/30136725/plot-background-colour-in-gradient
-gg.background.fill <- function(gg.plot, cols = "white", which = "x") {
-  #does not work with facets
-  
-  stopifnot(which %in% c("x", "y"))
-  which1 <- if (which == "x") "width" else "height"
-  
-  require(gridExtra)
-  
-  g <- ggplotGrob(gg.plot)
-  #g <- ggplotGrob(p)
-  gg <- g$grobs      
-  findIt <- vapply(gg, function(x) grepl("GRID.gTree", x$name, fixed = TRUE), TRUE)
-  n1 <- getGrob(gg[findIt][[1]], "grill.gTree", grep=TRUE)$name
-  n2 <- getGrob(gg[findIt][[1]], "panel.background.rect", grep=TRUE)$name
-  gg[findIt][[1]]$children[[n1]]$children[[n2]]$gp$fill <- cols
-  x <- gg[findIt][[1]]$children[[n1]]$children[[n2]][[which]]
-  w <- gg[findIt][[1]]$children[[n1]]$children[[n2]][[which1]]
-  attr <- attributes(x)
-  x <- seq(0 + c(w)/length(cols)/2, 1 - c(w)/length(cols)/2, length.out = length(cols))
-  attributes(x) <- attr
-  gg[findIt][[1]]$children[[n1]]$children[[n2]][[which]] <- x
-  w <- c(w)/length(cols) 
-  attributes(w) <- attr
-  gg[findIt][[1]]$children[[n1]]$children[[n2]][[which1]] <- w
-  g$grobs <- gg
-  class(g) = c("arrange", "ggplot", class(g)) 
-  g
-}
+# #https://stackoverflow.com/questions/30136725/plot-background-colour-in-gradient
+# gg.background.fill <- function(gg.plot, cols = "white", which = "x") {
+#   #does not work with facets
+#   
+#   stopifnot(which %in% c("x", "y"))
+#   which1 <- if (which == "x") "width" else "height"
+#   
+#   require(gridExtra)
+#   
+#   g <- ggplotGrob(gg.plot)
+#   #g <- ggplotGrob(p)
+#   gg <- g$grobs      
+#   findIt <- vapply(gg, function(x) grepl("GRID.gTree", x$name, fixed = TRUE), TRUE)
+#   n1 <- getGrob(gg[findIt][[1]], "grill.gTree", grep=TRUE)$name
+#   n2 <- getGrob(gg[findIt][[1]], "panel.background.rect", grep=TRUE)$name
+#   gg[findIt][[1]]$children[[n1]]$children[[n2]]$gp$fill <- cols
+#   x <- gg[findIt][[1]]$children[[n1]]$children[[n2]][[which]]
+#   w <- gg[findIt][[1]]$children[[n1]]$children[[n2]][[which1]]
+#   attr <- attributes(x)
+#   x <- seq(0 + c(w)/length(cols)/2, 1 - c(w)/length(cols)/2, length.out = length(cols))
+#   attributes(x) <- attr
+#   gg[findIt][[1]]$children[[n1]]$children[[n2]][[which]] <- x
+#   w <- c(w)/length(cols) 
+#   attributes(w) <- attr
+#   gg[findIt][[1]]$children[[n1]]$children[[n2]][[which1]] <- w
+#   g$grobs <- gg
+#   class(g) = c("arrange", "ggplot", class(g)) 
+#   g
+# }
 
 
 
 
-graficar_lineas_degradado <- function(data, texto_y = "Cantidad de empresas"){
+graficar_lineas_degradado <- function(data, variable = "rubro", texto_y = "Cantidad de empresas"){
   #fondo degradado https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
   colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
   fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
   
+  #calcular año mínimo y máximo
+  año_minimo <- min(data$año, na.rm = T)
+  año_maximo <- max(data$año, na.rm = T)
+  
   #graficar
   p <- data %>%
-    ggplot(aes(año, empresas, col=rubro)) +
+    ggplot(aes(año, empresas, col=variable)) +
     #fondo degradado
-    annotation_custom(fondo_degradado, xmin=2005, xmax=2019, ymin=0, ymax=Inf) +
+    annotation_custom(fondo_degradado, xmin=año_minimo, xmax=año_maximo, ymin=0, ymax=Inf) +
     geom_segment(col = color_fondo, size=1, aes(x=año, y=Inf, yend=empresas, xend=año), show.legend = F) + #parche de líneas hacia arriba para tapar el fondo de degradado que se le escapa al geom_ribbon
     #líneas de fondo
     geom_segment(col = color_claro, alpha = 0.3, aes(x=año, y=0, yend=empresas, xend=año), show.legend = F) +
@@ -302,3 +306,29 @@ graficar_mapa_rubros <- function(datos_filtrados) {
    theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
   return(p)
 }
+
+
+graficar_barras_horizontales <- function(data, variable="subrubro", slice=8, str_trunc=80, str_wrap=40) {
+  variable <- sym(variable)
+  
+  p <- data %>%
+    arrange(desc(empresas)) %>%
+    slice(1:slice) %>%
+    mutate(!!variable := stringr::str_trunc(as.character(!!variable), str_trunc),
+           !!variable := stringr::str_wrap(as.character(!!variable), str_wrap),
+           !!variable := as.factor(!!variable),
+           !!variable := forcats::fct_reorder(!!variable, empresas),
+           id = 1:n()) %>%
+    ggplot(aes(x=empresas, y = !!variable)) +
+    geom_col(fill = color_claro, width = 0.4, aes(alpha = id), show.legend = F) +
+    geom_text(aes(label = empresas), size = 3, col = color_blanco, hjust=-0.9) +
+    #scale_fill_gradient(high = color_claro, low= color_blanco) +
+    scale_alpha_continuous(range = c(1, 0.2)) +
+    scale_x_continuous(expand = expansion(mult = c(0, 0.4))) +
+    theme_void() +
+    theme(axis.text.y = element_text(hjust = 1, color = color_negro, family = "Montserrat", size = 9, margin = margin(r = 10))) +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo))
+  
+  return(p)
+}
+
