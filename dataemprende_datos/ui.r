@@ -108,12 +108,16 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            #textos ----
            conditionalPanel("input.rubro != '' && input.subrubro != ''",
                             id = "condicional_rubro_elegido",
+                            
                             #párrafo empresas/rubros y tramos
-                            htmlOutput("t_empresas_rubro_1")%>% aos(animation = "fade-down", delay = "0"),
+                            htmlOutput("t_empresas_rubro_1") %>% aos(animation = "fade-down", delay = "0"),
+                            br(), br(),
+                            htmlOutput("t_empresas_rubro_2") %>% aos(animation = "fade-down", delay = "0"),
+                            
            ),
            #cantidad de empresas
-           #cuántas del rubro hay en la región
-            #porcentaje de las empresas  
+           #cuántas del rubro hay en la región OK
+            #porcentaje de las empresas   OK 
            #cuántas del rubro hay en la comuna
             #porcentaje de las empresas  
            
@@ -123,8 +127,20 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            
            espaciador_interior(),
            
+           #mapa empresas comuna ----
+           h3("Empresas del rubro por comuna"),
+           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                            id = "condicional_rubro_elegido",
+                            
+                            plotOutput("m_empresas_comuna", height = "400px") %>% #width exacto para que no tenga borde blanco
+                              aos(animation = "fade-down", delay = "0") %>%
+                              shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
+           ),
+           espaciador_interior(),
+           
+           
            #casitas empresas ----
-           h3("Tamaño de las empresas") %>%
+           h3("Tamaño de las empresas en la comuna") %>%
              aos(animation = "fade-down", delay = "0"),
            br(),
            

@@ -163,12 +163,37 @@ shinyServer(function(input, output, session) {
             "En la región existen",
             cifra(filter(datos$empresas_rubros, rubro == input$rubro) %>% pull() %>% puntos() %>% ninguna()), 
             "empresas dedicadas a su mismo rubro, equivalentes al",
-            cifra((filter(datos$empresas_rubros, rubro == input$rubro)$n/22047) %>% porcentaje() %>% paste0(".")),
+            cifra((filter(datos$empresas_rubros, rubro == input$rubro)$n/22047) %>% porcentaje()),
+            "del total de empresas de Tarapacá."
+        )
+        return(t)
+    })
+    
+    #texto empresas rubro ----
+    output$t_empresas_rubro_2 <- reactive({
+        req(input$rubro != "")
+        
+        t <- HTML(
+            "El",
+            cifra(datos$empresas_rubros_comuna %>%
+                filter(comuna == input$comuna,
+                       rubro == input$rubro) %>% select(porcentaje) %>% pull() %>% porcentaje()),
+            "de las empresas de su rubro se encuentra ubicada en su comuna."
         )
         return(t)
     })
         
     
+    #mapa empresas comuna ----
+    output$m_empresas_comuna <- renderPlot({
+        req(input$rubro != "")
+        
+        m <- datos$empresas_rubros_comuna %>%
+            filter(rubro == input$rubro) %>%
+            graficar_mapa_comunas(variable = "empresas")
+        return(m)
+    }, res = 100) %>%
+        bindCache(input$rubro)
     
     #tamaños de empresas ----
     #gráfico de logos de empresas en tres filas

@@ -1,4 +1,4 @@
-library(dplyr)
+suppressPackageStartupMessages(library(dplyr))
 library(ggplot2)
 library(aos)
 #library(grid)
@@ -10,6 +10,7 @@ source("variables.r")
 load("datos_precalculados.rdata")
 load("puntos_empresas.rdata")
 load("datos_mapas.rdata")
+load("datos_mapa_regional.rdata")
 
 color_fondo <- "#457B9D"
 color_claro <- "#A8DADC"
@@ -348,3 +349,62 @@ graficar_barras_horizontales <- function(data, variable="subrubro", slice=8, str
   return(p)
 }
 
+
+graficar_mapa_comunas <- function(data, variable){
+  
+  #agregar datos a puntos
+  lugares_tarapaca_datos <- datos_mapa_regional$lugares %>%
+    left_join(data, 
+              by = c("name" = "comuna")) %>%
+    rename(empresas = all_of(variable))
+  
+  
+  suppressWarnings(m <- ggplot() +
+   #mapa de base
+   # geom_point(aes(x=-70.17, y=-18.95), col = "red", size=14) +
+   # geom_point(aes(x=-70.24, y=-19.055), col = "orange", size=10) +
+   # geom_point(aes(x=-68.45, y=-19.05), col = "red", size=15) +
+   # geom_point(aes(x=-68.57, y=-19.23), col = "green", size=4) +
+   # geom_point(aes(x=-70.1, y=-21.5), col = "blue", size=10) +
+   # geom_point(aes(x=-68.47, y=-20.77), col = "pink", size=5) +
+   #mapa regional
+   geom_sf(data = datos_mapa_regional$región, aes(geometry = geometry),
+           fill = color_oscuro, col = color_fondo) +
+   #carreteras
+   geom_sf(data = datos_mapa_regional$carreteras %>% 
+             filter(name != "Avenida La Tirana" &
+                      name != "Avenida Arturo Prat Chacón" &
+                      name != "Segundo Acceso" &
+                      name != "Las Cabras" &
+                      name != "Ruta 16" &
+                      name != "Avenida Circunvalación"),
+           color = color_negro, size = .3, alpha = 0.4) +
+   # #calles medianas
+   # geom_sf(data = datos_mapa_regional$calles$osm_lines,
+   #         inherit.aes = FALSE,
+   #         color = color_negro, size = .2, alpha = 0.2) +
+   #puntos
+   geom_point(data = lugares_tarapaca_datos,
+              aes(geometry = geometry, size = empresas), 
+              stat = "sf_coordinates", col = color_claro, alpha = 0.6,
+              show.legend = F) +
+   #texto
+   ggrepel::geom_text_repel(data = datos_mapa_regional$lugares, aes(geometry = geometry, label = name), 
+                            stat = "sf_coordinates", seed = 1993, point.padding = 0.2, min.segment.length = 9,
+                            size = 3, col = "black", family = "Montserrat", alpha = 0.7) +
+   #zoom region
+   coord_sf(xlim = c(-70.4, -68.35),
+            ylim = c(-21.7, -18.9), expand = FALSE) +
+   # #zoom iquique y alto hospicio
+   # coord_sf(xlim = c(-70.17, -70.06),
+   #          ylim = c(-20.31, -20.195), expand = FALSE) +
+   scale_size_continuous(range = c(-1, 15)) +
+   theme_void() +
+   theme(plot.background = element_rect(fill = color_fondo, color = color_fondo), panel.background = element_rect(fill = color_fondo, color = color_fondo)))
+ 
+ #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
+ suppressWarnings(m <- cowplot::ggdraw(m) +
+   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo)))
+ 
+ return(m)
+}
