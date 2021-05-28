@@ -57,6 +57,18 @@ datos_sii$empresas %>%
   summarize(n = sum(empresas, na.rm = T))
 
 
+
+#porcentaje de empresas de la región en la comuna
+empresas_rubros_comuna <- datos_sii$empresas %>%
+  filter(año == 2019) %>%
+  group_by(rubro) %>%
+  mutate(porcentaje = empresas/sum(empresas)) %>%
+  select(-año)
+
+
+empresas_rubros_comuna %>%
+  filter(rubro == rubros_sii[4])
+
 #comunas ----
 empresas_comunas <- datos_sii$empresas %>%
   filter(año == 2019) %>%
@@ -145,9 +157,9 @@ datos_sii$empresas_act %>%
 #gráfico aumento empresas del rubro
 #pasado a global como funcion graficar_lineas_degradado()
 #https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
-colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
-
-fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
+# colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
+# 
+# fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
 
 empresas_año_rubro_region <- datos_sii$empresas %>%
   group_by(año, rubro) %>%
@@ -155,41 +167,41 @@ empresas_año_rubro_region <- datos_sii$empresas %>%
 
 empresas_año_rubro_comuna <- datos_sii$empresas
 
-datos_sii$empresas %>%
-  filter(comuna == comuna_elegida) %>% #picker
-  filter(rubro == rubros_sii[2]) %>% #picker
-  ggplot(aes(año, empresas, col=rubro)) +
-  #fondo degradado
-  annotation_custom(fondo_degradado, xmin=2005+0.008, xmax=2019-0.008, ymin=0, ymax=Inf) +
-  #líneas de fondo
-  geom_segment(col = color_claro, alpha = 0.15, aes(x=año, y=0, yend=empresas, xend=año), show.legend = F) +
-  #colores de fondo arriba/abajo
-  geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = empresas, ymax = Inf), show.legend = F) + #fondo oscuro (arriba)
-  geom_area(fill = color_fondo, alpha = 0.1, show.legend = F) + #fondo claro (abajo)
-  #línea
-  geom_line(color = color_claro, size = 1.2, show.legend = F, ) +
-  #punto
-  #geom_point(col=color_negro, alpha=0.6, size=3) + #punto chico negro
-  geom_point(color = color_blanco, size=1.5) + #punto chico claro
-  geom_point(color = color_blanco, size=6, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande claro
-  geom_point(color = color_claro, size=2, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande blanco
-  #líneas del gráfico
-  #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(empresas))) +
-  #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=max(año)+0.2, yend=0)) +
-  scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 3))) +
-  #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
-  #texto
-  geom_text(inherit.aes = F, aes(x = max(año)+0.3, y=max(empresas), label = max(empresas)), color=color_blanco,
-            hjust=0, check_overlap = T) +
-  #tema
-  theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
-  theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
-        panel.background = element_rect(fill = color_fondo, color = color_fondo),
-        text = element_text(color = color_oscuro),
-        axis.text = element_text(color = color_negro),
-        axis.ticks = element_blank(), panel.grid = element_blank(), axis.title.x = element_blank(),
-        axis.text.x = element_text(margin=margin(t=-5)),
-        axis.text.y = element_text(margin=margin(r=1)))
+# datos_sii$empresas %>%
+#   filter(comuna == comuna_elegida) %>% #picker
+#   filter(rubro == rubros_sii[2]) %>% #picker
+#   ggplot(aes(año, empresas, col=rubro)) +
+#   #fondo degradado
+#   annotation_custom(fondo_degradado, xmin=2005+0.008, xmax=2019-0.008, ymin=0, ymax=Inf) +
+#   #líneas de fondo
+#   geom_segment(col = color_claro, alpha = 0.15, aes(x=año, y=0, yend=empresas, xend=año), show.legend = F) +
+#   #colores de fondo arriba/abajo
+#   geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = empresas, ymax = Inf), show.legend = F) + #fondo oscuro (arriba)
+#   geom_area(fill = color_fondo, alpha = 0.1, show.legend = F) + #fondo claro (abajo)
+#   #línea
+#   geom_line(color = color_claro, size = 1.2, show.legend = F, ) +
+#   #punto
+#   #geom_point(col=color_negro, alpha=0.6, size=3) + #punto chico negro
+#   geom_point(color = color_blanco, size=1.5) + #punto chico claro
+#   geom_point(color = color_blanco, size=6, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande claro
+#   geom_point(color = color_claro, size=2, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande blanco
+#   #líneas del gráfico
+#   #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(empresas))) +
+#   #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=max(año)+0.2, yend=0)) +
+#   scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 3))) +
+#   #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
+#   #texto
+#   geom_text(inherit.aes = F, aes(x = max(año)+0.3, y=max(empresas), label = max(empresas)), color=color_blanco,
+#             hjust=0, check_overlap = T) +
+#   #tema
+#   theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
+#   theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
+#         panel.background = element_rect(fill = color_fondo, color = color_fondo),
+#         text = element_text(color = color_oscuro),
+#         axis.text = element_text(color = color_negro),
+#         axis.ticks = element_blank(), panel.grid = element_blank(), axis.title.x = element_blank(),
+#         axis.text.x = element_text(margin=margin(t=-5)),
+#         axis.text.y = element_text(margin=margin(r=1)))
 
 
 
@@ -201,19 +213,19 @@ datos_sii$empresas %>%
 
 #g evolución subrubros ----
 #gráfico empresas por subrubros, destacando el seleccionado
-datos_sii$empresas_act %>%
-  filter(comuna == comuna_elegida) %>% #picker
-  filter(rubro == rubro_elegido) %>% #picker
-  group_by(año, subrubro) %>%
-  summarize(empresas = sum(empresas)) %>%
-  mutate(tipo = case_when(subrubro == subrubro_elegido ~ "elegido",
-                          TRUE ~ "no")) %>%
-  ggplot(aes(año, empresas, col = subrubro, alpha = tipo)) +
-  geom_line(size = 1, show.legend=F) +
-  scale_x_continuous(breaks = años_sii) +
-  scale_y_log10() +
-  scale_alpha_manual(values = c(1, 0.5)) +
-  theme(axis.text.x = element_text(angle=90, vjust=0.5))
+# datos_sii$empresas_act %>%
+#   filter(comuna == comuna_elegida) %>% #picker
+#   filter(rubro == rubro_elegido) %>% #picker
+#   group_by(año, subrubro) %>%
+#   summarize(empresas = sum(empresas)) %>%
+#   mutate(tipo = case_when(subrubro == subrubro_elegido ~ "elegido",
+#                           TRUE ~ "no")) %>%
+#   ggplot(aes(año, empresas, col = subrubro, alpha = tipo)) +
+#   geom_line(size = 1, show.legend=F) +
+#   scale_x_continuous(breaks = años_sii) +
+#   scale_y_log10() +
+#   scale_alpha_manual(values = c(1, 0.5)) +
+#   theme(axis.text.x = element_text(angle=90, vjust=0.5))
 
 #empresas_año_subrubro_comuna
 #empresas_año_subrubro_region
@@ -226,9 +238,9 @@ empresas_año_subrubro_region <- datos_sii$empresas_act %>%
          rubro = as.factor(rubro))
 
 #graficar
-empresas_año_subrubro_region %>%
-  filter(subrubro == subrubro_elegido) %>%
-  graficar_lineas_degradado(variable="subrubro")
+# empresas_año_subrubro_region %>%
+#   filter(subrubro == subrubro_elegido) %>%
+#   graficar_lineas_degradado(variable="subrubro")
 
 
 #precalcular crecimiento de empresas por subrubro por comuna
@@ -240,114 +252,114 @@ empresas_año_subrubro_comuna <- datos_sii$empresas_act %>%
          comuna = as.factor(comuna))
 
 #graficar
-empresas_año_subrubro_comuna %>%
-  filter(subrubro == subrubro_elegido,
-         comuna == comuna_elegida) %>%
-  graficar_lineas_degradado(variable="subrubro")
+# empresas_año_subrubro_comuna %>%
+#   filter(subrubro == subrubro_elegido,
+#          comuna == comuna_elegida) %>%
+#   graficar_lineas_degradado(variable="subrubro")
 
 
 #g torta subrubros ----
 #es mala idea visualizarlo como torta
-datos_torta <- empresas_año_subrubro_region %>%
-  ungroup() %>%
-  filter(rubro == rubros_sii[5],
-         año == max(año)) %>%
-  select(-año, -rubro)
+# datos_torta <- empresas_año_subrubro_region %>%
+#   ungroup() %>%
+#   filter(rubro == rubros_sii[5],
+#          año == max(año)) %>%
+#   select(-año, -rubro)
+# 
+# datos_torta
 
-datos_torta
-
-torta_vinculacion <- function(datos, variable, peso, numero = 100, nombre, calcular=TRUE) {
-  variable <-  sym(variable)
-  variable_elegida <- as.character(variable)
-  numero_elegido <- numero
-  peso <-  sym(peso)
-  
-  if (calcular==TRUE) {
-    p <- datos %>%
-      mutate(!!variable := forcats::fct_lump(!!variable, n=numero_elegido, w = !!peso, other_level = "Otros")#,
-             #!!variable := stringr::str_to_sentence(!!variable)
-      ) %>%
-      count(!!variable) %>%
-      mutate(porcentaje = n/sum(n))
-    
-  } else{
-    p <- datos
-  }
-  
-  #graficar
-  p <- p %>%
-    ggplot(aes(y=porcentaje, 
-               fill=forcats::fct_reorder(!!variable, porcentaje), 
-               col=forcats::fct_reorder(!!variable, porcentaje),
-               x=1)) +
-    geom_col(show.legend=F,
-                         aes(#tooltip = paste0(!!variable, ": ", scales::percent(porcentaje, 1.1))
-                         )) +
-    geom_point(alpha=0, size=0) +
-    # geom_text(aes(x=1.2, label = scales::percent(porcentaje, 1.1)),
-    #           position = position_stack(vjust = 0.5),
-    #           col = "black", show.legend = F) +
-    coord_polar(theta = "y", direction = -1, start = 5.7, clip = "off") +
-    theme_void() +
-    theme(plot.background = element_rect(fill = color_fondo, 
-                                         color= color_fondo)) +
-    fishualize::scale_fill_fish_d(option = "Oncorhynchus_keta", direction = -1) +
-    fishualize::scale_color_fish_d(option = "Oncorhynchus_keta", direction = -1) +
-    labs(fill = nombre,
-         col = nombre) +
-    guides(fill = guide_legend(reverse = TRUE),
-           col = guide_legend(reverse = TRUE,
-                              override.aes = list(size=5, alpha=1, fill=NA, text=NA))) +
-    theme(text = element_text(family = "Open Sans", size = 11, color = color_negro),
-          legend.position = "bottom",
-          legend.direction = "vertical",
-          legend.title = element_text(face = "bold"),
-          legend.text = element_text(size=11, margin = margin(t=2, b=2)),
-          legend.margin = margin(-10, 10, 5, 10),
-          plot.margin = margin(-10, #arriba
-                               40, #derecha
-                               0, #abajo
-                               -40)) #izquierda
-  
-  return(p)
-}
-
-
-datos_torta %>%
-torta_vinculacion(variable ="subrubro", peso="empresas", numero=6, nombre="mapaches") +
-  theme(legend.position ="none")
+# torta_vinculacion <- function(datos, variable, peso, numero = 100, nombre, calcular=TRUE) {
+#   variable <-  sym(variable)
+#   variable_elegida <- as.character(variable)
+#   numero_elegido <- numero
+#   peso <-  sym(peso)
+#   
+#   if (calcular==TRUE) {
+#     p <- datos %>%
+#       mutate(!!variable := forcats::fct_lump(!!variable, n=numero_elegido, w = !!peso, other_level = "Otros")#,
+#              #!!variable := stringr::str_to_sentence(!!variable)
+#       ) %>%
+#       count(!!variable) %>%
+#       mutate(porcentaje = n/sum(n))
+#     
+#   } else{
+#     p <- datos
+#   }
+#   
+#   #graficar
+#   p <- p %>%
+#     ggplot(aes(y=porcentaje, 
+#                fill=forcats::fct_reorder(!!variable, porcentaje), 
+#                col=forcats::fct_reorder(!!variable, porcentaje),
+#                x=1)) +
+#     geom_col(show.legend=F,
+#                          aes(#tooltip = paste0(!!variable, ": ", scales::percent(porcentaje, 1.1))
+#                          )) +
+#     geom_point(alpha=0, size=0) +
+#     # geom_text(aes(x=1.2, label = scales::percent(porcentaje, 1.1)),
+#     #           position = position_stack(vjust = 0.5),
+#     #           col = "black", show.legend = F) +
+#     coord_polar(theta = "y", direction = -1, start = 5.7, clip = "off") +
+#     theme_void() +
+#     theme(plot.background = element_rect(fill = color_fondo, 
+#                                          color= color_fondo)) +
+#     fishualize::scale_fill_fish_d(option = "Oncorhynchus_keta", direction = -1) +
+#     fishualize::scale_color_fish_d(option = "Oncorhynchus_keta", direction = -1) +
+#     labs(fill = nombre,
+#          col = nombre) +
+#     guides(fill = guide_legend(reverse = TRUE),
+#            col = guide_legend(reverse = TRUE,
+#                               override.aes = list(size=5, alpha=1, fill=NA, text=NA))) +
+#     theme(text = element_text(family = "Open Sans", size = 11, color = color_negro),
+#           legend.position = "bottom",
+#           legend.direction = "vertical",
+#           legend.title = element_text(face = "bold"),
+#           legend.text = element_text(size=11, margin = margin(t=2, b=2)),
+#           legend.margin = margin(-10, 10, 5, 10),
+#           plot.margin = margin(-10, #arriba
+#                                40, #derecha
+#                                0, #abajo
+#                                -40)) #izquierda
+#   
+#   return(p)
+# }
+# 
+# 
+# datos_torta %>%
+# torta_vinculacion(variable ="subrubro", peso="empresas", numero=6, nombre="mapaches") +
+#   theme(legend.position ="none")
 
 
 #g barras subrubros ----
-datos$empresas_año_subrubro_region %>%
-  ungroup() %>%
-  filter(rubro == rubros_sii[5],
-         año == max(año)) %>%
-  select(-año, -rubro) %>%
-  graficar_barras_horizontales(slice=6)
-
-datos$empresas_año_subrubro_comuna %>%
-  ungroup() %>%
-  filter(rubro == rubros_sii[2],
-         comuna == comuna_elegida,
-         año == max(año)) %>%
-  select(-año, -rubro, -comuna) %>%
-  graficar_barras_horizontales(slice=6, str_trunc=80)
+# datos$empresas_año_subrubro_region %>%
+#   ungroup() %>%
+#   filter(rubro == rubros_sii[5],
+#          año == max(año)) %>%
+#   select(-año, -rubro) %>%
+#   graficar_barras_horizontales(slice=6)
+# 
+# datos$empresas_año_subrubro_comuna %>%
+#   ungroup() %>%
+#   filter(rubro == rubros_sii[2],
+#          comuna == comuna_elegida,
+#          año == max(año)) %>%
+#   select(-año, -rubro, -comuna) %>%
+#   graficar_barras_horizontales(slice=6, str_trunc=80)
 
 
 #g evolución actividades ----
 #gráfico empresas por actividades
-datos_sii$empresas_act %>%
-  filter(comuna == comuna_elegida) %>% #picker
-  filter(rubro == rubro_elegido) %>% #picker
-  group_by(año, actividad) %>%
-  summarize(empresas = sum(empresas)) %>%
-  ggplot(aes(año, empresas, col = actividad)) +
-  geom_line(size = 1, show.legend=F) +
-  scale_x_continuous(breaks = años_sii) +
-  scale_y_log10() +
-  scale_alpha_manual(values = c(1, 0.5)) +
-  theme(axis.text.x = element_text(angle=90, vjust=0.5))
+# datos_sii$empresas_act %>%
+#   filter(comuna == comuna_elegida) %>% #picker
+#   filter(rubro == rubro_elegido) %>% #picker
+#   group_by(año, actividad) %>%
+#   summarize(empresas = sum(empresas)) %>%
+#   ggplot(aes(año, empresas, col = actividad)) +
+#   geom_line(size = 1, show.legend=F) +
+#   scale_x_continuous(breaks = años_sii) +
+#   scale_y_log10() +
+#   scale_alpha_manual(values = c(1, 0.5)) +
+#   theme(axis.text.x = element_text(angle=90, vjust=0.5))
 
 
 #gráfico empresas por rubro, subrubro y actividad
@@ -1161,6 +1173,8 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               "empresas_rubros" = empresas_rubros,
               "empresas_comunas" = empresas_comunas,
               "empresas_subrubros" = empresas_subrubros,
+              ##
+              "empresas_rubros_comuna" = empresas_rubros_comuna,
               ##
               "trabajadores_rubros" = trabajadores_rubros,
               "trabajadores_comuna_rubro" = trabajadores_comuna_rubro,
