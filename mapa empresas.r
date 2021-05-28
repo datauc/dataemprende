@@ -301,6 +301,9 @@ datos_mapas <- list(#"mar" = water,
 
 save(datos_mapas, file = "dataemprende_datos/datos_mapas.rdata")
 
+load("dataemprende_datos/datos_mapas.rdata")
+
+
 # fondo <- "#2D668E"
 # degradado <- colorRampPalette(c("#2D668E", "#457B9D"))
 # color_terreno <- degradado(3)[2]
@@ -321,17 +324,44 @@ ggplot() +
   geom_sf(data = datos_mapas$calles_grandes$osm_lines,
           color = color_negro, size = .5, alpha = .8, inherit.aes = F) +
   #puntos
-  geom_point(data = puntos_empresas %>%
-               filter(letra == "H"), aes(x=x, y=y, col = glosa_seccion),
-             alpha = 0.4, size = 1, col = color_claro, show.legend = F) +
-  #zoom en iquique y alto hospicio
-  coord_sf(xlim = c(-70.17, -70.06),
-           ylim = c(-20.31, -20.195),
+  # geom_point(data = puntos_empresas %>%
+  #              filter(letra == "H"), aes(x=x, y=y, col = glosa_seccion),
+  #            alpha = 0.4, size = 1, col = color_claro, show.legend = F) +
+  # #zoom en iquique y alto hospicio
+  # coord_sf(xlim = c(-70.17, -70.06),
+  #          ylim = c(-20.31, -20.195),
+  #          expand = FALSE) +
+  #zoom en alto hospicio
+  coord_sf(xlim = c((-70.17+mover_x)+zoom, (-70.06+mover_x)-zoom),
+           ylim = c((-20.31+mover_y)+zoom, (-20.195+mover_y)-zoom),
            expand = FALSE) +
   theme_void() +
-  theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
-        panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  theme(plot.background = element_rect(fill = color_fondo, color = color_fondo), panel.background = element_rect(fill = color_fondo, color = color_fondo))
 
+#iquique y alto hospicio
+mover_x = 0
+mover_y = 0
+zoom = 0
+
+# #centrar en alto hospicio
+# mover_x = 0.021
+# mover_y = -0.022
+# zoom = 0.025
+
+# # #centrar en iquique arriba
+# mover_x = -0.029
+# mover_y = 0.03
+# zoom = 0.039
+
+# #centrar en iquique al medio
+# mover_x = -0.02
+# mover_y = 0
+# zoom = 0.039
+
+#centrar en iquique abajo
+mover_x = -0.014
+mover_y = -0.016
+zoom = 0.039
 
 #seleccionar letra para filtrar datos
 rubro_elegido <- rubros_sii[1]

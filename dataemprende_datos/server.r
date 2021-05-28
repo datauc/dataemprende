@@ -1,5 +1,6 @@
 shinyServer(function(input, output, session) {
     
+    options(shiny.sanitize.errors = FALSE)
     #observe(startAnim(session, 'selectores', 'bounceInRight'))
     
     #filtrar selector de subrubros
@@ -313,13 +314,40 @@ shinyServer(function(input, output, session) {
     }) %>%
         bindCache(input$selector_m_iquique_empresas_rubro, input$rubro, input$subrubro)
     
+    #mapa
     output$m_iquique_empresas_rubro <- renderPlot({
+        #nivel de zoom
+        if (input$zoom_m_iquique_empresas_rubro == "Iquique y Alto Hospicio") {
+            #iquique y alto hospicio
+            mover_x_elegido = 0; mover_y_elegido = 0; zoom_elegido = 0
+            
+        } else if (input$zoom_m_iquique_empresas_rubro == "Iquique norte") {
+            # # #centrar en iquique arriba
+            mover_x_elegido = -0.029; mover_y_elegido = 0.03; zoom_elegido = 0.039
+            
+        } else if (input$zoom_m_iquique_empresas_rubro == "Iquique centro") {
+            #centrar en iquique al medio
+            mover_x_elegido = -0.02; mover_y_elegido = 0; zoom_elegido = 0.039
+            
+        } else if (input$zoom_m_iquique_empresas_rubro == "Iquique sur") {
+            #centrar en iquique abajo
+            mover_x_elegido = -0.014; mover_y_elegido = -0.016; zoom_elegido = 0.039
+            
+        } else if (input$zoom_m_iquique_empresas_rubro == "Alto Hospicio") {
+            #centrar en alto hospicio
+            mover_x_elegido = 0.021; mover_y_elegido = -0.022; zoom_elegido = 0.025
+        }
+        
         #graficar
         p <- d_iquique_empresas_rubro() %>%
-            graficar_mapa_rubros()  
+            graficar_mapa_rubros(mover_x = mover_x_elegido,
+                                 mover_y = mover_y_elegido,
+                                 zoom = zoom_elegido)  
         return(p)
-    }, res = 100) %>%
-        bindCache(input$selector_m_iquique_empresas_rubro, input$rubro, input$subrubro)
+    }, res = 100) #%>%
+        # bindCache(input$selector_m_iquique_empresas_rubro, #selector rubro/subrubro
+        #           input$zoom_m_iquique_empresas_rubro, #zoom
+        #           input$rubro, input$subrubro)
     
     
     #grafico horizontal ----

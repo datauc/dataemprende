@@ -115,6 +115,11 @@ lugares_tarapaca_datos <- datos_mapa_regional$lugares %>%
   rename(empresas = n)
 
 
+#graficar ----
+#load("dataemprende_datos/datos_mapa_regional.rdata")
+#load("dataemprende_datos/datos_precalculados.rdata")
+#library(tidyverse)
+
 #graficar mezclando capas
 ggplot() +
   #mapa de base

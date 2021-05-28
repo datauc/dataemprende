@@ -2,12 +2,10 @@
 
 library(dplyr)
 
-shinyUI(fluidPage(#shinymaterial::material_page(#
-  #shinyanimate::withAnim(), #animación shinyanimate
+shinyUI(fluidPage(
   aos::use_aos(), #animación en scroll
-  includeScript("scripts.js"),
+  includeScript("scripts.js"), #javascript de animación fade para conditional panels
   includeCSS("estilos.css"), #estilos css
-  #tags$link(rel = "stylesheet", type = "text/css", href = "estilos.css"),
   
   fluidRow(
     column(12, class = "fondo",
@@ -70,7 +68,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
   espaciador(),
   
   #—----
-  #resultados ----
+  #resumen ----
   
   fluidRow(
     column(12,
@@ -132,6 +130,7 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
            conditionalPanel("input.rubro != '' && input.subrubro != ''",
                             id = "condicional_rubro_elegido",
                             
+                            #mapa
                             plotOutput("m_empresas_comuna", height = "400px") %>% #width exacto para que no tenga borde blanco
                               aos(animation = "fade-down", delay = "0") %>%
                               shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
@@ -254,25 +253,38 @@ shinyUI(fluidPage(#shinymaterial::material_page(#
                                                             selected = "Rubro",
                                                             justified = TRUE,
                                                             width = "90%"),
-                            #texto descriptivo
                             
                             #texto del ciiu que se muestra a partir del subrubro
                             conditionalPanel("input.selector_m_iquique_empresas_rubro == 'Subrubro'",
                                              id = "condicional_rubro_elegido",
-                                             textOutput("subrubro_en_ciiu")
+                                             textOutput("subrubro_en_ciiu"),
+                                             br(),
                             )
            )
     ),
     
-    column(5, #style = "margin-right: 0px; padding-right: 0px; float: right; border: 0px; align-items: right;border-radius: 0px;",
+    column(5, 
            conditionalPanel("input.rubro != '' && input.subrubro != ''",
                             id = "condicional_rubro_elegido",
-                            
+
+                            #mapa
                             plotOutput("m_iquique_empresas_rubro", height = "400px", width = "359px") %>% #width exacto para que no tenga borde blanco
-                              aos(animation = "fade-down", delay = "0") %>%
-                              shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo) #%>%
-                            #aos(animation = "fade-down"),
-                            #poner hacia el lado derecho, ojalá fondo oscuro hacia esa esquina
+                              aos(animation = "fade-down", delay = 0) %>%
+                              shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
+                            
+                            #selector para el zoom
+                            br(),
+                            selectInput(inputId = "zoom_m_iquique_empresas_rubro", 
+                                        label = "Acercamiento:",
+                                        choices = c("Iquique y Alto Hospicio",
+                                                    "Iquique norte",
+                                                    "Iquique centro",
+                                                    "Iquique sur",
+                                                    "Alto Hospicio"),
+                                        selected = "Iquique y Alto Hospicio",
+                                        width = "100%") %>%
+                              aos(animation = "fade-down", delay = 0),
+                            br(),br(),
            ) 
     )
   ),

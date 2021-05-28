@@ -291,14 +291,15 @@ graficar_lineas_degradado <- function(data, variable = "rubro", texto_y = "Canti
 
 
 #graficar mapa rubros 
-graficar_mapa_rubros <- function(datos_filtrados) {
+graficar_mapa_rubros <- function(datos_filtrados, 
+                                 mover_x = 0,
+                                 mover_y = 0,
+                                 zoom = 0) {
+
   p <- ggplot() +
     #mapa de base
     geom_sf(data = datos_mapas$región, aes(geometry = geometry),
             fill = color_oscuro, col = color_oscuro) +
-    #agua y tierra
-    #geom_sf(data = datos_mapas$tierra, colour = "transparent", fill="grey90") + #tierra
-    #geom_sf(data = datos_mapas$mar, colour = "transparent", fill = "lightblue1") + #mar
     #calles
     geom_sf(data = datos_mapas$calles_medianas$osm_lines,
             color = color_claro, size = .3, alpha = .2, inherit.aes = F) +
@@ -309,9 +310,13 @@ graficar_mapa_rubros <- function(datos_filtrados) {
     #puntos
     geom_point(data = datos_filtrados, aes(x=x, y=y),
               alpha = 0.3, size = 1, col = color_claro, show.legend = F) +
-    #zoom en iquique y alto hospicio
-    coord_sf(xlim = c(-70.17, -70.06),
-             ylim = c(-20.31, -20.195),
+    # #zoom en iquique y alto hospicio
+    # coord_sf(xlim = c(-70.17, -70.06),
+    #          ylim = c(-20.31, -20.195),
+    #          expand = FALSE) +
+    #zoom variable
+    coord_sf(xlim = c((-70.17+mover_x)+zoom, (-70.06+mover_x)-zoom),
+             ylim = c((-20.31+mover_y)+zoom, (-20.195+mover_y)-zoom),
              expand = FALSE) +
     theme_void() +
     theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
@@ -322,6 +327,7 @@ graficar_mapa_rubros <- function(datos_filtrados) {
    theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
   return(p)
 }
+
 
 
 graficar_barras_horizontales <- function(data, variable="subrubro", slice=8, str_trunc=80, str_wrap=40) {
@@ -358,8 +364,7 @@ graficar_mapa_comunas <- function(data, variable){
               by = c("name" = "comuna")) %>%
     rename(empresas = all_of(variable))
   
-  
-  suppressWarnings(m <- ggplot() +
+  m <- ggplot() +
    #mapa de base
    # geom_point(aes(x=-70.17, y=-18.95), col = "red", size=14) +
    # geom_point(aes(x=-70.24, y=-19.055), col = "orange", size=10) +
@@ -389,22 +394,22 @@ graficar_mapa_comunas <- function(data, variable){
               stat = "sf_coordinates", col = color_claro, alpha = 0.6,
               show.legend = F) +
    #texto
-   ggrepel::geom_text_repel(data = datos_mapa_regional$lugares, aes(geometry = geometry, label = name), 
+   ggrepel::geom_text_repel(data = lugares_tarapaca_datos, aes(geometry = geometry, label = name), 
                             stat = "sf_coordinates", seed = 1993, point.padding = 0.2, min.segment.length = 9,
                             size = 3, col = "black", family = "Montserrat", alpha = 0.7) +
    #zoom region
    coord_sf(xlim = c(-70.4, -68.35),
-            ylim = c(-21.7, -18.9), expand = FALSE) +
+            ylim = c(-21.7, -18.9), expand = FALSE, clip = "off") +
    # #zoom iquique y alto hospicio
    # coord_sf(xlim = c(-70.17, -70.06),
    #          ylim = c(-20.31, -20.195), expand = FALSE) +
-   scale_size_continuous(range = c(-1, 15)) +
+   scale_size_continuous(range = c(0, 15)) +
    theme_void() +
-   theme(plot.background = element_rect(fill = color_fondo, color = color_fondo), panel.background = element_rect(fill = color_fondo, color = color_fondo)))
+   theme(plot.background = element_rect(fill = color_fondo, color = color_fondo), panel.background = element_rect(fill = color_fondo, color = color_fondo))
  
  #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
- suppressWarnings(m <- cowplot::ggdraw(m) +
-   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo)))
+ m <- cowplot::ggdraw(m) +
+   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
  
  return(m)
 }
