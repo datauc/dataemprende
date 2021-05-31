@@ -196,6 +196,40 @@ shinyServer(function(input, output, session) {
     }, res = 100) %>%
         bindCache(input$rubro)
     
+    
+    
+    output$rubro_subrubro_elegido_1 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        
+        if (input$selector_g_barras_empresas_rubro == "Rubro") {
+            h <- HTML(cifra(input$rubro)) }
+        else {
+            h <- HTML(cifra(input$subrubro))
+        }
+        return(h)
+    })
+    
+    #grafico horizontal empresas comuna ----
+    output$g_barras_empresas_rubro_comuna <- renderPlot({
+        req(input$rubro != "")
+        
+        if (input$selector_g_barras_empresas_rubro == "Rubro") {
+            d <- datos$empresas_rubros_comuna %>%
+                ungroup() %>%
+                filter(rubro == input$rubro)
+            
+        } else if (input$selector_g_barras_empresas_rubro == "Subrubro") {
+            d <- datos$empresas_subrubros_comuna %>%
+                ungroup() %>%
+                filter(subrubro == input$subrubro)
+        }
+        
+        p <- graficar_barras_horizontales(d, variable = "comuna", slice=7, str_wrap=30, str_trunc=50)
+        return(p)
+    }, res = 100)
+    
+    
     #tamaños de empresas ----
     #gráfico de logos de empresas en tres filas
     output$g_empresas_comuna <- renderPlot({
@@ -230,6 +264,17 @@ shinyServer(function(input, output, session) {
         return(t)
     })
     
+    output$rubro_elegido_1 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        HTML(cifra(input$rubro))
+    })
+    
+    output$subrubro_elegido_1 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        HTML(cifra(input$subrubro))
+    })
     
     #grafico crecimiento rubro region/comuna----
     #gráfico de líneas con degradado
@@ -290,8 +335,7 @@ shinyServer(function(input, output, session) {
     }) #%>%
         #bindCache(input$subrubro)
     
-    #output de texto del ciiu correspondiente
-    output$subrubro_en_ciiu <- renderText({ subrubro_en_ciiu() })
+    
     
     
     #mapa empresas rubro ----
@@ -344,13 +388,26 @@ shinyServer(function(input, output, session) {
                                  mover_y = mover_y_elegido,
                                  zoom = zoom_elegido)  
         return(p)
-    }, res = 100) #%>%
-        # bindCache(input$selector_m_iquique_empresas_rubro, #selector rubro/subrubro
-        #           input$zoom_m_iquique_empresas_rubro, #zoom
-        #           input$rubro, input$subrubro)
+    }, res = 100) %>%
+        bindCache(input$selector_m_iquique_empresas_rubro, #selector rubro/subrubro
+                  input$zoom_m_iquique_empresas_rubro, #zoom
+                  input$rubro, input$subrubro)
+    
+    output$rubro_subrubro_elegido_2 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        
+        if (input$selector_m_iquique_empresas_rubro == "Rubro") {
+            h <- HTML(cifra(input$rubro)) }
+        else {
+            #output de texto del ciiu correspondiente
+            h <- HTML(cifra(subrubro_en_ciiu()))
+        }
+        return(h)
+    })
     
     
-    #grafico horizontal ----
+    #grafico horizontal empresas subrubro ----
     output$g_barras_empresas_subrubro <- renderPlot({
         req(input$rubro != "")
         

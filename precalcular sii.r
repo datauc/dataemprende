@@ -110,6 +110,12 @@ empresas_subrubros <- datos_sii$empresas_act %>%
   group_by(rubro, subrubro) %>%
   summarize(n = sum(empresas, na.rm = T))
 
+
+empresas_subrubros_comuna <- datos_sii$empresas_act %>%
+  filter(año == 2019) %>%
+  group_by(rubro, subrubro, comuna) %>%
+  summarize(empresas = sum(empresas, na.rm = T))
+
 #subrubro elegido ----
 #empresas subrubro región
 datos_sii$empresas_act %>%
@@ -1175,6 +1181,7 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               "empresas_subrubros" = empresas_subrubros,
               ##
               "empresas_rubros_comuna" = empresas_rubros_comuna,
+              "empresas_subrubros_comuna" = empresas_subrubros_comuna,
               ##
               "trabajadores_rubros" = trabajadores_rubros,
               "trabajadores_comuna_rubro" = trabajadores_comuna_rubro,
