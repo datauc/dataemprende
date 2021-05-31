@@ -230,7 +230,11 @@ espaciador_interior <- function() {
 
 
 
-graficar_lineas_degradado <- function(data, variable = "rubro", texto_y = "Cantidad de empresas"){
+graficar_lineas_degradado <- function(data, variable = "rubro", #no hace nada creo
+                                      variable_y_elegida="empresas", #columna con valores y
+                                      texto_y = "Cantidad de empresas",
+                                      numero_largo = 1 #multiplicador del espacio para los numeros
+                                      ){
   #fondo degradado https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
   colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
   fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
@@ -241,29 +245,30 @@ graficar_lineas_degradado <- function(data, variable = "rubro", texto_y = "Canti
   
   #graficar
   p <- data %>%
-    ggplot(aes(año, empresas, col=variable)) +
+    rename(variable_y = all_of(variable_y_elegida)) %>%
+    ggplot(aes(año, variable_y, col=variable)) +
     #fondo degradado
     annotation_custom(fondo_degradado, xmin=año_minimo, xmax=año_maximo, ymin=0, ymax=Inf) +
-    geom_segment(col = color_fondo, size=1, aes(x=año, y=Inf, yend=empresas, xend=año), show.legend = F) + #parche de líneas hacia arriba para tapar el fondo de degradado que se le escapa al geom_ribbon
+    geom_segment(col = color_fondo, size=1, aes(x=año, y=Inf, yend=variable_y, xend=año), show.legend = F) + #parche de líneas hacia arriba para tapar el fondo de degradado que se le escapa al geom_ribbon
     #líneas de fondo
-    geom_segment(col = color_claro, alpha = 0.3, aes(x=año, y=0, yend=empresas, xend=año), show.legend = F) +
+    geom_segment(col = color_claro, alpha = 0.3, aes(x=año, y=0, yend=variable_y, xend=año), show.legend = F) +
     #colores de fondo arriba/abajo
-    geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = empresas, ymax = Inf), show.legend = F) + #fondo oscuro (arriba) para tapar el degradado
+    geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = variable_y, ymax = Inf), show.legend = F) + #fondo oscuro (arriba) para tapar el degradado
     geom_area(fill = color_fondo, alpha = 0.2, show.legend = F) + #fondo claro (abajo)
     #línea
     geom_line(color = color_claro, size = 1.2, show.legend = F, ) +
     #punto
     #geom_point(col=color_negro, alpha=0.6, size=3) + #punto chico negro
     geom_point(color = color_blanco, size=1.5) + #punto chico claro
-    geom_point(color = color_blanco, size=6, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande claro
-    geom_point(color = color_claro, size=4, data = . %>% filter(año == 2019), aes(x = max(año), y=max(empresas))) + #punto grande blanco
+    geom_point(color = color_blanco, size=6, data = . %>% filter(año == 2019), aes(x = max(año), y=max(variable_y))) + #punto grande claro
+    geom_point(color = color_claro, size=4, data = . %>% filter(año == 2019), aes(x = max(año), y=max(variable_y))) + #punto grande blanco
     #líneas del gráfico
     #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(empresas))) +
     #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=max(año)+0.2, yend=0)) +
-    scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2))) +
+    scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2*numero_largo))) +
     #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
     #texto
-    geom_text(color = color_blanco, family = "Dosis ExtraLight SemiBold", size = 5, aes(label = paste0(" ", max(empresas)), x = max(año)+0.5, y=max(empresas)),
+    geom_text(color = color_blanco, family = "Dosis ExtraLight SemiBold", size = 5, aes(label = paste0(" ", max(variable_y)), x = max(año)+0.5, y=max(variable_y)),
               hjust=0, inherit.aes = F, check_overlap = T, data = . %>% filter(año == 2019)) +
     #tema
     coord_cartesian(clip="off") +

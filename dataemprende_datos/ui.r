@@ -397,6 +397,70 @@ fluidRow(
   )
 ),
 
+espaciador_interior(),
+
+fluidRow(
+  column(12,
+         h3("Evolución de los trabajadores del rubro") %>%
+           aos(animation = "fade-down", delay = "0"),
+         br(),
+         
+         conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                          id = "condicional_rubro_elegido",
+                          
+                          #titulo del rubro elegido
+                          htmlOutput("rubro_elegido_3") %>% 
+                            aos(animation = "fade-down", delay = "0"),
+                          br(),
+                          
+                          #botonera
+                          shinyWidgets::radioGroupButtons("selector_g_crecimiento_trabajadores_rubro",
+                                                          label = NULL,
+                                                          choices = c("Región", "Comuna"),
+                                                          selected = "Región",
+                                                          justified = TRUE,
+                                                          width = "90%") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          
+                          #grafico de degradado
+                          plotOutput("g_crecimiento_trabajadores_rubro", height = "300px") %>% 
+                            aos(animation = "fade-down", delay = "200")
+         ),
+  )
+),
+
+espaciador_interior(),
+
+fluidRow(
+  column(12,
+         h3("Evolución de los trabajadores del subrubro") %>%
+           aos(animation = "fade-down", delay = "0"),
+         br(),
+         
+         conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                          id = "condicional_rubro_elegido",
+                          
+                          #titulo del rubro elegido
+                          htmlOutput("subrubro_elegido_3") %>% 
+                            aos(animation = "fade-down", delay = "0"),
+                          br(),
+                          
+                          #botonera
+                          shinyWidgets::radioGroupButtons("selector_g_crecimiento_trabajadores_subrubro",
+                                                          label = NULL,
+                                                          choices = c("Región", "Comuna"),
+                                                          selected = "Región",
+                                                          justified = TRUE,
+                                                          width = "90%") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          
+                          #grafico de degradado
+                          plotOutput("g_crecimiento_trabajadores_subrubro", height = "300px") %>% 
+                            aos(animation = "fade-down", delay = "200")
+         ),
+  )
+),
+
 espaciador(),
 
 #—----

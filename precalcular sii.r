@@ -612,6 +612,26 @@ datos_sii$trabajadores_act %>%
   group_by(género) %>%
   summarize(n = sum(valor, na.rm = T))
 
+#evolución subrubro region ----
+trabajadores_año_subrubro_region <- datos_sii$trabajadores_act %>%
+  filter(#rubro == rubro_elegido,
+    #año == 2019,
+    género == "total",
+    tipo == "dependencia",
+    calculo == "total") %>%
+  group_by(rubro, subrubro, año) %>%
+  summarize(trabajadores = sum(valor, na.rm = T))
+
+#evolución subrubro comuna ----
+trabajadores_año_subrubro_comuna <- datos_sii$trabajadores_act %>%
+  filter(#rubro == rubro_elegido,
+    #año == 2019,
+    género == "total",
+    tipo == "dependencia",
+    calculo == "total") %>%
+  group_by(rubro, subrubro, comuna, año) %>%
+  summarize(trabajadores = sum(valor, na.rm = T))
+
 # dependencia: comunas ----
 datos_sii$trabajadores %>%
   filter(año == 2019,
@@ -1189,6 +1209,9 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               "trabajadores_genero_comunas" = trabajadores_genero_comunas,
               "trabajadores_genero_rubros" = trabajadores_genero_rubros,
               "trabajadores_genero_rubros_comunas" = trabajadores_genero_rubros_comunas,
+              ##
+              "trabajadores_año_subrubro_region" = trabajadores_año_subrubro_region,
+              "trabajadores_año_subrubro_comuna" = trabajadores_año_subrubro_comuna,
               ##
               "tramos_comuna" = tramos_comuna,
               "tramos_region" = tramos_region,

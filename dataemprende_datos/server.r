@@ -356,7 +356,9 @@ shinyServer(function(input, output, session) {
                 filter(rubro == input$rubro)
         }
     }) %>%
-        bindCache(input$selector_m_iquique_empresas_rubro, input$rubro, input$subrubro)
+        bindCache(input$selector_m_iquique_empresas_rubro, 
+                  input$zoom_m_iquique_empresas_rubro,
+                  input$rubro, input$subrubro)
     
     #mapa
     output$m_iquique_empresas_rubro <- renderPlot({
@@ -434,6 +436,87 @@ shinyServer(function(input, output, session) {
     
     #—----
     #TRABAJADORES ----
+    
+    output$rubro_elegido_3 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        HTML(cifra(input$rubro))
+    })
+    
+    output$subrubro_elegido_3 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        HTML(cifra(input$subrubro))
+    })
+    
+    #grafico crecimiento rubro region/comuna----
+    #gráfico de líneas con degradado
+    output$g_crecimiento_trabajadores_rubro <- renderPlot({
+        req(input$rubro != "")
+        #lógica para la botonera de comuna o región:
+        
+        #filtrar por comuna si se elige comuna en el selector
+        if (input$selector_g_crecimiento_trabajadores_rubro == "Comuna") {
+            d <- datos$trabajadores_año_subrubro_comuna %>%
+                filter(rubro == input$rubro,
+                       comuna == input$comuna) %>%
+                group_by(rubro, comuna, año) %>%
+                summarize(trabajadores = sum(trabajadores, na.rm=T))
+            
+        } #si se selecciona region, usar datos sin comuna precalculados
+        else { 
+            d <- datos$trabajadores_año_subrubro_region %>%
+                filter(rubro == input$rubro) %>%
+                group_by(rubro, año) %>%
+                summarize(trabajadores = sum(trabajadores, na.rm=T))
+        }
+        #graficar
+        p <- d %>%
+            graficar_lineas_degradado(variable = "rubro", variable_y_elegida="trabajadores", 
+                                      texto_y = "Cantidad de trabajadores",
+                                      numero_largo=1.5)
+        return(p)
+    }, res = 100) #%>%
+    # bindCache(input$selector_g_crecimiento_trabajadores_rubro,
+    #           input$rubro,
+    #           input$comuna)
+    
+    
+    
+    #grafico crecimiento subrubro region/comuna----
+    #gráfico de líneas con degradado
+    output$g_crecimiento_trabajadores_subrubro <- renderPlot({
+        req(input$rubro != "",
+            input$subrubro != "")
+        #lógica para la botonera de comuna o región:
+        
+        #filtrar por comuna si se elige comuna en el selector
+        if (input$selector_g_crecimiento_trabajadores_subrubro == "Comuna") {
+            d <- datos$trabajadores_año_subrubro_comuna %>%
+                filter(subrubro == input$subrubro,
+                       comuna == input$comuna) #%>%
+                #group_by(rubro, comuna, año) %>%
+                #summarize(trabajadores = sum(trabajadores, na.rm=T))
+            
+        } #si se selecciona region, usar datos sin comuna precalculados
+        else { 
+            d <- datos$trabajadores_año_subrubro_region %>%
+                filter(subrubro == input$subrubro) #%>%
+                #group_by(rubro, año) %>%
+                #summarize(trabajadores = sum(trabajadores, na.rm=T))
+        }
+        #graficar
+        p <- d %>%
+            graficar_lineas_degradado(variable = "subrubro", variable_y_elegida="trabajadores", 
+                                      texto_y = "Cantidad de trabajadores",
+                                      numero_largo=1.5)
+        return(p)
+    }, res = 100) #%>%
+    # bindCache(input$selector_g_crecimiento_trabajadores_subrubro,
+    #           input$rubro,
+    #           input$comuna)
+    
+    
     
     #grafico genero ----
     #gráfico de logos del género de trabajadores de la comuna
