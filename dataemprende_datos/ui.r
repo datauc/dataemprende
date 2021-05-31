@@ -399,6 +399,8 @@ fluidRow(
 
 espaciador_interior(),
 
+
+#grafico crecimiento rubro ----
 fluidRow(
   column(12,
          h3("Evolución de los trabajadores del rubro") %>%
@@ -431,6 +433,7 @@ fluidRow(
 
 espaciador_interior(),
 
+#grafico crecimiento subrubro ----
 fluidRow(
   column(12,
          h3("Evolución de los trabajadores del subrubro") %>%
@@ -468,10 +471,78 @@ espaciador(),
 fluidRow(
   column(12,
          h2("Ventas") %>% aos(animation = "fade-down", duration = "1000"),
+         br(),
+  )
+),
+
+
+#grafico crecimiento rubro ----
+fluidRow(
+  column(12,
+         h3("Evolución de ventas del rubro") %>%
+           aos(animation = "fade-down", delay = "0"),
+         br(),
+         
+         conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                          id = "condicional_rubro_elegido",
+                          
+                          #titulo del rubro elegido
+                          htmlOutput("rubro_elegido_4") %>% 
+                            aos(animation = "fade-down", delay = "0"),
+                          br(),
+                          
+                          #botonera
+                          shinyWidgets::radioGroupButtons("selector_g_crecimiento_ventas_rubro",
+                                                          label = NULL,
+                                                          choices = c("Región", "Comuna"),
+                                                          selected = "Región",
+                                                          justified = TRUE,
+                                                          width = "90%") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          
+                          #grafico de degradado
+                          plotOutput("g_crecimiento_ventas_rubro", height = "300px") %>% 
+                            aos(animation = "fade-down", delay = "200")
+         ),
+  )
+),
+
+espaciador_interior(),
+
+#grafico crecimiento subrubro ----
+fluidRow(
+  column(12,
+         h3("Evolución de ventas del subrubro") %>%
+           aos(animation = "fade-down", delay = "0"),
+         br(),
+         
+         conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                          id = "condicional_rubro_elegido",
+                          
+                          #titulo del rubro elegido
+                          htmlOutput("subrubro_elegido_4") %>% 
+                            aos(animation = "fade-down", delay = "0"),
+                          br(),
+                          
+                          #botonera
+                          shinyWidgets::radioGroupButtons("selector_g_crecimiento_ventas_subrubro",
+                                                          label = NULL,
+                                                          choices = c("Región", "Comuna"),
+                                                          selected = "Región",
+                                                          justified = TRUE,
+                                                          width = "90%") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          
+                          #grafico de degradado
+                          plotOutput("g_crecimiento_ventas_subrubro", height = "300px") %>% 
+                            aos(animation = "fade-down", delay = "200")
+         ),
   )
 ),
 
 espaciador(),
+
+
 
 )
 )

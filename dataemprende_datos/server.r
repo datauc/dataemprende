@@ -1,7 +1,7 @@
 shinyServer(function(input, output, session) {
     
     options(shiny.sanitize.errors = FALSE)
-    #observe(startAnim(session, 'selectores', 'bounceInRight'))
+    options(OutDec= ",") #decimales con coma
     
     #filtrar selector de subrubros
     observeEvent(input$rubro, {
@@ -545,6 +545,106 @@ shinyServer(function(input, output, session) {
         
         return(p)
     }, res = 100)
+  
     
+    #—----
+    
+    #VENTAS ----  
+    
+    
+    output$rubro_elegido_4 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        HTML(cifra(input$rubro))
+    })
+    
+    output$subrubro_elegido_4 <- reactive({
+        req(input$rubro != "",
+            input$subrubro != "")
+        HTML(cifra(input$subrubro))
+    })
+    
+    #grafico crecimiento rubro region/comuna----
+    #gráfico de líneas con degradado
+    output$g_crecimiento_ventas_rubro <- renderPlot({
+        req(input$rubro != "")
+        #lógica para la botonera de comuna o región:
+        
+        #filtrar por comuna si se elige comuna en el selector
+        if (input$selector_g_crecimiento_ventas_rubro == "Comuna") {
+            d <- datos$ventas_año_subrubro_comuna %>% 
+                filter(rubro == input$rubro,
+                       comuna == input$comuna) %>%
+                group_by(año, rubro) %>%
+                summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
+                          empresas = sum(empresas)) %>%
+                ungroup() %>%
+                mutate(ventas_promedio = ventas_anuales/empresas,
+                       ventas_promedio = round(ventas_promedio/1000000, 3))
+            
+        } #si se selecciona region, usar datos sin comuna precalculados
+        else { 
+            d <- datos$ventas_año_subrubro_region %>% 
+                filter(rubro == input$rubro) %>%
+                group_by(año, rubro) %>%
+                summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
+                          empresas = sum(empresas)) %>%
+                ungroup() %>%
+                mutate(ventas_promedio = ventas_anuales/empresas,
+                       ventas_promedio = round(ventas_promedio/1000000, 3))
+        }
+        #graficar
+        p <- d %>%
+            graficar_lineas_degradado(variable = "rubro", variable_y_elegida="ventas_promedio", 
+                                      texto_y = "Ventas (en millones de pesos)",
+                                      numero_largo=1.5)
+        return(p)
+    }, res = 100) #%>%
+    # bindCache(input$selector_g_crecimiento_trabajadores_rubro,
+    #           input$rubro,
+    #           input$comuna)
+    
+    
+    
+    #grafico crecimiento subrubro region/comuna----
+    #gráfico de líneas con degradado
+    output$g_crecimiento_ventas_subrubro <- renderPlot({
+        req(input$rubro != "",
+            input$subrubro != "")
+        #lógica para la botonera de comuna o región:
+        
+        #filtrar por comuna si se elige comuna en el selector
+        if (input$selector_g_crecimiento_ventas_subrubro == "Comuna") {
+            d <- datos$ventas_año_subrubro_comuna %>% 
+                filter(subrubro == input$subrubro,
+                       comuna == input$comuna) %>%
+                #group_by(año, rubro) %>%
+                #summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
+                #          empresas = sum(empresas)) %>%
+                ungroup() %>%
+                mutate(ventas_promedio = ventas_anuales/empresas,
+                       ventas_promedio = round(ventas_promedio/1000000, 3))
+            
+        } #si se selecciona region, usar datos sin comuna precalculados
+        else { 
+            d <- datos$ventas_año_subrubro_region %>% 
+                filter(subrubro == input$subrubro) %>%
+                #group_by(año, rubro) %>%
+                #summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
+                #          empresas = sum(empresas)) %>%
+                ungroup() %>%
+                mutate(ventas_promedio = ventas_anuales/empresas,
+                       ventas_promedio = round(ventas_promedio/1000000, 3))
+        }
+        #graficar
+        p <- d %>%
+            graficar_lineas_degradado(variable = "subrubro", variable_y_elegida="ventas_promedio", 
+                                      texto_y = "Ventas (en millones de pesos)",
+                                      numero_largo=1.5)
+        return(p)
+    }, res = 100) #%>%
+    # bindCache(input$selector_g_crecimiento_trabajadores_subrubro,
+    #           input$rubro,
+    #           input$comuna)
     
 })

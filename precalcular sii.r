@@ -954,6 +954,19 @@ datos_sii$ventas %>%
   geom_col(aes(y=empresas*50000), alpha=0.2) +
   scale_y_continuous(labels = function(x) paste(x/1000000, "M"))
 
+
+#evolución ventas rubro/subrubro ----
+ventas_año_subrubro_region <- datos_sii$ventas_act %>%
+  group_by(año, rubro, subrubro) %>%
+  summarize(across(where(is.numeric), ~ sum(.x))) %>%
+  select(-ventas_mensuales, -ventas_anuales_uf)
+
+#evolución ventas rubro/subrubro comuna ----
+ventas_año_subrubro_comuna <- datos_sii$ventas_act %>%
+  group_by(año, comuna, rubro, subrubro) %>%
+  summarize(across(where(is.numeric), ~ sum(.x))) %>%
+  select(-ventas_mensuales, -ventas_anuales_uf)
+
 #—----
 
 #RENTA ----
@@ -1212,6 +1225,9 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               ##
               "trabajadores_año_subrubro_region" = trabajadores_año_subrubro_region,
               "trabajadores_año_subrubro_comuna" = trabajadores_año_subrubro_comuna,
+              ##
+              "ventas_año_subrubro_region" = ventas_año_subrubro_region,
+              "ventas_año_subrubro_comuna" = ventas_año_subrubro_comuna,
               ##
               "tramos_comuna" = tramos_comuna,
               "tramos_region" = tramos_region,
