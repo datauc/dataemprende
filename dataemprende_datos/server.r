@@ -5,16 +5,22 @@ shinyServer(function(input, output, session) {
     
     #filtrar selector de subrubros
     observeEvent(input$rubro, {
-        # subrubros_filtrados <- subrubros_sii %>%
-        #     filter(rubro == input$rubro) %>%
-        #     select(subrubro) %>%
-        #     pull()
-        
-        subrubros_filtrados <- subrubros_sii$subrubro[subrubros_sii$rubro == input$rubro]
+      
+      # #entrega subrubros ordenados por cantidad de empresas
+      # #tictoc::tic()
+      # subrubros_filtrados <- datos$empresas_subrubros %>%
+      #   filter(rubro == input$rubro) %>%
+      #   arrange(desc(n)) %>% 
+      #   select(subrubro) %>%
+      #   pull()
+      # #tictoc::toc()
+      
+      #lo mismo pero preprocesado
+      subrubros_filtrados <- subrubros_sii$subrubro[subrubros_sii$rubro == input$rubro]
         
         updateSelectInput(session, "subrubro",
                           choices = subrubros_filtrados)
-    }) #%>% bindCache(input$rubro)
+    }) 
     
     #texto ----
     ####poner un if else "ninguno" en rubros y subrubros sin gente 
@@ -225,7 +231,7 @@ shinyServer(function(input, output, session) {
                 filter(subrubro == input$subrubro)
         }
         
-        p <- graficar_barras_horizontales(d, variable = "comuna", slice=7, str_wrap=30, str_trunc=50)
+        p <- graficar_barras_horizontales(d, variable_categorica = "comuna", slice=7, str_wrap=30, str_trunc=50)
         return(p)
     }, res = 100)
     
@@ -461,14 +467,14 @@ shinyServer(function(input, output, session) {
                 filter(rubro == input$rubro,
                        comuna == input$comuna) %>%
                 group_by(rubro, comuna, año) %>%
-                summarize(trabajadores = sum(trabajadores, na.rm=T))
+                summarize(trabajadores = sum(trabajadores, na.rm=T), .groups = "drop")
             
         } #si se selecciona region, usar datos sin comuna precalculados
         else { 
             d <- datos$trabajadores_año_subrubro_region %>%
                 filter(rubro == input$rubro) %>%
                 group_by(rubro, año) %>%
-                summarize(trabajadores = sum(trabajadores, na.rm=T))
+                summarize(trabajadores = sum(trabajadores, na.rm=T), .groups = "drop")
         }
         #graficar
         p <- d %>%
@@ -494,16 +500,12 @@ shinyServer(function(input, output, session) {
         if (input$selector_g_crecimiento_trabajadores_subrubro == "Comuna") {
             d <- datos$trabajadores_año_subrubro_comuna %>%
                 filter(subrubro == input$subrubro,
-                       comuna == input$comuna) #%>%
-                #group_by(rubro, comuna, año) %>%
-                #summarize(trabajadores = sum(trabajadores, na.rm=T))
+                       comuna == input$comuna) 
             
         } #si se selecciona region, usar datos sin comuna precalculados
         else { 
             d <- datos$trabajadores_año_subrubro_region %>%
-                filter(subrubro == input$subrubro) #%>%
-                #group_by(rubro, año) %>%
-                #summarize(trabajadores = sum(trabajadores, na.rm=T))
+                filter(subrubro == input$subrubro) 
         }
         #graficar
         p <- d %>%
@@ -546,11 +548,14 @@ shinyServer(function(input, output, session) {
         return(p)
     }, res = 100)
   
+    #(!)mayores trabajadores ----
+    #en comuna
+    #mayores trabajadores mujeres
+    
     
     #—----
     
     #VENTAS ----  
-    
     
     output$rubro_elegido_4 <- reactive({
         req(input$rubro != "",
@@ -577,8 +582,7 @@ shinyServer(function(input, output, session) {
                        comuna == input$comuna) %>%
                 group_by(año, rubro) %>%
                 summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
-                          empresas = sum(empresas)) %>%
-                ungroup() %>%
+                          empresas = sum(empresas), .groups = "drop") %>%
                 mutate(ventas_promedio = ventas_anuales/empresas,
                        ventas_promedio = round(ventas_promedio/1000000, 3))
             
@@ -588,8 +592,7 @@ shinyServer(function(input, output, session) {
                 filter(rubro == input$rubro) %>%
                 group_by(año, rubro) %>%
                 summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
-                          empresas = sum(empresas)) %>%
-                ungroup() %>%
+                          empresas = sum(empresas), .groups = "drop") %>%
                 mutate(ventas_promedio = ventas_anuales/empresas,
                        ventas_promedio = round(ventas_promedio/1000000, 3))
         }
@@ -618,9 +621,6 @@ shinyServer(function(input, output, session) {
             d <- datos$ventas_año_subrubro_comuna %>% 
                 filter(subrubro == input$subrubro,
                        comuna == input$comuna) %>%
-                #group_by(año, rubro) %>%
-                #summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
-                #          empresas = sum(empresas)) %>%
                 ungroup() %>%
                 mutate(ventas_promedio = ventas_anuales/empresas,
                        ventas_promedio = round(ventas_promedio/1000000, 3))
@@ -629,9 +629,6 @@ shinyServer(function(input, output, session) {
         else { 
             d <- datos$ventas_año_subrubro_region %>% 
                 filter(subrubro == input$subrubro) %>%
-                #group_by(año, rubro) %>%
-                #summarize(ventas_anuales = sum(ventas_anuales, na.rm = T),
-                #          empresas = sum(empresas)) %>%
                 ungroup() %>%
                 mutate(ventas_promedio = ventas_anuales/empresas,
                        ventas_promedio = round(ventas_promedio/1000000, 3))
@@ -646,5 +643,85 @@ shinyServer(function(input, output, session) {
     # bindCache(input$selector_g_crecimiento_trabajadores_subrubro,
     #           input$rubro,
     #           input$comuna)
+    
+    
+    output$rubro_elegido_5 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+      HTML(cifra(input$rubro))
+    })
+    
+    output$subrubro_elegido_5 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+      HTML(cifra(input$subrubro))
+    })
+    #mayores ventas rubro ----
+    
+    #rubros con mayores ventas anuales promedio en la región/comuna elegida
+    output$g_mayores_ventas_rubro <- renderPlot({
+      req(input$rubro != "")
+      
+      #región
+      if (input$selector_g_mayores_ventas_rubro == "Región") {
+        d <- datos$ventas_año_subrubro_comuna %>%
+          filter(año == 2019) %>%
+          group_by(rubro) %>%
+          summarize(ventas_anuales = sum(ventas_anuales, na.rm=T),
+                    empresas = sum(empresas), .groups = "drop") %>%
+          mutate(ventas_promedio = ventas_anuales/empresas,
+                 ventas_promedio = round(ventas_promedio/1000000, 1))
+      }
+      #comuna
+      else {
+        d <- datos$ventas_año_subrubro_comuna %>%
+          filter(año == 2019,
+                 comuna == input$comuna) %>%
+          group_by(comuna, rubro) %>%
+          summarize(ventas_anuales = sum(ventas_anuales, na.rm=T),
+                    empresas = sum(empresas), .groups = "drop") %>%
+          mutate(ventas_promedio = ventas_anuales/empresas,
+                 ventas_promedio = round(ventas_promedio/1000000, 1))
+      }
+      p <- graficar_barras_horizontales(d, variable_categorica = "rubro", 
+                                        variable_numerica = "ventas_promedio", 
+                                        slice=6, str_wrap=25, str_trunc=50)
+      return(p)
+    }, res = 100)
+    
+    #mayores ventas subrubro ----
+    #subrubros con mayores ventas anuales promedio en la región/comuna elegida
+    output$g_mayores_ventas_subrubro <- renderPlot({
+      req(input$rubro != "")
+      
+      #región
+      if (input$selector_g_mayores_ventas_subrubro == "Región") {
+        d <- datos$ventas_año_subrubro_comuna %>%
+          filter(año == 2019,
+                 rubro == input$rubro) %>%
+          group_by(subrubro) %>%
+          summarize(ventas_anuales = sum(ventas_anuales, na.rm=T),
+                    empresas = sum(empresas), .groups = "drop") %>%
+          mutate(ventas_promedio = ventas_anuales/empresas,
+                 ventas_promedio = round(ventas_promedio/1000000, 1))
+      }
+      #comuna
+      else {
+        d <- datos$ventas_año_subrubro_comuna %>%
+          filter(año == 2019,
+                 comuna == input$comuna,
+                 rubro == input$rubro) %>%
+          group_by(comuna, subrubro) %>%
+          summarize(ventas_anuales = sum(ventas_anuales, na.rm=T),
+                    empresas = sum(empresas), .groups = "drop") %>%
+          mutate(ventas_promedio = ventas_anuales/empresas,
+                 ventas_promedio = round(ventas_promedio/1000000, 1))
+      }
+      p <- graficar_barras_horizontales(d, variable_categorica = "subrubro", 
+                                        variable_numerica = "ventas_promedio", 
+                                        slice=6, str_wrap=25, str_trunc=50)
+      return(p)
+    }, res = 100)
+    
     
 })

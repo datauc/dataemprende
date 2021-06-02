@@ -42,6 +42,20 @@ rubros_sii <- c("Comercio al por mayor y al por menor; reparación de vehículos
 #   arrange(desc(subrubro)) %>%
 #   distinct()
 #save(subrubros_sii, file = "subrubros.rdata")
+
+# subrubros_sii <- datos$empresas_subrubros %>%
+#   group_by(rubro) %>%
+#   arrange(desc(n)) %>%
+#   ungroup() %>%
+#   #filter(rubro == "Construcción") %>%
+#   select(rubro, subrubro) %>%
+#   distinct()
+# 
+# subrubros_sii %>%
+#   filter(rubro == "Construcción")
+# 
+# save(subrubros_sii, file = "dataemprende_datos/subrubros.rdata")
+
 load("subrubros.rdata")
 
 #cargar cruce entre ciiu y subrubros del sii para mapa de puntos de empresas

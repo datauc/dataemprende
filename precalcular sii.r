@@ -16,7 +16,7 @@ source("dataemprende_datos/variables.r")
 comuna_elegida <- comunas_sii[2]
 rubro_elegido <- rubros_sii[1]
 
-subrubros_sii <- datos_sii$ventas_act %>%
+subrubros_todos_sii <- datos_sii$ventas_act %>%
   #filtrar subrubros sin ventas anuales
   #filter(ventas_anuales_uf > 0) %>%
   select(subrubro) %>%
@@ -424,7 +424,7 @@ datos_sii$empresas_act %>%
 #las empresas del subrubro crecieron un xxx% en el último año
 
 lista <- list()
-for (i in subrubros_sii) {
+for (i in subrubros_todos_sii) {
   cat(i, fill=T)
   parte <- datos_sii$empresas_act %>%
     #filter(comuna == comuna_elegida) %>% #picker
@@ -449,7 +449,7 @@ crecimiento_subrubros_1_region <- bind_rows(lista)
 
 #crecimiento 5 años
 lista <- list()
-for (i in subrubros_sii) {
+for (i in subrubros_todos_sii) {
   cat(i, fill=T)
 parte <- datos_sii$empresas_act %>%
   #filter(comuna == comuna_elegida) %>% #picker
@@ -474,7 +474,7 @@ crecimiento_subrubros_5_region <- bind_rows(lista)
 
 #crecimiento 10 años
 lista <- list()
-for (i in subrubros_sii) {
+for (i in subrubros_todos_sii) {
   cat(i, fill=T)
   parte <- datos_sii$empresas_act %>%
   #filter(comuna == comuna_elegida) %>% #picker

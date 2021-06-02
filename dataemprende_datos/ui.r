@@ -540,6 +540,78 @@ fluidRow(
   )
 ),
 
+espaciador_interior(),
+
+#grafico horizontal rubros mayores ventas ----
+#rubros con mayores ventas anuales promedio en la comuna elegida
+fluidRow(
+  column(12,
+         h3("Rubros con mayores ventas") %>%
+           aos(animation = "fade-down", delay = "0"),
+         br(),
+         
+         conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                          id = "condicional_rubro_elegido",
+                          
+                          #titulo del rubro elegido
+                          # htmlOutput("rubro_elegido_5") %>% 
+                          #   aos(animation = "fade-down", delay = "0"),
+                          em("Cifras en millones de pesos.")%>% 
+                            aos(animation = "fade-down", delay = "0"),
+                           br(), br(),
+                          
+                          #botonera
+                          shinyWidgets::radioGroupButtons("selector_g_mayores_ventas_rubro",
+                                                          label = NULL,
+                                                          choices = c("Región", "Comuna"),
+                                                          selected = "Región",
+                                                          justified = TRUE,
+                                                          width = "90%") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          
+                          #grafico de degradado
+                          plotOutput("g_mayores_ventas_rubro", height = "300px") %>% 
+                            aos(animation = "fade-down", delay = "200")
+         ),
+  )
+),
+
+espaciador_interior(),
+
+#grafico horizontal subrubros mayores ventas ----
+fluidRow(
+  column(12,
+         h3("Sububros del rubro elegido con mayores ventas") %>%
+           aos(animation = "fade-down", delay = "0"),
+         br(),
+         
+         conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                          id = "condicional_rubro_elegido",
+                          
+                          #titulo del subrubro elegido
+                          htmlOutput("rubro_elegido_5") %>% 
+                            aos(animation = "fade-down", delay = "0"),
+                          br(),
+                          em("Cifras en millones de pesos.") %>% 
+                            aos(animation = "fade-down", delay = "100"),
+                          br(), br(),
+                          
+                          #botonera
+                          shinyWidgets::radioGroupButtons("selector_g_mayores_ventas_subrubro",
+                                                          label = NULL,
+                                                          choices = c("Región", "Comuna"),
+                                                          selected = "Región",
+                                                          justified = TRUE,
+                                                          width = "90%") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          
+                          #grafico de degradado
+                          plotOutput("g_mayores_ventas_subrubro", height = "300px") %>% 
+                            aos(animation = "fade-down", delay = "200")
+         ),
+  )
+),
+
 espaciador(),
 
 

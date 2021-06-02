@@ -335,20 +335,21 @@ graficar_mapa_rubros <- function(datos_filtrados,
 
 
 
-graficar_barras_horizontales <- function(data, variable="subrubro", slice=8, str_trunc=80, str_wrap=40) {
-  variable <- sym(variable)
+graficar_barras_horizontales <- function(data, variable_categorica="subrubro", variable_numerica="empresas", slice=8, str_trunc=80, str_wrap=40) {
+  variable_categorica <- sym(variable_categorica)
   
   p <- data %>%
-    arrange(desc(empresas)) %>%
+    rename(valor = all_of(variable_numerica)) %>%
+    arrange(desc(valor)) %>%
     slice(1:slice) %>%
-    mutate(!!variable := stringr::str_trunc(as.character(!!variable), str_trunc),
-           !!variable := stringr::str_wrap(as.character(!!variable), str_wrap),
-           !!variable := as.factor(!!variable),
-           !!variable := forcats::fct_reorder(!!variable, empresas),
+    mutate(!!variable_categorica := stringr::str_trunc(as.character(!!variable_categorica), str_trunc),
+           !!variable_categorica := stringr::str_wrap(as.character(!!variable_categorica), str_wrap),
+           !!variable_categorica := as.factor(!!variable_categorica),
+           !!variable_categorica := forcats::fct_reorder(!!variable_categorica, valor),
            id = 1:n()) %>%
-    ggplot(aes(x=empresas, y = !!variable)) +
+    ggplot(aes(x=valor, y = !!variable_categorica)) +
     geom_col(fill = color_claro, width = 0.3, aes(alpha = id), show.legend = F) +
-    geom_text(aes(label = paste0(" ", empresas)), size = 5, family = "Dosis ExtraLight SemiBold", col = color_blanco, 
+    geom_text(aes(label = paste0(" ", valor)), size = 5, family = "Dosis ExtraLight SemiBold", col = color_blanco, 
               hjust = 0) +
     #scale_fill_gradient(high = color_claro, low= color_blanco) +
     scale_alpha_continuous(range = c(1, 0.2)) +
