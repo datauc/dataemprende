@@ -406,5 +406,43 @@ shinyServer(function(input, output, session) {
         return(p)
     }, res = 100)
     
+    ### Mapa leaflet: Actualizacón Selector de Rubro.
+    observeEvent(input$comuna2,{
+        select_rubro2 = with(empresas_mapa_sii,
+                             glosa_seccion[nom_comuna==input$comuna2]) %>% 
+            unique() %>% sort()
+        updateSelectInput(session,"rubro2",
+                          choices = select_rubro2 )
+    })
+    ### Mapa leaflet: Actualicación Selector de Subrubro.
+    observeEvent(input$rubro2,{
+        select_srubro2 = with(empresas_mapa_sii,
+                              glosa_division[nom_comuna==input$comuna2 &
+                                                 glosa_seccion == input$rubro2]) %>%
+            unique() %>% sort()
+        updateSelectInput(session,"srubro2",
+                          choices = select_srubro2)
+    })
+    
+    ### Mapa leaflet: Creación Mapa leaflet
+    output$mymap <- renderLeaflet({
+        
+        Empresas_aux = empresas_mapa_sii %>% 
+            filter(nom_comuna ==input$comuna2,
+                   glosa_seccion == input$rubro2,
+                   glosa_division == input$srubro2)
+        
+        indx= which(comunas_sii2==input$comuna2)
+        
+        
+        leaflet() %>%
+            setView(lng = com_lng[indx],
+                    lat = com_lat[indx],
+                    zoom = c(13,15,12,14,14)[indx]) %>% 
+            addProviderTiles(providers$CartoDB.Positron) %>% 
+            addCircleMarkers(lng = Empresas_aux$longitud, 
+                             lat = Empresas_aux$latitud,
+                             radius = 4,color = "#6082b6",stroke = FALSE,fillOpacity = 0.7)    
+    })
     
 })

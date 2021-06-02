@@ -1,6 +1,7 @@
 suppressPackageStartupMessages(library(dplyr))
 library(ggplot2)
 library(aos)
+library(leaflet)
 #library(grid)
 
 #importar variables y listas necesarias
@@ -11,6 +12,7 @@ load("datos_precalculados.rdata")
 load("puntos_empresas.rdata")
 load("datos_mapas.rdata")
 load("datos_mapa_regional.rdata")
+load("empresas_mapa_sii.rdata")
 
 color_fondo <- "#457B9D"
 color_claro <- "#A8DADC"
@@ -260,7 +262,7 @@ graficar_lineas_degradado <- function(data, variable = "rubro", texto_y = "Canti
     #líneas del gráfico
     #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(empresas))) +
     #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=max(año)+0.2, yend=0)) +
-    scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2))) +
+    scale_x_continuous(breaks = anos_sii, expand = expansion(add=c(0, 2))) +
     #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
     #texto
     geom_text(color = color_blanco, family = "Dosis ExtraLight SemiBold", size = 5, aes(label = paste0(" ", max(empresas)), x = max(año)+0.5, y=max(empresas)),

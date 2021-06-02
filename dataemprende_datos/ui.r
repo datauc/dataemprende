@@ -357,5 +357,54 @@ shinyUI(fluidPage(
   
   espaciador(),
   
+  ## Mapa Claudio
+  fluidRow(
+    column(12,
+           h2("Mapa") %>% aos(animation = "fade-down", duration = "1000"),
+           br(),
+           )
+    ),
+  fluidRow(
+    
+    column(12,
+           
+           div(id = "selectores",
+               #input$comuna
+               selectInput(inputId = "comuna2", 
+                           label = "Comuna donde se ubica su negocio o emprendimiento", 
+                           choices = comunas_sii2,
+                           selected = "Iquique",
+                           width = "100%"),
+               
+               #input$rubro
+               selectInput(inputId = "rubro2", 
+                           label = "Rubro principal de su negocio o emprendimiento", 
+                           choices = NULL,
+                           width = "100%"),
+               #input$subrubro
+               selectInput(inputId = "srubro2", 
+                           label = "Subrubro de su negocio o emprendimiento", 
+                           choices = NULL,
+                           width = "100%"),
+               
+               conditionalPanel("input.rubro2 == '' || input.subrubro2 == ''",
+                                #id = "condicional_rubro_elegido",
+                                em("Por favor, rellene todos los campos")
+               )
+           )
+    ) %>% aos(animation = "fade-down", duration = "2000", delay = 0),
+    
+  ),
+  fluidRow(
+    column(12,leafletOutput("mymap"))
+  ),
+  
+  
 )
 )
+
+
+
+
+
+
