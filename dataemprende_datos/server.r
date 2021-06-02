@@ -593,7 +593,7 @@ shinyServer(function(input, output, session) {
       
       p <- graficar_circular(d, variable_categorica = "dependencia", variable_numerica = "trabajadores")
       return(p)
-    }, res = 100)
+    }, res = 100, bg = color_fondo)
     
     
     
