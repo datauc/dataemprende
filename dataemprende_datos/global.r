@@ -446,3 +446,5 @@ graficar_circular <- function(data, variable_categorica, variable_numerica) {
     coord_fixed()
   return(p)
 }
+
+#Bastián Olea Herrera (@bastimapache)
