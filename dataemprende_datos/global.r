@@ -3,6 +3,7 @@ library(ggplot2)
 library(aos)
 #library(grid)
 
+cat("cargando datos...", fill=T)
 #importar variables y listas necesarias
 source("variables.r")
 
@@ -12,6 +13,8 @@ load("puntos_empresas.rdata")
 load("datos_mapas.rdata")
 load("datos_mapa_regional.rdata")
 
+cat("datos cargados", fill=T)
+
 color_fondo <- "#457B9D"
 color_claro <- "#A8DADC"
 color_blanco <- "#F1FAEE"
@@ -19,6 +22,7 @@ color_oscuro <- "#2D668E"
 color_negro <- "#1D3557"
 
 #funciones ----
+cat("cargando funciones...", fill=T)
 #pone puntos de miles a una cifra
 puntos <- function(x) {
   y <- format(x, big.mark = ".", decimal.mark = ",")
@@ -418,4 +422,27 @@ graficar_mapa_comunas <- function(data, variable){
    theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
  
  return(m)
+}
+
+graficar_circular <- function(data, variable_categorica, variable_numerica) {
+  grosor=0.7
+  transparencia=0.5
+  
+  p <- data %>%
+    rename(variable_categorica = all_of(variable_categorica),
+           variable_numerica = all_of(variable_numerica)) %>%
+    ggplot(aes(fill = variable_categorica, col=variable_categorica, alpha=variable_categorica)) +
+    ggforce::geom_arc_bar(aes(x0 = 0, y0 = 0, r0 = grosor, r = 1, 
+                              amount = variable_numerica), 
+                          stat = "pie", col = color_fondo, size=2, fill= color_claro) +
+    theme_void() +
+    scale_alpha_manual(values = c(transparencia, 1)) +
+    theme(legend.position = "bottom",
+          legend.title = element_blank()) +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
+          text = element_text(family = "Montserrat", color=color_blanco),
+          legend.text = element_text(margin = margin(r=20))) +
+    guides(alpha = guide_legend(reverse = TRUE)) +
+    coord_fixed()
+  return(p)
 }

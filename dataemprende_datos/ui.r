@@ -137,6 +137,12 @@ shinyUI(fluidPage(
            #mapa
            conditionalPanel("input.rubro != '' && input.subrubro != ''",
                             id = "condicional_rubro_elegido",
+                            
+                            #titulo del rubro/subrubro
+                            htmlOutput("rubro_elegido_6") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            br(),
+                            
                             plotOutput("m_empresas_comuna", height = "400px") %>% #width exacto para que no tenga borde blanco
                               aos(animation = "fade-down", delay = "0") %>%
                               shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
@@ -461,6 +467,38 @@ fluidRow(
                           plotOutput("g_crecimiento_trabajadores_subrubro", height = "300px") %>% 
                             aos(animation = "fade-down", delay = "200")
          ),
+  )
+),
+
+espaciador_interior(),
+
+#grafico dependencia rubro ----
+fluidRow(
+  column(12,
+         h3("Trabajadores por dependencia") %>%
+           aos(animation = "fade-down", delay = "0"),
+         br(),
+         #barras con botonera
+         conditionalPanel("input.rubro != '' && input.subrubro != ''",
+                          id = "condicional_rubro_elegido",
+                          #boronera
+                          shinyWidgets::radioGroupButtons("selector_g_trabajadores_dependencia",
+                                                          label = NULL,
+                                                          choices = c("Rubro", "Subrubro"),
+                                                          selected = "Rubro",
+                                                          justified = TRUE,
+                                                          width = "90%") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          
+                          #titulo del rubro/subrubro
+                          htmlOutput("rubro_subrubro_elegido_3") %>%
+                            aos(animation = "fade-down", delay = "100"),
+                          br(),
+                          
+                          #grafico de barras
+                          plotOutput("g_trabajadores_dependencia", height = "300px") %>% 
+                            aos(animation = "fade-down", delay = "200"),
+         )
   )
 ),
 

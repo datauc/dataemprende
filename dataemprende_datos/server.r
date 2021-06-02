@@ -5,7 +5,7 @@ shinyServer(function(input, output, session) {
     
     #filtrar selector de subrubros
     observeEvent(input$rubro, {
-      
+      req(input$rubro != "")
       # #entrega subrubros ordenados por cantidad de empresas
       # #tictoc::tic()
       # subrubros_filtrados <- datos$empresas_subrubros %>%
@@ -18,6 +18,7 @@ shinyServer(function(input, output, session) {
       #lo mismo pero preprocesado
       subrubros_filtrados <- subrubros_sii$subrubro[subrubros_sii$rubro == input$rubro]
         
+      cat(fill=T, "observeEvent(input$rubro)")
         updateSelectInput(session, "subrubro",
                           choices = subrubros_filtrados)
     }) 
@@ -45,6 +46,7 @@ shinyServer(function(input, output, session) {
             cifra(filter(datos$tramos_region, tramo == "Micro")$porcentaje %>% porcentaje()),
             "microempresas."
         )
+        cat(fill=T, "output$parrafo1")
         return(t)
     })
     
@@ -69,6 +71,7 @@ shinyServer(function(input, output, session) {
             cifra(filter(datos$tramos_rubro, rubro == input$rubro, tramo == "Micro")$porcentaje %>% porcentaje()),
             "corresponden a microempresas."
         )
+        cat(fill=T, "output$parrafo2")
         return(t)
     })
     
@@ -82,6 +85,7 @@ shinyServer(function(input, output, session) {
             "personas trabajan en el rubro de",
             paste(tolower(input$rubro)) %>% paste0(".")
         )
+        cat(fill=T, "output$parrafo3")
         return(t)
     })
     
@@ -104,7 +108,7 @@ shinyServer(function(input, output, session) {
         } else {
             t <- paste(t, "no hay trabajadores que se desempeñen en este rubro.")
         }
-        
+        cat(fill=T, "output$parrafo4")
         return(HTML(t))
     })
     
@@ -154,6 +158,7 @@ shinyServer(function(input, output, session) {
                        tolower(input$rubro) %>% paste0(".")
             )
         }
+        cat(fill=T, "output$parrafo5")
         return(HTML(t))
     })
     
@@ -192,15 +197,22 @@ shinyServer(function(input, output, session) {
         
     
     #mapa empresas comuna ----
+    output$rubro_elegido_6 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+      HTML(cifra(input$rubro))
+    })
+    
     output$m_empresas_comuna <- renderPlot({
         req(input$rubro != "")
         
         m <- datos$empresas_rubros_comuna %>%
             filter(rubro == input$rubro) %>%
             graficar_mapa_comunas(variable = "empresas")
+        cat(fill=T, "output$m_empresas_comuna")
         return(m)
-    }, res = 100) %>%
-        bindCache(input$rubro)
+    }, res = 100) #%>%
+        #bindCache(input$rubro)
     
     
     
@@ -267,6 +279,7 @@ shinyServer(function(input, output, session) {
                       cifra((datos$crecimiento_subrubros_region %>% filter(subrubro == input$subrubro))$crecimiento_10 %>% porcentaje()),
                       "a nivel regional.")
         }
+      cat(fill=T, "output$crecimiento_subrubros_empresas")
         return(t)
     })
     
@@ -368,6 +381,7 @@ shinyServer(function(input, output, session) {
     
     #mapa
     output$m_iquique_empresas_rubro <- renderPlot({
+      req(input$rubro != "")
         #nivel de zoom
         if (input$zoom_m_iquique_empresas_rubro == "Iquique y Alto Hospicio") {
             #iquique y alto hospicio
@@ -395,6 +409,7 @@ shinyServer(function(input, output, session) {
             graficar_mapa_rubros(mover_x = mover_x_elegido,
                                  mover_y = mover_y_elegido,
                                  zoom = zoom_elegido)  
+        cat(fill=T, "output$m_iquique_empresas_rubro")
         return(p)
     }, res = 100) %>%
         bindCache(input$selector_m_iquique_empresas_rubro, #selector rubro/subrubro
@@ -481,6 +496,7 @@ shinyServer(function(input, output, session) {
             graficar_lineas_degradado(variable = "rubro", variable_y_elegida="trabajadores", 
                                       texto_y = "Cantidad de trabajadores",
                                       numero_largo=1.5)
+        cat(fill=T, "output$g_crecimiento_trabajadores_rubro")
         return(p)
     }, res = 100) #%>%
     # bindCache(input$selector_g_crecimiento_trabajadores_rubro,
@@ -548,6 +564,39 @@ shinyServer(function(input, output, session) {
         return(p)
     }, res = 100)
   
+    
+    #grafico dependencia rubro ----
+    output$rubro_subrubro_elegido_3 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+      
+      if (input$selector_g_trabajadores_dependencia == "Rubro") {
+        h <- HTML(cifra(input$rubro)) }
+      else {
+        h <- HTML(cifra(input$subrubro))
+      }
+      return(h)
+    })
+    
+    output$g_trabajadores_dependencia <- renderPlot({
+      req(input$rubro != "",
+          input$subrubro != "")
+      
+      if (input$selector_g_trabajadores_dependencia == "Rubro") {
+      d <- datos$trabajadores_dependencia_rubro %>%
+        filter(rubro == input$rubro)
+      
+      } else if (input$selector_g_trabajadores_dependencia == "Subrubro") {
+        d <- datos$trabajadores_dependencia_subrubro %>%
+          filter(subrubro == input$subrubro)
+      }
+      
+      p <- graficar_circular(d, variable_categorica = "dependencia", variable_numerica = "trabajadores")
+      return(p)
+    }, res = 100)
+    
+    
+    
     #(!)mayores trabajadores ----
     #en comuna
     #mayores trabajadores mujeres
@@ -601,6 +650,7 @@ shinyServer(function(input, output, session) {
             graficar_lineas_degradado(variable = "rubro", variable_y_elegida="ventas_promedio", 
                                       texto_y = "Ventas (en millones de pesos)",
                                       numero_largo=1.5)
+        cat(fill=T, "output$g_crecimiento_ventas_rubro")
         return(p)
     }, res = 100) #%>%
     # bindCache(input$selector_g_crecimiento_trabajadores_rubro,
@@ -720,6 +770,7 @@ shinyServer(function(input, output, session) {
       p <- graficar_barras_horizontales(d, variable_categorica = "subrubro", 
                                         variable_numerica = "ventas_promedio", 
                                         slice=6, str_wrap=25, str_trunc=50)
+      cat(fill=T, "output$g_mayores_ventas_subrubro")
       return(p)
     }, res = 100)
     
