@@ -40,6 +40,7 @@ body {
   color: #F1FAEE;
 }
 
+/*fondo principal con el mapa en gif*/
 .fondo {
   background-image: url("anim3_comp.gif"); /* The image used */
   background-color: #2D668E;/*#1D3557; /* Used if the image is unavailable */
@@ -49,6 +50,8 @@ body {
   background-repeat: no-repeat; /* Do not repeat the image */
   /*background-size: cover;  Resize the background image to cover the entire container */
 }
+
+
 
 
 /* SELECTORES */
@@ -98,5 +101,25 @@ body {
 .selectize-dropdown .active {
   color: #F1FAEE; 
   background: #2D668E !important;
-  
+}
+
+/* estilos botonera radioGroupButton */
+.btn.radiobtn.btn-default {
+  font-size: 10pt; 
+  color: #F1FAEE; /*texto*/
+  background: #2D668E; 
+  border-color: #2D668E;
+}
+.btn.radiobtn.btn-default.active { /*botón activado/apretado*/
+  font-size: 10pt; 
+  color: #1D3557; 
+  box-shadow: none;  /*sin sombra*/
+  background: #A8DADC; 
+  border-color: #A8DADC;
+}
+.btn.radiobtn.btn-default:hover { /*botón hover*/
+  font-size: 10pt; 
+  color: #F1FAEE;
+  background: #1D3557; 
+  border-color: #1D3557;
 }
