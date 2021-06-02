@@ -4,6 +4,22 @@ library(tidyverse)
 
 #importar ----
 #importar datos de Diego
+# Te detallo a continuación cómo extraer las coordenadas de las empresas de Tarapacá
+# 
+# 
+# Ingresando a 
+# https://geoine-ine-chile.opendata.arcgis.com/datasets/2ec79c76da274f0e880c545933b3c4a2_0/explore?filters=eyJOT01fUkVHSU9OIjpbIlJFR0nTTiBERSBUQVJBUEFDwSJdfQ%3D%3D&location=-36.566300%2C-88.515450%2C4.49&showTable=true
+# 
+# en el apartado descargar el archivo en formato Json (importante que solo sirve utilizando json)
+# 
+# para leerlo en R, utilizar la siguiente lineas de comando
+# 
+# library(jsonlite)
+# 
+# options(digits=22)
+# df <- fromJSON("Directorio_Nacional_de_Empresas_2017.geojson")$feature
+# 
+
 #load("datos diego/Empresas_Taparaca.Rdata")
 
 base_puntos_empresas_tarapaca <- readxl::read_xlsx("mapa claudio/Empresas_Tarapaca.xlsx")

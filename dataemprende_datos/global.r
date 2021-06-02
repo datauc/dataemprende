@@ -1,6 +1,7 @@
 suppressPackageStartupMessages(library(dplyr))
 library(ggplot2)
 library(aos)
+library(leaflet)
 #library(grid)
 
 cat("cargando datos...", fill=T)
@@ -12,6 +13,7 @@ load("datos_precalculados.rdata")
 load("puntos_empresas.rdata")
 load("datos_mapas.rdata")
 load("datos_mapa_regional.rdata")
+load("empresas_mapa_sii.rdata")
 
 cat("datos cargados", fill=T)
 
