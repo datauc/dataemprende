@@ -856,6 +856,26 @@ datos_sii$trabajadores %>%
   scale_x_continuous(breaks = años_sii) +
   theme(axis.text.x = element_text(angle=90, vjust=0.5))
 
+
+#evolucion género ----
+trabajadores_año_genero_rubro <- datos_sii$trabajadores_act %>%
+  filter(#rubro == rubro_elegido,
+    #año == 2019,
+    género != "total",
+    tipo == "dependencia",
+    calculo == "total") %>%
+  group_by(rubro, año, género) %>%
+  summarize(trabajadores = sum(valor, na.rm = T))
+
+trabajadores_año_genero_subrubro <- datos_sii$trabajadores_act %>%
+  filter(#rubro == rubro_elegido,
+    #año == 2019,
+    género != "total",
+    tipo == "dependencia",
+    calculo == "total") %>%
+  group_by(rubro, subrubro, año, género) %>%
+  summarize(trabajadores = sum(valor, na.rm = T))
+
 # (!) actividades ----
 
 # (!) tamaño x comunas ----
@@ -1247,6 +1267,9 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               ##
               "trabajadores_año_subrubro_region" = trabajadores_año_subrubro_region,
               "trabajadores_año_subrubro_comuna" = trabajadores_año_subrubro_comuna,
+              ##
+              "trabajadores_año_genero_rubro" = trabajadores_año_genero_rubro,
+              "trabajadores_año_genero_subrubro" = trabajadores_año_genero_subrubro,
               ##
               "ventas_año_subrubro_region" = ventas_año_subrubro_region,
               "ventas_año_subrubro_comuna" = ventas_año_subrubro_comuna,

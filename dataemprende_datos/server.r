@@ -1,24 +1,26 @@
 shinyServer(function(input, output, session) {
-    
     options(shiny.sanitize.errors = FALSE)
     options(OutDec= ",") #decimales con coma
     
     #filtrar selector de subrubros
     observeEvent(input$rubro, {
       req(input$rubro != "")
+      #cat("observeEvent(input$rubro) 1")
       # #entrega subrubros ordenados por cantidad de empresas
       # #tictoc::tic()
       # subrubros_filtrados <- datos$empresas_subrubros %>%
       #   filter(rubro == input$rubro) %>%
-      #   arrange(desc(n)) %>% 
+      #   arrange(desc(n)) %>%
       #   select(subrubro) %>%
       #   pull()
       # #tictoc::toc()
       
+      #browse()
       #lo mismo pero preprocesado
+      #subrubros_sii$subrubro[subrubros_sii$rubro == rubros_sii[2]]
       subrubros_filtrados <- subrubros_sii$subrubro[subrubros_sii$rubro == input$rubro]
         
-      cat(fill=T, "observeEvent(input$rubro)")
+      #cat(fill=T, "observeEvent(input$rubro) 2")
         updateSelectInput(session, "subrubro",
                           choices = subrubros_filtrados)
     }) 
@@ -197,21 +199,34 @@ shinyServer(function(input, output, session) {
         
     
     #mapa empresas comuna ----
-    output$rubro_elegido_6 <- reactive({
+    # output$rubro_elegido_6 <- reactive({
+    #   req(input$rubro != "",
+    #       input$subrubro != "")
+    #   HTML(cifra(input$rubro))
+    # })
+    
+    datos_m_empresas_comuna <- reactive({
       req(input$rubro != "",
-          input$subrubro != "")
-      HTML(cifra(input$rubro))
-    })
+          input$subrubro != "",
+          datos_mapa_regional$lugares)
+      
+      d <- datos$empresas_rubros_comuna %>%
+        filter(rubro == input$rubro)
+      return(d)
+    }) %>% bindCache(input$rubro)
     
     output$m_empresas_comuna <- renderPlot({
-        req(input$rubro != "")
+        req(input$rubro != "",
+            input$subrubro != "",
+            datos_mapa_regional$lugares,
+            datos_m_empresas_comuna())
         
-        m <- datos$empresas_rubros_comuna %>%
-            filter(rubro == input$rubro) %>%
-            graficar_mapa_comunas(variable = "empresas")
+        # m <- datos$empresas_rubros_comuna %>%
+        #     filter(rubro == input$rubro) %>%
+            m <- graficar_mapa_comunas(datos_m_empresas_comuna(), variable = "empresas")
         cat(fill=T, "output$m_empresas_comuna")
         return(m)
-    }, res = 100) #%>%
+    }, res = 100, bg = color_fondo) #%>%
         #bindCache(input$rubro)
     
     
@@ -227,6 +242,47 @@ shinyServer(function(input, output, session) {
         }
         return(h)
     })
+    
+    # #mapa leaflet ----
+    # ### Mapa leaflet: Actualizacón Selector de Rubro.
+    # observeEvent(input$comuna2,{
+    #   select_rubro2 = with(empresas_mapa_sii,
+    #                        glosa_seccion[nom_comuna==input$comuna2]) %>% 
+    #     unique() %>% sort()
+    #   updateSelectInput(session,"rubro2",
+    #                     choices = select_rubro2 )
+    # })
+    # ### Mapa leaflet: Actualicación Selector de Subrubro.
+    # observeEvent(input$rubro2,{
+    #   select_srubro2 = with(empresas_mapa_sii,
+    #                         glosa_division[nom_comuna==input$comuna2 &
+    #                                          glosa_seccion == input$rubro2]) %>%
+    #     unique() %>% sort()
+    #   updateSelectInput(session,"srubro2",
+    #                     choices = select_srubro2)
+    # })
+    # 
+    # ### Mapa leaflet: Creación Mapa leaflet
+    # output$mymap <- renderLeaflet({
+    #   
+    #   Empresas_aux = empresas_mapa_sii %>% 
+    #     filter(nom_comuna ==input$comuna2,
+    #            glosa_seccion == input$rubro2,
+    #            glosa_division == input$srubro2)
+    #   
+    #   indx= which(comunas_sii2==input$comuna2)
+    #   
+    #   
+    #   leaflet() %>%
+    #     setView(lng = com_lng[indx],
+    #             lat = com_lat[indx],
+    #             zoom = c(13,15,12,14,14)[indx]) %>% 
+    #     addProviderTiles(providers$CartoDB.Positron) %>% 
+    #     addCircleMarkers(lng = Empresas_aux$longitud, 
+    #                      lat = Empresas_aux$latitud,
+    #                      radius = 4,color = "#6082b6",stroke = FALSE,fillOpacity = 0.7)    
+    # })
+    
     
     #grafico horizontal empresas comuna ----
     output$g_barras_empresas_rubro_comuna <- renderPlot({
@@ -411,7 +467,7 @@ shinyServer(function(input, output, session) {
                                  zoom = zoom_elegido)  
         cat(fill=T, "output$m_iquique_empresas_rubro")
         return(p)
-    }, res = 100) %>%
+    }, res = 100, bg = color_fondo) %>%
         bindCache(input$selector_m_iquique_empresas_rubro, #selector rubro/subrubro
                   input$zoom_m_iquique_empresas_rubro, #zoom
                   input$rubro, input$subrubro)
@@ -565,6 +621,42 @@ shinyServer(function(input, output, session) {
     }, res = 100)
   
     
+    #grafico crecimiento género ----
+    output$rubro_subrubro_elegido_4 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+
+      if (input$selector_rubro_g_trabajadores_crecimiento_genero == "Rubro") {
+        h <- HTML(cifra(input$rubro)) }
+      else {
+        h <- HTML(cifra(input$subrubro))
+      }
+      return(h)
+    })
+
+    output$g_crecimiento_trabajadores_genero <- renderPlot({
+      req(input$rubro != "",
+          input$subrubro != "")
+      #variable de género
+      genero_elegido <- switch(input$selector_genero_g_trabajadores_crecimiento_genero,
+                       "Mujeres" = "femenino",
+                       "Hombres" = "masculino")
+      #condicional por rubro o subrubro
+      if (input$selector_rubro_g_trabajadores_crecimiento_genero == "Rubro") {
+        d <- datos$trabajadores_año_genero_rubro %>%
+          filter(rubro == input$rubro,
+                 género == genero_elegido)
+      } else if (input$selector_rubro_g_trabajadores_crecimiento_genero == "Subrubro") {
+          d <- datos$trabajadores_año_genero_subrubro %>%
+            filter(subrubro == input$subrubro,
+                   género == genero_elegido)
+      }
+      #graficar
+          p <- graficar_lineas_degradado(d, variable_y_elegida = "trabajadores", numero_largo = 1.5)
+      return(p)
+    }, res=100)
+    
+    
     #grafico dependencia rubro ----
     output$rubro_subrubro_elegido_3 <- reactive({
       req(input$rubro != "",
@@ -602,45 +694,7 @@ shinyServer(function(input, output, session) {
     #en comuna
     #mayores trabajadores mujeres
 
-    #mapa leaflet ----
-    ### Mapa leaflet: Actualizacón Selector de Rubro.
-    observeEvent(input$comuna2,{
-        select_rubro2 = with(empresas_mapa_sii,
-                             glosa_seccion[nom_comuna==input$comuna2]) %>% 
-            unique() %>% sort()
-        updateSelectInput(session,"rubro2",
-                          choices = select_rubro2 )
-    })
-    ### Mapa leaflet: Actualicación Selector de Subrubro.
-    observeEvent(input$rubro2,{
-        select_srubro2 = with(empresas_mapa_sii,
-                              glosa_division[nom_comuna==input$comuna2 &
-                                                 glosa_seccion == input$rubro2]) %>%
-            unique() %>% sort()
-        updateSelectInput(session,"srubro2",
-                          choices = select_srubro2)
-    })
     
-    ### Mapa leaflet: Creación Mapa leaflet
-    output$mymap <- renderLeaflet({
-        
-        Empresas_aux = empresas_mapa_sii %>% 
-            filter(nom_comuna ==input$comuna2,
-                   glosa_seccion == input$rubro2,
-                   glosa_division == input$srubro2)
-        
-        indx= which(comunas_sii2==input$comuna2)
-        
-        
-        leaflet() %>%
-            setView(lng = com_lng[indx],
-                    lat = com_lat[indx],
-                    zoom = c(13,15,12,14,14)[indx]) %>% 
-            addProviderTiles(providers$CartoDB.Positron) %>% 
-            addCircleMarkers(lng = Empresas_aux$longitud, 
-                             lat = Empresas_aux$latitud,
-                             radius = 4,color = "#6082b6",stroke = FALSE,fillOpacity = 0.7)    
-    })
     
     
     #—----

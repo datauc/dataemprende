@@ -1,7 +1,5 @@
 #http://dataintelligence.cl/shiny/dataemprende_datos
 
-library(dplyr)
-
 shinyUI(fluidPage(
   aos::use_aos(), #animación en scroll
   includeScript("scripts.js"), #javascript de animación fade para conditional panels
@@ -22,7 +20,7 @@ shinyUI(fluidPage(
            br(),br(),
            
            p("Para asesorarte, necesitamos que respondas algunas preguntas...") %>% 
-             aos(animation = "fade-down", duration = "2000", delay = 400),
+             aos(animation = "fade-down", duration = "2000", delay = 800),
            
            espaciador(),
     ),
@@ -59,7 +57,12 @@ shinyUI(fluidPage(
                conditionalPanel("input.rubro == '' || input.subrubro == ''",
                                 #id = "condicional_rubro_elegido",
                                 em("Por favor, rellene todos los campos")
-               )
+               ),
+               
+               # conditionalPanel("input.rubro.length > 1",
+               #                  #id = "condicional_rubro_elegido",
+               #                  p("PRUEBA")
+               # ),
            )
     ) %>% aos(animation = "fade-down", duration = "2000", delay = 0),
     
@@ -67,16 +70,19 @@ shinyUI(fluidPage(
   
   espaciador(),
   
+  #el gran condicional
+  conditionalPanel(selector_rubro_no_vacio,
+                   id = "condicional_rubro_elegido",
   #—----
   #resumen ----
-  
+    
   fluidRow(
     column(12,
            
            h3("Resumen") %>% aos(animation = "fade-down", duration = "1000"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             #párrafo empresas/rubros y tramos
                             htmlOutput("parrafo1")%>% aos(animation = "fade-down", delay = "0"),
@@ -104,7 +110,7 @@ shinyUI(fluidPage(
            br(),
            
            #textos ----
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #párrafo empresas/rubros y tramos
@@ -135,14 +141,14 @@ shinyUI(fluidPage(
     ),       
     column(6,                 
            #mapa
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
-                            #titulo del rubro/subrubro
-                            htmlOutput("rubro_elegido_6") %>%
-                              aos(animation = "fade-down", delay = "100"),
+                            # #titulo del rubro/subrubro
+                            # htmlOutput("rubro_elegido_6") %>%
+                            #   aos(animation = "fade-down", delay = "100"),
+                            # br(),
                             br(),
-                            
                             plotOutput("m_empresas_comuna", height = "400px") %>% #width exacto para que no tenga borde blanco
                               aos(animation = "fade-down", delay = "0") %>%
                               shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
@@ -152,9 +158,11 @@ shinyUI(fluidPage(
     #barras empresas comuna ----
     column(6,
            #barras con botonera
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
-                            #boronera
+                            
+                            br(), br(),
+                            #botonera
                             shinyWidgets::radioGroupButtons("selector_g_barras_empresas_rubro",
                                                             label = NULL,
                                                             choices = c("Rubro", "Subrubro"),
@@ -185,7 +193,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             #gráfico de logos de empresas en tres filas
                             plotOutput("g_empresas_comuna", height = "200px") %>% 
@@ -204,7 +212,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             div(
                               p("En comparación con", 
@@ -236,7 +244,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del rubro elegido
@@ -269,7 +277,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del subrubro
@@ -303,7 +311,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #botonera rubro/subrubro
@@ -322,7 +330,7 @@ shinyUI(fluidPage(
     ),
     
     column(5, 
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #mapa
@@ -357,7 +365,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             shinyWidgets::radioGroupButtons("selector_g_barras_empresas_subrubro",
@@ -384,7 +392,7 @@ shinyUI(fluidPage(
            br(),
            
            #gráfico género ----
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #gráfico de logos del género de trabajadores de la comuna
@@ -405,6 +413,47 @@ shinyUI(fluidPage(
   
   espaciador_interior(),
   
+  #grafico crecimiento genero ----
+  fluidRow(
+    column(12,
+           h3("Evolución de trabajadores por género") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
+           
+           conditionalPanel(selector_rubro_no_vacio,
+                            id = "condicional_rubro_elegido",
+                            
+                            #titulo del rubro elegido
+                            htmlOutput("rubro_subrubro_elegido_4") %>% 
+                              aos(animation = "fade-down", delay = "0"),
+                            br(),
+                            
+                            #botonera
+                            shinyWidgets::radioGroupButtons("selector_rubro_g_trabajadores_crecimiento_genero",
+                                                            label = NULL,
+                                                            choices = c("Rubro", "Subrubro"),
+                                                            selected = "Rubro",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            br(),
+                            shinyWidgets::radioGroupButtons("selector_genero_g_trabajadores_crecimiento_genero",
+                                                            label = NULL,
+                                                            choices = c("Mujeres", "Hombres"),
+                                                            selected = "Mujeres",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "200"),
+                            
+                            #grafico de degradado
+                            plotOutput("g_crecimiento_trabajadores_genero", height = "300px") %>% 
+                              aos(animation = "fade-down", delay = "300")
+           ),
+    )
+  ),
+  
+  espaciador_interior(),
+  
   
   #grafico crecimiento rubro ----
   fluidRow(
@@ -413,7 +462,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del rubro elegido
@@ -446,7 +495,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del rubro elegido
@@ -479,7 +528,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            #barras con botonera
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             #boronera
                             shinyWidgets::radioGroupButtons("selector_g_trabajadores_dependencia",
@@ -502,6 +551,12 @@ shinyUI(fluidPage(
     )
   ),
   
+  #espaciador_interior(),
+  
+  
+  
+  #espaciador_interior(),
+  
   espaciador(),
   
   #—----
@@ -521,7 +576,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del rubro elegido
@@ -554,7 +609,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del rubro elegido
@@ -588,7 +643,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del rubro elegido
@@ -623,7 +678,7 @@ shinyUI(fluidPage(
              aos(animation = "fade-down", delay = "0"),
            br(),
            
-           conditionalPanel("input.rubro != '' && input.subrubro != ''",
+           conditionalPanel(selector_rubro_no_vacio,
                             id = "condicional_rubro_elegido",
                             
                             #titulo del subrubro elegido
@@ -652,50 +707,50 @@ shinyUI(fluidPage(
   
   espaciador(),
   
+  #—----
+  ## Mapa Claudio ----
+  # fluidRow(
+  #   column(12,
+  #          h2("Mapa") %>% aos(animation = "fade-down", duration = "1000"),
+  #          br(),
+  #   )
+  # ),
+  # fluidRow(
+  #   
+  #   column(12,
+  #          
+  #          div(id = "selectores",
+  #              #input$comuna
+  #              selectInput(inputId = "comuna2", 
+  #                          label = "Comuna donde se ubica su negocio o emprendimiento", 
+  #                          choices = comunas_sii2,
+  #                          selected = "Iquique",
+  #                          width = "100%"),
+  #              
+  #              #input$rubro
+  #              selectInput(inputId = "rubro2", 
+  #                          label = "Rubro principal de su negocio o emprendimiento", 
+  #                          choices = NULL,
+  #                          width = "100%"),
+  #              #input$subrubro
+  #              selectInput(inputId = "srubro2", 
+  #                          label = "Subrubro de su negocio o emprendimiento", 
+  #                          choices = NULL,
+  #                          width = "100%"),
+  #              
+  #              conditionalPanel("input.rubro2 == '' || input.subrubro2 == ''",
+  #                               #id = "condicional_rubro_elegido",
+  #                               em("Por favor, rellene todos los campos")
+  #              )
+  #          )
+  #   ) %>% aos(animation = "fade-down", duration = "2000", delay = 0),
+  #   
+  # ),
+  # fluidRow(
+  #   column(12,leafletOutput("mymap"))
+  # ),
   
-  ## Mapa Claudio
-  fluidRow(
-    column(12,
-           h2("Mapa") %>% aos(animation = "fade-down", duration = "1000"),
-           br(),
-    )
-  ),
-  fluidRow(
-    
-    column(12,
-           
-           div(id = "selectores",
-               #input$comuna
-               selectInput(inputId = "comuna2", 
-                           label = "Comuna donde se ubica su negocio o emprendimiento", 
-                           choices = comunas_sii2,
-                           selected = "Iquique",
-                           width = "100%"),
-               
-               #input$rubro
-               selectInput(inputId = "rubro2", 
-                           label = "Rubro principal de su negocio o emprendimiento", 
-                           choices = NULL,
-                           width = "100%"),
-               #input$subrubro
-               selectInput(inputId = "srubro2", 
-                           label = "Subrubro de su negocio o emprendimiento", 
-                           choices = NULL,
-                           width = "100%"),
-               
-               conditionalPanel("input.rubro2 == '' || input.subrubro2 == ''",
-                                #id = "condicional_rubro_elegido",
-                                em("Por favor, rellene todos los campos")
-               )
-           )
-    ) %>% aos(animation = "fade-down", duration = "2000", delay = 0),
-    
-  ),
-  fluidRow(
-    column(12,leafletOutput("mymap"))
-  ),
-  
-  
+)
 )
 )
 

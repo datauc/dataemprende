@@ -1,10 +1,11 @@
 suppressPackageStartupMessages(library(dplyr))
 library(ggplot2)
 library(aos)
-library(leaflet)
+#library(leaflet)
 #library(grid)
 
 cat("cargando datos...", fill=T)
+
 #importar variables y listas necesarias
 source("variables.r")
 
@@ -13,7 +14,7 @@ load("datos_precalculados.rdata")
 load("puntos_empresas.rdata")
 load("datos_mapas.rdata")
 load("datos_mapa_regional.rdata")
-load("empresas_mapa_sii.rdata")
+#load("empresas_mapa_sii.rdata")
 
 cat("datos cargados", fill=T)
 
@@ -23,8 +24,14 @@ color_blanco <- "#F1FAEE"
 color_oscuro <- "#2D668E"
 color_negro <- "#1D3557"
 
+selector_rubro_no_vacio <- "input.rubro.length > 1"
+  #"(typeof input.rubro !== 'undefined' && input.rubro.length > 0)"
+  #"input.rubro !== ''" 
+  #"(input.rubro !== 'undefined' && input.rubro > 0)"
+
 #funciones ----
 cat("cargando funciones...", fill=T)
+
 #pone puntos de miles a una cifra
 puntos <- function(x) {
   y <- format(x, big.mark = ".", decimal.mark = ",")
@@ -334,8 +341,8 @@ graficar_mapa_rubros <- function(datos_filtrados,
           panel.background = element_rect(fill = color_fondo, color = color_fondo))
   
   #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
-  p <- cowplot::ggdraw(p) +
-   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  # p <- cowplot::ggdraw(p) +
+  #  theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
   return(p)
 }
 
@@ -420,8 +427,8 @@ graficar_mapa_comunas <- function(data, variable){
    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo), panel.background = element_rect(fill = color_fondo, color = color_fondo))
  
  #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
- m <- cowplot::ggdraw(m) +
-   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
+ # m <- cowplot::ggdraw(m) +
+ #   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
  
  return(m)
 }
@@ -449,4 +456,5 @@ graficar_circular <- function(data, variable_categorica, variable_numerica) {
   return(p)
 }
 
+cat("funciones cargadas")
 #Bastián Olea Herrera (@bastimapache)
