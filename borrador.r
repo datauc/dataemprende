@@ -1,7 +1,7 @@
 library(ggforce)
 
 #evolución dependencia
-datos_sii$trabajadores_act %>%
+trabajadores_año_dependencia_subrubro <- datos_sii$trabajadores_act %>%
   filter(#rubro == rubro_elegido,
          #año == 2019,
          género == "total",
@@ -10,15 +10,18 @@ datos_sii$trabajadores_act %>%
   group_by(rubro, subrubro, año, dependencia) %>%
   summarize(trabajadores = sum(valor, na.rm = T))
 
+#ejemplo de gráfico de línea
+datos_sii$empresas %>%
+  filter(comuna == comunas_sii[5]) %>% #picker
+  filter(rubro == rubros_sii[3]) %>% #picker
+  graficar_lineas_degradado()
 
 
+#función para gráfico que tenga dos líneas
 datos$trabajadores_año_genero_rubro %>%
-  filter(rubro == rubros_sii[3],
-         género == "femenino") %>% #input
-  graficar_lineas_degradado(variable_y_elegida = "trabajadores", numero_largo = 1.5)
-
-prueba = "Mujer"
-
-resultado <- switch(prueba,
-       "Mujer" = 1,
-         "Hombre" = 0)
+  filter(rubro == rubros_sii[11]) %>%
+  graficar_lineas_comparadas_degradado(variable_y = "trabajadores",
+                                       numero_largo=1.5,
+                                       texto_y = "Trabajadores por género",
+                                       variable = "rubro",
+                                       variable_categorica_elegida = "género")

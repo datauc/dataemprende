@@ -637,22 +637,28 @@ shinyServer(function(input, output, session) {
     output$g_crecimiento_trabajadores_genero <- renderPlot({
       req(input$rubro != "",
           input$subrubro != "")
-      #variable de género
-      genero_elegido <- switch(input$selector_genero_g_trabajadores_crecimiento_genero,
-                       "Mujeres" = "femenino",
-                       "Hombres" = "masculino")
+      # #variable de género
+      # genero_elegido <- switch(input$selector_genero_g_trabajadores_crecimiento_genero,
+      #                  "Mujeres" = "femenino",
+      #                  "Hombres" = "masculino")
+      
       #condicional por rubro o subrubro
       if (input$selector_rubro_g_trabajadores_crecimiento_genero == "Rubro") {
         d <- datos$trabajadores_año_genero_rubro %>%
-          filter(rubro == input$rubro,
-                 género == genero_elegido)
+          filter(rubro == input$rubro)
+                 #género == genero_elegido)
       } else if (input$selector_rubro_g_trabajadores_crecimiento_genero == "Subrubro") {
           d <- datos$trabajadores_año_genero_subrubro %>%
-            filter(subrubro == input$subrubro,
-                   género == genero_elegido)
+            filter(subrubro == input$subrubro)
+                   #género == genero_elegido)
       }
       #graficar
-          p <- graficar_lineas_degradado(d, variable_y_elegida = "trabajadores", numero_largo = 1.5)
+          #p <- graficar_lineas_degradado(d, variable_y_elegida = "trabajadores", numero_largo = 1.5)
+      p <- graficar_lineas_comparadas_degradado(d, variable_y = "trabajadores",
+                                                numero_largo=1.5,
+                                                texto_y = "Trabajadores por género",
+                                                variable = "rubro",
+                                                variable_categorica_elegida = "género")
       return(p)
     }, res=100)
     
@@ -686,6 +692,9 @@ shinyServer(function(input, output, session) {
       p <- graficar_circular(d, variable_categorica = "dependencia", variable_numerica = "trabajadores")
       return(p)
     }, res = 100, bg = color_fondo)
+    
+    
+    #grafico crecimiento dependencia ----
     
     
     

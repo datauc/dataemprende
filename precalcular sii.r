@@ -868,12 +868,25 @@ trabajadores_año_genero_rubro <- datos_sii$trabajadores_act %>%
   summarize(trabajadores = sum(valor, na.rm = T))
 
 trabajadores_año_genero_subrubro <- datos_sii$trabajadores_act %>%
-  filter(#rubro == rubro_elegido,
-    #año == 2019,
-    género != "total",
+  filter(género != "total",
     tipo == "dependencia",
     calculo == "total") %>%
   group_by(rubro, subrubro, año, género) %>%
+  summarize(trabajadores = sum(valor, na.rm = T))
+
+#evolución dependencia ----
+trabajadores_año_dependencia_rubro <- datos_sii$trabajadores_act %>%
+  filter(género == "total",
+    tipo == "dependencia",
+    calculo == "total") %>%
+  group_by(rubro, año, dependencia) %>%
+  summarize(trabajadores = sum(valor, na.rm = T))
+
+trabajadores_año_dependencia_subrubro <- datos_sii$trabajadores_act %>%
+  filter(género == "total",
+    tipo == "dependencia",
+    calculo == "total") %>%
+  group_by(rubro, subrubro, año, dependencia) %>%
   summarize(trabajadores = sum(valor, na.rm = T))
 
 # (!) actividades ----
@@ -1270,6 +1283,8 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               ##
               "trabajadores_año_genero_rubro" = trabajadores_año_genero_rubro,
               "trabajadores_año_genero_subrubro" = trabajadores_año_genero_subrubro,
+              "trabajadores_año_dependencia_rubro" = trabajadores_año_dependencia_rubro,
+              "trabajadores_año_dependencia_subrubro" = trabajadores_año_dependencia_subrubro,
               ##
               "ventas_año_subrubro_region" = ventas_año_subrubro_region,
               "ventas_año_subrubro_comuna" = ventas_año_subrubro_comuna,

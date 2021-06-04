@@ -436,18 +436,18 @@ shinyUI(fluidPage(
                                                             justified = TRUE,
                                                             width = "90%") %>%
                               aos(animation = "fade-down", delay = "100"),
-                            br(),
-                            shinyWidgets::radioGroupButtons("selector_genero_g_trabajadores_crecimiento_genero",
-                                                            label = NULL,
-                                                            choices = c("Mujeres", "Hombres"),
-                                                            selected = "Mujeres",
-                                                            justified = TRUE,
-                                                            width = "90%") %>%
-                              aos(animation = "fade-down", delay = "200"),
+                            # br(),
+                            # shinyWidgets::radioGroupButtons("selector_genero_g_trabajadores_crecimiento_genero",
+                            #                                 label = NULL,
+                            #                                 choices = c("Mujeres", "Hombres"),
+                            #                                 selected = "Mujeres",
+                            #                                 justified = TRUE,
+                            #                                 width = "90%") %>%
+                            #   aos(animation = "fade-down", delay = "200"),
                             
                             #grafico de degradado
                             plotOutput("g_crecimiento_trabajadores_genero", height = "300px") %>% 
-                              aos(animation = "fade-down", delay = "300")
+                              aos(animation = "fade-down", delay = "200")
            ),
     )
   ),

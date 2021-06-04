@@ -269,14 +269,14 @@ graficar_lineas_degradado <- function(data, variable = "rubro", #no hace nada cr
     geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = variable_y, ymax = Inf), show.legend = F) + #fondo oscuro (arriba) para tapar el degradado
     geom_area(fill = color_fondo, alpha = 0.2, show.legend = F) + #fondo claro (abajo)
     #línea
-    geom_line(color = color_claro, size = 1.2, show.legend = F, ) +
+    geom_line(color = color_claro, size = 1.2, show.legend = F) +
     #punto
     #geom_point(col=color_negro, alpha=0.6, size=3) + #punto chico negro
     geom_point(color = color_blanco, size=1.5) + #punto chico claro
     geom_point(color = color_blanco, size=6, data = . %>% filter(año == 2019), aes(x = max(año), y=max(variable_y))) + #punto grande claro
     geom_point(color = color_claro, size=4, data = . %>% filter(año == 2019), aes(x = max(año), y=max(variable_y))) + #punto grande blanco
     #líneas del gráfico
-    #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(empresas))) +
+    #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=min(año), yend=max(variable_y))) +
     #geom_segment(inherit.aes = F, color = color_negro, y=0, aes(x=min(año), xend=max(año)+0.2, yend=0)) +
     scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2*numero_largo))) +
     #scale_y_continuous(expand = expansion(mult=c(0, 0.15))) +
@@ -455,6 +455,97 @@ graficar_circular <- function(data, variable_categorica, variable_numerica) {
     coord_fixed()
   return(p)
 }
+
+graficar_lineas_comparadas_degradado <- function(data, variable = "rubro", #no hace nada creo
+                                                 variable_y_elegida = "empresas", #columna con valores y
+                                                 texto_y = "Cantidad de empresas",
+                                                 variable_categorica_elegida,
+                                                 numero_largo = 1 #multiplicador del espacio para los numeros
+){
+  #fondo degradado https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
+  colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
+  fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
+  
+  #calcular año mínimo y máximo
+  año_minimo <- min(data$año, na.rm = T)
+  año_maximo <- max(data$año, na.rm = T)
+  
+  #graficar
+  p <- data %>%
+    rename(variable_y = all_of(variable_y_elegida),
+           variable_categorica = all_of(variable_categorica_elegida)) %>%
+    group_by(año) %>%
+    mutate(punto_mas_alto = max(variable_y),
+           punto_mas_bajo = min(variable_y)) %>%
+    mutate(variable_categorica = stringr::str_to_sentence(variable_categorica)) %>%
+    ungroup() %>%
+    ggplot(aes(x=año, y=variable_y, col=variable_categorica)) +
+    #fondo degradado
+    annotation_custom(fondo_degradado, xmin=año_minimo, xmax=año_maximo, ymin=0, ymax=Inf) +
+    geom_segment(col = color_fondo, size=1, 
+                 aes(x=año, y=Inf, yend=punto_mas_alto, xend=año), show.legend = F) + #parche de líneas hacia arriba para tapar el fondo de degradado que se le escapa al geom_ribbon
+    #líneas de fondo
+    geom_segment(col = color_claro, alpha = 0.3, 
+                 aes(x=año, y=0, yend=punto_mas_alto, xend=año), show.legend = F) +
+    #colores de fondo arriba/abajo
+    geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, 
+                aes(ymin = punto_mas_alto, ymax = Inf), show.legend = F) + #fondo oscuro (arriba) para tapar el degradado
+    #geom_area(fill = color_fondo, alpha = 0.2, show.legend = F) + #fondo claro (abajo)
+    #color entre las dos líneas
+    geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 0.7, 
+                aes(ymin = punto_mas_bajo, ymax = punto_mas_alto), show.legend = F) + #fondo entre las dos líneas
+    geom_segment(col = color_fondo, alpha = 0.5, 
+                 aes(x=año, y=punto_mas_bajo, yend=punto_mas_alto, xend=año), show.legend = F) + #líneas verticales entre las dos líneas
+    #línea
+    geom_line(size = 1.2, show.legend = F) +
+    #punto
+    geom_point(color = color_blanco, 
+               size=6, data = . %>% filter(año == 2019), 
+               aes(x = max(año), y=variable_y), show.legend = F) + #punto grande claro
+    geom_point(#color = color_claro, 
+      size=4, data = . %>% filter(año == 2019), 
+      aes(x = max(año), y=variable_y), show.legend = T) + #punto grande blanco
+    #líneas del gráfico
+    scale_x_continuous(breaks = años_sii, expand = expansion(add=c(0, 2*numero_largo))) +
+    scale_color_manual(values = c(color_claro, #colorspace::desaturate(colorspace::darken(color_claro, 0.1), amount = -0.4),
+                                  colorspace::lighten(
+                                    colorspace::desaturate(color_oscuro, amount = -0.2),
+                                    0.05)#color_oscuro
+    ), aesthetics = c("color", "fill")) +
+    #texto
+    ggrepel::geom_text_repel(color = color_blanco, family = "Dosis ExtraLight SemiBold", size = 5, 
+                             aes(label = paste0(" ", variable_y), x = max(año)+0.5), 
+                             hjust=0, show.legend=F, #check_overlap = T, 
+                             direction = "y", box.padding = -2,
+                             data = . %>% filter(año == 2019)) +
+    #tema
+    coord_cartesian(clip="off") +
+    labs(y = texto_y, fill = "variable_c", col = "variable_c") +
+    theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
+          panel.background = element_rect(fill = color_fondo, color = color_fondo),
+          text = element_text(color = color_oscuro, family = "Montserrat"),
+          axis.text = element_text(color = color_negro),
+          axis.ticks = element_blank(), panel.grid = element_blank(), axis.title.x = element_blank(),
+          axis.text.x = element_text(margin=margin(t = -8)),
+          axis.text.y = element_text(margin=margin(r = 4))) +
+    theme(legend.position = "bottom",
+          legend.background = element_blank(),
+          legend.key = element_blank(),
+          legend.title = element_blank(),
+          legend.text = element_text(color = color_blanco, margin = margin(r=20)))
+  
+  return(p)
+}
+
+# datos$trabajadores_año_genero_rubro %>%
+#   filter(rubro == rubros_sii[11]) %>%
+#   graficar_lineas_comparadas_degradado(variable_y = "trabajadores",
+#                                        numero_largo=1.5,
+#                                        texto_y = "Trabajadores por género",
+#                                        variable = "rubro",
+#                                        variable_categorica_elegida = "género")
+
 
 cat("funciones cargadas")
 #Bastián Olea Herrera (@bastimapache)
