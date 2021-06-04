@@ -551,7 +551,40 @@ shinyUI(fluidPage(
     )
   ),
   
-  #espaciador_interior(),
+  espaciador_interior(),
+  
+  #grafico crecimiento dependencia ----
+  fluidRow(
+    column(12,
+           h3("Evolución de trabajadores por dependencia") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
+           
+           conditionalPanel(selector_rubro_no_vacio,
+                            id = "condicional_rubro_elegido",
+                            
+                            #titulo del rubro elegido
+                            htmlOutput("rubro_subrubro_elegido_5") %>% 
+                              aos(animation = "fade-down", delay = "0"),
+                            br(),
+                            
+                            #botonera
+                            shinyWidgets::radioGroupButtons("selector_rubro_g_trabajadores_crecimiento_dependencia",
+                                                            label = NULL,
+                                                            choices = c("Rubro", "Subrubro"),
+                                                            selected = "Rubro",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            #grafico de degradado
+                            plotOutput("g_crecimiento_trabajadores_dependencia", height = "300px") %>% 
+                              aos(animation = "fade-down", delay = "200")
+           ),
+    )
+  ),
+  
+  espaciador_interior(),
   
   
   

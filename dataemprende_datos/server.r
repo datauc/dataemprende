@@ -695,7 +695,39 @@ shinyServer(function(input, output, session) {
     
     
     #grafico crecimiento dependencia ----
+    output$rubro_subrubro_elegido_5 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+      
+      if (input$selector_rubro_g_trabajadores_crecimiento_dependencia == "Rubro") {
+        h <- HTML(cifra(input$rubro)) }
+      else {
+        h <- HTML(cifra(input$subrubro))
+      }
+      return(h)
+    })
     
+    output$g_crecimiento_trabajadores_dependencia <- renderPlot({
+      req(input$rubro != "",
+          input$subrubro != "")
+      
+      #condicional por rubro o subrubro
+      if (input$selector_rubro_g_trabajadores_crecimiento_dependencia == "Rubro") {
+        d <- datos$trabajadores_año_dependencia_rubro %>%
+          filter(rubro == input$rubro)
+
+      } else if (input$selector_rubro_g_trabajadores_crecimiento_dependencia == "Subrubro") {
+        d <- datos$trabajadores_año_dependencia_subrubro %>%
+          filter(subrubro == input$subrubro)
+      }
+      #graficar
+      p <- graficar_lineas_comparadas_degradado(d, variable_y = "trabajadores",
+                                                numero_largo=1.5,
+                                                texto_y = "Trabajadores por dependencia",
+                                                variable = "rubro",
+                                                variable_categorica_elegida = "dependencia")
+      return(p)
+    }, res=100)
     
     
 
