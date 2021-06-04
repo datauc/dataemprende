@@ -1,6 +1,6 @@
 #http://dataintelligence.cl/shiny/dataemprende_datos
 
-shinyUI(fluidPage(
+shinyUI(fluidPage(title = "DataEmprende Tarapacá", lang = "es",
   aos::use_aos(), #animación en scroll
   includeScript("scripts.js"), #javascript de animación fade para conditional panels
   includeCSS("estilos.css"), #estilos css

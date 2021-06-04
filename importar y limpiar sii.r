@@ -42,9 +42,10 @@ sii_comu_act <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_COMU_ACT.tx
   mutate(`Rubro economico` = str_remove_all(`Rubro economico`, ". - "),
          `Subrubro economico` = str_remove_all(`Subrubro economico`, ".* - "))
 
-sii_tram_comu <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_COMU.txt", local = locale(encoding = "latin1"))
-
-sii_tram_rubr <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_RUBR.txt", local = locale(encoding = "latin1"))
+#tramos
+sii_tram_comu <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_COMU.txt", local = readr::locale(encoding = "latin1"))
+sii_tram_rubr <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_RUBR.txt", local = readr::locale(encoding = "latin1"))
+sii_tram_subrubr <- readr::read_tsv(file = "~/SII/Datos/SII oct 2020/PUB_TRAM_SUBR.txt", local = readr::locale(encoding = "latin1"))
 
 
 # glimpse(sii_reg_rubr)
@@ -305,8 +306,9 @@ names(sii_tram_comu)
 tramos_comuna <- sii_tram_comu %>% 
   filter(`Region del domicilio o casa matriz` == "Región de Tarapacá") %>% 
   rename(tramo = `Tramo segun ventas (13 tramos)`) %>%
+  #count(tramo)
   filter(tramo != "Sin Ventas/Sin Información") %>%
-  mutate(tramo2 = str_remove_all(tramo, " .")) %>% 
+  mutate(tramo2 = stringr::str_remove_all(tramo, " .")) %>% 
   mutate(pyme = case_when(tramo2 == "Grande" ~ "No",
                           tramo2 == "Micro" ~ "Micro",
                           TRUE ~ "Pyme")) %>%
@@ -350,6 +352,81 @@ tramos_rubro <- sii_tram_rubr %>%
 
 
 
+
+
+tramos_comuna_13 <- sii_tram_comu %>% 
+  filter(`Region del domicilio o casa matriz` == "Región de Tarapacá") %>% 
+  rename(tramo = `Tramo segun ventas (13 tramos)`) %>%
+  #count(tramo)
+  #filter(tramo != "Sin Ventas/Sin Información") %>%
+  #mutate(tramo2 = str_remove_all(tramo, " .")) %>% 
+  # mutate(pyme = case_when(tramo2 == "Grande" ~ "No",
+  #                         tramo2 == "Micro" ~ "Micro",
+  #                         TRUE ~ "Pyme")) %>%
+  mutate(across(c(`Ventas anuales en UF`), ~ readr::parse_number(.x))) %>%
+  group_by(`Comuna del domicilio o casa matriz`, 
+           tramo, #`Tramo segun ventas (13 tramos)`, 
+           `Año Comercial`) %>%
+  summarize(empresas = sum(`Número de empresas`),
+            ventas = mean(`Ventas anuales en UF`, na.rm = T),
+            honorarios = mean(`Número de trabajadores a honorarios informados`, na.rm = T),
+            honorarios_f = mean(`Número de trabajadores a honorarios de género femenino informados`, na.rm = T),
+            honorarios_m = mean(`Número de trabajadores a honorarios de género masculino informados`, na.rm = T),
+            dependientes = mean(`Número de trabajadores dependientes informados`, na.rm = T),
+            dependientes_m = mean(`Número de trabajadores dependientes de género masculino informados`, na.rm = T),
+            dependientes_f = mean(`Número de trabajadores dependientes de género femenino informados`, na.rm = T)) %>%
+  rename(comuna = 1, tramo=2, año=3)
+
+
+
+tramos_rubro_13 <- sii_tram_rubr %>% 
+  mutate(`Rubro economico` = stringr::str_remove_all(`Rubro economico`, ". - ")) %>%
+  rename(tramo = `Tramo segun ventas (13 tramos)`) %>%
+  #filter(tramo != "Sin Ventas/Sin Información") %>%
+  #mutate(tramo2 = str_remove_all(tramo, " .")) %>% 
+  #mutate(pyme = case_when(tramo2 == "Grande" ~ "No",
+  #                        tramo2 == "Micro" ~ "Micro",
+  #                        TRUE ~ "Pyme")) %>%
+  mutate(across(c(`Ventas anuales en UF`), ~ readr::parse_number(.x))) %>%
+  group_by(`Rubro economico`, 
+           tramo,
+           `Año Comercial`) %>%
+  summarize(empresas = sum(`Número de empresas`),
+            ventas = mean(`Ventas anuales en UF`, na.rm = T),
+            honorarios = mean(`Número de trabajadores a honorarios informados`, na.rm = T),
+            honorarios_f = mean(`Número de trabajadores a honorarios de género femenino informados`, na.rm = T),
+            honorarios_m = mean(`Número de trabajadores a honorarios de género masculino informados`, na.rm = T),
+            dependientes = mean(`Número de trabajadores dependientes informados`, na.rm = T),
+            dependientes_m = mean(`Número de trabajadores dependientes de género masculino informados`, na.rm = T),
+            dependientes_f = mean(`Número de trabajadores dependientes de género femenino informados`, na.rm = T)) %>%
+  rename(tramo = tramo, rubro=1, año=3)
+
+
+tramos_subrubro_13 <- sii_tram_subrubr %>% 
+  mutate(`Rubro economico` = stringr::str_remove_all(`Rubro economico`, ". - "),
+         `Subrubro economico` = stringr::str_remove_all(`Subrubro economico`, "\\d+ - ")) %>%
+  rename(tramo = `Tramo segun ventas (13 tramos)`) %>%
+  #filter(tramo != "Sin Ventas/Sin Información") %>%
+  #mutate(tramo2 = str_remove_all(tramo, " .")) %>% 
+  #mutate(pyme = case_when(tramo2 == "Grande" ~ "No",
+  #                        tramo2 == "Micro" ~ "Micro",
+  #                        TRUE ~ "Pyme")) %>%
+  mutate(across(c(`Ventas anuales en UF`), ~ readr::parse_number(.x))) %>%
+  group_by(`Rubro economico`, 
+           `Subrubro economico`, 
+           tramo,
+           `Año Comercial`) %>%
+  summarize(empresas = sum(`Número de empresas`),
+            ventas = mean(`Ventas anuales en UF`, na.rm = T),
+            honorarios = mean(`Número de trabajadores a honorarios informados`, na.rm = T),
+            honorarios_f = mean(`Número de trabajadores a honorarios de género femenino informados`, na.rm = T),
+            honorarios_m = mean(`Número de trabajadores a honorarios de género masculino informados`, na.rm = T),
+            dependientes = mean(`Número de trabajadores dependientes informados`, na.rm = T),
+            dependientes_m = mean(`Número de trabajadores dependientes de género masculino informados`, na.rm = T),
+            dependientes_f = mean(`Número de trabajadores dependientes de género femenino informados`, na.rm = T)) %>%
+  rename(rubro=1, subrubro=2, año=4)
+
+
 #—----
 # revisar ----
 # sii_empresas
@@ -372,6 +449,9 @@ datos_sii <- list("empresas" = sii_empresas,
                   "renta_act" = sii_renta_act, 
                   ##
                   "tramos_comuna" = tramos_comuna,
-                  "tramos_rubro" = tramos_rubro)
+                  "tramos_rubro" = tramos_rubro,
+                  "tramos_comuna_13" = tramos_comuna_13,
+                  "tramos_rubro_13" = tramos_rubro_13,
+                  "tramos_subrubro_13" = tramos_subrubro_13)
 
 save(datos_sii, file = "datos_sii_act.rdata")
