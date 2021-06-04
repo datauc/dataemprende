@@ -688,18 +688,18 @@ datos_sii$trabajadores %>%
   tidyr::pivot_wider(values_from = n, names_from = dependencia)
 
 # g dependencia: rubro elegido ----
-datos_sii$trabajadores %>%
-  filter(rubro == rubro_elegido) %>%
-  filter(tipo == "dependencia",
-         calculo == "total",
-         género == "total") %>%
-  select(-dato, -tipo, -empresas, -calculo) %>%
-  group_by(año, dependencia) %>%
-  summarize(n = sum(valor, na.rm = T)) %>%
-  ggplot(aes(año, n, col = dependencia)) +
-  geom_line(show.legend = F) +
-  scale_x_continuous(breaks = años_sii) +
-  theme(axis.text.x = element_text(angle=90, vjust=0.5))
+# datos_sii$trabajadores %>%
+#   filter(rubro == rubro_elegido) %>%
+#   filter(tipo == "dependencia",
+#          calculo == "total",
+#          género == "total") %>%
+#   select(-dato, -tipo, -empresas, -calculo) %>%
+#   group_by(año, dependencia) %>%
+#   summarize(n = sum(valor, na.rm = T)) %>%
+#   ggplot(aes(año, n, col = dependencia)) +
+#   geom_line(show.legend = F) +
+#   scale_x_continuous(breaks = años_sii) +
+#   theme(axis.text.x = element_text(angle=90, vjust=0.5))
 
 # dependencia: rubro elegido y comuna elegida ----
 datos_sii$trabajadores %>%
@@ -765,17 +765,17 @@ trabajadores_genero_rubros <- datos_sii$trabajadores %>%
          masculino_p = masculino/(femenino + masculino))
 
 #g género: rubro elegido ----
-datos_sii$trabajadores %>%
-  filter(rubro == rubro_elegido,
-         género != "total",
-         tipo == "dependencia",
-         calculo == "total") %>%
-  group_by(año, género) %>%
-  summarize(n = sum(valor, na.rm = T)) %>%
-  ggplot(aes(año, n, col = género)) +
-  geom_line(show.legend = F) +
-  scale_x_continuous(breaks = años_sii) +
-  theme(axis.text.x = element_text(angle=90, vjust=0.5))
+# datos_sii$trabajadores %>%
+#   filter(rubro == rubro_elegido,
+#          género != "total",
+#          tipo == "dependencia",
+#          calculo == "total") %>%
+#   group_by(año, género) %>%
+#   summarize(n = sum(valor, na.rm = T)) %>%
+#   ggplot(aes(año, n, col = género)) +
+#   geom_line(show.legend = F) +
+#   scale_x_continuous(breaks = años_sii) +
+#   theme(axis.text.x = element_text(angle=90, vjust=0.5))
 
 
 
@@ -1025,55 +1025,55 @@ ventas_año_subrubro_comuna <- datos_sii$ventas_act %>%
 #RENTA ----
 
 #rubros ----
-datos_sii$renta %>%
-  filter(año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(rubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
+# datos_sii$renta %>%
+#   filter(año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(rubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
   
 
 #rubro elegido ----
-datos_sii$renta %>%
-  filter(rubro == rubro_elegido,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(rubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-#rubro elegido x comuna elegida ----
-datos_sii$renta %>%
-  filter(rubro == rubro_elegido,
-         comuna == comuna_elegida,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(comuna, rubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-#rubro elegido x comunas ----
-datos_sii$renta %>%
-  filter(rubro == rubro_elegido,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(comuna, rubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-#rubro elegido x género ----
-datos_sii$renta %>%
-  filter(rubro == rubro_elegido,
-         año == 2019) %>%
-  filter(género != "total",
-         calculo == "total") %>%
-  group_by(género, rubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
+# datos_sii$renta %>%
+#   filter(rubro == rubro_elegido,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(rubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# #rubro elegido x comuna elegida ----
+# datos_sii$renta %>%
+#   filter(rubro == rubro_elegido,
+#          comuna == comuna_elegida,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(comuna, rubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# #rubro elegido x comunas ----
+# datos_sii$renta %>%
+#   filter(rubro == rubro_elegido,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(comuna, rubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# #rubro elegido x género ----
+# datos_sii$renta %>%
+#   filter(rubro == rubro_elegido,
+#          año == 2019) %>%
+#   filter(género != "total",
+#          calculo == "total") %>%
+#   group_by(género, rubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
 
 #g evolución rubro elegido x género ----
 # datos_sii$renta %>%
@@ -1089,108 +1089,108 @@ datos_sii$renta %>%
 #   theme(axis.text.x = element_text(angle=90, vjust=0.5))
 # #habría que comparar con cantidad de trabajadores
 
-# rubro elegido x comuna elegida x género ----
-datos_sii$renta %>%
-  filter(comuna == comuna_elegida, #selector
-         rubro == rubro_elegido) %>%
-  filter(calculo == "total") %>%
-  ggplot(aes(año, valor, col=género, fill=género)) +
-  geom_line() +
-  scale_y_continuous(labels = function(x) paste(x/1000000, "M")) +
-  scale_x_continuous(breaks = años_sii) +
-  theme(axis.text.x = element_text(angle=90, vjust=0.5))
-
-
-#subrubros ----
-datos_sii$renta_act %>%
-  filter(rubro == rubro_elegido,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(subrubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-
-#subrubro elegido ----
-datos_sii$renta_act %>%
-  filter(subrubro == subrubro_elegido,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(subrubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-#subrubro elegido x comuna elegida----
-datos_sii$renta_act %>%
-  filter(subrubro == subrubro_elegido,
-         comuna == comuna_elegida,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(comuna, subrubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-
-#g subrubros x comuna elegida ----
-# datos_sii$renta_act %>%
-#   filter(rubro == rubro_elegido,
-#          comuna == comuna_elegida) %>%
-#   filter(género == "total",
-#          calculo == "total") %>%
-#   group_by(año, comuna, subrubro) %>%
-#   summarize(valor = sum(valor, na.rm = T)) %>%
-#   filter(valor > 0) %>%
-#   ggplot(aes(año, valor/1000000, col = subrubro)) +
-#   geom_line(show.legend = F) +
-#   scale_y_continuous(labels = function(x) paste(x, "M")) +
+# # rubro elegido x comuna elegida x género ----
+# datos_sii$renta %>%
+#   filter(comuna == comuna_elegida, #selector
+#          rubro == rubro_elegido) %>%
+#   filter(calculo == "total") %>%
+#   ggplot(aes(año, valor, col=género, fill=género)) +
+#   geom_line() +
+#   scale_y_continuous(labels = function(x) paste(x/1000000, "M")) +
 #   scale_x_continuous(breaks = años_sii) +
 #   theme(axis.text.x = element_text(angle=90, vjust=0.5))
-
-
-#subrubro elegido x comunas ----
-datos_sii$renta_act %>%
-  filter(subrubro == subrubro_elegido,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(comuna, subrubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-#subrubro elegido x género ----
-datos_sii$renta_act %>%
-  filter(subrubro == subrubro_elegido,
-         año == 2019) %>%
-  filter(género != "total",
-         calculo == "total") %>%
-  group_by(género, subrubro) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-
-#actividades ----
-datos_sii$renta_act %>%
-  filter(subrubro == subrubro_elegido,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(actividad) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
-
-#actividades x comuna elegida ----
-datos_sii$renta_act %>%
-  filter(subrubro == subrubro_elegido,
-         comuna == comuna_elegida,
-         año == 2019) %>%
-  filter(género == "total",
-         calculo == "total") %>%
-  group_by(comuna, actividad) %>%
-  summarize(valor = sum(valor, na.rm = T)) %>%
-  arrange(desc(valor))
+# 
+# 
+# #subrubros ----
+# datos_sii$renta_act %>%
+#   filter(rubro == rubro_elegido,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(subrubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# 
+# #subrubro elegido ----
+# datos_sii$renta_act %>%
+#   filter(subrubro == subrubro_elegido,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(subrubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# #subrubro elegido x comuna elegida----
+# datos_sii$renta_act %>%
+#   filter(subrubro == subrubro_elegido,
+#          comuna == comuna_elegida,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(comuna, subrubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# 
+# #g subrubros x comuna elegida ----
+# # datos_sii$renta_act %>%
+# #   filter(rubro == rubro_elegido,
+# #          comuna == comuna_elegida) %>%
+# #   filter(género == "total",
+# #          calculo == "total") %>%
+# #   group_by(año, comuna, subrubro) %>%
+# #   summarize(valor = sum(valor, na.rm = T)) %>%
+# #   filter(valor > 0) %>%
+# #   ggplot(aes(año, valor/1000000, col = subrubro)) +
+# #   geom_line(show.legend = F) +
+# #   scale_y_continuous(labels = function(x) paste(x, "M")) +
+# #   scale_x_continuous(breaks = años_sii) +
+# #   theme(axis.text.x = element_text(angle=90, vjust=0.5))
+# 
+# 
+# #subrubro elegido x comunas ----
+# datos_sii$renta_act %>%
+#   filter(subrubro == subrubro_elegido,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(comuna, subrubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# #subrubro elegido x género ----
+# datos_sii$renta_act %>%
+#   filter(subrubro == subrubro_elegido,
+#          año == 2019) %>%
+#   filter(género != "total",
+#          calculo == "total") %>%
+#   group_by(género, subrubro) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# 
+# #actividades ----
+# datos_sii$renta_act %>%
+#   filter(subrubro == subrubro_elegido,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(actividad) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
+# 
+# #actividades x comuna elegida ----
+# datos_sii$renta_act %>%
+#   filter(subrubro == subrubro_elegido,
+#          comuna == comuna_elegida,
+#          año == 2019) %>%
+#   filter(género == "total",
+#          calculo == "total") %>%
+#   group_by(comuna, actividad) %>%
+#   summarize(valor = sum(valor, na.rm = T)) %>%
+#   arrange(desc(valor))
 
 #g actividades x comuna elegida ----
 # datos_sii$renta_act %>%
@@ -1225,11 +1225,39 @@ tramos_comuna <- datos_sii$tramos_comuna %>%
   mutate(porcentaje = empresas/sum(empresas)) %>%
   select(comuna, tramo, empresas, porcentaje)
 
+tramos_comuna_13 <- datos_sii$tramos_comuna_13 %>%
+  ungroup() %>%
+  select(año, comuna, tramo, empresas) %>%
+  mutate(tramo4 = stringr::str_remove_all(tramo, " \\d")) %>%
+  mutate(tramo = recode(tramo, "Sin Ventas/Sin Información" = "Desconocido")) %>%
+  mutate(tramo = forcats::fct_relevel(tramo,
+                                      "Micro 1", "Micro 2", "Micro 3",
+                                      "Pequeña 1", "Pequeña 2", "Pequeña 3",
+                                      "Mediana 1", "Mediana 2",
+                                      "Grande 1", "Grande 2", "Grande 3", "Grande 4",
+                                      "Desconocido"))
+
+
 #tramos región ----
 tramos_region <- datos_sii$tramos_comuna %>%
   group_by(tramo) %>%
   summarize(empresas = sum(empresas)) %>%
   mutate(porcentaje = empresas/sum(empresas))
+
+tramos_region_13 <- datos_sii$tramos_comuna_13 %>%
+  ungroup() %>%
+  group_by(año, tramo) %>%
+  summarize(empresas = sum(empresas, na.rm=T)) %>%
+  select(año, tramo, empresas) %>%
+  mutate(tramo4 = stringr::str_remove_all(tramo, " \\d")) %>%
+  mutate(tramo = recode(tramo, "Sin Ventas/Sin Información" = "Desconocido")) %>%
+  mutate(tramo = forcats::fct_relevel(tramo,
+                                      "Micro 1", "Micro 2", "Micro 3",
+                                      "Pequeña 1", "Pequeña 2", "Pequeña 3",
+                                      "Mediana 1", "Mediana 2",
+                                      "Grande 1", "Grande 2", "Grande 3", "Grande 4",
+                                      "Desconocido"))
+
 
 #tramos rubro ----
 tramos_rubro <- datos_sii$tramos_rubro %>%
@@ -1238,6 +1266,32 @@ tramos_rubro <- datos_sii$tramos_rubro %>%
   mutate(porcentaje = empresas/sum(empresas)) %>%
   select(rubro, tramo, empresas, porcentaje)
 
+
+
+tramos_rubro_13 <- datos_sii$tramos_rubro_13 %>%
+  ungroup() %>%
+  select(año, rubro, tramo, empresas) %>%
+  mutate(tramo4 = stringr::str_remove_all(tramo, " \\d")) %>%
+  mutate(tramo = recode(tramo, "Sin Ventas/Sin Información" = "Desconocido")) %>%
+  mutate(tramo = forcats::fct_relevel(tramo,
+                                      "Micro 1", "Micro 2", "Micro 3",
+                                      "Pequeña 1", "Pequeña 2", "Pequeña 3",
+                                      "Mediana 1", "Mediana 2",
+                                      "Grande 1", "Grande 2", "Grande 3", "Grande 4",
+                                      "Desconocido"))
+
+#tramos subrubro ----
+tramos_subrubro_13 <- datos_sii$tramos_subrubro_13 %>%
+  ungroup() %>%
+  select(año, rubro, subrubro, tramo, empresas) %>%
+  mutate(tramo4 = stringr::str_remove_all(tramo, " \\d")) %>%
+  mutate(tramo = recode(tramo, "Sin Ventas/Sin Información" = "Desconocido")) %>%
+  mutate(tramo = forcats::fct_relevel(tramo,
+                                      "Micro 1", "Micro 2", "Micro 3",
+                                      "Pequeña 1", "Pequeña 2", "Pequeña 3",
+                                      "Mediana 1", "Mediana 2",
+                                      "Grande 1", "Grande 2", "Grande 3", "Grande 4",
+                                      "Desconocido"))
 #—----
 
 #COMPILAR ----
@@ -1290,8 +1344,12 @@ datos <- list("empresas_año_rubro_comuna" = empresas_año_rubro_comuna, #datos_
               "ventas_año_subrubro_comuna" = ventas_año_subrubro_comuna,
               ##
               "tramos_comuna" = tramos_comuna,
+              "tramos_comuna_13" = tramos_comuna_13,
               "tramos_region" = tramos_region,
+              "tramos_region_13" = tramos_region_13,
               "tramos_rubro" = tramos_rubro,
+              "tramos_rubro_13" = tramos_rubro_13,
+              "tramos_subrubro_13" = tramos_subrubro_13,
               ##
               "crecimiento_subrubros_region" = crecimiento_subrubros_region)
 

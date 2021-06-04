@@ -304,12 +304,85 @@ shinyServer(function(input, output, session) {
     }, res = 100)
     
     
-    #tamaños de empresas ----
+    #logos tamaños de empresas ----
     #gráfico de logos de empresas en tres filas
     output$g_empresas_comuna <- renderPlot({
         p <- graficar_empresas(input$comuna)
         return(p)
     })
+    
+    
+    #grafico area tramos comuna ----
+    output$comuna_elegida_1 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+      HTML(cifra(input$comuna))
+    })
+    
+    output$g_empresas_area_comuna <- renderPlot({
+      req(input$rubro != "",
+          input$subrubro != "")
+      
+      #comuna o región
+      if (input$selector_g_empresas_area_comuna == "Comuna") {
+      d <- datos$tramos_comuna_13 %>%
+        #excluir grandes empresas
+        filter(tramo4 != "Grande") %>%
+        droplevels() %>%
+        #filtrar comuna
+        filter(comuna == input$comuna)
+      
+      } else if (input$selector_g_empresas_area_comuna == "Región") {
+        d <- datos$tramos_region_13 %>%
+          #excluir grandes empresas
+          filter(tramo4 != "Grande") %>%
+          droplevels()
+      }
+      p <- graficar_area_aditiva(d)
+      return(p)
+    }, res=100, bg = color_fondo) #%>% 
+      #bindCache(input$selector_g_empresas_area_comuna,
+      #          input$comuna)
+    
+    
+    #grafico area tramos rubro ----
+    output$rubro_subrubro_elegido_6 <- reactive({
+      req(input$rubro != "",
+          input$subrubro != "")
+      
+      if (input$selector_g_empresas_area_rubro == "Rubro") {
+        h <- HTML(cifra(input$rubro)) }
+      else {
+        h <- HTML(cifra(input$subrubro))
+      }
+      return(h)
+    })
+    
+    output$g_empresas_area_rubro <- renderPlot({
+      req(input$rubro != "",
+          input$subrubro != "")
+      
+      #comuna o región
+      if (input$selector_g_empresas_area_rubro == "Rubro") {
+        d <- datos$tramos_rubro_13 %>%
+          #excluir grandes empresas
+          filter(tramo4 != "Grande") %>%
+          droplevels() %>%
+          filter(rubro == input$rubro)
+        
+      } else if (input$selector_g_empresas_area_rubro == "Subrubro") {
+        d <- datos$tramos_subrubro_13 %>%
+          #excluir grandes empresas
+          filter(tramo4 != "Grande") %>%
+          droplevels() %>%
+          filter(subrubro == input$subrubro)
+      }
+      p <- graficar_area_aditiva(d)
+      return(p)
+    }, res=100, bg = color_fondo) %>% 
+      bindCache(input$selector_g_empresas_area_rubro,
+                input$rubro,
+                input$subrubro)
     
 
     #crecimiento del subrubro ----

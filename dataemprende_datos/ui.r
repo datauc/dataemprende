@@ -186,7 +186,7 @@ shinyUI(fluidPage(title = "DataEmprende Tarapacá", lang = "es",
   espaciador_interior(),
   
   
-  #casitas empresas ----
+  #logos tamaño empresas ----
   fluidRow(
     column(12,
            h3("Tamaño de las empresas en la comuna") %>%
@@ -202,6 +202,80 @@ shinyUI(fluidPage(title = "DataEmprende Tarapacá", lang = "es",
     )
   ),
   
+  espaciador_interior(),
+  
+  #gráfico área tramos comuna ----
+  fluidRow(
+    column(12,
+           h3("Evolución del tamaño de las empresas") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
+           
+           conditionalPanel(selector_rubro_no_vacio,
+                            id = "condicional_rubro_elegido",
+                            
+                            #botonera
+                            shinyWidgets::radioGroupButtons("selector_g_empresas_area_comuna",
+                                                            label = NULL,
+                                                            choices = c("Comuna", "Región"),
+                                                            selected = "Región",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            #titulo de comuna elegida
+                            conditionalPanel("input.selector_g_empresas_area_comuna =='Comuna'",
+                            htmlOutput("comuna_elegida_1") %>% 
+                              aos(animation = "fade-down", delay = "0")
+                            ),
+                            
+                            br(),
+                            em("Excluyendo grandes empresas.") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            #gráfico de logos de empresas en tres filas
+                            plotOutput("g_empresas_area_comuna", height = "400px") %>% 
+                              aos(animation = "fade-down", delay = "200")
+           ),
+    )
+  ),
+  
+  espaciador_interior(),
+  
+  #gráfico área tramos rubro ----
+  fluidRow(
+    column(12,
+           h3("Evolución del tamaño de las empresas") %>%
+             aos(animation = "fade-down", delay = "0"),
+           br(),
+           
+           conditionalPanel(selector_rubro_no_vacio,
+                            id = "condicional_rubro_elegido",
+                            
+                            #botonera
+                            shinyWidgets::radioGroupButtons("selector_g_empresas_area_rubro",
+                                                            label = NULL,
+                                                            choices = c("Rubro", "Subrubro"),
+                                                            selected = "Rubro",
+                                                            justified = TRUE,
+                                                            width = "90%") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            
+                            #titulo del rubro
+                            htmlOutput("rubro_subrubro_elegido_6") %>% 
+                              aos(animation = "fade-down", delay = "0"),
+                            br(),
+                            
+                            em("Excluyendo grandes empresas.") %>%
+                              aos(animation = "fade-down", delay = "100"),
+                            
+                            #gráfico de logos de empresas en tres filas
+                            plotOutput("g_empresas_area_rubro", height = "400px") %>% 
+                              aos(animation = "fade-down", delay = "200")
+           ),
+    )
+  ),
   
   espaciador_interior(),
   
