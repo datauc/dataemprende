@@ -38,6 +38,12 @@ color_gris <- "#89A4B5"
 #                                                     colorspace::hex2RGB(color_oscuro)))
 color_medio <- "#6BA0B5"
 
+#color mezcla entre el el oscuro y el fondo
+# color_medio_2 <- colorspace::hex(colorspace::mixcolor(0.5,
+#                                                     colorspace::hex2RGB(color_oscuro),
+#                                                     colorspace::hex2RGB(color_fondo)))
+color_medio_2 <- "#397196"
+
 # ver escala de colores
 # scales::show_col(c(color_blanco,
 #                    color_claro,
