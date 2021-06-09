@@ -86,12 +86,44 @@ colores_azules_3_grupos_2 <- c("#A8DADC", "#92D0D3", "#77C7CA",
 #opciones ----
 
 selector_rubro_no_vacio <- "input.rubro.length > 1"
-  #"(typeof input.rubro !== 'undefined' && input.rubro.length > 0)"
-  #"input.rubro !== ''" 
-  #"(input.rubro !== 'undefined' && input.rubro > 0)"
+#"(typeof input.rubro !== 'undefined' && input.rubro.length > 0)"
+#"input.rubro !== ''" 
+#"(input.rubro !== 'undefined' && input.rubro > 0)"
 
 #funciones ----
 cat("cargando funciones...", fill=T)
+
+#fotos
+fotos <- function(fotos = 1) {
+  fotos <- paste0("fotos/foto", fotos, ".jpg")
+  
+  f <- list(
+    espaciador_interior(),
+    
+    conditionalPanel(selector_rubro_no_vacio,
+                     id = "condicional_rubro_elegido",
+                     div(
+                       style = paste0(
+                         #"background-image: url('fotos/foto1.jpg');", #The image used
+                         "background-image: url('", fotos, "');",
+                         "background-color:", color_fondo, ";", #2D668E;", #Used if the image is unavailable
+                         "opacity: 0.85;", 
+                         #"mix-blend-mode: soft-light;",
+                         "background-position: 100% 50%;", #Center the image
+                         "background-repeat: no-repeat;", #Do not repeat the image
+                         "background-size: cover;", #Resize the background image to cover the entire container
+                         "margin-left: -15px;",
+                         "margin-right: -15px;",
+                         "margin-bottom: -20px;"),
+                       
+                       espaciador(),
+                     )
+    ),
+    espaciador_interior()
+  )
+  return(f)
+}
+
 
 #pone puntos de miles a una cifra
 puntos <- function(x) {
@@ -107,7 +139,7 @@ pesos <- function(x) {
 
 #pone los porcentajes en el formato correcto
 porcentaje <- function(x, z = 0.1) {
- y <- scales::percent(x, decimal.mark = ",", big.mark =".", accuracy = z)
+  y <- scales::percent(x, decimal.mark = ",", big.mark =".", accuracy = z)
   return(y) 
 }
 
@@ -134,7 +166,7 @@ graficar_genero <- function(dato_hombres = 0.5,
   cant_mujeres_g <- dato_mujeres %>% round(1)*10
   
   distribucion_g <- c(rep("Hombres", cant_hombres_g),
-                    rep("Mujeres", cant_mujeres_g)
+                      rep("Mujeres", cant_mujeres_g)
   )
   
   datos_g <- tibble(genero = distribucion_g, id = 1:10) %>%
@@ -215,7 +247,7 @@ graficar_empresas <- function(input_comuna = "Iquique") {
     #agregar orden para el texto
     group_by(tramo) %>%
     mutate(posicion = max(orden)+0.6)
-
+  
   p <- distribucion3 %>%
     ggplot(aes(x = orden, y = tramo, label = logo, fill = tramo, col = tramo)) +
     geom_text(size = 7, family = 'FontAwesome', col = color_claro, show.legend=F) +
@@ -251,13 +283,13 @@ cifra <- function(x) {
 
 
 espaciador <- function() {
- 
+  
   y <- list(br(),br(),
-  br(),br(),
-  br(),br(),
-  br(),br(),
-  br(),br(),
-  p(" "))
+            br(),br(),
+            br(),br(),
+            br(),br(),
+            br(),br(),
+            p(" "))
   return(y)
 }
 
@@ -308,7 +340,7 @@ graficar_lineas_degradado <- function(data, variable = "rubro", #no hace nada cr
                                       variable_y_elegida="empresas", #columna con valores y
                                       texto_y = "Cantidad de empresas",
                                       numero_largo = 1 #multiplicador del espacio para los numeros
-                                      ){
+){
   #fondo degradado https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
   colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
   fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
@@ -374,7 +406,7 @@ graficar_mapa_rubros <- function(datos_filtrados,
                                  mover_x = 0,
                                  mover_y = 0,
                                  zoom = 0) {
-
+  
   p <- ggplot() +
     #mapa de base
     geom_sf(data = datos_mapas$región, aes(geometry = geometry),
@@ -388,7 +420,7 @@ graficar_mapa_rubros <- function(datos_filtrados,
             color = color_negro, size = .5, alpha = .8, inherit.aes = F) +
     #puntos
     geom_point(data = datos_filtrados, aes(x=x, y=y),
-              alpha = 0.3, size = 1, col = color_claro, show.legend = F) +
+               alpha = 0.3, size = 1, col = color_claro, show.legend = F) +
     # #zoom en iquique y alto hospicio
     # coord_sf(xlim = c(-70.17, -70.06),
     #          ylim = c(-20.31, -20.195),
@@ -445,53 +477,53 @@ graficar_mapa_comunas <- function(data, variable){
     rename(empresas = all_of(variable))
   
   m <- ggplot() +
-   #mapa de base
-   # geom_point(aes(x=-70.17, y=-18.95), col = "red", size=14) +
-   # geom_point(aes(x=-70.24, y=-19.055), col = "orange", size=10) +
-   # geom_point(aes(x=-68.45, y=-19.05), col = "red", size=15) +
-   # geom_point(aes(x=-68.57, y=-19.23), col = "green", size=4) +
-   # geom_point(aes(x=-70.1, y=-21.5), col = "blue", size=10) +
-   # geom_point(aes(x=-68.47, y=-20.77), col = "pink", size=5) +
-   #mapa regional
-   geom_sf(data = datos_mapa_regional$región, aes(geometry = geometry),
-           fill = color_oscuro, col = color_fondo) +
-   #carreteras
-   geom_sf(data = datos_mapa_regional$carreteras %>% 
-             filter(name != "Avenida La Tirana" &
-                      name != "Avenida Arturo Prat Chacón" &
-                      name != "Segundo Acceso" &
-                      name != "Las Cabras" &
-                      name != "Ruta 16" &
-                      name != "Avenida Circunvalación"),
-           color = color_negro, size = .3, alpha = 0.4) +
-   # #calles medianas
-   # geom_sf(data = datos_mapa_regional$calles$osm_lines,
-   #         inherit.aes = FALSE,
-   #         color = color_negro, size = .2, alpha = 0.2) +
-   #puntos
-   geom_point(data = lugares_tarapaca_datos,
-              aes(geometry = geometry, size = empresas), 
-              stat = "sf_coordinates", col = color_claro, alpha = 0.6,
-              show.legend = F) +
-   #texto
-   ggrepel::geom_text_repel(data = lugares_tarapaca_datos, aes(geometry = geometry, label = name), 
-                            stat = "sf_coordinates", seed = 1993, point.padding = 0.2, min.segment.length = 9,
-                            size = 3, col = "black", family = "Montserrat", alpha = 0.7) +
-   #zoom region
-   coord_sf(xlim = c(-70.4, -68.35),
-            ylim = c(-21.7, -18.9), expand = FALSE, clip = "off") +
-   # #zoom iquique y alto hospicio
-   # coord_sf(xlim = c(-70.17, -70.06),
-   #          ylim = c(-20.31, -20.195), expand = FALSE) +
-   scale_size_continuous(range = c(0, 15)) +
-   theme_void() +
-   theme(plot.background = element_rect(fill = color_fondo, color = color_fondo), panel.background = element_rect(fill = color_fondo, color = color_fondo))
- 
- #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
- # m <- cowplot::ggdraw(m) +
- #   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
- 
- return(m)
+    #mapa de base
+    # geom_point(aes(x=-70.17, y=-18.95), col = "red", size=14) +
+    # geom_point(aes(x=-70.24, y=-19.055), col = "orange", size=10) +
+    # geom_point(aes(x=-68.45, y=-19.05), col = "red", size=15) +
+    # geom_point(aes(x=-68.57, y=-19.23), col = "green", size=4) +
+    # geom_point(aes(x=-70.1, y=-21.5), col = "blue", size=10) +
+    # geom_point(aes(x=-68.47, y=-20.77), col = "pink", size=5) +
+    #mapa regional
+    geom_sf(data = datos_mapa_regional$región, aes(geometry = geometry),
+            fill = color_oscuro, col = color_fondo) +
+    #carreteras
+    geom_sf(data = datos_mapa_regional$carreteras %>% 
+              filter(name != "Avenida La Tirana" &
+                       name != "Avenida Arturo Prat Chacón" &
+                       name != "Segundo Acceso" &
+                       name != "Las Cabras" &
+                       name != "Ruta 16" &
+                       name != "Avenida Circunvalación"),
+            color = color_negro, size = .3, alpha = 0.4) +
+    # #calles medianas
+    # geom_sf(data = datos_mapa_regional$calles$osm_lines,
+    #         inherit.aes = FALSE,
+    #         color = color_negro, size = .2, alpha = 0.2) +
+    #puntos
+    geom_point(data = lugares_tarapaca_datos,
+               aes(geometry = geometry, size = empresas), 
+               stat = "sf_coordinates", col = color_claro, alpha = 0.6,
+               show.legend = F) +
+    #texto
+    ggrepel::geom_text_repel(data = lugares_tarapaca_datos, aes(geometry = geometry, label = name), 
+                             stat = "sf_coordinates", seed = 1993, point.padding = 0.2, min.segment.length = 9,
+                             size = 3, col = "black", family = "Montserrat", alpha = 0.7) +
+    #zoom region
+    coord_sf(xlim = c(-70.4, -68.35),
+             ylim = c(-21.7, -18.9), expand = FALSE, clip = "off") +
+    # #zoom iquique y alto hospicio
+    # coord_sf(xlim = c(-70.17, -70.06),
+    #          ylim = c(-20.31, -20.195), expand = FALSE) +
+    scale_size_continuous(range = c(0, 15)) +
+    theme_void() +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo), panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  
+  #arreglar fondo con barras blancas por haber usado coord_sf: https://gis.stackexchange.com/questions/269224/ggplot2-map-with-colored-background-and-coord-map
+  # m <- cowplot::ggdraw(m) +
+  #   theme(panel.background = element_rect(fill = color_fondo, color = color_fondo))
+  
+  return(m)
 }
 
 graficar_circular <- function(data, variable_categorica, variable_numerica) {
