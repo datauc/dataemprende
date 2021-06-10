@@ -107,7 +107,7 @@ fotos <- function(fotos = 1) {
                          #"background-image: url('fotos/foto1.jpg');", #The image used
                          "background-image: url('", fotos, "');",
                          "background-color:", color_fondo, ";", #2D668E;", #Used if the image is unavailable
-                         "opacity: 0.85;", 
+                         #"opacity: 0.9;", 
                          #"mix-blend-mode: soft-light;",
                          "background-position: 100% 50%;", #Center the image
                          "background-repeat: no-repeat;", #Do not repeat the image
@@ -117,7 +117,8 @@ fotos <- function(fotos = 1) {
                          "margin-bottom: -20px;"),
                        
                        espaciador(),
-                     )
+                       br(), br(), br()
+                     ) %>% aos(animation = "fade-down", delay = "0", duration = "1000")
     ),
     espaciador_interior()
   )

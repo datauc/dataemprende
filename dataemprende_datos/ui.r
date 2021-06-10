@@ -102,32 +102,31 @@ shinyUI(
                                                                 id = "condicional_rubro_elegido",
                                                                 #párrafo empresas/rubros y tramos
                                                                 htmlOutput("parrafo1") %>% 
-                                                                  aos(animation = "fade-down", delay = "2000"),
+                                                                  aos(animation = "fade-down", delay = "0"),
                                                                 br(),br(),
                                                                 
                                                                 #párrafo tramos/comuna, tramos/rubro
                                                                 htmlOutput("parrafo2") %>% 
-                                                                  aos(animation = "fade-down", delay = "2100"),
+                                                                  aos(animation = "fade-down", delay = "100"),
                                                                 br(),br(),
                                                                 
                                                                 htmlOutput("parrafo3") %>% 
-                                                                  aos(animation = "fade-down", delay = "2200"),
+                                                                  aos(animation = "fade-down", delay = "200"),
                                                                 br(),br(),
                                                                 
                                                                 htmlOutput("parrafo4") %>% 
-                                                                  aos(animation = "fade-down", delay = "2300"),
+                                                                  aos(animation = "fade-down", delay = "300"),
                                                                 br(),br(),
                                                                 
                                                                 htmlOutput("parrafo5") %>% 
-                                                                  aos(animation = "fade-down", delay = "2400")
+                                                                  aos(animation = "fade-down", delay = "400")
                                                ),
                                         ),
                                         
                                       ),
                                       
                                       #espaciador(),
-                                      fotos(1) %>% 
-                                        aos(animation = "fade-down", delay = "2000", duration = "1000"),
+                                      fotos(1),
                                       
                                       
                                       #—----
@@ -410,7 +409,7 @@ shinyUI(
                                       
                                       #mapa empresas rubro ----
                                       fluidRow(#style = "margin-right: 0px; padding-right: 0px; float: right; border: 0px; align-items: right;border-radius: 0px;",
-                                        column(7,
+                                        column(12,
                                                h3("Ubicación de las empresas") %>%
                                                  aos(animation = "fade-down", delay = "0"),
                                                br(),
@@ -430,15 +429,18 @@ shinyUI(
                                                                 htmlOutput("rubro_subrubro_elegido_2") %>%
                                                                   aos(animation = "fade-down", delay = "100"),
                                                                 br(),
-                                               )
-                                        ),
+                                               #)
+                                        #),
                                         
-                                        column(5, 
-                                               conditionalPanel(selector_rubro_no_vacio,
-                                                                id = "condicional_rubro_elegido",
+                                        # column(5, 
+                                        #        conditionalPanel(selector_rubro_no_vacio,
+                                        #                         id = "condicional_rubro_elegido",
                                                                 
                                                                 #mapa
-                                                                plotOutput("m_iquique_empresas_rubro", height = "400px", width = "359px") %>% #width exacto para que no tenga borde blanco
+                                                                plotOutput("m_iquique_empresas_rubro", 
+                                                                           height = "500px"#, 
+                                                                           #width = "359px"
+                                                                           ) %>% #width exacto para que no tenga borde blanco
                                                                   aos(animation = "fade-down", delay = 0) %>%
                                                                   shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
                                                                 
@@ -486,8 +488,8 @@ shinyUI(
                                         )
                                       ),
                                       
-                                      fotos(2) %>%
-                                        aos(animation = "fade-down", delay = "2000", duration = "1000"),
+                                      fotos(2),
+                                        
                                       #espaciador(),
                                       
                                       #—----
@@ -699,8 +701,8 @@ shinyUI(
                                       #espaciador_interior(),
                                       
                                       #espaciador(),
-                                      fotos(3) %>%
-                                        aos(animation = "fade-down", delay = "2000", duration = "1000"),
+                                      fotos(3),
+                                      
                                       
                                       #—----
                                       # VENTAS ----
@@ -849,8 +851,7 @@ shinyUI(
                                       ),
                                       
                                       #espaciador(),
-                                      fotos(4) %>%
-                                        aos(animation = "fade-down", delay = "2000", duration = "1000"),
+                                      fotos(4),
                                       
                                       espaciador(),
                                       
