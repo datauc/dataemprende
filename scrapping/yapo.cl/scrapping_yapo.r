@@ -197,15 +197,3 @@ for(archivo in archivos_s) {
 
 #save(base_yapo, file = paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
 #load(paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
-
-base_yapo %>% count(categoria)
-
-base_yapo %>% count(comuna)
-
-library(ggplot2)
-
-base_yapo %>%
-  ggplot(aes(precio)) +
-  geom_histogram(bins = 90) +
-  geom_rug(alpha=0.1) +
-  scale_x_continuous(n.breaks = 10, limits = c(0, 60000))
