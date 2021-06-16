@@ -123,3 +123,33 @@ body {
   background: #1D3557; 
   border-color: #1D3557;
 }
+
+
+
+/* pestañas */
+
+/* espaciado entre pestañas */ 
+.tabbable > .nav > li > a {
+  margin-right: 4px; 
+  margin-bottom: 8px
+}
+
+/* inactiva */
+.tabbable > .nav > li > a {
+  background-color: #2D668E; 
+  color: #F1FAEE
+  
+} 
+
+/* seleccionada */
+.tabbable > .nav > li[class=active] > a {
+  background-color: #A8DADC; 
+  font-weight: 600; 
+  color: #F1FAEE
+} 
+
+/* hover */
+.tabbable > .nav > li > a:hover {
+  background-color: #1D3557; 
+  color: #F1FAEE
+} 

@@ -4,6 +4,8 @@ library(aos)
 #library(leaflet)
 #library(grid)
 
+Sys.setlocale(category = "LC_TIME", locale="es_ES.UTF-8") #Meses en español
+
 cat("cargando datos...", fill=T)
 
 #importar variables y listas necesarias
@@ -688,6 +690,84 @@ graficar_area_aditiva <- function(data,
           legend.key = element_blank(),
           legend.title = element_blank(),
           legend.text = element_text(color = color_blanco, margin = margin(r=20)))
+  
+  return(p)
+}
+
+
+graficar_lineas_degradado_reg <- function(data, variable = "categoria", #no hace nada creo
+                                      variable_y_elegida="cantidad", #columna con valores y
+                                      texto_y = "Cantidad de productos",
+                                      numero_largo = 1 #multiplicador del espacio para los numeros
+){
+  #fondo degradado https://r.789695.n4.nabble.com/plot-background-excel-gradient-style-background-td4632138.html#a4634954
+  colores_degradado <- colorRampPalette(c(color_claro, color_fondo))
+  fondo_degradado <- grid::rasterGrob(colores_degradado(5), width=unit(1,"npc"), height = unit(1,"npc"), interpolate = T) 
+  
+  data <- data %>% 
+    na.omit()
+  
+  #calcular año mínimo y máximo
+  fecha_minima <- min(data$fecha, na.rm = T)
+  fecha_maxima <- max(data$fecha, na.rm = T)
+  
+  # breaks_mensuales <- data %>% 
+  #   ungroup() %>% 
+  #   mutate(dias = lubridate::day(fecha)) %>% 
+  #   filter(dias == 01) %>% 
+  #   select(fecha) %>% 
+  #   distinct() %>% 
+  #   pull()
+  
+  breaks_mensuales2 <- data %>% 
+    ungroup() %>% 
+    rename(variable_y = all_of(variable_y_elegida)) %>%
+    mutate(dias = lubridate::day(fecha)) %>% 
+    filter(dias == 01 | dias == 15)
+  
+  #graficar
+  p <- data %>%
+    rename(variable_y = all_of(variable_y_elegida)) %>%
+    ggplot(aes(fecha, variable_y, col=variable)) +
+    #fondo degradado
+    annotation_custom(fondo_degradado, xmin=fecha_minima, xmax=fecha_maxima, ymin=0, ymax=Inf) +
+    geom_vline(xintercept = c(fecha_minima, fecha_maxima), size=1, col = color_fondo) +
+    #geom_segment(col = color_fondo, size=1, aes(x=fecha, y=Inf, yend=variable_y, xend=fecha), show.legend = F) + #parche de líneas hacia arriba para tapar el fondo de degradado que se le escapa al geom_ribbon
+    #líneas de fondo
+    geom_segment(data = breaks_mensuales2, col = color_claro, alpha = 0.3, aes(x=fecha, y=0, yend=variable_y, xend=fecha), show.legend = F) +
+    #colores de fondo arriba/abajo
+    geom_ribbon(fill = color_fondo, col=color_fondo, alpha = 1, aes(ymin = variable_y, ymax = Inf), show.legend = F) + #fondo oscuro (arriba) para tapar el degradado
+    geom_area(fill = color_fondo, alpha = 0.2, show.legend = F) + #fondo claro (abajo)
+    #línea
+    geom_line(color = color_claro, size = 1.2, show.legend = F) +
+    #línea de tendencia
+    geom_line(color = color_blanco, size = 1.2, alpha = 0.7, stat = "smooth", method = "lm", lineend = "round") +
+    #punto
+    #geom_point(color = color_blanco, size=1.5) + #punto chico claro
+    geom_point(color = color_blanco, size=6, data = . %>% na.omit() %>%  filter(fecha == max(fecha)), aes(x = max(fecha), y=max(variable_y))) + #punto grande claro
+    geom_point(color = color_claro, size=4, data = . %>% na.omit() %>%  filter(fecha == max(fecha)), aes(x = max(fecha), y=max(variable_y))) + #punto grande blanco
+    #líneas del gráfico
+    scale_x_date(date_breaks = "weeks", date_labels = "%d %b",
+                 #labels = fecha_etiqueta,
+                 expand = expansion(add=c(0, 3 * numero_largo))) +
+    #texto
+    geom_text(color = color_blanco, family = "Dosis ExtraLight SemiBold", size = 5, aes(label = paste0("  ", round(max(variable_y))), x = max(fecha)+0.5, y=max(variable_y)),
+              hjust=0, inherit.aes = F, check_overlap = T, data = . %>% filter(fecha == fecha_maxima)) +
+    geom_text(data = breaks_mensuales2, 
+              #aes(label = "    jueves"),
+              aes(label = ifelse(lubridate::day(fecha) == 1, paste("    ", format(fecha, "%B")), "")),
+              color = color_claro, family = "Montserrat", size = 3, angle = 90, hjust = 0,  vjust = 0.5) +
+    #tema
+    coord_cartesian(clip = "off") +
+    labs(y = texto_y) +
+    theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
+    theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
+          panel.background = element_rect(fill = color_fondo, color = color_fondo),
+          text = element_text(color = color_oscuro, family = "Montserrat"),
+          axis.text = element_text(color = color_negro),
+          axis.ticks = element_blank(), panel.grid = element_blank(), axis.title.x = element_blank(),
+          axis.text.x = element_text(margin=margin(t = -15), hjust = 1),
+          axis.text.y = element_text(margin=margin(l = 4, r = -2)))
   
   return(p)
 }

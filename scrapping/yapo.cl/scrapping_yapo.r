@@ -1,5 +1,6 @@
 library(dplyr)
 library(rvest)
+library(lubridate)
 
 # #dirección a scrappear
 # url <- "https://www.yapo.cl/tarapaca/"
@@ -83,7 +84,7 @@ content <- read_html("scrapping/yapo.cl/paginas/11-jun-2021/yapo_2021-06-11_anim
 
 
 
-#scrapping ----
+#prueba scrapping ----
 
 #ver todos los nodos
 #content %>% html_nodes("*") %>% html_attr("class") %>% unique()
@@ -119,9 +120,23 @@ fecha_s <- "11-jun-2021"
 fecha_a <- "2021-06-11"
 ruta_scrapping <- paste0("scrapping/yapo.cl/paginas/", fecha_s, "/")
 archivos_s <- list.files(ruta_scrapping)
+categorias <- c("Artículos del hogar", "Bolsos y accesorios", 
+                "Celulares", "Computadores", 
+                "Jardín y herramientas", "Moda y vestuario", 
+                "Muebles", "Salud y belleza", 
+                "Electrodomésticos", "Vestuario maternidad e infantil", 
+                "Calzado", "Consolas y videojuegos", 
+                "Hobbies y outdoor", "Servicios", 
+                "Televisión y cámaras", "Artículos infantiles", 
+                "Deportes", "Juguetes", 
+                "Mascotas y accesorios", "Arte y antiguedades", 
+                "Libros y revistas", "Otros productos", 
+                "Ciclismo", "Música y películas", 
+                "Instrumentos musicales")
 
 #loop
 for(archivo in archivos_s) {
+  
   #iniciar loop: inicializar lista
   if(archivo == min(archivos_s)) { 
     cat("inicializando lista", fill=T) 
@@ -182,10 +197,44 @@ for(archivo in archivos_s) {
   base_yapo_list[[archivo]] <- resultado
   cat("OK ", archivo, fill=T) 
   
-  #terminar loop: transformar lista a tibble 
+  #terminar loop: 
   if(archivo == max(archivos_s)) { 
+    
+    #transformar lista a tibble 
     cat("convirtiendo lista...", fill=T) 
     base_yapo <- bind_rows(base_yapo_list) 
+    
+    #ordenar categorías
+    base_yapo <- base_yapo %>% mutate(categoria = recode(
+        categoria,
+        "articulos-del-hogar" = "Artículos del hogar",
+        "bolsos-bisuteria-accesorios" = "Bolsos y accesorios",
+        "celulares" = "Celulares",
+        "computadores" = "Computadores",
+        "jardin_herramientas" = "Jardín y herramientas",
+        "moda-vestuario" = "Moda y vestuario",
+        "muebles" = "Muebles",
+        "salud-belleza" = "Salud y belleza",
+        "electrodomesticos" = "Electrodomésticos",
+        "vestuario-futura-mama-ninos" = "Vestuario maternidad e infantil",
+        "calzado" = "Calzado",
+        "consolas_videojuegos" = "Consolas y videojuegos",
+        "hobbies_outdoor" = "Hobbies y outdoor",
+        "servicios" = "Servicios",
+        "television_camaras" = "Televisión y cámaras",
+        "coches-articulos-infantiles" = "Artículos infantiles",
+        "deportes_gimnasia" = "Deportes",
+        "juguetes" = "Juguetes",
+        "animales_accesorios" = "Mascotas y accesorios",
+        "arte_antiguedades_colecciones" = "Arte y antiguedades",
+        "libros_revistas" = "Libros y revistas",
+        "otros_productos" = "Otros productos",
+        "bicicletas_ciclismo" = "Ciclismo",
+        "musica_peliculas" = "Música y películas",
+        "instrumentos_musicales" = "Instrumentos musicales")) %>% 
+      #ordenar factor de categoría
+      mutate(categoria = as.factor(categoria),
+             categoria = forcats::fct_relevel(categoria, categorias))
     
     #formatear fechas y hora
     cat("convirtiendo fecha y hora...", fill=T) 
@@ -215,7 +264,7 @@ for(archivo in archivos_s) {
       #limpiar
       select(-mes, -dia, -fecha_p, -fecha_f) %>% 
       #corrección si la fecha es superior al día de scrapping, entonces sería 2020 y no 2021
-      mutate(fecha = case_when(fecha > ymd(fecha_a) ~ fecha - years(1),
+      mutate(fecha = case_when(fecha > lubridate::ymd(fecha_a) ~ fecha - years(1),
                                TRUE ~ fecha)) %>% 
       #crear columna con fecha+hora y otra con sólo hora
       mutate(fecha_hora = lubridate::parse_date_time(paste(fecha, hora), "%y-%m-%d %H:%M"),
