@@ -8,7 +8,7 @@ fecha_s <- "11-jun-2021"
 fecha_a <- "2021-06-11"
 load(paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
 
-categorias[c(1:8)]
+categorias_yapo[c(1:8)]
 
 load("~/Texto/stopwords/stopwords.Rdata")
 
@@ -64,6 +64,7 @@ base_yapo_procesada <- list("entera" = base_yapo,
                             "palabras" = base_yapo_palabras)
 
 save(base_yapo_procesada, file = "dataemprende_datos/scrapping_yapo.rdata")
+#load("dataemprende_datos/scrapping_yapo.rdata")
 
 #—----
 
@@ -81,22 +82,22 @@ base_yapo_procesada$resumen %>%
 #Promedio de precios por categoría
 base_yapo_procesada$resumen %>% 
   select(-cantidad) %>% 
-  #filter(categoria == categorias[8]) %>% 
+  #filter(categoria == categorias_yapo[8]) %>% 
   ggplot() +
   geom_segment(col = color_claro, size = 1, 
                aes(xend = 0, x = precio_promedio, 
-                   y = forcats::fct_relevel(categoria, rev(categorias)), yend = forcats::fct_relevel(categoria, rev(categorias)))) +
+                   y = forcats::fct_relevel(categoria, rev(categorias_yapo)), yend = forcats::fct_relevel(categoria, rev(categorias_yapo)))) +
   geom_point(size = 4, col = color_blanco, 
-             aes(x = precio_promedio, y = forcats::fct_relevel(categoria, rev(categorias)))) +
+             aes(x = precio_promedio, y = forcats::fct_relevel(categoria, rev(categorias_yapo)))) +
   geom_point(size = 2.5, col = color_claro, 
-             aes(x = precio_promedio, y = forcats::fct_relevel(categoria, rev(categorias)))) +
+             aes(x = precio_promedio, y = forcats::fct_relevel(categoria, rev(categorias_yapo)))) +
   #geom_text(aes(label = paste0("  $", stringr::str_trim(format(round(precio_promedio, -2), big.mark = ".", decimal.mark = ","))), 
   geom_text(size = 4, family = "Dosis ExtraLight SemiBold", col = color_blanco,
             aes(label = precio_promedio %>% round(-2) %>% 
                   format(big.mark = ".", decimal.mark = ",") %>% 
                   stringr::str_trim() %>% paste0("   $", .),
                 x = precio_promedio, 
-                y = forcats::fct_relevel(categoria, rev(categorias))),
+                y = forcats::fct_relevel(categoria, rev(categorias_yapo))),
             hjust = 0) +
   theme_minimal() +
   scale_x_continuous(expand = expansion(c(0, 0.5))) +
@@ -111,9 +112,9 @@ base_yapo_procesada$entera %>%
   group_by(categoria, fecha) %>% 
   summarize(cantidad = n()) %>% 
   #filtrar categoría
-  filter(categoria == categorias[1]) %>% 
+  filter(categoria == categorias_yapo[1]) %>% 
   #últimos x meses
-  filter(fecha > lubridate::ymd(fecha_a) - months(3)) %>% 
+  filter(fecha > max(fecha) - months(3)) %>% 
   #suavizar datos
   mutate(cantidad = zoo::rollmean(cantidad, k = 4, fill = NA)) %>% 
   #graficar
@@ -130,8 +131,8 @@ base_yapo_procesada$palabras %>%
   arrange(categoria, desc(n)) %>%
   slice(1:10) %>%
   mutate(id = 1:n()) %>%
-  filter(categoria == categorias[1]) %>% 
-  mutate(palabra = str_to_sentence(palabra)) %>% 
+  filter(categoria == categorias_yapo[1]) %>% 
+  mutate(palabra = stringr::str_to_sentence(palabra)) %>% 
   graficar_barras_horizontales(variable_categorica = "palabra",
                                variable_numerica = "n")
 
@@ -152,9 +153,9 @@ base_yapo_procesada$entera %>%
 #horas del día ----
 #horas del día que se publican productos
 base_yapo_procesada$entera %>% 
-  filter(fecha >= ymd(fecha_a) - months(1)) %>% #último mes
+  filter(fecha >= max(fecha) - months(1)) %>% #último mes
   filter(categoria == categorias_yapo[3]) %>% 
-  mutate(horas = hour(hora),
+  mutate(horas = lubridate::hour(hora),
          horas = replace(horas, horas == 0, 24)) %>% 
   group_by(horas) %>% 
   summarize(cantidad = n()) %>% 

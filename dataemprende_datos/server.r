@@ -990,6 +990,8 @@ shinyServer(function(input, output, session) {
     
     #productos categoria ----
     output$yapo_productos_categoria <- renderPlot({
+      req(base_yapo_procesada$resumen)
+      
       p <- base_yapo_procesada$resumen %>% 
         select(categoria, cantidad) %>% 
         graficar_barras_horizontales(variable_categorica = "categoria", 
@@ -1000,6 +1002,8 @@ shinyServer(function(input, output, session) {
     
     #precios categoría ----
     output$yapo_precios_categoria <- renderPlot({
+      req(base_yapo_procesada$resumen)
+      
       p <- base_yapo_procesada$resumen %>% 
         select(-cantidad) %>% 
         #filter(categoria == categorias[8]) %>% 
@@ -1031,13 +1035,15 @@ shinyServer(function(input, output, session) {
     
     #tendencias productos ----
     output$yapo_tendencias_productos <- renderPlot({
+      req(base_yapo_procesada$entera)
+      
       p <- base_yapo_procesada$entera %>%
         group_by(categoria, fecha) %>% 
         summarize(cantidad = n()) %>% 
         #filtrar categoría
         filter(categoria == input$yapo_categorias_2) %>% 
         #últimos x meses
-        filter(fecha > lubridate::ymd(fecha_a) - months(3)) %>% 
+        filter(fecha > max(fecha) - months(3)) %>% 
         #suavizar datos
         mutate(cantidad = zoo::rollmean(cantidad, k = 6, fill = NA)) %>% 
         #graficar
@@ -1047,6 +1053,8 @@ shinyServer(function(input, output, session) {
     
     #productos más vendidos ----
     output$yapo_productos_mas_vendidos <- renderPlot({
+      req(base_yapo_procesada$palabras)
+      
       p <- base_yapo_procesada$palabras %>%
         group_by(categoria) %>%
         count(palabra) %>%
@@ -1054,7 +1062,7 @@ shinyServer(function(input, output, session) {
         slice(1:15) %>%
         mutate(id = 1:n()) %>%
         filter(categoria == input$yapo_categorias_3) %>% 
-        mutate(palabra = str_to_sentence(palabra)) %>% 
+        mutate(palabra =stringr::str_to_sentence(palabra)) %>% 
         graficar_barras_horizontales(variable_categorica = "palabra",
                                      variable_numerica = "n")
       return(p)
@@ -1063,10 +1071,12 @@ shinyServer(function(input, output, session) {
     
     #horas del día ----
     output$yapo_horas_del_dia <- renderPlot({
+      req(base_yapo_procesada$entera)
+      
       p <- base_yapo_procesada$entera %>% 
-        filter(fecha >= ymd(fecha_a) - months(1)) %>% #último mes
+        filter(fecha >= max(fecha) - months(1)) %>% #último mes
         filter(categoria == input$yapo_categorias_4) %>% 
-        mutate(horas = hour(hora),
+        mutate(horas = lubridate::hour(hora),
                horas = replace(horas, horas == 0, 24)) %>% 
         group_by(horas) %>% 
         summarize(cantidad = n()) %>% 
