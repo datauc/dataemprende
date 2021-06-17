@@ -2,26 +2,15 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
 library(tidytext)
+library(lubridate)
+
 fecha_s <- "11-jun-2021"
 fecha_a <- "2021-06-11"
 load(paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
 
 categorias[c(1:8)]
 
-
 load("~/Texto/stopwords/stopwords.Rdata")
-
-#análisis unigrama ----
-#tokenizar y filtrar stopwords
-base_yapo_palabras <- base_yapo %>%
-  select(producto, precio, categoria, pagina, fecha, hora, comuna) %>%
-  #tokenizar
-  unnest_tokens(palabra, producto, drop = F, to_lower = T) %>%
-  select(palabra, everything()) %>%
-  #limpiar
-  filter(nchar(palabra) > 3) %>%
-  filter(!(palabra %in% stopwords))
-  
 
 #palabras obvias que no aportan al estar dentro de sus categorías respectivas
 palabras_obvias <- c("bicicleta", "bicicletas", "bici", "bike",
@@ -40,24 +29,22 @@ palabras_meta <- c("busco", "oferta", "ofertas",
                    "Iquique", "Alto Hospicio",
                    "original", "originales")
 
-#top conceptos por categoría
-base_yapo_palabras_top <- base_yapo_palabras %>%
-  group_by(categoria) %>%
-  count(palabra) %>%
-  filter(!(palabra %in% palabras_obvias),
-         !(palabra %in% palabras_meta)) %>%
-  arrange(categoria, desc(n)) %>%
-  slice(1:10) %>%
-  mutate(id = 1:n())
 
+#precalcular ----
 
+#tokenizar nombres de productos y filtrar stopwords
+base_yapo_palabras <- base_yapo %>%
+  select(producto, precio, categoria, pagina, fecha, hora, comuna) %>%
+  #tokenizar
+  unnest_tokens(palabra, producto, drop = F, to_lower = T) %>%
+  select(palabra, everything()) %>%
+  #limpiar
+  filter(nchar(palabra) > 3) %>%
+  filter(!(palabra %in% stopwords),
+         !(palabra %in% palabras_obvias),
+         !(palabra %in% palabras_meta))
 
-#—----
-
-#outputs ----
-
-#cantidad productos ----
-#Categorías ordenadas por cantidad de productos en la última semana
+#resumenes estadísticos de precios
 base_yapo_resumen <- base_yapo %>%
   filter(precio > 1000) %>% 
   filter(fecha >= ymd(fecha_a) - weeks(1)) %>% #última semana
@@ -69,15 +56,30 @@ base_yapo_resumen <- base_yapo %>%
             precio_max = max(precio, na.rm=T)) %>% 
   arrange(desc(cantidad))
 
-base_yapo_resumen %>% 
+
+#compilar ----
+
+base_yapo_procesada <- list("entera" = base_yapo,
+                            "resumen" = base_yapo_resumen,
+                            "palabras" = base_yapo_palabras)
+
+save(base_yapo_procesada, file = "dataemprende_datos/scrapping_yapo.rdata")
+
+#—----
+
+#outputs ----
+
+#productos categoria ----
+#Categorías ordenadas por cantidad de productos en la última semana
+base_yapo_procesada$resumen %>% 
   select(categoria, cantidad) %>% 
   graficar_barras_horizontales(variable_categorica = "categoria", 
                                variable_numerica = "cantidad", slice = 10)
 
 
-#precios promedio ----
+#precios categoria ----
 #Promedio de precios por categoría
-base_yapo_resumen %>% 
+base_yapo_procesada$resumen %>% 
   select(-cantidad) %>% 
   #filter(categoria == categorias[8]) %>% 
   ggplot() +
@@ -103,13 +105,11 @@ base_yapo_resumen %>%
   theme(axis.text.y = element_text(hjust = 1, color = color_negro, family = "Montserrat", size = 9, margin = margin(r = 10))) +
   theme(plot.background = element_rect(fill = color_fondo, color = color_fondo))
 
-#evolucion productos ----
+#tendencias productos ----
 #Evolución de cantidad de productos vendidos por categoría
-base_yapo_evolucion_cantidad <- base_yapo %>%
+base_yapo_procesada$entera %>%
   group_by(categoria, fecha) %>% 
-  summarize(cantidad = n())
-
-base_yapo_evolucion_cantidad %>% 
+  summarize(cantidad = n()) %>% 
   #filtrar categoría
   filter(categoria == categorias[1]) %>% 
   #últimos x meses
@@ -120,11 +120,16 @@ base_yapo_evolucion_cantidad %>%
  graficar_lineas_degradado_reg()
 
 
-
+# (!) evolución precios ----
 
 
 #productos más vendidos ----
-base_yapo_palabras_top %>%
+base_yapo_procesada$palabras %>%
+  group_by(categoria) %>%
+  count(palabra) %>%
+  arrange(categoria, desc(n)) %>%
+  slice(1:10) %>%
+  mutate(id = 1:n()) %>%
   filter(categoria == categorias[1]) %>% 
   mutate(palabra = str_to_sentence(palabra)) %>% 
   graficar_barras_horizontales(variable_categorica = "palabra",
@@ -133,7 +138,7 @@ base_yapo_palabras_top %>%
 #(!) evolución rango ----
 #evolución de cantidad de productos por rango de precios por categoría
 #grafico por semanas, con puntos jitter en la cantidad?
-base_yapo %>% 
+base_yapo_procesada$entera %>% 
   filter(precio > 15000,
          precio < 25000) %>% 
   group_by(categoria, fecha) %>% 
@@ -146,8 +151,9 @@ base_yapo %>%
 
 #horas del día ----
 #horas del día que se publican productos
-base_yapo %>% 
+base_yapo_procesada$entera %>% 
   filter(fecha >= ymd(fecha_a) - months(1)) %>% #último mes
+  filter(categoria == categorias_yapo[3]) %>% 
   mutate(horas = hour(hora),
          horas = replace(horas, horas == 0, 24)) %>% 
   group_by(horas) %>% 

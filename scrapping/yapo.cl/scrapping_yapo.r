@@ -274,5 +274,9 @@ for(archivo in archivos_s) {
 
 base_yapo
 
+#guardar base con fecha
 #save(base_yapo, file = paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
+
+#guardar última base sin fecha para cargar desde shiny
+save(base_yapo, file = paste0("dataemprende_datos/scrapping_yapo.rdata"))
 #load(paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))

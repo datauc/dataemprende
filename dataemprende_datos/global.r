@@ -16,6 +16,9 @@ load("datos_precalculados.rdata")
 load("puntos_empresas.rdata")
 load("datos_mapas.rdata")
 load("datos_mapa_regional.rdata")
+
+#scrapping
+load("scrapping_yapo.rdata")
 #load("empresas_mapa_sii.rdata")
 
 cat("datos cargados", fill=T)

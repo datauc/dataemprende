@@ -880,8 +880,89 @@ shinyUI(
                                                            
                                                            espaciador(),
                                                            
+                                                           #YAPO.cl ----
+                                                           h2("Portal de compraventa Yapo.cl") %>% 
+                                                             aos(animation = "fade-down", duration = "1000"),
+                                                           br(),
+                                                           
+                                                           #productos categoria ----
+                                                           h3("Productos en venta por categoría") %>%
+                                                             aos(animation = "fade-down", delay = "0"),
+                                                           
+                                                           br(),
+                                                           
+                                                           plotOutput("yapo_productos_categoria", height = "400px") %>% 
+                                                             aos(animation = "fade-down", delay = "100"),
+                                                           
+                                                           espaciador_interior(),
+                                                           
+                                                           
+                                                           
+                                                           #precios categoría ----
+                                                           h3("Precios por categoría") %>%
+                                                             aos(animation = "fade-down", delay = "0"),
+                                                           #diferentes tendencias
+                                                           
+                                                           plotOutput("yapo_precios_categoria", height = "500px") %>% 
+                                                             aos(animation = "fade-down", delay = "100"),
+                                                           
+                                                           espaciador_interior(),
+                                                           
+                                                           #tendencias productos ----
+                                                           h3("Tendencias de publicación de productos") %>%
+                                                             aos(animation = "fade-down", delay = "0"),
+                                                           
+                                                           br(),
+                                                           #selector categorias
+                                                           selectInput(inputId = "yapo_categorias_2", 
+                                                                       label = "Seleccione una categoría de productos:", 
+                                                                       choices = categorias_yapo,
+                                                                       width = "100%"),
+                                                           br(),
+                                                           
+                                                           plotOutput("yapo_tendencias_productos", height = "300px") %>% 
+                                                             aos(animation = "fade-down", delay = "100"),
+                                                           
+                                                           espaciador_interior(),
+                                                           
+                                                           #productos más vendidos ----
+                                                           h3("Productos más vendidos") %>%
+                                                             aos(animation = "fade-down", delay = "0"),
+                                                           
+                                                           br(),
+                                                           #selector categorias
+                                                           selectInput(inputId = "yapo_categorias_3", 
+                                                                       label = "Seleccione una categoría de productos:", 
+                                                                       choices = categorias_yapo,
+                                                                       width = "100%"),
+                                                           br(),
+                                                           
+                                                           plotOutput("yapo_productos_mas_vendidos", height = "400px") %>% 
+                                                             aos(animation = "fade-down", delay = "100"),
+                                                           
+                                                           espaciador_interior(),
+                                                           
+                                                           
+                                                           
+                                                           #horas del día ----
+                                                           h3("Horario de las publicaciones") %>%
+                                                             aos(animation = "fade-down", delay = "0"),
+                                                           
+                                                           br(),
+                                                           #selector categorias
+                                                           selectInput(inputId = "yapo_categorias_4", 
+                                                                       label = "Seleccione una categoría de productos:", 
+                                                                       choices = categorias_yapo,
+                                                                       width = "100%"),
+                                                           br(),
+                                                           
+                                                           plotOutput("yapo_horas_del_dia", height = "300px") %>% 
+                                                             aos(animation = "fade-down", delay = "100"),
+                                                           
+                                                           espaciador_interior(),
+                                                           
                                                            #—----
-                                                           ## Mapa Claudio ----
+                                                           ## Mapa Claudio 
                                                            # fluidRow(
                                                            #   column(12,
                                                            #          h2("Mapa") %>% aos(animation = "fade-down", duration = "1000"),
@@ -923,12 +1004,13 @@ shinyUI(
                                                            #   column(12,leafletOutput("mymap"))
                                                            # ),
                                                            
-                                                  )#fin pestaña
-                                      )#fin tabset
+                                                  ) #fin pestaña
+                                      ) #fin tabset
                      ) #fin condicional
                      
               ) #fin columna
             ), #fin fluidRow principal
+            
             
             #footer ----
             fluidRow(

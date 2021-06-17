@@ -69,3 +69,21 @@ load("subrubros.rdata")
 
 #cargar cruce entre ciiu y subrubros del sii para mapa de puntos de empresas
 load("cruce_ciiuu_sii.rdata")
+
+
+
+#variables yapo ----
+
+categorias_yapo <- c("Artículos del hogar", "Bolsos y accesorios", 
+                "Celulares", "Computadores", 
+                "Jardín y herramientas", "Moda y vestuario", 
+                "Muebles", "Salud y belleza", 
+                "Electrodomésticos", "Vestuario maternidad e infantil", 
+                "Calzado", "Consolas y videojuegos", 
+                "Hobbies y outdoor", "Servicios", 
+                "Televisión y cámaras", "Artículos infantiles", 
+                "Deportes", "Juguetes", 
+                "Mascotas y accesorios", "Arte y antiguedades", 
+                "Libros y revistas", "Otros productos", 
+                "Ciclismo", "Música y películas", 
+                "Instrumentos musicales")
