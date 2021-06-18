@@ -2,23 +2,6 @@ library(dplyr)
 library(rvest)
 library(lubridate)
 
-# #dirección a scrappear
-# url <- "https://www.yapo.cl/tarapaca/"
-# url <- "yapo.cl"
-# url <- "www.estrellaiquique.cl"
-# url <- "https://www.yapo.cl/tarapaca/electrodomesticos/"
-# url <- "https://www.yapo.cl/tarapaca/moda-belleza-salud?ca=2_s&l=0&w=1&cmn=" #cuando son pag 1
-# "https://www.yapo.cl/tarapaca/moda-belleza-salud?ca=2_s&cg=4000&o=2"
-# "https://www.yapo.cl/tarapaca/moda-belleza-salud?ca=2_s&cg=4000&o=3"
-# "https://www.yapo.cl/tarapaca/muebles?ca=2_s&l=0&w=1&cmn=" #cuando son pag 1
-# #https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=3
-
-##forma de construir la url
-#paste0("https://www.yapo.cl/tarapaca/", categoria, "?ca=2_s&o=", pagina)
-
-
-#descargar página manualmente
-download.file(url, destfile = "scrapping/yapo.cl/temp/1.html", quiet=TRUE)
 
 #definir categorías (son todas menos las de busqueda de empleo)
 categorias <- c("computadores",
@@ -76,43 +59,43 @@ for (c in categorias) { #categorías por scrappear
   }
 }
 
-#scrapping individual ----
-
-#cargar página descargada
-content <- read_html("scrapping/yapo.cl/temp/yapo_2021-06-10_muebles_4.html")
-content <- read_html("scrapping/yapo.cl/paginas/11-jun-2021/yapo_2021-06-11_animales_accesorios_10.html")
-
-
-
-#prueba scrapping ----
-
-#ver todos los nodos
-#content %>% html_nodes("*") %>% html_attr("class") %>% unique()
-
-#contenido
-s_titulo <- content %>% html_nodes(".title") %>% html_text()
-s_enlace <- content %>% html_nodes(".title") %>% html_attr('href') #enlaces
-s_imagen <- content %>% html_nodes(".image") %>% html_attr('src')
-s_fecha <- content %>% html_nodes(".date") %>% html_text() 
-s_hora <- content %>% html_nodes(".hour") %>% html_text() 
-s_comuna <- content %>% html_nodes(".commune") %>% html_text() 
-
-#obtiene los precios incluso si no hay
-s_precio <- content %>% html_nodes(".thumbs_subject") %>%
-  #busca adentro de la class anterior, retorna NA si no encuentra
-  lapply(. %>% html_nodes(".price") %>% html_text() %>%
-           ifelse(identical(., character(0)), NA, .)) %>% 
-  unlist()
-
-#unir columnas
-resultado_1 <- tibble::tibble(titulo = s_titulo,
-                              precio = s_precio,
-                              enlace = s_enlace,
-                              #categoria = s_categoria,
-                              fecha = s_fecha,
-                              hora = s_hora,
-                              comuna = s_comuna,
-                              imagen = s_imagen)
+# #scrapping individual ----
+# 
+# #cargar página descargada
+# content <- read_html("scrapping/yapo.cl/temp/yapo_2021-06-10_muebles_4.html")
+# content <- read_html("scrapping/yapo.cl/paginas/11-jun-2021/yapo_2021-06-11_animales_accesorios_10.html")
+# 
+# 
+# 
+# #prueba scrapping ----
+# 
+# #ver todos los nodos
+# #content %>% html_nodes("*") %>% html_attr("class") %>% unique()
+# 
+# #contenido
+# s_titulo <- content %>% html_nodes(".title") %>% html_text()
+# s_enlace <- content %>% html_nodes(".title") %>% html_attr('href') #enlaces
+# s_imagen <- content %>% html_nodes(".image") %>% html_attr('src')
+# s_fecha <- content %>% html_nodes(".date") %>% html_text() 
+# s_hora <- content %>% html_nodes(".hour") %>% html_text() 
+# s_comuna <- content %>% html_nodes(".commune") %>% html_text() 
+# 
+# #obtiene los precios incluso si no hay
+# s_precio <- content %>% html_nodes(".thumbs_subject") %>%
+#   #busca adentro de la class anterior, retorna NA si no encuentra
+#   lapply(. %>% html_nodes(".price") %>% html_text() %>%
+#            ifelse(identical(., character(0)), NA, .)) %>% 
+#   unlist()
+# 
+# #unir columnas
+# resultado_1 <- tibble::tibble(titulo = s_titulo,
+#                               precio = s_precio,
+#                               enlace = s_enlace,
+#                               #categoria = s_categoria,
+#                               fecha = s_fecha,
+#                               hora = s_hora,
+#                               comuna = s_comuna,
+#                               imagen = s_imagen)
 
 
 #scrapping de todas las páginas ----
@@ -275,7 +258,7 @@ for(archivo in archivos_s) {
 base_yapo
 
 #guardar base con fecha
-#save(base_yapo, file = paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
+save(base_yapo, file = paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
 
 #guardar última base sin fecha para cargar desde shiny
 save(base_yapo, file = paste0("dataemprende_datos/scrapping_yapo.rdata"))
