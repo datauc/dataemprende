@@ -126,9 +126,32 @@ descargar_portalinmobiliario("https://www.portalinmobiliario.com/arriendo/comerc
 #scrappear datos descargados
 base_portal <- scrapping_portalinmobiliario()
 
+#recodificar
+base_portal <- base_portal %>% 
+  mutate(tipo = recode(tipo, "departamentos" = "deptos"),
+         tipo = stringr::str_to_sentence(tipo)) %>% 
+  #categorías de metros
+  mutate(metros = readr::parse_number(metros)) %>% 
+  mutate(metros_cat = cut_width(metros, 100, boundary = 0)) %>% #cortar en categorías
+  mutate(metros_cat = ifelse(metros > 500, "500+", as.character(metros_cat))) %>% #límite superior
+  mutate(metros_cate = metros_cat, #poner nombres a categorías
+         metros_cate = stringr::str_remove(metros_cate, "\\["),
+         metros_cate = stringr::str_remove(metros_cate, "\\]"),
+         metros_cate = stringr::str_remove(metros_cate, "\\("),
+         metros_cate = stringr::str_replace(metros_cate, ",", " a "),
+         metros_cate = paste(metros_cate, "m²"),
+         metros_cat = as.factor(metros_cate)) %>% 
+  select(-metros_cate) %>% 
+  #categorías de dormitorios
+  mutate(dormitorios_cat = case_when(dormitorios >= 10 ~ "10+", #límite superior
+                                     TRUE ~ as.character(dormitorios))) %>% 
+  mutate(dormitorios_cat = as.factor(dormitorios_cat),
+         dormitorios_cat = forcats::fct_relevel(dormitorios_cat, "10+", after = Inf)) #ordenar
 
 #guardar
-save(base_portal, file = paste0("scrapping/portalinmobiliario/bases/base_portal_", lubridate::today(), ".rdata"))
+"2021-06-18"
+#save(base_portal, file = paste0("scrapping/portalinmobiliario/bases/base_portal_", lubridate::today(), ".rdata"))
+save(base_portal, file = paste0("scrapping/portalinmobiliario/bases/base_portal_", "2021-06-18", ".rdata"))
 
 #guardar última base sin fecha para cargar desde shiny
 save(base_portal, file = paste0("dataemprende_datos/scrapping_portal.rdata"))

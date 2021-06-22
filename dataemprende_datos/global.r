@@ -21,6 +21,7 @@ load("datos_mapa_regional.rdata")
 
 #scrapping
 load("scrapping_yapo.rdata")
+load("scrapping_portal.rdata")
 #load("empresas_mapa_sii.rdata")
 
 cat("datos cargados", fill=T)
@@ -89,6 +90,7 @@ color_medio_2 <- "#397196"
 colores_azules_3_grupos_2 <- c("#A8DADC", "#92D0D3", "#77C7CA", 
                                "#6BA0B5", "#4E9CB6", "#2D95B3", 
                                "#386D95", "#125E87")
+scales::show_col(colores_azules_3_grupos_2[c(1, 4, 6, 8)])
 
 #opciones ----
 
@@ -449,18 +451,25 @@ graficar_mapa_rubros <- function(datos_filtrados,
 
 
 
-graficar_barras_horizontales <- function(data, variable_categorica="subrubro", variable_numerica="empresas", slice=8, str_trunc=80, str_wrap=40) {
+graficar_barras_horizontales <- function(data, variable_categorica="subrubro", variable_numerica="empresas", 
+                                         rank = TRUE,
+                                         slice=8, str_trunc=80, str_wrap=40) {
   variable_categorica <- sym(variable_categorica)
   
   p <- data %>%
-    rename(valor = all_of(variable_numerica)) %>%
-    arrange(desc(valor)) %>%
-    slice(1:slice) %>%
-    mutate(!!variable_categorica := stringr::str_trunc(as.character(!!variable_categorica), str_trunc),
-           !!variable_categorica := stringr::str_wrap(as.character(!!variable_categorica), str_wrap),
-           !!variable_categorica := as.factor(!!variable_categorica),
-           !!variable_categorica := forcats::fct_reorder(!!variable_categorica, valor),
-           id = 1:n()) %>%
+    rename(valor = all_of(variable_numerica))
+  
+  if (rank == TRUE) {
+   p <- p %>%  
+     arrange(desc(valor)) %>%
+     slice(1:slice) %>% 
+     mutate(!!variable_categorica := stringr::str_trunc(as.character(!!variable_categorica), str_trunc),
+            !!variable_categorica := stringr::str_wrap(as.character(!!variable_categorica), str_wrap),
+            !!variable_categorica := as.factor(!!variable_categorica),
+            !!variable_categorica := forcats::fct_reorder(!!variable_categorica, valor))
+  }
+    p <- p %>% 
+    mutate(id = 1:n()) %>% 
     ggplot(aes(x=valor, y = !!variable_categorica)) +
     geom_col(fill = color_claro, width = 0.3, aes(alpha = id), show.legend = F) +
     geom_text(aes(label = paste0(" ", valor)), size = 5, family = "Dosis ExtraLight SemiBold", col = color_blanco, 
