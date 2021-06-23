@@ -1,12 +1,28 @@
+# Contexto ----
+
+# Se realiza un sistema de web scraping que pueda extraer información de los
+# productos disponibles en Lider, para calcular la canasta básica familiar y ver
+# como evoluciona en el tiempo
+
+
+# Librerias ----
+
 library(tidyverse)
 library(rvest)
+
+# Modelo
+
+# Se carga la pagina principal del Lider, para extraer:
+# Mundo (carnes, frutas, etc.)
+# Departamento (Dentro de carnes: vacuno, pollo, cerdo, etc.)
+# Categoría (Dentro de vacuno: deshuesado, al vacío, etc.)
 
 Pagina_Lider <- read_html("https://www.lider.cl/supermercado/")
 
 
-# Departamento  ----
+# Mundo  ----
 
-# Nombre del Mundo en el HTML (se utiliza para la base de datos)
+# Nombre del Mundo (como se les muestra a los usuarios)
 NOMBRE_MUNDO <- Pagina_Lider %>% 
   html_nodes(xpath = "//div[@class='department-list']/ul") %>% 
   html_text2()  %>% 
@@ -15,14 +31,17 @@ NOMBRE_MUNDO <- Pagina_Lider %>%
   str_split_fixed("\n",str_count(.,"\n")+1) %>% 
   str_trim()
 
-# Nombre del Mundo para los usuarios (se utiliza para moverse en el HTML)
+# Nombre del Mundo (como se utiliza dentro del HTML)
 mundo <- Pagina_Lider %>%
   html_nodes(xpath = "//div[@class='department-list']/ul/li/a") %>%
   html_attr('data-target') %>% 
   str_remove_all("#")
 
+
+# Departamento ----
+
+# Se crea un vector vacio donde se agregaran la lista de departamentos por cada mundo
 Departamento = character(0)
-# Nombre del departamento por mundo
 for(i in mundo){
   aux = character(0)
   niveles <- Pagina_Lider %>% 
@@ -38,12 +57,17 @@ for(i in mundo){
   Departamento[length(Departamento) +1] <- aux %>% list()
 }
 
+# Se crea un df, con el mundo y departamento
 df <- tibble(Codigo_mundo = mundo,
              Mundo = NOMBRE_MUNDO,
              Departamento = Departamento) %>% 
   mutate(n = lapply(Departamento,length) %>% unlist()) 
 
-# Nombre de la categoria por departamento
+# Categoría ----
+
+# Se debe crear una lista contenida dentro de otra lista
+# Esto debido a que para cada elemento de la lista de departamento, se crea la lista de categorias
+
 categorias = character(0)
 URL_CATEGORIA = character(0)
 for(i in 1:16){
@@ -78,10 +102,15 @@ for(i in 1:16){
   URL_CATEGORIA[length(URL_CATEGORIA) + 1] <- aux3 %>% list()
 }
 
+# procesamiento de las listas ----
+
+# Se añaden las listas contenidas dentro de otra lista al df
 df <- df %>%
   add_column(Categorias = categorias, URL_categorias = URL_CATEGORIA) %>%
   select(-n)
   
+
+# Se expanden el df, expandiendo las listas y se guarda en un df2
 df2 <- df %>% 
   unnest(cols = c(Departamento,Categorias,URL_categorias), keep_empty = TRUE) %>% 
   unnest(cols = c(Categorias,URL_categorias), keep_empty = TRUE) %>% 
@@ -93,24 +122,34 @@ df2 <- df %>%
              Precio_redondeado = character(nrow(.)),
              Enlace      = character(nrow(.)))
 
+# El resultado es un df de 515 categorías
 
-for(i in 139:nrow(df2)){
-  Sys.sleep(2)
-  # Se ingresa a la primera categoría del departamento
+
+# Productos ----
+
+# Proceso de extracción de información de los productos de cada categoría
+
+for(i in 1:nrow(df2)){
+  Sys.sleep(2) # Tiempo de espera para evitar bloqueo
+  
+  # Se selecciona la categoría i
   ENLACES <- df2$URL_categorias[i] %>% read_html()
   
-  # Se calcula el número de paginas de productos de dicha categoría
+  # Se calcula el número de productos para esa categoría
   N_Productos <- ENLACES %>% 
     html_node(xpath = "//small[@class = 'hidden-xs']") %>% 
     html_text2() %>% 
     str_remove_all('[:alpha:]') %>% 
     str_remove_all('[:punct:]') %>% 
     as.numeric() 
+  
+  # Se calcula el número de pagínas, suponiendo 80 productos por pag.
   N_Paginas <- ceiling(N_Productos/80)
   
-  # Se realiza el scraping de todas las paginas de una categoría del primer departamento
-  Sys.sleep(2)
+  # Se realiza el scraping de los productos de la categoría i
+  Sys.sleep(2) # tiempo de espera para evitar bloqueo
   
+  # Se genera un df que se llena con los productos de la categoría i
   df_aux <- tibble(Nombre      = character(0),
                    Descripción = character(0),
                    Atributo    = character(0),
@@ -118,7 +157,11 @@ for(i in 139:nrow(df2)){
                    Precio_redondeado = character(0),
                    Enlace      = character(0))
   
+  # Se salta la categoría si esta nos da NA, esto se debe a que algunas paginas del Lider
+  # Tienen error 500
   if(is.na(N_Paginas) == TRUE){next}
+  
+  # Se realiza el scraping por página
   for(j in 1:N_Paginas){
     if(N_Paginas == 1){
       Pagina <- paste0(df2$URL_categorias[i],"?N=&No=0&Nrpp=80",sep = "") %>% read_html()
@@ -158,6 +201,9 @@ for(i in 139:nrow(df2)){
       unique() %>% 
       paste0("https://www.lider.cl",.) 
     
+    # Si el largo de nombre y precio es distinto, se debe a que un producto no tiene señalado
+    # la información de precio, esto ocurre con productos descontinuados. Por lo cual se procede
+    # a identificarlo y eliminarlo de la muestra
     if(length(Nombre) != length(Precio)){
       
       id <- Pagina %>% 
@@ -181,6 +227,9 @@ for(i in 139:nrow(df2)){
       Enlace      <- Enlace[-id_eliminar]
     }
     
+    # Se asignan los productos de la página actual al df_aux y se itera el proceso con la
+    # siguiente pagina
+    
     df_aux <- df_aux %>% 
       add_row(Nombre      = Nombre,
               Descripción = Descripción,
@@ -192,6 +241,7 @@ for(i in 139:nrow(df2)){
     print(paste0("Pagina ",j," de ",N_Paginas," scrapeada", sep = ""))
   }
   
+  # Se asignan los productos de la categoría i al df final
   df2$Nombre[i]      <- df_aux$Nombre %>% list()
   df2$Descripción[i] <- df_aux$Descripción %>% list()
   df2$Atributo[i]    <- df_aux$Atributo %>% list()
@@ -202,6 +252,9 @@ for(i in 139:nrow(df2)){
   print(paste0("Termino de ejecución de la categoría número ",i," (504), Categoria: ",df2$Categorias[i],sep = ""))
 }
 
+# Se eliminan de la lista los productos que dieron error 500
+Lider <- df2 %>% 
+  unnest(cols = c(Nombre,Descripción,Atributo,Precio,Precio_redondeado,Enlace)) %>% 
+  filter(Nombre != "")
 
-
-
+save(Lider,file = "C:\\Users\\Diego Holiwis\\Documents\\GitHub\\dataemprende\\datos diego\\Web scraping - Lider\\Lider.Rdata")
