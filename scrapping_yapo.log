@@ -1,0 +1,33 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  'scrapping/yapo.cl/paginas/2021-06-25' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=2'
+
+Warning message:
+In dir.create(ruta) : 'scrapping/yapo.cl/paginas/2021-06-25' already exists
+Execution halted

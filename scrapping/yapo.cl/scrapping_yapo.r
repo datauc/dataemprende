@@ -2,6 +2,7 @@ library(dplyr)
 library(rvest)
 library(lubridate)
 
+cat("DEFINIENDO FUNCIONES...", fill=T)
 #descargar páginas ----
 #loop que genera todas las url de las categorías y páginas de resultados (50 publicaciones por página)
 
@@ -239,16 +240,40 @@ scrapping_yapo <- function(fecha = lubridate::today()) {
 #—----
 
 #descargar páginas nuevas
+cat("DESCARGANDO...", fill=T)
 descargar_yapo()
 
 #scrappear páginas descargadas
+cat("SCRAPPING...", fill=T)
 base_yapo <- scrapping_yapo()
 
 #guardar base con fecha
 save(base_yapo, file = paste0("scrapping/yapo.cl/bases/base_yapo_", lubridate::today(), ".rdata"))
 
-#integrar bases (!)
 
-#guardar última base sin fecha para cargar desde shiny
-#save(base_yapo, file = paste0("dataemprende_datos/scrapping_yapo.rdata"))
-#load(paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
+# integrar bases ----
+cat("INTEGRANDO BASES...", fill=T)
+
+archivos_y <- list.files("scrapping/yapo.cl/bases/")
+
+#crear lista
+bases_yapo <- list()
+
+#loop que carga todas las bases en una sola lista
+for (arch in archivos_y) {
+  bases_yapo[[arch]] <- get(load(paste0("scrapping/yapo.cl/bases/", arch)))
+}
+
+#convertir lista a data frame
+bases_yapo <- dplyr::bind_rows(bases_yapo) %>% 
+  distinct(producto, fecha, .keep_all = T)
+
+#guardar base unificada
+save(bases_yapo, file = "scrapping/yapo.cl/bases_yapo.rdata")
+
+#—----
+#procesar ----
+cat("PROCESANDO BASES...", fill=T)
+source("scrapping/yapo.cl/procesar_yapo.r", echo = T)
+
+
