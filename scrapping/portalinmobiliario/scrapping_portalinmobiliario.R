@@ -1,8 +1,12 @@
+setwd("~/Dataemprende/")
+
 library(dplyr)
 library(rvest)
+library(ggplot2)
 library(lubridate)
 library(stringr)
 
+cat("DEFINIENDO FUNCIONES...", fill=T)
 #función para descargar ----
 descargar_portalinmobiliario <- function(direccion, tipo = "departamentos", fecha = lubridate::today()) {
   ruta <- paste0("scrapping/portalinmobiliario/paginas/", fecha, "/")
@@ -111,6 +115,7 @@ scrapping_portalinmobiliario <- function(fecha = lubridate::today()) {
 #—----
 
 #descargar y scrappear ----
+cat("DESCARGANDO...", fill=T)
 #departamentos
 descargar_portalinmobiliario("https://www.portalinmobiliario.com/arriendo/departamento/tarapaca", "departamentos")
 
@@ -124,9 +129,12 @@ descargar_portalinmobiliario("https://www.portalinmobiliario.com/arriendo/oficin
 descargar_portalinmobiliario("https://www.portalinmobiliario.com/arriendo/comercial/tarapaca", "locales")
 
 #scrappear datos descargados
+cat("SCRAPPING...", fill=T)
 base_portal <- scrapping_portalinmobiliario()
 
 #recodificar
+cat("LIMPIANDO...", fill=T)
+
 base_portal <- base_portal %>% 
   mutate(tipo = recode(tipo, "departamentos" = "deptos"),
          tipo = stringr::str_to_sentence(tipo)) %>% 
@@ -149,9 +157,34 @@ base_portal <- base_portal %>%
          dormitorios_cat = forcats::fct_relevel(dormitorios_cat, "10+", after = Inf)) #ordenar
 
 #guardar
-"2021-06-18"
-#save(base_portal, file = paste0("scrapping/portalinmobiliario/bases/base_portal_", lubridate::today(), ".rdata"))
-save(base_portal, file = paste0("scrapping/portalinmobiliario/bases/base_portal_", "2021-06-18", ".rdata"))
+save(base_portal, file = paste0("scrapping/portalinmobiliario/bases/base_portal_", lubridate::today(), ".rdata"))
 
-#guardar última base sin fecha para cargar desde shiny
-save(base_portal, file = paste0("dataemprende_datos/scrapping_portal.rdata"))
+
+
+#—----
+# integrar bases ----
+cat("INTEGRANDO BASES...", fill=T)
+
+archivos_y <- list.files("scrapping/portalinmobiliario/bases/")
+
+#crear lista
+bases_portal <- list()
+
+#loop que carga todas las bases en una sola lista
+for (arch in archivos_y) {
+  bases_portal[[arch]] <- get(load(paste0("scrapping/portalinmobiliario/bases/", arch)))
+}
+
+#convertir lista a data frame
+base_portal <- dplyr::bind_rows(bases_portal) %>% 
+  distinct(subtitulo, ubicacion, .keep_all = T)
+
+#guardar base unificada
+save(base_portal, file = "scrapping/portalinmobiliario/bases_portal.rdata")
+save(base_portal, file = "dataemprende/scrapping_portal.rdata")
+#—----
+#procesar ----
+cat("PROCESANDO BASES...", fill=T)
+source("scrapping/yapo.cl/procesar_yapo.r", echo = T)
+
+

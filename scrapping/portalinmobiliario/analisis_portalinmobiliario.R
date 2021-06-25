@@ -4,35 +4,12 @@ library(ggplot2)
 
 load(paste0("scrapping/portalinmobiliario/bases/base_portal_", "2021-06-18", ".rdata"))
 
-#preprocesar ----
-
-base_portal <- base_portal %>% 
-  mutate(tipo = recode(tipo, "departamentos" = "deptos"),
-         tipo = stringr::str_to_sentence(tipo)) %>% 
-  #categorías de metros
-  mutate(metros = readr::parse_number(metros)) %>% 
-  mutate(metros_cat = cut_width(metros, 100, boundary = 0)) %>% #cortar en categorías
-  mutate(metros_cat = ifelse(metros > 500, "500+", as.character(metros_cat))) %>% #límite superior
-  mutate(metros_cate = metros_cat, #poner nombres a categorías
-         metros_cate = stringr::str_remove(metros_cate, "\\["),
-         metros_cate = stringr::str_remove(metros_cate, "\\]"),
-         metros_cate = stringr::str_remove(metros_cate, "\\("),
-         metros_cate = stringr::str_replace(metros_cate, ",", " a "),
-         metros_cate = paste(metros_cate, "m²"),
-         metros_cat = as.factor(metros_cate)) %>% 
-  select(-metros_cate) %>% 
-  #categorías de dormitorios
-  mutate(dormitorios_cat = case_when(dormitorios >= 10 ~ "10+", #límite superior
-                                     TRUE ~ as.character(dormitorios))) %>% 
-  mutate(dormitorios_cat = as.factor(dormitorios_cat),
-         dormitorios_cat = forcats::fct_relevel(dormitorios_cat, "10+", after = Inf)) #ordenar
-
-#compilar ----
-base_portal_procesada <- list("entera" = base_portal,
-                            "resumen" = base_yapo_resumen,
-                            "palabras" = base_yapo_palabras)
-
-save(base_portal_procesada, file = "dataemprende_datos/scrapping_portal.rdata")
+# #compilar ----
+# base_portal_procesada <- list("entera" = base_portal,
+#                             "resumen" = base_yapo_resumen,
+#                             "palabras" = base_yapo_palabras)
+# 
+# save(base_portal_procesada, file = "dataemprende_datos/scrapping_portal.rdata")
 #load("dataemprende_datos/scrapping_portal.rdata")
 
 
