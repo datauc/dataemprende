@@ -1068,7 +1068,7 @@ shinyServer(function(input, output, session) {
       return(p)
     }, res = 100)  
     
-    
+
     #horas del día ----
     output$yapo_horas_del_dia <- renderPlot({
       req(base_yapo_procesada$entera)

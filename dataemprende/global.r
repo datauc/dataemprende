@@ -90,7 +90,7 @@ color_medio_2 <- "#397196"
 colores_azules_3_grupos_2 <- c("#A8DADC", "#92D0D3", "#77C7CA", 
                                "#6BA0B5", "#4E9CB6", "#2D95B3", 
                                "#386D95", "#125E87")
-scales::show_col(colores_azules_3_grupos_2[c(1, 4, 6, 8)])
+#scales::show_col(colores_azules_3_grupos_2[c(1, 4, 6, 8)])
 
 #opciones ----
 

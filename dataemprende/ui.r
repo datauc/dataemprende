@@ -1,4 +1,4 @@
-#http://dataintelligence.cl/shiny/dataemprende_datos
+#http://dataintelligence.cl/shiny/dataemprende
 
 shinyUI(
   fluidPage(title = "DataEmprende Tarapacá", lang = "es",
