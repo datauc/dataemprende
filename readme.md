@@ -12,7 +12,7 @@ El archivo `importar y limpiar sii.r` permite descargar todos los datos estadís
 
 El archivo `precalcular sii.r` toma las bases que genera el archivo anterior, y calcula múltiples resúmenes de información que se guardan en una lista. El objetivo es resumir las bases de datos del SII y simplificar su información en varias bases más pequeñas y livianas. En la estrucura de este archivo se pueden calcular fácilmente la mayoría de los datos relevantes que entregan las bases del SII, efectivamente traduciendo las decenas de bases enormes y desordenadas del SII en dataframes pequeños y digeribles.
 
-Posteriormente, estos datos precalculados, entre otros, alimentan un visualizador programado en Shiny que presenta la información de manera atractiva y eficiente. El visualizador (en constante desarrollo) puede verse en el siguiente enlace: http://dataintelligence.cl/shiny/dataemprende_datos
+Posteriormente, estos datos precalculados, entre otros, alimentan un visualizador programado en Shiny que presenta la información de manera atractiva y eficiente. El visualizador (en constante desarrollo) puede verse en el siguiente enlace: http://dataintelligence.cl/shiny/dataemprende
 
 ## Dependencias
 
