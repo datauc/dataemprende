@@ -1,3 +1,5 @@
+setwd("~/Dataemprende/")
+
 library(dplyr)
 library(rvest)
 library(lubridate)
