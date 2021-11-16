@@ -298,7 +298,7 @@ espaciador <- function() {
             br(),br(),
             br(),br(),
             br(),br(),
-            br(),br(),
+            #br(),br(),
             p(" "))
   return(y)
 }

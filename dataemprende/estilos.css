@@ -33,6 +33,7 @@ h2 {
   font-size: 140%;
 }
 
+
 body {
   font-family: 'Montserrat', cursive;
   font-weight: 300;
@@ -153,3 +154,58 @@ body {
   background-color: #1D3557; 
   color: #F1FAEE
 } 
+
+
+
+
+
+
+
+
+
+
+/* color normal botoneras */
+.btn.radiobtn.btn-default, 
+.selectize-input.items,
+.btn
+{ background: #2D668E; 
+  border-color: #2D668E; }
+/*
+99006C
+/* color de realce botoneras */
+.btn.radiobtn.btn-default.active, 
+.btn.radiobtn.btn-default:hover, 
+.selectize-input.items:hover,
+.selectize-dropdown .active,
+.btn:hover,
+.btn.active
+{ background: #A8DADC !important; 
+  border-color: #A8DADC !important; }
+/*293c55  
+
+
+
+  /* color de texto botoneras */ 
+  .btn.radiobtn.btn-default, 
+  .btn.radiobtn.btn-default.active, 
+  .btn.radiobtn.btn-default:hover, 
+  .btn
+  { color: white !important; }
+  
+  
+  
+  
+      /*links*/
+ .enlace {
+   /*font-family: Roboto;*/ 
+   /*font-weight:400, */
+   font-family: 'Dosis', sans-serif;;
+   font-weight: 300;
+   font-size: 20px;
+   color: #A8DADC !important;
+   text-decoration: underline;
+ }
+ 
+ .enlace:hover {
+   color: #FFFFFF !important;
+ }
