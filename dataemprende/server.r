@@ -1232,6 +1232,31 @@ shinyServer(function(input, output, session) {
     }, res = 100)  
     
     
+    #—----
+    
+    #DESCARGAS ----
+    
+    output$descarga_taller <- downloadHandler(
+      filename = "FondosConcursables.pdf",
+      content = function(file) {
+        file.copy("www/descargas/FondosConcursables.pdf", file)
+      }, 
+      contentType = "application/pdf")
+    
+    output$descarga_cuadro_regimen <- downloadHandler(
+      filename = "CuadroComparativodelRegimenGeneralySimplificado.pdf",
+      content = function(file) {
+        file.copy("www/descargas/CuadroComparativodelRegimenGeneralySimplificado.pdf", file)
+      }, 
+      contentType = "application/pdf")
+    
+    output$descarga_cuadro_empresas <- downloadHandler(
+      filename = "CuadroComparativodeEmpresasySociedades.pdf",
+      content = function(file) {
+        file.copy("www/descargas/CuadroComparativodeEmpresasySociedades.pdf", file)
+      }, 
+      contentType = "application/pdf")
+    
 })
 
 #Bastián Olea Herrera (@bastimapache)

@@ -11,20 +11,29 @@ shinyUI(
               column(12, class = "fondo",
                      style = "padding-bottom: 30px;",
                      
-                     br(),br(),
+                     img(src = "logos.png",
+                       height = 90, 
+                       style = "padding: 5px; margin-left: -15px;"
+                     ),
+                     
+                     br(),#br(),
                      
                      div(
                        h1("DataEmprende", style = "display:inline-block;"),
-                       div("Tarapacá", class = "h1b", style = "display:inline-block;")
-                     ) %>% 
+                       div("Tarapacá", class = "h1b", style = "display:inline-block;")) %>% 
                        aos(animation = "fade-down", duration = "2000"),
                      
-                     br(),br(),
+                     br(),
                      
                      p("Para asesorarte, necesitamos que respondas algunas preguntas...") %>% 
                        aos(animation = "fade-down", duration = "2000", delay = 800),
                      
-                     espaciador(),
+                     #espaciador(),
+                     #espaciador_interior(),
+                     br(), br(), br(), 
+                     
+                     p("Proyecto financiado por el Gobierno Regional de Tarapacá a tarvés del Fondo de Innovación para la Competitividad (FIC)",
+                       style = "font-size: 75%; opacity: 0.6;")
               ),
               
             ),
@@ -1086,40 +1095,60 @@ shinyUI(
                                                            
                                                            #descarga 1
                                                            
-                                                           h3("Estudio 1") %>% 
+                                                           h3("Taller descargable de Fondos Concursables") %>% 
                                                              aos(animation = "fade-down", delay=0),
                                                            br(),
                                                            
-                                                           p("Este estudio trata sobre...") %>% 
-                                                             aos(animation = "fade-down", delay = 0),
-                                                           br(),
+                                                           # p("Este estudio trata sobre...") %>% 
+                                                           #   aos(animation = "fade-down", delay = 0),
+                                                           # br(),
                                                            
-                                                           downloadButton(outputId = "descarga_pais1", 
-                                                                          label = HTML("&nbsp;&nbsp;Descargar estudio de empresas"), 
+                                                           downloadButton(outputId = "descarga_taller", 
+                                                                          label = HTML("&nbsp;&nbsp;Descargar estudio"), 
                                                                           icon = icon("file-download"),
                                                                           style = "text-decoration: none !important;") %>% 
                                                              aos(animation = "fade-down", delay=0), 
+                                                           
+
+                                                           espaciador_interior(),
+                                                           
+                                                           
+                                                           #descarga 2
+                                                           h3("Cuadro comparativo del régimen general y simplificado") %>% 
+                                                             aos(animation = "fade-down", delay=0),
+                                                           br(),
+                                                           
+                                                           # p("Este estudio trata sobre...") %>% 
+                                                           #   aos(animation = "fade-down", delay = 0),
+                                                           # br(),
+                                                           
+                                                           downloadButton(outputId = "descarga_cuadro_regimen", 
+                                                                          label = HTML("&nbsp;&nbsp;Descargar estudio"), 
+                                                                          icon = icon("file-download"),
+                                                                          style = "text-decoration: none !important;") %>% 
+                                                             aos(animation = "fade-down", delay=0), 
+                                                           #CuadroComparativodelRegimenGeneralySimplificado.pdf
+                                                           
                                                            
                                                            
                                                            espaciador_interior(),
                                                            
                                                            
-                                                           #descarga 2
-                                                           
-                                                           
-                                                           h3("Descarga de datos y estudios") %>% 
+                                                           #descarga 3
+                                                           h3("Cuadro Comparativo de Empresas y Sociedades") %>% 
                                                              aos(animation = "fade-down", delay=0),
                                                            br(),
                                                            
-                                                           p("Este estudio trata sobre...") %>% 
-                                                             aos(animation = "fade-down", delay = 0),
-                                                           br(),
+                                                           # p("Este estudio trata sobre...") %>% 
+                                                           #   aos(animation = "fade-down", delay = 0),
+                                                           # br(),
                                                            
-                                                           downloadButton(outputId = "descarga_pais2", 
-                                                                          label = HTML("&nbsp;&nbsp;Descargar otro estudio"), 
+                                                           downloadButton(outputId = "descarga_cuadro_empresas", 
+                                                                          label = HTML("&nbsp;&nbsp;Descargar estudio"), 
                                                                           icon = icon("file-download"),
                                                                           style = "text-decoration: none !important;") %>% 
                                                              aos(animation = "fade-down", delay=0), 
+                                                           #CuadroComparativodeEmpresasySociedades.pdf
                                                            
                                                            
                                                            espaciador()
@@ -1137,15 +1166,30 @@ shinyUI(
                                                            br(),
                                                            
                                                            
-                                                           p("Enlaces a nuestros proyectos..."),
+                                                           p("Visita estos links y conoce nuestros productos y actividades, de los que puedes participar gratuitamente."),
                                                            br(),br(),
                                                            
                                                            
-                                                           tags$a(href = "www.google.com",
-                                                                  "Proyecto Tarapatech",
-                                                                  target="_blank",
-                                                                  class = "enlace"),
-                                                                  #style = paste0("color:", color_claro, ";")),
+                                                           tags$a(href = "https://www.tarapaca.mat.uc.cl/", "Tarapacá UC",
+                                                                  target="_blank", class = "enlace", style="display:inline"),
+                                                           p("Visita nuestra página y conoce todos los proyectos que hemos ejecutado."),
+                                                           br(),
+                                                           
+                                                           tags$a(href = "https://www.acamedia.cl/", "Acamedia",
+                                                                  target="_blank", class = "enlace", style="display:inline"),
+                                                           p("Plataforma de capacitación, producto principal de nuestro proyecto TarapaTech, donde podrás acceder a videos tutoriales que serán liberados por temporadas."),
+                                                           br(),
+                                                           
+                                                           tags$a(href = "https://www.galeriatarapatech.cl/", "Galería Tarapatech",
+                                                                  target="_blank", class = "enlace", style="display:inline"),
+                                                           p("Conoce Galería TarapaTech, plataforma de difusión de las pymes y emprendimientos de Tarapacá, puedes inscribirte gratuitamente y pontenciarte con nosotros."),
+                                                           br(),
+                                                           
+                                                           tags$a(href = "https://www.tarapatech.cl/", "Tarapatech",
+                                                                  target="_blank", class = "enlace", style="display:inline"),
+                                                           p("Conoce la ruta que hemos desarrollado para potenciar los emprendimientos y pymes de Tarapacá."),
+                                                           br(),
+                                                           
                                                            
                                                            espaciador()
                                                            

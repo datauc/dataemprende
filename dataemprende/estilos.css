@@ -43,12 +43,14 @@ body {
 
 /*fondo principal con el mapa en gif*/
 .fondo {
-  background-image: url("anim3_comp.gif"); /* The image used */
+  background-image: url("anim4_comp.gif"); /* The image used */
   background-color: #2D668E;/*#1D3557; /* Used if the image is unavailable */
   /*opacity: 0.2;*/
   /*height: 200px; /* You must set a specified height */
+  width: 100%;
   background-position: 100% 0%; /*top-right; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
+  /*background-size: cover;*/
   /*background-size: cover;  Resize the background image to cover the entire container */
 }
 

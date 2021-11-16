@@ -4,7 +4,8 @@ library(dplyr)
 library(ggplot2)
 library(gganimate)
 
-load("dataemprende_datos/datos_precalculados.rdata")
+#load("dataemprende_datos/datos_precalculados.rdata")
+load("dataemprende/datos_precalculados.rdata")
 
 load("datos_sii.rdata")
 
@@ -72,23 +73,28 @@ degradado <- colorRampPalette(c("#2D668E", "#457B9D"))
 
 terreno <- degradado(3)[2]
 
+glimpse(mapa_regional)
+
+min(mapa_regional$tasa)
+
 #graficar
 p <- mapa_regional %>%
+  mutate(tasa = replace(tasa, tasa==0, NA)) %>% 
   ggplot(aes(geometry = geometry)) +
   geom_sf(data = mapa_regional %>% select(geometry:rubro) %>% distinct(), 
-          col = fondo, fill = terreno, size = 0.3) +
+          col = fondo, fill = terreno, size = 0.8) +
   geom_point(aes(size = tasa, col = top,
                  group = interaction(tasa, top)),
-                         alpha = 0.6,
+                         alpha = 0.8,
                          stat = "sf_coordinates", show.legend=F) +
   scale_color_manual(values = c("#F1FAEE", "#A8DADC")) +
-  scale_size_continuous(range = c(0, 30)) +
-  #coord_sf(expand = T) +
+  scale_size_continuous(range = c(0, 60)) +
+  coord_sf(clip = "off") +
   theme_void(base_size = 15) +
   theme(plot.background = element_rect(fill = fondo, color = fondo))
 
 
-
+#p
 #el fondo oscuro es #2D668E
 #el grupo es lo que define la animación
 #si se pone data en uan capa, se excluye de la animación
@@ -96,8 +102,8 @@ p <- mapa_regional %>%
 anim <- p +
   #transition_manual(rubro) +
   transition_states(rubro,
-                   transition_length = 3,
-                   state_length = 2) +
+                   transition_length = 2,
+                   state_length = 3) +
   enter_grow() +
   exit_shrink() +
   #ggtitle("{rubro}") +
@@ -106,8 +112,14 @@ anim <- p +
 anim
 
 anim_save(animation = anim, 
-          filename = "anim.gif", 
-          fps = 24,
+          renderer = gifski_renderer(),
+          #filename = "anim_4.gif", 
+          filename = "dataemprende/www/anim4.gif", 
+          fps = 30,
           bg = fondo,
           duration = 20,
           rewind = T)
+
+
+#luego compromir gif:
+#gifsicle -O3 ~/Dataemprende/dataemprende/www/anim4.gif -o ~/Dataemprende/dataemprende/www/anim4_comp.gif --colors 12

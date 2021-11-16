@@ -294,10 +294,10 @@ cifra <- function(x) {
 
 espaciador <- function() {
   
-  y <- list(br(),br(),
-            br(),br(),
-            br(),br(),
-            br(),br(),
+  y <- list(br(), br(),
+            br(), br(),
+            br(), br(),
+            #br(), #br(),
             #br(),br(),
             p(" "))
   return(y)
@@ -305,9 +305,9 @@ espaciador <- function() {
 
 espaciador_interior <- function() {
   
-  y <- list(br(),br(),
-            br(),br(),
-            br(),
+  y <- list(br(), br(),
+            br(), br(),
+            #br(),
             p(" "))
   return(y)
 }
