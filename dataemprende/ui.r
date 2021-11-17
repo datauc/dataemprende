@@ -11,8 +11,8 @@ shinyUI(
               column(12, class = "fondo",
                      style = "padding-bottom: 30px;",
                      
-                     img(src = "logos.png",
-                       height = 90, 
+                     img(src = "logos.svg",
+                       height = 120, 
                        style = "padding: 5px; margin-left: -15px;"
                      ),
                      
@@ -32,8 +32,8 @@ shinyUI(
                      #espaciador_interior(),
                      br(), br(), br(), 
                      
-                     p("Proyecto financiado por el Gobierno Regional de Tarapacá a tarvés del Fondo de Innovación para la Competitividad (FIC)",
-                       style = "font-size: 75%; opacity: 0.6;")
+                     p('“Proyecto financiado por el Gobierno Regional de Tarapacá a tarvés del Fondo de Innovación para la Competitividad (FIC)”',
+                       style = "font-size: 85%; opacity: 0.6;")
               ),
               
             ),
@@ -1212,38 +1212,39 @@ shinyUI(
                                     #"margin-bottom: -20px;"
                      ),
                      
-                     p("Plataforma desarrollada por el equipo DATA UC, usando R Shiny"),
+                     #p("Plataforma desarrollada por el equipo DATA UC, usando R Shiny"),
+                     p("Investigación y desarrollo - equipo DATA UC y TARAPACÁ UC"),
                      
-                     div(style = "display: inline-block;", 
-                         em("Desarrollo: ")
-                     ),
-                     div(style = "display: inline-block;",
-                         tags$a(href = "http://bastian.olea.biz",
-                                "Bastián Olea Herrera,",
-                                target="_blank",
-                                style = paste0("color:", color_claro, ";")
-                         ),
-                     ),
-                     
-                     br(),
-                     
-                     div(style = "display: inline-block;", 
-                         em("Dirección: ")),
-                     div(style = "display: inline-block;",
-                         tags$a(href = "https://www.linkedin.com/in/alexis-alvear-leyton/",
-                                "Alexis Alvear Leyton",
-                                target="_blank",
-                                style = paste0("color:", color_claro, ";")
-                         ),
-                     ),
-                     br(), br(),
-                     
-                     div(tags$a(href = "https://github.com/datauc/dataemprende",
-                                "Código de fuente disponible en GitHub",
-                                target="_blank",
-                                style = paste0("color:", color_claro, ";")
-                     ),
-                     ),
+                     # div(style = "display: inline-block;", 
+                     #     em("Desarrollo: ")
+                     # ),
+                     # div(style = "display: inline-block;",
+                     #     tags$a(href = "http://bastian.olea.biz",
+                     #            "Bastián Olea Herrera,",
+                     #            target="_blank",
+                     #            style = paste0("color:", color_claro, ";")
+                     #     ),
+                     # ),
+                     # 
+                     # br(),
+                     # 
+                     # div(style = "display: inline-block;", 
+                     #     em("Dirección: ")),
+                     # div(style = "display: inline-block;",
+                     #     tags$a(href = "https://www.linkedin.com/in/alexis-alvear-leyton/",
+                     #            "Alexis Alvear Leyton",
+                     #            target="_blank",
+                     #            style = paste0("color:", color_claro, ";")
+                     #     ),
+                     # ),
+                     # br(), br(),
+                     # 
+                     # div(tags$a(href = "https://github.com/datauc/dataemprende",
+                     #            "Código de fuente disponible en GitHub",
+                     #            target="_blank",
+                     #            style = paste0("color:", color_claro, ";")
+                     # ),
+                     # ),
                      
                      br(),
                      

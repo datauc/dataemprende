@@ -62,7 +62,7 @@ mapa_regional <- chilemapas::mapa_comunas %>%
   rename(comuna = nombre_comuna) %>%
   mutate(comuna = recode(comuna,
                          "Camina"="Camiña")) %>%
-  #datos
+  #anexarle los datos al mapa
   left_join(datos_mapa) %>%
   filter(codigo_region=="01")
 
