@@ -87,7 +87,7 @@ descargar_yapo <- function(paginas = 1:10, espera = 1.5, fecha = lubridate::toda
 
 scrapping_yapo <- function(fecha = lubridate::today()) {
   fecha_a <- as.character(fecha)
-
+  
   #lista de archivos
   ruta_scrapping <- paste0("/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/", fecha_a, "/")
   archivos_s <- list.files(ruta_scrapping)
@@ -162,83 +162,90 @@ scrapping_yapo <- function(fecha = lubridate::today()) {
     
     base_yapo_list[[archivo]] <- resultado
     cat("OK ", archivo, fill=T) 
-    
-    #terminar loop: 
-    if(archivo == max(archivos_s)) { 
-      
-      #transformar lista a tibble 
-      cat("convirtiendo lista...", fill=T) 
-      base_yapo <- bind_rows(base_yapo_list) 
-      
-      #ordenar categorías
-      base_yapo <- base_yapo %>% mutate(categoria = recode(
-        categoria,
-        "articulos-del-hogar" = "Artículos del hogar",
-        "bolsos-bisuteria-accesorios" = "Bolsos y accesorios",
-        "celulares" = "Celulares",
-        "computadores" = "Computadores",
-        "jardin_herramientas" = "Jardín y herramientas",
-        "moda-vestuario" = "Moda y vestuario",
-        "muebles" = "Muebles",
-        "salud-belleza" = "Salud y belleza",
-        "electrodomesticos" = "Electrodomésticos",
-        "vestuario-futura-mama-ninos" = "Vestuario maternidad e infantil",
-        "calzado" = "Calzado",
-        "consolas_videojuegos" = "Consolas y videojuegos",
-        "hobbies_outdoor" = "Hobbies y outdoor",
-        "servicios" = "Servicios",
-        "television_camaras" = "Televisión y cámaras",
-        "coches-articulos-infantiles" = "Artículos infantiles",
-        "deportes_gimnasia" = "Deportes",
-        "juguetes" = "Juguetes",
-        "animales_accesorios" = "Mascotas y accesorios",
-        "arte_antiguedades_colecciones" = "Arte y antiguedades",
-        "libros_revistas" = "Libros y revistas",
-        "otros_productos" = "Otros productos",
-        "bicicletas_ciclismo" = "Ciclismo",
-        "musica_peliculas" = "Música y películas",
-        "instrumentos_musicales" = "Instrumentos musicales")) %>% 
-        #ordenar factor de categoría
-        mutate(categoria = as.factor(categoria),
-               categoria = forcats::fct_relevel(categoria, categorias))
-      
-      #formatear fechas y hora
-      cat("convirtiendo fecha y hora...", fill=T) 
-      base_yapo <- base_yapo %>% 
-        #detectar ayer/hoy de acuerdo a la fecha del scrapping
-        mutate(fecha_f = case_when(fecha == "Hoy" ~ lubridate::ymd(fecha_a),
-                                   fecha == "Ayer" ~ lubridate::ymd(fecha_a) - lubridate::days(1)),
-               #detectar meses
-               mes = case_when(stringr::str_detect(fecha, "Ene") ~ 01,
-                               stringr::str_detect(fecha, "Feb") ~ 02,
-                               stringr::str_detect(fecha, "Mar") ~ 03,
-                               stringr::str_detect(fecha, "Abr") ~ 04,
-                               stringr::str_detect(fecha, "May") ~ 05,
-                               stringr::str_detect(fecha, "Jun") ~ 06,
-                               stringr::str_detect(fecha, "Jul") ~ 07,
-                               stringr::str_detect(fecha, "Ago") ~ 08,
-                               stringr::str_detect(fecha, "Sep") ~ 09,
-                               stringr::str_detect(fecha, "Oct") ~ 10,
-                               stringr::str_detect(fecha, "Nov") ~ 11,
-                               stringr::str_detect(fecha, "Dic") ~ 12),
-               #detectar días
-               dia = readr::parse_number(as.character(fecha))) %>% 
-        #armar fechas
-        mutate(fecha_p = lubridate::ymd(paste(2021, mes, dia, sep="-"))) %>% 
-        #unir columnas de hoy/ayer con fechas armadas
-        mutate(fecha = coalesce(fecha_p, fecha_f)) %>%
-        #limpiar
-        select(-mes, -dia, -fecha_p, -fecha_f) %>% 
-        #corrección si la fecha es superior al día de scrapping, entonces sería 2020 y no 2021
-        mutate(fecha = case_when(fecha > lubridate::ymd(fecha_a) ~ fecha - years(1),
-                                 TRUE ~ fecha)) %>% 
-        #crear columna con fecha+hora y otra con sólo hora
-        mutate(fecha_hora = lubridate::parse_date_time(paste(fecha, hora), "%y-%m-%d %H:%M"),
-               hora = hms::as_hms(fecha_hora)) 
-    }
   }
   
-  return(base_yapo)
+  return(base_yapo_list)
+}
+
+
+#ultimo paso ----
+scrapping_yapo_terminar <- function(data) {
+  #terminar loop: 
+  #if(archivo == max(archivos_s)) { 
+    
+    #transformar lista a tibble 
+    cat("convirtiendo lista...", fill=T) 
+    #base_yapo_1 <- bind_rows(base_yapo_list) 
+  base_yapo_1 <- bind_rows(data) 
+    
+    #ordenar categorías
+    base_yapo_2 <- base_yapo_1 %>% mutate(categoria = recode(
+      categoria,
+      "articulos-del-hogar" = "Artículos del hogar",
+      "bolsos-bisuteria-accesorios" = "Bolsos y accesorios",
+      "celulares" = "Celulares",
+      "computadores" = "Computadores",
+      "jardin_herramientas" = "Jardín y herramientas",
+      "moda-vestuario" = "Moda y vestuario",
+      "muebles" = "Muebles",
+      "salud-belleza" = "Salud y belleza",
+      "electrodomesticos" = "Electrodomésticos",
+      "vestuario-futura-mama-ninos" = "Vestuario maternidad e infantil",
+      "calzado" = "Calzado",
+      "consolas_videojuegos" = "Consolas y videojuegos",
+      "hobbies_outdoor" = "Hobbies y outdoor",
+      "servicios" = "Servicios",
+      "television_camaras" = "Televisión y cámaras",
+      "coches-articulos-infantiles" = "Artículos infantiles",
+      "deportes_gimnasia" = "Deportes",
+      "juguetes" = "Juguetes",
+      "animales_accesorios" = "Mascotas y accesorios",
+      "arte_antiguedades_colecciones" = "Arte y antiguedades",
+      "libros_revistas" = "Libros y revistas",
+      "otros_productos" = "Otros productos",
+      "bicicletas_ciclismo" = "Ciclismo",
+      "musica_peliculas" = "Música y películas",
+      "instrumentos_musicales" = "Instrumentos musicales")) %>% 
+      #ordenar factor de categoría
+      mutate(categoria = as.factor(categoria),
+             categoria = forcats::fct_relevel(categoria, categorias))
+    
+    #formatear fechas y hora
+    cat("convirtiendo fecha y hora...", fill=T) 
+    base_yapo_3 <- base_yapo_2 %>% 
+      #detectar ayer/hoy de acuerdo a la fecha del scrapping
+      mutate(fecha_f = case_when(fecha == "Hoy" ~ lubridate::ymd(fecha_a),
+                                 fecha == "Ayer" ~ lubridate::ymd(fecha_a) - lubridate::days(1)),
+             #detectar meses
+             mes = case_when(stringr::str_detect(fecha, "Ene") ~ 01,
+                             stringr::str_detect(fecha, "Feb") ~ 02,
+                             stringr::str_detect(fecha, "Mar") ~ 03,
+                             stringr::str_detect(fecha, "Abr") ~ 04,
+                             stringr::str_detect(fecha, "May") ~ 05,
+                             stringr::str_detect(fecha, "Jun") ~ 06,
+                             stringr::str_detect(fecha, "Jul") ~ 07,
+                             stringr::str_detect(fecha, "Ago") ~ 08,
+                             stringr::str_detect(fecha, "Sep") ~ 09,
+                             stringr::str_detect(fecha, "Oct") ~ 10,
+                             stringr::str_detect(fecha, "Nov") ~ 11,
+                             stringr::str_detect(fecha, "Dic") ~ 12),
+             #detectar días
+             dia = readr::parse_number(as.character(fecha))) %>% 
+      #armar fechas
+      mutate(fecha_p = lubridate::ymd(paste(2021, mes, dia, sep="-"))) %>% 
+      #unir columnas de hoy/ayer con fechas armadas
+      mutate(fecha = coalesce(fecha_p, fecha_f)) %>%
+      #limpiar
+      select(-mes, -dia, -fecha_p, -fecha_f) %>% 
+      #corrección si la fecha es superior al día de scrapping, entonces sería 2020 y no 2021
+      mutate(fecha = case_when(fecha > lubridate::ymd(fecha_a) ~ fecha - years(1),
+                               TRUE ~ fecha)) %>% 
+      #crear columna con fecha+hora y otra con sólo hora
+      mutate(fecha_hora = lubridate::parse_date_time(paste(fecha, hora), "%y-%m-%d %H:%M"),
+             hora = hms::as_hms(fecha_hora)) 
+
+    base_yapo <- base_yapo_3
+    return(base_yapo) 
 }
 
 #—----
@@ -249,7 +256,9 @@ descargar_yapo()
 
 #scrappear páginas descargadas
 cat("SCRAPPING...", fill=T)
-base_yapo <- scrapping_yapo()
+base_yapo_list <- scrapping_yapo()
+
+base_yapo <- scrapping_yapo_terminar(base_yapo_list)
 
 #guardar base con fecha
 save(base_yapo, file = paste0("/mnt/volumen/Dataemprende/scrapping/yapo.cl/bases/base_yapo_", lubridate::today(), ".rdata"))

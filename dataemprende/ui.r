@@ -11,29 +11,33 @@ shinyUI(
               column(12, class = "fondo",
                      style = "padding-bottom: 30px;",
                      
+                     div(
                      img(src = "logos.svg",
                        height = 120, 
-                       style = "padding: 5px; margin-left: -15px;"
-                     ),
-                     
-                     br(),#br(),
-                     
-                     div(
-                       h1("DataEmprende", style = "display:inline-block;"),
-                       div("Tarapacá", class = "h1b", style = "display:inline-block;")) %>% 
-                       aos(animation = "fade-down", duration = "2000"),
+                       style = "padding: 5px; margin-left: -15px;"), #%>% 
+                       #aos(animation = "fade-down", duration = "1000"),
                      
                      br(),
                      
-                     p("Para asesorarte, necesitamos que respondas algunas preguntas...") %>% 
-                       aos(animation = "fade-down", duration = "2000", delay = 800),
+                     div(
+                       h1("DataEmprende", style = "display:inline-block;"),
+                       div("Tarapacá", class = "h1b", style = "display:inline-block;")), #%>% 
+                       #aos(animation = "fade-down", duration = "2000", delay = 800),
+                     
+                     br(),
+                     
+                     p("Para asesorarte, necesitamos que respondas algunas preguntas..."), #%>% 
+                       #aos(animation = "fade-down"),
                      
                      #espaciador(),
                      #espaciador_interior(),
                      br(), br(), br(), 
                      
                      p('“Proyecto financiado por el Gobierno Regional de Tarapacá a tarvés del Fondo de Innovación para la Competitividad (FIC)”',
-                       style = "font-size: 85%; opacity: 0.6;")
+                       style = "font-size: 85%; opacity: 0.6;"), #%>% 
+                       #aos(animation = "fade-down", duration = "2000", delay = 1600),
+                     ) %>% 
+                       aos(animation = "fade-down", duration = "2000"),
               ),
               
             ),
@@ -44,13 +48,18 @@ shinyUI(
             fluidRow(
               #sidebar ----
               column(4, #columna del sidebar, lado izquierdo
-                     style = paste0("background-color: ", color_medio_2, ";",
-                                    "margin-top: 0px;"), #para que se pegue al header
+                     style = glue::glue("background-color: {color_medio_2}; 
+                                        margin-top: 0px;"), #para que se pegue al header
+                     
+                     
+                     desliza_para_continuar(),
                      
                      espaciador(),
                      
                      #div con los tres selectores
                      div(id = "selectores",
+                         #class = "fade_in",
+                         
                          #input$comuna
                          selectInput(inputId = "comuna", 
                                      label = "Comuna donde se ubica su negocio o emprendimiento", 
@@ -75,7 +84,7 @@ shinyUI(
                                           em("Por favor, rellene todos los campos")
                          )
                      ) %>% 
-                       aos(animation = "fade-down", duration = "2000", delay = 0), #animación selectores
+                       aos(animation = "fade-down", duration = "2000", delay = 400), #animación selectores
                      
                      #cuadro con degradado debajo de los selectores
                      div(

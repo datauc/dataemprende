@@ -7,6 +7,7 @@ library(lubridate)
 library(stringr)
 
 cat("DEFINIENDO FUNCIONES...", fill=T)
+
 #función para descargar ----
 descargar_portalinmobiliario <- function(direccion, tipo = "departamentos", fecha = lubridate::today()) {
   tiempo_inicio <- Sys.time()
@@ -185,9 +186,11 @@ base_portal <- dplyr::bind_rows(bases_portal) %>%
 #guardar base unificada
 save(base_portal, file = "/mnt/volumen/Dataemprende/scrapping/portalinmobiliario/bases_portal.rdata")
 save(base_portal, file = "dataemprende/scrapping_portal.rdata")
+
 #—----
+
 #procesar ----
-cat("PROCESANDO BASES...", fill=T)
+#cat("PROCESANDO BASES...", fill=T)
 #source("scrapping/procesar_yapo.r", echo = T)
 
 

@@ -211,3 +211,31 @@ body {
  .enlace:hover {
    color: #FFFFFF !important;
  }
+ 
+ 
+/* ANIMACIONES */
+
+.fade_in_out { 
+    animation: fadeinout 4s linear forwards; /*forwards hace que se mantenga así*/ 
+    animation-duration: 6s; /* tiempo total de la animación */
+    animation-delay: 2s; /*tiempo antes de empezar animación*/
+    opacity: 0; /*que empiece invisible*/
+}
+@keyframes fadeinout {
+  0%  { opacity: 0; } /* que empiece y termine en 0 */
+  25% { opacity: 1; }
+  75% { opacity: 1; }
+  100%{ opacity: 0; } /* que empiece y termine en 0 */
+}
+
+
+.fade_in { 
+    animation: fadein 3s linear forwards; /*forwards hace que se mantenga así*/ 
+    animation-duration: 3s; /* tiempo total de la animación */
+    animation-delay: 1s; /*tiempo antes de empezar animación*/
+    opacity: 0; /*que empiece invisible*/
+}
+@keyframes fadein {
+  0%  { opacity: 0; } 
+  100%{ opacity: 1; } /* solo fade in */
+}

@@ -40244,3 +40244,2013 @@ In addition: Warning messages:
 SCRAPPING...
 Error in scrapping_yapo() : object 'base_yapo' not found
 Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=1'
+In addition: Warning message:
+In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/computadores?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/celulares?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/consolas_videojuegos?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/television_camaras?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/muebles?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/electrodomesticos?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/jardin_herramientas?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/articulos-del-hogar?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/moda-vestuario?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bolsos-bisuteria-accesorios?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/salud-belleza?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/calzado?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/vestuario-futura-mama-ninos?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/juguetes?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/coches-articulos-infantiles?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/animales_accesorios?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/deportes_gimnasia?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/bicicletas_ciclismo?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/hobbies_outdoor?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/instrumentos_musicales?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/musica_peliculas?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/libros_revistas?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/arte_antiguedades_colecciones?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/servicios?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=1'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=1'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=1': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=2'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=2'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=2': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=3'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=3'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=3': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=4'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=4'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=4': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=5'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=5'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=5': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=6'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=6'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=6': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=7'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=7'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=7': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=8'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=8'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=8': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=9'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=9'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=9': HTTP status was '504 Gateway Timeout'
+trying URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=10'
+Error in download.file(url, destfile = paste0(ruta, archivo), quiet = F) : 
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=10'
+In addition: Warning messages:
+1: In dir.create(ruta) :
+  '/mnt/volumen/Dataemprende/scrapping/yapo.cl/paginas/2021-11-19' already exists
+2: In download.file(url, destfile = paste0(ruta, archivo), quiet = F) :
+  cannot open URL 'https://www.yapo.cl/tarapaca/otros_productos?ca=2_s&o=10': HTTP status was '504 Gateway Timeout'
+SCRAPPING...
+Error in scrapping_yapo() : object 'base_yapo' not found
+Execution halted

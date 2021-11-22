@@ -4,6 +4,7 @@ library(ggplot2)
 library(tidytext)
 library(lubridate)
 
+setwd("~/Dataemprende/")
 #fecha_s <- "11-jun-2021"
 #fecha_a <- "2021-06-11"
 #load(paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))

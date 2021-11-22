@@ -312,6 +312,16 @@ espaciador_interior <- function() {
   return(y)
 }
 
+desliza_para_continuar <- function() {
+ y <- div(style = glue::glue("color: {color_claro};
+                             text-align: center;"),
+       class = "fade_in_out", #clase para la animación
+       br(),
+       icon("chevron-down", style = "display:inline-block;"), 
+       p("desliza para continuar", style = "display:inline-block;"),
+       icon("chevron-down"))
+  return(y) 
+}
 
 # #https://stackoverflow.com/questions/30136725/plot-background-colour-in-gradient
 # gg.background.fill <- function(gg.plot, cols = "white", which = "x") {
