@@ -16,7 +16,7 @@ source("variables.r")
 # source("dataemprende/variables.r")
 
 #importar funciones para logos FontAwesome
-source("~/Otros/fa_svg_icons.r")
+source("/home/bastian/Otros/fa_svg_icons.r")
 
 #cargar datos
 load("datos_precalculados.rdata")

@@ -136,24 +136,29 @@ shinyUI(
                                                                                      div(class = "fade_in",
                                                                                          #párrafo empresas/rubros y tramos
                                                                                          htmlOutput("parrafo1") %>% 
-                                                                                           aos(animation = "fade-down", delay = "0"),
+                                                                                           aos(animation = "fade-down", delay = "0") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
                                                                                          br(),br(),
                                                                                          
                                                                                          #párrafo tramos/comuna, tramos/rubro
                                                                                          htmlOutput("parrafo2") %>% 
-                                                                                           aos(animation = "fade-down", delay = "100"),
+                                                                                           aos(animation = "fade-down", delay = "100") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
                                                                                          br(),br(),
                                                                                          
                                                                                          htmlOutput("parrafo3") %>% 
-                                                                                           aos(animation = "fade-down", delay = "200"),
+                                                                                           aos(animation = "fade-down", delay = "200") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
                                                                                          br(),br(),
                                                                                          
                                                                                          htmlOutput("parrafo4") %>% 
-                                                                                           aos(animation = "fade-down", delay = "300"),
+                                                                                           aos(animation = "fade-down", delay = "300") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
                                                                                          br(),br(),
                                                                                          
                                                                                          htmlOutput("parrafo5") %>% 
-                                                                                           aos(animation = "fade-down", delay = "400")
+                                                                                           aos(animation = "fade-down", delay = "400") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
                                                                                      )
                                                                     ),
                                                              ),
@@ -190,9 +195,13 @@ shinyUI(
                                                                                      id = "condicional_rubro_elegido",
                                                                                      div(class = "fade_in",
                                                                                          #párrafo empresas/rubros y tramos
-                                                                                         htmlOutput("t_empresas_rubro_1") %>% aos(animation = "fade-down", delay = "0"),
+                                                                                         htmlOutput("t_empresas_rubro_1") %>% 
+                                                                                           aos(animation = "fade-down", delay = "0") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
                                                                                          br(), br(),
-                                                                                         htmlOutput("t_empresas_rubro_2") %>% aos(animation = "fade-down", delay = "0"),
+                                                                                         htmlOutput("t_empresas_rubro_2") %>% 
+                                                                                           aos(animation = "fade-down", delay = "0") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo),
                                                                                      )
                                                                     )
                                                              )
@@ -217,7 +226,8 @@ shinyUI(
                                                                                      br(),
                                                                                      #gráfico de logos de empresas en tres filas
                                                                                      plotOutput("g_empresas_comuna", height = "300px", width = "500px") %>% 
-                                                                                       aos(animation = "fade-down", delay = "0")
+                                                                                       aos(animation = "fade-down", delay = "0") %>% 
+                                                                                       shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
                                                                                      )
                                                                     ),
                                                              )
@@ -271,7 +281,8 @@ shinyUI(
                                                                                          
                                                                                          #grafico de barras
                                                                                          plotOutput("g_barras_empresas_rubro_comuna", height = "300px") %>% 
-                                                                                           aos(animation = "fade-down", delay = "200"),
+                                                                                           aos(animation = "fade-down", delay = "200") %>% 
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
                                                                                      )
                                                                     )
                                                              )
