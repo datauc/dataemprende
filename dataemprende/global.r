@@ -3,6 +3,7 @@ library(ggplot2)
 library(aos)
 library(hms)
 library(lubridate)
+library(ggimage)
 #library(leaflet)
 #library(grid)
 
@@ -12,12 +13,20 @@ cat("cargando datos...", fill=T)
 
 #importar variables y listas necesarias
 source("variables.r")
+# source("dataemprende/variables.r")
+
+#importar funciones para logos FontAwesome
+source("~/Otros/fa_svg_icons.r")
 
 #cargar datos
 load("datos_precalculados.rdata")
 load("puntos_empresas.rdata")
 load("datos_mapas.rdata")
 load("datos_mapa_regional.rdata")
+# load("dataemprende/datos_precalculados.rdata")
+# load("dataemprende/puntos_empresas.rdata")
+# load("dataemprende/datos_mapas.rdata")
+# load("dataemprende/datos_mapa_regional.rdata")
 
 #scrapping
 load("scrapping_yapo.rdata")
@@ -244,9 +253,12 @@ graficar_empresas <- function(input_comuna = "Iquique") {
   distribucion2 <- distribucion %>%
     group_by(tramo) %>%
     mutate(orden = 1:n()) %>%
-    mutate(logo = case_when(tramo == "Micro" ~ "\uF54F", #tienda casa
-                            tramo == "Pequeña" ~ "\uF54E", #tienda con techo
-                            tramo == "Mediana" ~ "\uF1AD")) #edificio
+    # mutate(logo = case_when(tramo == "Micro" ~ "\uF015", #"\uF54F", #tienda casa #store-alt
+    #                         tramo == "Pequeña" ~ "\uF54E", #tienda con techo #store
+    #                         tramo == "Mediana" ~ "\uF1AD")) #edificio #building
+    mutate(logo = case_when(tramo == "Micro" ~ fa_icon("store-alt"), #"\uF54F", #tienda casa #store-alt
+                            tramo == "Pequeña" ~ fa_icon("store"), #tienda con techo #store
+                            tramo == "Mediana" ~ fa_icon("building"))) #edificio #building
   
   #agregar porcentajes
   distribucion3 <- distribucion2 %>%
@@ -260,7 +272,13 @@ graficar_empresas <- function(input_comuna = "Iquique") {
   
   p <- distribucion3 %>%
     ggplot(aes(x = orden, y = tramo, label = logo, fill = tramo, col = tramo)) +
-    geom_text(size = 7, family = 'FontAwesome', col = color_claro, show.legend=F) +
+    # geom_text(size = 7, 
+    #           family = "FontAwesome",
+    #           col = color_claro, show.legend=F) +
+    geom_image(aes(image = logo),
+               size = 0.07,
+               asp = 1.7, #aspect ratio del gráfico; hay que definir tanto height como width en plotOutput para que se mantenga siempre el mismo
+               col = color_claro) +
     geom_text(aes(x = posicion, label=scales::percent(porcentaje, accuracy = 0.1)), 
               col=color_negro, hjust=0, family = "Dosis ExtraLight SemiBold", size = 5, check_overlap = T, show.legend=F) +
     theme_void() +
@@ -448,7 +466,7 @@ graficar_mapa_rubros <- function(datos_filtrados,
     #zoom variable
     coord_sf(xlim = c((-70.17+mover_x)+zoom, (-70.06+mover_x)-zoom),
              ylim = c((-20.31+mover_y)+zoom, (-20.195+mover_y)-zoom),
-             expand = FALSE) +
+             expand = T) +
     theme_void() +
     theme(plot.background = element_rect(fill = color_fondo, color = color_fondo),
           panel.background = element_rect(fill = color_fondo, color = color_fondo))

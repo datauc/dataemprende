@@ -5,6 +5,8 @@ shinyUI(
             aos::use_aos(), #animación en scroll
             includeScript("scripts.js"), #javascript de animación fade para conditional panels
             includeCSS("estilos.css"), #estilos css
+            tags$style("@import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);"), #fontAwesome 5,7
+            
             
             #header ----
             fluidRow(
@@ -12,29 +14,29 @@ shinyUI(
                      style = "padding-bottom: 30px;",
                      
                      div(
-                     img(src = "logos.svg",
-                       height = 120, 
-                       style = "padding: 5px; margin-left: -15px;"), #%>% 
+                       img(src = "logos.svg",
+                           height = 120, 
+                           style = "padding: 5px; margin-left: -15px;"), #%>% 
                        #aos(animation = "fade-down", duration = "1000"),
-                     
-                     br(),
-                     
-                     div(
-                       h1("DataEmprende", style = "display:inline-block;"),
-                       div("Tarapacá", class = "h1b", style = "display:inline-block;")), #%>% 
+                       
+                       br(),
+                       
+                       div(
+                         h1("DataEmprende", style = "display:inline-block;"),
+                         div("Tarapacá", class = "h1b", style = "display:inline-block;")), #%>% 
                        #aos(animation = "fade-down", duration = "2000", delay = 800),
-                     
-                     br(),
-                     
-                     p("Para asesorarte, necesitamos que respondas algunas preguntas..."), #%>% 
+                       
+                       br(),
+                       
+                       p("Para asesorarte, necesitamos que respondas algunas preguntas..."), #%>% 
                        #aos(animation = "fade-down"),
-                     
-                     #espaciador(),
-                     #espaciador_interior(),
-                     br(), br(), br(), 
-                     
-                     p('“Proyecto financiado por el Gobierno Regional de Tarapacá a tarvés del Fondo de Innovación para la Competitividad (FIC)”',
-                       style = "font-size: 85%; opacity: 0.6;"), #%>% 
+                       
+                       #espaciador(),
+                       #espaciador_interior(),
+                       br(), br(), br(), 
+                       
+                       p('“Proyecto financiado por el Gobierno Regional de Tarapacá a tarvés del Fondo de Innovación para la Competitividad (FIC)”',
+                         style = "font-size: 85%; opacity: 0.6;"), #%>% 
                        #aos(animation = "fade-down", duration = "2000", delay = 1600),
                      ) %>% 
                        aos(animation = "fade-down", duration = "2000"),
@@ -121,32 +123,38 @@ shinyUI(
                                                                     
                                                                     espaciador(),
                                                                     
-                                                                    h3("Resumen") %>% 
-                                                                      aos(animation = "fade-down", delay = "2000", duration = "1000"),
+                                                                    div(class="fade_in",
+                                                                    h3("Resumen") #%>% 
+                                                                      #aos(animation = "fade-down", delay = "2000", duration = "1000"),
+                                                                    ),
+                                                                    
                                                                     br(),
                                                                     
                                                                     conditionalPanel(selector_rubro_no_vacio,
                                                                                      id = "condicional_rubro_elegido",
-                                                                                     #párrafo empresas/rubros y tramos
-                                                                                     htmlOutput("parrafo1") %>% 
-                                                                                       aos(animation = "fade-down", delay = "0"),
-                                                                                     br(),br(),
                                                                                      
-                                                                                     #párrafo tramos/comuna, tramos/rubro
-                                                                                     htmlOutput("parrafo2") %>% 
-                                                                                       aos(animation = "fade-down", delay = "100"),
-                                                                                     br(),br(),
-                                                                                     
-                                                                                     htmlOutput("parrafo3") %>% 
-                                                                                       aos(animation = "fade-down", delay = "200"),
-                                                                                     br(),br(),
-                                                                                     
-                                                                                     htmlOutput("parrafo4") %>% 
-                                                                                       aos(animation = "fade-down", delay = "300"),
-                                                                                     br(),br(),
-                                                                                     
-                                                                                     htmlOutput("parrafo5") %>% 
-                                                                                       aos(animation = "fade-down", delay = "400")
+                                                                                     div(class = "fade_in",
+                                                                                         #párrafo empresas/rubros y tramos
+                                                                                         htmlOutput("parrafo1") %>% 
+                                                                                           aos(animation = "fade-down", delay = "0"),
+                                                                                         br(),br(),
+                                                                                         
+                                                                                         #párrafo tramos/comuna, tramos/rubro
+                                                                                         htmlOutput("parrafo2") %>% 
+                                                                                           aos(animation = "fade-down", delay = "100"),
+                                                                                         br(),br(),
+                                                                                         
+                                                                                         htmlOutput("parrafo3") %>% 
+                                                                                           aos(animation = "fade-down", delay = "200"),
+                                                                                         br(),br(),
+                                                                                         
+                                                                                         htmlOutput("parrafo4") %>% 
+                                                                                           aos(animation = "fade-down", delay = "300"),
+                                                                                         br(),br(),
+                                                                                         
+                                                                                         htmlOutput("parrafo5") %>% 
+                                                                                           aos(animation = "fade-down", delay = "400")
+                                                                                     )
                                                                     ),
                                                              ),
                                                              
@@ -162,39 +170,61 @@ shinyUI(
                                                   #—----
                                                   # EMPRESAS ----
                                                   tabPanel(title=HTML("&nbsp;&nbsp;&nbsp;&nbsp;Empresas&nbsp;&nbsp;&nbsp;&nbsp;"), 
+
                                                            fluidRow(
                                                              column(12,
                                                                     
+                                                                    
+                                                                    
                                                                     espaciador(),
                                                                     
-                                                                    h2("Empresas") %>% 
-                                                                      aos(animation = "fade-down", duration = "1000"),
+                                                                    div(class = "fade_in",
+                                                                    h2("Empresas") #%>% 
+                                                                      #aos(animation = "fade-down", duration = "1000")
+                                                                    ),
+                                                                    
                                                                     br(),
                                                                     
                                                                     #textos ----
                                                                     conditionalPanel(selector_rubro_no_vacio,
                                                                                      id = "condicional_rubro_elegido",
-                                                                                     
-                                                                                     #párrafo empresas/rubros y tramos
-                                                                                     htmlOutput("t_empresas_rubro_1") %>% aos(animation = "fade-down", delay = "0"),
-                                                                                     br(), br(),
-                                                                                     htmlOutput("t_empresas_rubro_2") %>% aos(animation = "fade-down", delay = "0"),
-                                                                                     
+                                                                                     div(class = "fade_in",
+                                                                                         #párrafo empresas/rubros y tramos
+                                                                                         htmlOutput("t_empresas_rubro_1") %>% aos(animation = "fade-down", delay = "0"),
+                                                                                         br(), br(),
+                                                                                         htmlOutput("t_empresas_rubro_2") %>% aos(animation = "fade-down", delay = "0"),
+                                                                                     )
                                                                     )
                                                              )
                                                            ),
-                                                           #cantidad de empresas
-                                                           #cuántas del rubro hay en la región OK
-                                                           #porcentaje de las empresas   OK 
-                                                           #cuántas del rubro hay en la comuna OK mapa
-                                                           #barras
-                                                           #porcentaje de las empresas  
-                                                           
-                                                           #como se divide el rubro (porcentaje empresas por subrubros)
-                                                           
-                                                           #principales actividades del rubro/subrubro
                                                            
                                                            espaciador_interior(),
+                                                           
+                                                           
+                                                           
+                                                           
+                                                           #logos tamaño empresas ----
+                                                           fluidRow(
+                                                             column(12,
+                                                                    
+                                                                    
+                                                                    conditionalPanel(selector_rubro_no_vacio,
+                                                                                     id = "condicional_rubro_elegido",
+                                                                                     
+                                                                                     div(class = "fade_in",
+                                                                                     h3("Tamaño de las empresas en la comuna") %>%
+                                                                                       aos(animation = "fade-down", delay = "0"),
+                                                                                     br(),
+                                                                                     #gráfico de logos de empresas en tres filas
+                                                                                     plotOutput("g_empresas_comuna", height = "300px", width = "500px") %>% 
+                                                                                       aos(animation = "fade-down", delay = "0")
+                                                                                     )
+                                                                    ),
+                                                             )
+                                                           ),
+                                                           
+                                                           espaciador_interior(),
+                                                           
                                                            
                                                            #mapa empresas comuna ----
                                                            fluidRow(
@@ -206,16 +236,16 @@ shinyUI(
                                                                     #mapa
                                                                     conditionalPanel(selector_rubro_no_vacio,
                                                                                      id = "condicional_rubro_elegido",
-                                                                                     
-                                                                                     # #titulo del rubro/subrubro
-                                                                                     # htmlOutput("rubro_elegido_6") %>%
-                                                                                     #   aos(animation = "fade-down", delay = "100"),
-                                                                                     # br(),
-                                                                                     br(),
-                                                                                     plotOutput("m_empresas_comuna", height = "400px") %>% #width exacto para que no tenga borde blanco
-                                                                                       aos(animation = "fade-down", delay = "0") %>%
-                                                                                       shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
-                                                                    )
+                                                                                     div(class = "fade_in",
+                                                                                         #titulo del rubro/subrubro
+                                                                                         htmlOutput("rubro_elegido_6") %>%
+                                                                                           aos(animation = "fade-down", delay = "100"),
+                                                                                         br(),
+                                                                                         br(),
+                                                                                         plotOutput("m_empresas_comuna", height = "400px") %>% #width exacto para que no tenga borde blanco
+                                                                                           aos(animation = "fade-down", delay = "0") %>%
+                                                                                           shinycssloaders::withSpinner(proxy.height = "400px", color = color_oscuro, color.background = color_fondo)
+                                                                                     ))
                                                              ),
                                                              
                                                              #barras empresas comuna ----
@@ -223,45 +253,27 @@ shinyUI(
                                                                     #barras con botonera
                                                                     conditionalPanel(selector_rubro_no_vacio,
                                                                                      id = "condicional_rubro_elegido",
-                                                                                     
-                                                                                     br(), br(),
-                                                                                     #botonera
-                                                                                     shinyWidgets::radioGroupButtons("selector_g_barras_empresas_rubro",
-                                                                                                                     label = NULL,
-                                                                                                                     choices = c("Rubro", "Subrubro"),
-                                                                                                                     selected = "Rubro",
-                                                                                                                     justified = TRUE,
-                                                                                                                     width = "90%") %>%
-                                                                                       aos(animation = "fade-down", delay = "100"),
-                                                                                     
-                                                                                     #titulo del rubro/subrubro
-                                                                                     htmlOutput("rubro_subrubro_elegido_1") %>%
-                                                                                       aos(animation = "fade-down", delay = "100"),
-                                                                                     br(),
-                                                                                     
-                                                                                     #grafico de barras
-                                                                                     plotOutput("g_barras_empresas_rubro_comuna", height = "300px") %>% 
-                                                                                       aos(animation = "fade-down", delay = "200"),
+                                                                                     div(class = "fade_in",
+                                                                                         br(), br(),
+                                                                                         #botonera
+                                                                                         shinyWidgets::radioGroupButtons("selector_g_barras_empresas_rubro",
+                                                                                                                         label = NULL,
+                                                                                                                         choices = c("Rubro", "Subrubro"),
+                                                                                                                         selected = "Rubro",
+                                                                                                                         justified = TRUE,
+                                                                                                                         width = "90%") %>%
+                                                                                           aos(animation = "fade-down", delay = "100"),
+                                                                                         
+                                                                                         #titulo del rubro/subrubro
+                                                                                         htmlOutput("rubro_subrubro_elegido_1") %>%
+                                                                                           aos(animation = "fade-down", delay = "100"),
+                                                                                         br(),
+                                                                                         
+                                                                                         #grafico de barras
+                                                                                         plotOutput("g_barras_empresas_rubro_comuna", height = "300px") %>% 
+                                                                                           aos(animation = "fade-down", delay = "200"),
+                                                                                     )
                                                                     )
-                                                             )
-                                                           ),
-                                                           
-                                                           espaciador_interior(),
-                                                           
-                                                           
-                                                           #logos tamaño empresas ----
-                                                           fluidRow(
-                                                             column(12,
-                                                                    h3("Tamaño de las empresas en la comuna") %>%
-                                                                      aos(animation = "fade-down", delay = "0"),
-                                                                    br(),
-                                                                    
-                                                                    conditionalPanel(selector_rubro_no_vacio,
-                                                                                     id = "condicional_rubro_elegido",
-                                                                                     #gráfico de logos de empresas en tres filas
-                                                                                     plotOutput("g_empresas_comuna", height = "200px") %>% 
-                                                                                       aos(animation = "fade-down", delay = "0")
-                                                                    ),
                                                              )
                                                            ),
                                                            
@@ -522,9 +534,9 @@ shinyUI(
                                                              )
                                                            ),
                                                            
-                                                           fotos(2),
+                                                           #fotos(2),
                                                            
-                                                           #espaciador(),
+                                                           espaciador(),
                                                            
                                                            #—----
                                                            # TRABAJADORES ----
@@ -728,14 +740,14 @@ shinyUI(
                                                              )
                                                            ),
                                                            
-                                                           espaciador_interior(),
+                                                           #espaciador_interior(),
                                                            
                                                            
                                                            
                                                            #espaciador_interior(),
                                                            
-                                                           #espaciador(),
-                                                           fotos(3),
+                                                           espaciador(),
+                                                           #fotos(3),
                                                            
                                                            
                                                            #—----
@@ -889,7 +901,6 @@ shinyUI(
                                                            
                                                            espaciador(),
                                                            
-                                                           
                                                   ), #end pestaña
                                                   
                                                   #—----
@@ -898,6 +909,7 @@ shinyUI(
                                                            
                                                            espaciador(),
                                                            
+                                                           div(class = "fade_in",
                                                            #YAPO.cl ----
                                                            h2("Portal de compraventa Yapo.cl") %>% 
                                                              aos(animation = "fade-down", duration = "1000"),
@@ -1085,13 +1097,14 @@ shinyUI(
                                                            # fluidRow(
                                                            #   column(12,leafletOutput("mymap"))
                                                            # ),
-                                                           
+                                                           )
                                                   ), #fin pestaña
                                                   #DESCARGAS ----
                                                   tabPanel(title=HTML("&nbsp;&nbsp;&nbsp;&nbsp;Descargas&nbsp;&nbsp;&nbsp;&nbsp;"), 
                                                            
                                                            espaciador(),
                                                            
+                                                           div(class = "fade_in",
                                                            
                                                            h2("Descarga de datos y estudios") %>% 
                                                              aos(animation = "fade-down", duration = "1000"),
@@ -1118,7 +1131,7 @@ shinyUI(
                                                                           style = "text-decoration: none !important;") %>% 
                                                              aos(animation = "fade-down", delay=0), 
                                                            
-
+                                                           
                                                            espaciador_interior(),
                                                            
                                                            
@@ -1161,7 +1174,7 @@ shinyUI(
                                                            
                                                            
                                                            espaciador()
-                                                           
+                                                           )
                                                   ), #fin pestaña
                                                   
                                                   #PROYECTOS ----
@@ -1169,7 +1182,8 @@ shinyUI(
                                                            
                                                            espaciador(),
                                                            
-                                                           
+                                                           div(class = "fade_in",
+                                                               
                                                            h2("Conoce más proyectos") %>% 
                                                              aos(animation = "fade-down", duration = "1000"),
                                                            br(),
@@ -1201,6 +1215,7 @@ shinyUI(
                                                            
                                                            
                                                            espaciador()
+                                                           )
                                                            
                                                   ) #fin pestaña
                                       ) #fin tabset

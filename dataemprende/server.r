@@ -219,7 +219,8 @@ shinyServer(function(input, output, session) {
         req(input$rubro != "",
             input$subrubro != "",
             datos_mapa_regional$lugares,
-            datos_m_empresas_comuna())
+            datos_m_empresas_comuna(),
+            nrow(datos_m_empresas_comuna()) > 1)
         
         # m <- datos$empresas_rubros_comuna %>%
         #     filter(rubro == input$rubro) %>%
@@ -500,17 +501,20 @@ shinyServer(function(input, output, session) {
                        glosa_division == subrubro_en_ciiu()) #usar función que ya hizo la correspondencia entre ciuu y subrubro
         } #rubro, sin filtrar subrubro
         else {
-            d <- puntos_empresas %>% 
+            d <- puntos_empresas %>%
+              #filter(rubro == rubros_sii[10])
                 filter(rubro == input$rubro)
         }
-    }) %>%
-        bindCache(input$selector_m_iquique_empresas_rubro, 
-                  input$zoom_m_iquique_empresas_rubro,
-                  input$rubro, input$subrubro)
+    }) #%>%
+        # bindCache(input$selector_m_iquique_empresas_rubro, 
+        #           input$zoom_m_iquique_empresas_rubro,
+        #           input$rubro, input$subrubro)
     
     #mapa
     output$m_iquique_empresas_rubro <- renderPlot({
-      req(input$rubro != "")
+      req(input$rubro != "",
+          input$subrubro != "",
+          nrow(d_iquique_empresas_rubro()) > 1)
         #nivel de zoom
         if (input$zoom_m_iquique_empresas_rubro == "Iquique y Alto Hospicio") {
             #iquique y alto hospicio
@@ -540,10 +544,12 @@ shinyServer(function(input, output, session) {
                                  zoom = zoom_elegido)  
         cat(fill=T, "output$m_iquique_empresas_rubro")
         return(p)
-    }, res = 100, bg = color_fondo) %>%
-        bindCache(input$selector_m_iquique_empresas_rubro, #selector rubro/subrubro
-                  input$zoom_m_iquique_empresas_rubro, #zoom
-                  input$rubro, input$subrubro)
+    }, res = 100, bg = color_fondo) #%>%
+        # bindCache(input$selector_m_iquique_empresas_rubro, #selector rubro/subrubro
+        #           input$zoom_m_iquique_empresas_rubro, #zoom
+        #           input$rubro, input$subrubro)
+    
+    
     
     output$rubro_subrubro_elegido_2 <- reactive({
         req(input$rubro != "",

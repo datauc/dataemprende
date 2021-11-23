@@ -230,9 +230,9 @@ body {
 
 
 .fade_in { 
-    animation: fadein 3s linear forwards; /*forwards hace que se mantenga así*/ 
-    animation-duration: 3s; /* tiempo total de la animación */
-    animation-delay: 1s; /*tiempo antes de empezar animación*/
+    animation: fadein 2s linear forwards; /*forwards hace que se mantenga así*/ 
+    animation-duration: 2s; /* tiempo total de la animación */
+    animation-delay: 0s; /*tiempo antes de empezar animación*/
     opacity: 0; /*que empiece invisible*/
 }
 @keyframes fadein {
