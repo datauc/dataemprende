@@ -35,7 +35,7 @@ shinyUI(
                        #espaciador_interior(),
                        br(), br(), br(), 
                        
-                       p('“Proyecto financiado por el Gobierno Regional de Tarapacá a tarvés del Fondo de Innovación para la Competitividad (FIC)”',
+                       p('“Proyecto financiado por el Gobierno Regional de Tarapacá a través del Fondo de Innovación para la Competitividad FIC 2017”',
                          style = "font-size: 85%; opacity: 0.6;"), #%>% 
                        #aos(animation = "fade-down", duration = "2000", delay = 1600),
                      ) %>% 
@@ -1247,8 +1247,28 @@ shinyUI(
                                     #"margin-bottom: -20px;"
                      ),
                      
+                     div(
+                       br(),
+                     p("Proyecto FIC", 
+                       style = "font-family: 'Dosis', sans-serif;
+                       margin-bottom: 6px; font-size: 20px; font-weight: 600;"),
+                     
+                     p('“Proyecto financiado por el Gobierno Regional de Tarapacá a través del Fondo de Innovación para la Competitividad FIC 2017”'),
+                       br(),
+                       
+                     p("Ejecuta",
+                            style = "font-family: 'Dosis', sans-serif;
+                       margin-bottom: -50px; font-size: 20px; font-weight: 600;"),
+                     
+                     br(),
+                       img(src = "logos.svg", height = 160),
+                     img(src = "logo-uc-blanco.svg", height = 100)
+                     ),
+                     
+                       
+                     
                      #p("Plataforma desarrollada por el equipo DATA UC, usando R Shiny"),
-                     p("Investigación y desarrollo - equipo DATA UC y TARAPACÁ UC"),
+                     #p("Investigación y desarrollo - equipo DATA UC y TARAPACÁ UC"),
                      
                      # div(style = "display: inline-block;", 
                      #     em("Desarrollo: ")
@@ -1280,19 +1300,19 @@ shinyUI(
                      #            style = paste0("color:", color_claro, ";")
                      # ),
                      # ),
-                     
-                     br(),
-                     
-                     p("Facultad de Matemáticas"),
-                     p("Universidad Católica de Chile"),
-                     tags$a(img(
-                       #src = "logodatauc.png",
-                       src = "logo-datauc-blanco.svg",
-                       width = 200, style = "padding: 10px"
-                     ),
-                     href = "http://www.mat.uc.cl",
-                     target="_blank"
-                     ),
+                     # 
+                     # br(),
+                     # 
+                     # p("Facultad de Matemáticas"),
+                     # p("Universidad Católica de Chile"),
+                     # tags$a(img(
+                     #   #src = "logodatauc.png",
+                     #   src = "logo-datauc-blanco.svg",
+                     #   width = 200, style = "padding: 10px"
+                     # ),
+                     # href = "http://www.mat.uc.cl",
+                     # target="_blank"
+                     # ),
                      br(),
               )
             ) #fin footer
