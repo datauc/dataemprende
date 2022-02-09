@@ -287,7 +287,8 @@ shinyServer(function(input, output, session) {
     
     #grafico horizontal empresas comuna ----
     output$g_barras_empresas_rubro_comuna <- renderPlot({
-        req(input$rubro != "")
+        req(input$rubro != "",
+            input$subrubro != "")
         
         if (input$selector_g_barras_empresas_rubro == "Rubro") {
             d <- datos$empresas_rubros_comuna %>%
@@ -1129,9 +1130,14 @@ shinyServer(function(input, output, session) {
     output$portal_precio_tipo <- renderPlot({
       req(base_portal)
       
+      # base_portal %>% 
+      #   group_by(tipo) %>% 
+      #   filter(tipo == "Casas") |> 
+      #   arrange(desc(precio))
+        
       p <- base_portal %>% 
         group_by(tipo) %>% 
-        summarize(promedio = mean(precio),
+        summarize(promedio = median(precio),
                   min = min(precio),
                   max = max(precio),
                   q = list(quantile(precio))) %>% #calcular cuartiles
@@ -1156,8 +1162,8 @@ shinyServer(function(input, output, session) {
         theme_void() +
         coord_cartesian(clip = "off") +
         scale_x_continuous(labels = function (x) paste(x/1000000, "M"), 
-                           expand = expansion(mult = c(0.1, 0.2)),
-                           breaks = c(1000000, 2000000, 3000000, 4000000, 5000000)) +
+                           expand = expansion(mult = c(0.2, 0.2)),
+                           breaks = c(0, 1000000, 2000000, 3000000, 4000000, 5000000)) +
         theme(axis.text.y = element_text(hjust = 1, color = color_negro, family = "Montserrat", size = 9, margin = margin(r = 5)),
               axis.text.x = element_text(hjust = 0.5, color = color_negro, family = "Montserrat", size = 9, margin = margin(t = 5, b=2))) +
         theme(plot.background = element_rect(fill = color_fondo, color = color_fondo)) +
@@ -1239,6 +1245,15 @@ shinyServer(function(input, output, session) {
     
     
     #—----
+    #ESTUDIOS ----
+    
+    # output$descarga_estudio_ofertas_laborales <- downloadHandler(
+    #   filename = "Estudio-ofertas-laborales.html",
+    #   content = function(file) {
+    #     file.copy("www/Estudio ofertas laborales/Estudio-ofertas-laborales.html", file)
+    #   }, 
+    #   contentType = "text/html")
+    
     
     #DESCARGAS ----
     

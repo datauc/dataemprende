@@ -43,7 +43,7 @@ body {
 
 /*fondo principal con el mapa en gif*/
 .fondo {
-  background-image: url("anim4_comp.gif"); /* The image used */
+  background-image: url("/home/bastian/Dataemprende/dataemprende/www/anim4_comp.gif"); /* The image used */
   background-color: #2D668E;/*#1D3557; /* Used if the image is unavailable */
   /*opacity: 0.2;*/
   /*height: 200px; /* You must set a specified height */
@@ -140,15 +140,17 @@ body {
 /* inactiva */
 .tabbable > .nav > li > a {
   background-color: #2D668E; 
-  color: #F1FAEE
-  
+  color: #F1FAEE !important;
+  font-weight: 300;
+   text-decoration: none;
 } 
 
 /* seleccionada */
 .tabbable > .nav > li[class=active] > a {
   background-color: #A8DADC; 
   font-weight: 600; 
-  color: #F1FAEE
+  color: #F1FAEE !important;
+  text-decoration: none;
 } 
 
 /* hover */
@@ -212,6 +214,18 @@ body {
    color: #FFFFFF !important;
  }
  
+a {
+  font-family: 'Dosis', sans-serif;;
+   font-weight: 300;
+   font-size: 20px;
+   color: #A8DADC !important;
+   text-decoration: underline;
+}
+ 
+  a:hover {
+   color: #FFFFFF !important;
+ }
+
  
 /* ANIMACIONES */
 

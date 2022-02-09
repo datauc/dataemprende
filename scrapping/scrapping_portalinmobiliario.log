@@ -1179,3 +1179,190 @@ In addition: Warning message:
 In download.file(direccion, destfile = paste0(ruta, archivo)) :
   cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
 Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+DEFINIENDO FUNCIONES...
+DESCARGANDO...
+trying URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Error in download.file(direccion, destfile = paste0(ruta, archivo)) : 
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca'
+Calls: descargar_portalinmobiliario -> download.file
+In addition: Warning message:
+In download.file(direccion, destfile = paste0(ruta, archivo)) :
+  cannot open URL 'https://www.portalinmobiliario.com/arriendo/departamento/tarapaca': HTTP status was '403 Forbidden'
+Execution halted
