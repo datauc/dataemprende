@@ -144,7 +144,7 @@ base_portal <- base_portal %>%
          tipo = stringr::str_to_sentence(tipo)) %>% 
   #categorías de metros
   mutate(metros = readr::parse_number(metros)) %>% 
-  mutate(metros_cat = cut_width(metros, 100, boundary = 0)) %>% #cortar en categorías
+  mutate(metros_cat = ggplot2::cut_width(metros, 100, boundary = 0)) %>% #cortar en categorías
   mutate(metros_cat = ifelse(metros > 500, "500+", as.character(metros_cat))) %>% #límite superior
   mutate(metros_cate = metros_cat, #poner nombres a categorías
          metros_cate = stringr::str_remove(metros_cate, "\\["),
@@ -185,7 +185,7 @@ base_portal <- dplyr::bind_rows(bases_portal) %>%
 
 #guardar base unificada
 save(base_portal, file = "/mnt/volumen/Dataemprende/scrapping/portalinmobiliario/bases_portal.rdata")
-save(base_portal, file = "dataemprende/scrapping_portal.rdata")
+save(base_portal, file = "/home/bastian/Dataemprende/dataemprende/scrapping_portal.rdata")
 
 #—----
 
