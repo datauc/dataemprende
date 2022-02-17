@@ -64,11 +64,11 @@ rubros_sii <- c("Comercio al por mayor y al por menor; reparación de vehículos
 # 
 # save(subrubros_sii, file = "dataemprende_datos/subrubros.rdata")
 
-load("subrubros.rdata")
+load("/home/bastian/Dataemprende/dataemprende/subrubros.rdata")
 #load("dataemprende_datos/subrubros.rdata")
 
 #cargar cruce entre ciiu y subrubros del sii para mapa de puntos de empresas
-load("cruce_ciiuu_sii.rdata")
+load("/home/bastian/Dataemprende/dataemprende/cruce_ciiuu_sii.rdata")
 
 
 

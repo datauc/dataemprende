@@ -1130,11 +1130,6 @@ shinyServer(function(input, output, session) {
     output$portal_precio_tipo <- renderPlot({
       req(base_portal)
       
-      # base_portal %>% 
-      #   group_by(tipo) %>% 
-      #   filter(tipo == "Casas") |> 
-      #   arrange(desc(precio))
-        
       p <- base_portal %>% 
         group_by(tipo) %>% 
         summarize(promedio = median(precio),

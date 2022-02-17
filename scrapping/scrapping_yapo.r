@@ -1,4 +1,4 @@
-setwd("~/Dataemprende/")
+setwd("/home/bastian/Dataemprende/")
 
 suppressPackageStartupMessages(library(dplyr))
 library(rvest)
@@ -173,14 +173,23 @@ scrapping_yapo_terminar <- function(data) {
   #terminar loop: 
   #if(archivo == max(archivos_s)) { 
     
+  #categorias formateadas
+  categorias <- c("Artículos del hogar", "Bolsos y accesorios", "Celulares", "Computadores","Jardín y herramientas", "Moda y vestuario", 
+                  "Muebles", "Salud y belleza", "Electrodomésticos", "Vestuario maternidad e infantil", 
+                  "Calzado", "Consolas y videojuegos","Hobbies y outdoor", "Servicios", 
+                  "Televisión y cámaras", "Artículos infantiles", "Deportes", "Juguetes", 
+                  "Mascotas y accesorios", "Arte y antiguedades", "Libros y revistas", "Otros productos", 
+                  "Ciclismo", "Música y películas", "Instrumentos musicales")
+  
+  fecha_a <- lubridate::today()
+  
     #transformar lista a tibble 
     cat("convirtiendo lista...", fill=T) 
     #base_yapo_1 <- bind_rows(base_yapo_list) 
   base_yapo_1 <- bind_rows(data) 
     
     #ordenar categorías
-    base_yapo_2 <- base_yapo_1 %>% mutate(categoria = recode(
-      categoria,
+    base_yapo_2 <- base_yapo_1 %>% mutate(categoria = recode(categoria,
       "articulos-del-hogar" = "Artículos del hogar",
       "bolsos-bisuteria-accesorios" = "Bolsos y accesorios",
       "celulares" = "Celulares",
@@ -261,7 +270,7 @@ base_yapo_list <- scrapping_yapo()
 base_yapo <- scrapping_yapo_terminar(base_yapo_list)
 
 #guardar base con fecha
-save(base_yapo, file = paste0("/mnt/volumen/Dataemprende/scrapping/yapo.cl/bases/base_yapo_", lubridate::today(), ".rdata"))
+save(base_yapo, file = paste0("/mnt/volumen/Dataemprende/scrapping/yapo.cl/bases/base_yapo_", lubridate::today(), ".rdata"), compress = T)
 
 
 # integrar bases ----

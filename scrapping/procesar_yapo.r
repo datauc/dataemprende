@@ -4,7 +4,7 @@ library(ggplot2)
 library(tidytext)
 library(lubridate)
 
-setwd("~/Dataemprende/")
+setwd("/home/bastian/Dataemprende/")
 #fecha_s <- "11-jun-2021"
 #fecha_a <- "2021-06-11"
 #load(paste0("scrapping/yapo.cl/bases/base_yapo_", fecha_s, ".rdata"))
@@ -62,10 +62,9 @@ base_yapo_resumen <- bases_yapo %>%
 
 
 #compilar ----
-
 base_yapo_procesada <- list("entera" = bases_yapo,
                             "resumen" = base_yapo_resumen,
                             "palabras" = base_yapo_palabras)
 
-save(base_yapo_procesada, file = "dataemprende/scrapping_yapo.rdata")
+save(base_yapo_procesada, file = "/home/bastian/Dataemprende/dataemprende/scrapping_yapo.rdata")
 #load("dataemprende_datos/scrapping_yapo.rdata")

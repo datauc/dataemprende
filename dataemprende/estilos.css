@@ -43,7 +43,8 @@ body {
 
 /*fondo principal con el mapa en gif*/
 .fondo {
-  background-image: url("/home/bastian/Dataemprende/dataemprende/www/anim4_comp.gif"); /* The image used */
+  /*background-image: url("/home/bastian/Dataemprende/dataemprende/www/anim4_comp.gif"); /* The image used */
+  background-image: url("anim4_comp.gif"); /* The image used */
   background-color: #2D668E;/*#1D3557; /* Used if the image is unavailable */
   /*opacity: 0.2;*/
   /*height: 200px; /* You must set a specified height */

@@ -1,4 +1,4 @@
-setwd("~/Dataemprende/")
+setwd("/home/bastian/Dataemprende/")
 
 suppressPackageStartupMessages(library(dplyr))
 library(rvest)
