@@ -5,6 +5,7 @@ shinyUI(
             aos::use_aos(), #animación en scroll
             includeScript("scripts.js"), #javascript de animación fade para conditional panels
             includeCSS("estilos.css"), #estilos css
+            shinyjs::useShinyjs(),
             tags$style("@import url(https://use.fontawesome.com/releases/v5.7.2/css/all.css);"), #fontAwesome 5,7
             
             
@@ -58,9 +59,9 @@ shinyUI(
                      
                      #espaciador(),
                      div(
-                       br(), br(),
-                       br(), br(),
-                       p(" ")
+                       br(), #br(),
+                       #br(), br(),
+                       #p(" ")
                      ),
                      
                      #div con los tres selectores
@@ -115,7 +116,14 @@ shinyUI(
                      
                      #pestañas ----
                      
-                     espaciador(), 
+                     #espaciador(),
+                     div(
+                       br(), br(),
+                       #br(), br(),
+                       #p(" ")
+                     ),
+                     
+                     #espaciador_interior(), 
                      
                      tabsetPanel(id = "tabs", type="pills", 
                                  
@@ -959,25 +967,11 @@ shinyUI(
                                  
                                  #—----
                                  #OFERTA ----
-                                 tabPanel(title=HTML("&nbsp;&nbsp;&nbsp;&nbsp;Oferta&nbsp;&nbsp;&nbsp;&nbsp;"), 
+                                 tabPanel(title=HTML("&nbsp;&nbsp;&nbsp;&nbsp;Precios&nbsp;&nbsp;&nbsp;&nbsp;"), 
                                           
                                           desliza_para_continuar(),
                                           
                                           espaciador_interior(),
-                                          
-                                          
-                                          #estudio de ofertas laborales ----
-                                          
-                                          # actionButton(outputId = "descarga_estudio_ofertas_laborales", 
-                                          # #downloadButton(outputId = "descarga_estudio_ofertas_laborales", 
-                                          #                label = HTML("&nbsp;&nbsp;Acceder al estudio de ofertas laborales"), 
-                                          #                icon = icon("file-chart-column"),
-                                          #                style = "text-decoration: none !important;") %>% 
-                                          #   aos(animation = "fade-down", delay=0), 
-                                          # 
-                                          # 
-                                          # espaciador_interior(),
-                                          
                                           
                                           div(class = "fade_in",
                                               #YAPO.cl ----
@@ -1190,10 +1184,144 @@ shinyUI(
                                  #          espaciador()
                                  # ),
                                  
+                                 
+                                 #CURSOS ----
+                                 
+                                 tabPanel(title=HTML("&nbsp;&nbsp;&nbsp;&nbsp;Capacitación&nbsp;&nbsp;&nbsp;&nbsp;"), 
+                                          
+                                          fluidRow(
+                                            column(12,
+                                                   desliza_para_continuar(),
+                                                   espaciador_interior(),
+                                                   div(class="fade_in",
+                                                       h2("Capacitación") ),
+                                                   espaciador_interior()
+                                            )
+                                          ),
+                                          
+                                          fluidRow(
+                                            column(12,
+                                            #texto explicativo
+                                            p("Dataemprende ofrece cursos personalizados de capacitación en transformación digital para ayudarle con la digitalización de su negocio o empresa. Respondiendo las siguientes preguntas, le recomendaremos una malla personalizada de los cursos que le son más apropiados considerando sus conocimientos, recursos, y características de su negocio.") |> 
+                                              aos(animation = "fade-down", delay = "100"),
+                                            espaciador_interior(),
+                                            
+                                            
+                                            #selectores ----
+                                            h4("¿Cuál es el nivel de digitalización de su pyme?") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            shinyWidgets::radioGroupButtons(
+                                              inputId = "v_nivel", label = NULL,
+                                              choiceNames = c("nulo", "bajo", "medio", "alto", "muy alto"),
+                                              choiceValues = 1:5,
+                                              #selected = NA,
+                                              width = 600, justified = T, size = "lg") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            espaciador_interior(),
+                                            
+                                            h4("¿Le interesa digitalizar su pyme en el corto o mediano plazo?") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            shinyWidgets::radioGroupButtons(
+                                              inputId = "v_deseo", label = NULL,
+                                              choiceNames = c("sí", "no"),
+                                              choiceValues = c(1, 0),
+                                              #selected = NA,
+                                              width = 600, justified = T, size = "lg") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            espaciador_interior(),
+                                            
+                                            h4("¿Cuál es el nivel actual de manejo de tecnologías digitales en su pyme?") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            shinyWidgets::radioGroupButtons(
+                                              inputId = "v_conoc", label = NULL,
+                                              choiceNames = c("bajo", "medio", "alto"),
+                                              choiceValues = 1:3,
+                                              #selected = NA,
+                                              width = 600, justified = T, size = "lg") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            espaciador_interior(),
+                                            
+                                            h4("¿Su pyme cuenta con los recursos (económicos, financieros) para digitalizarse?") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            shinyWidgets::radioGroupButtons(
+                                              inputId = "v_recur", label = NULL,
+                                              choiceNames = c("sí", "no"),
+                                              choiceValues = c(1, 0),
+                                              #selected = NA,
+                                              width = 600, justified = T, size = "lg") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            espaciador_interior(),
+                                            
+                                            h4("¿Cómo se compara su pyme en términos de digitalización con respecto a su competencia?") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            shinyWidgets::radioGroupButtons(
+                                              inputId = "v_compe", label = NULL,
+                                              choiceNames = c("peor", "igual", "mejor"),
+                                              choiceValues = 1:3,
+                                              #selected = NA,
+                                              width = 600, justified = T, size = "lg") |> 
+                                              aos(animation = "fade-down", delay="100"),
+                                            espaciador_interior(),
+                                            
+                                            
+                                            #alerta
+                                            div(id='cursos_alerta',
+                                                             em("Por favor, rellene todos los campos para obtener sus resultados")
+                                            ),
+                                            
+                                            #resultados ----
+                                            div(id="cursos_resultado",
+                                                div(class="fade_in",
+                                                    h2("Recomendación de cursos")
+                                                ),
+                                                
+                                                espaciador_interior(),
+                                                
+                                                p("A continuación se presentan los cursos que recomendamos...") |> 
+                                                  aos(animation = "fade-down", delay = "100"),
+                                                
+                                                #cantidad de cursos
+                                                
+                                                espaciador_interior(),
+                                                
+                                                fluidRow(
+                                                  column(5,
+                                                         uiOutput("cursos_resultado_botones") |> shinycssloaders::withSpinner(proxy.height = "200px", color = color_oscuro, color.background = color_fondo)
+                                                  ),
+                                                  column(7,
+                                                         #descripción del curso seleccionado
+                                                         div(style = glue::glue("color: {color_blanco}; background: {color_oscuro}; border-radius: 5px; border: none; height: 100%; padding: 12px;"),
+                                                             
+                                                             div(#style = "padding: 20px; padding-top: 0px;",
+                                                               
+                                                               div(id = "btn_curso_vacio",
+                                                                   espaciador_interior(),
+                                                                   em("Seleccione uno de los cursos recomendados para información más detallada."),
+                                                                   espaciador_interior()
+                                                               ),
+                                                             h3(textOutput("btn_curso_titulo"), style = "margin-left: 12px;"),
+                                                             br(),
+                                                             
+                                                             div(textOutput("btn_curso_descripcion"), style = "margin-left: 12px;"),
+                                                             br()
+                                                             )
+                                                         )
+                                                  )
+                                                )
+                                            )
+                                            
+                                            )),
+                                          
+                                          espaciador()
+                                 ), #end tab cursos
+                                 
+                                 #—----
+                                 
+                                 
                                  #DESCARGAS ----
                                  tabPanel(title=HTML("&nbsp;&nbsp;&nbsp;&nbsp;Documentos&nbsp;&nbsp;&nbsp;&nbsp;"), 
                                           
-                                          espaciador(),
+                                          espaciador_interior(),
                                           
                                           div(class = "fade_in",
                                               
@@ -1278,6 +1406,12 @@ shinyUI(
                                               tags$a(href="Estudio ofertas laborales/Estudio-ofertas-laborales.html", target="_blank", "(Presione aquí para abrirlo en una nueva pestaña)"),
                                               
                                               br(),
+                                              
+                                              # downloadButton(outputId = "descarga_ofertas_laborales", 
+                                              #                label = HTML("&nbsp;&nbsp;Descargar estudio"), 
+                                              #                icon = icon("file-download"),
+                                              #                style = "text-decoration: none !important;") %>% 
+                                              #   aos(animation = "fade-down", delay=0), 
                                               
                                               
                                               #espaciador_interior(),

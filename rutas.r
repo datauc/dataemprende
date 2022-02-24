@@ -1,5 +1,7 @@
-library(dplyr)
-source("dataemprende/variables.r")
+#library(dplyr)
+#source("dataemprende/variables.r")
+#rubros_sii |> datapasta::dpasta()
+#rubros_sii <- c("Comercio al por mayor y al por menor; reparación de vehículos automotores y motocicletas", "Transporte y almacenamiento", "Actividades de alojamiento y de servicio de comidas", "Construcción", "Industria manufacturera", "Otras actividades de servicios", "Actividades profesionales, científicas y técnicas", "Actividades de servicios administrativos y de apoyo", "Actividades inmobiliarias", "Actividades de atención de la salud humana y de asistencia social", "Enseñanza", "Información y comunicaciones", "Agricultura, ganadería, silvicultura y pesca", "Actividades financieras y de seguros", "Actividades artísticas, de entretenimiento y recreativas", "Explotación de minas y canteras", "Suministro de agua; evacuación de aguas residuales, gestión de desechos y descontaminación", "Suministro de electricidad, gas, vapor y aire acondicionado", "Administración pública y defensa; planes de seguridad social de afiliación obligatoria", "Actividades de organizaciones y órganos extraterritoriales")
 
 # Brechas posibles ----
 # En torno a la posibilidad de transformación digital o digitalización de pymes, se hipotetizan 5 posibles tipos de brechas en los que calificarían. Cada brecha puede tener un nivel asociado, con un polo negativo y otro positivo.
@@ -43,22 +45,22 @@ source("dataemprende/variables.r")
 #Variables ----
 
 #(nivel de digitalización)
-v_nivel = 4     # 1 2 3 4 5
+#v_nivel = 4     # 1 2 3 4 5
 
 #(deseo e interés)
-v_deseo = 1     # 0 1
+#v_deseo = 1     # 0 1
 
 #(necesidad formativa)
-v_conoc = 2     # 1 2 3 
+#v_conoc = 2     # 1 2 3 
 
 #(necesidad de capital)
-v_recur = 0     # 0 1
+#v_recur = 0     # 0 1
 
 #(necesidad competitiva)
-v_compe = 1     # 1 2 3
+#v_compe = 1     # 1 2 3
 
 #rubros
-v_rubro = rubros_sii
+#v_rubro = rubros_sii
 
 # Rutas ----
 # 1. **Rutas respecto a disposición** _(deseo e interés)_
@@ -83,10 +85,10 @@ v_rubro = rubros_sii
 
 
 
-cursos <- vector()
-cursos <- list()
+#cursos <- vector()
 
-recomendacion <- function(nombre = "ejemplo", v_deseo, v_conoc, v_recur, v_compe, v_nivel, v_rubro = "ninguno") {
+
+recomendacion <- function(nombre = "ejemplo", v_deseo, v_conoc, v_recur, v_compe, v_nivel, v_rubro = "ninguno", verbose = FALSE) {
   # 1. Rutas respecto a disposición (deseo e interés)
   c_deseo <- case_when(v_deseo == 0 ~ c("evangelización"),
                        #v_nivel <= 3 & v_deseo == 1 ~ c("fidelización")
@@ -155,51 +157,79 @@ recomendacion <- function(nombre = "ejemplo", v_deseo, v_conoc, v_recur, v_compe
   #if ("cursos de innovación" %in% cursos) { cursos <- cursos[! cursos %in% c("cursos de evangelización")] }
   #if ("cursos de innovación" %in% cursos) { cursos <- cursos[! cursos %in% c("cursos de evangelización")] }
   
+  #ordenar
+  cursos <- cursos |>
+    as.factor() |>
+    forcats::fct_relevel(after = Inf,
+                         "introducción",
+                         "evangelización",
+                         #
+                         "aplicación",
+                         #
+                         "postulación a proyectos",
+                         "herramientas básicas",
+                         "herramientas intermedias",
+                         "herramientas avanzadas",
+                         #
+                         "innovación",
+                         #
+                         "temático 1: marketing digital",
+                         "temático 2: ventas online",
+                         "temático 3: análisis de datos",
+                         "temático 4: herramientas financieras",
+                         "temático 5: logística") |> 
+    sort() |> 
+    janitor::make_clean_names(case = "snake") |> 
+    suppressWarnings()
+  
   #texto
-  message("Negocio: ", toupper(nombre))
-  message("Nivel: ", case_when(v_nivel == 1 ~ "nulo", v_nivel == 2 ~ "bajo", v_nivel == 3 ~ "medio", v_nivel == 4 ~ "alto", v_nivel == 5 ~ "vanguardista"))
-  message(case_when(v_deseo == 0 ~ "Sin interés", v_deseo == 1 ~ "Con interés"), " en digitalizarse")
-  message("Manejo ", case_when(v_conoc == 1 ~ "bajo", v_conoc == 2 ~ "medio", v_conoc == 3 ~ "alto"), " de tecnologías")
-  message(case_when(v_recur == 0 ~ "Sin recursos", v_recur == 1 ~ "Con recursos"), " para digitalizarse")
-  message("Se considera ", case_when(v_compe == 1 ~ "peor", v_compe == 2 ~ "igual de", v_compe == 3 ~ "mejor"), " digitalizado que su competencia")
-  if (v_rubro != "ninguno") { message("Rubro: ", stringr::str_trunc(v_rubro, 40)) }
-  message("Recomendación de ", length(cursos), " cursos: ", paste(cursos, collapse = ", "), "\n")
+  if (verbose == TRUE) {
+    message("Negocio: ", toupper(nombre))
+    message("Nivel: ", case_when(v_nivel == 1 ~ "nulo", v_nivel == 2 ~ "bajo", v_nivel == 3 ~ "medio", v_nivel == 4 ~ "alto", v_nivel == 5 ~ "vanguardista"))
+    message(case_when(v_deseo == 0 ~ "Sin interés", v_deseo == 1 ~ "Con interés"), " en digitalizarse")
+    message("Manejo ", case_when(v_conoc == 1 ~ "bajo", v_conoc == 2 ~ "medio", v_conoc == 3 ~ "alto"), " de tecnologías")
+    message(case_when(v_recur == 0 ~ "Sin recursos", v_recur == 1 ~ "Con recursos"), " para digitalizarse")
+    message("Se considera ", case_when(v_compe == 1 ~ "peor", v_compe == 2 ~ "igual de", v_compe == 3 ~ "mejor"), " digitalizado que su competencia")
+    if (v_rubro != "ninguno") { message("Rubro: ", stringr::str_trunc(v_rubro, 40)) }
+    message("Recomendación de ", length(cursos), " cursos: ", paste(cursos, collapse = ", "), "\n")
+  }
+  
   return(cursos)
   
 }
 
 # Obtener ----
 
-({
-  recomendacion(nombre = "pequeño almacén", 
-                v_nivel = 1, v_deseo = 0, v_conoc = 1, v_recur = 0, v_compe = 1, 
-                v_rubro = "Comercio al por mayor y al por menor, reparación de vehículos automotores y motocicletas")
-  
-  recomendacion(nombre = "food truck con pos", 
-                v_nivel = 3, v_deseo = 1, v_conoc = 2, v_recur = 0, v_compe = 3, 
-                v_rubro = "Actividades de alojamiento y de servicio de comidas")
-  
-  recomendacion(nombre = "empresa que vende online", 
-                v_nivel = 3, v_deseo = 1, v_conoc = 3, v_recur = 1, v_compe = 3, 
-                v_rubro = "Comercio al por mayor y al por menor, reparación de vehículos automotores y motocicletas")
-  
-  recomendacion(nombre = "fintech", 
-                v_nivel = 5, v_deseo = 1, v_conoc = 3, v_recur = 1, v_compe = 3, 
-                v_rubro = "Otras actividades de servicios")
-  
-  recomendacion(nombre = "peluquería con instagram", 
-                v_nivel = 3, v_deseo = 0, v_conoc = 2, v_recur = 1, v_compe = 2, 
-                v_rubro = "Otras actividades de servicios")
-  
-  recomendacion(nombre = "manicurista a domicilio", 
-                v_nivel = 2, v_deseo = 0, v_conoc = 2, v_recur = 0, v_compe = 3, 
-                v_rubro = "Otras actividades de servicios")
-  
-  recomendacion(nombre = "gimnasio local", 
-                v_nivel = 2, v_deseo = 1, v_conoc = 1, v_recur = 1, v_compe = 1, 
-                v_rubro = "Actividades artísticas, de entretenimiento y recreativas")
-  
-  recomendacion(nombre = "empresa de transportes", 
-                v_nivel = 3, v_deseo = 1, v_conoc = 2, v_recur = 1, v_compe = 2, 
-                v_rubro = "Transporte y almacenamiento")
-})
+# ({
+#   recomendacion(nombre = "pequeño almacén",
+#                 v_nivel = 1, v_deseo = 0, v_conoc = 1, v_recur = 0, v_compe = 1,
+#                 v_rubro = "Comercio al por mayor y al por menor, reparación de vehículos automotores y motocicletas")
+# 
+#   recomendacion(nombre = "food truck con pos",
+#                 v_nivel = 3, v_deseo = 1, v_conoc = 2, v_recur = 0, v_compe = 3,
+#                 v_rubro = "Actividades de alojamiento y de servicio de comidas")
+# 
+#   recomendacion(nombre = "empresa que vende online",
+#                 v_nivel = 3, v_deseo = 1, v_conoc = 3, v_recur = 1, v_compe = 3,
+#                 v_rubro = "Comercio al por mayor y al por menor, reparación de vehículos automotores y motocicletas")
+# 
+#   recomendacion(nombre = "fintech",
+#                 v_nivel = 5, v_deseo = 1, v_conoc = 3, v_recur = 1, v_compe = 3,
+#                 v_rubro = "Otras actividades de servicios")
+# 
+# recomendacion(nombre = "peluquería con instagram",
+#               v_nivel = 3, v_deseo = 0, v_conoc = 2, v_recur = 1, v_compe = 2,
+#               v_rubro = "Otras actividades de servicios")
+# 
+#   recomendacion(nombre = "manicurista a domicilio",
+#                 v_nivel = 2, v_deseo = 0, v_conoc = 2, v_recur = 0, v_compe = 3,
+#                 v_rubro = "Otras actividades de servicios")
+# 
+#   recomendacion(nombre = "gimnasio local",
+#                 v_nivel = 2, v_deseo = 1, v_conoc = 1, v_recur = 1, v_compe = 1,
+#                 v_rubro = "Actividades artísticas, de entretenimiento y recreativas")
+# 
+# recomendacion(nombre = "empresa de transportes",
+#               v_nivel = 3, v_deseo = 1, v_conoc = 2, v_recur = 1, v_compe = 2,
+#               v_rubro = "Transporte y almacenamiento")
+# })

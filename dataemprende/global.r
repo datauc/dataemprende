@@ -33,6 +33,12 @@ load("scrapping_yapo.rdata")
 load("scrapping_portal.rdata")
 #load("empresas_mapa_sii.rdata")
 
+#importar función de rutas
+source("/home/bastian/Dataemprende/rutas.r") #recomendacion()
+
+#metadata de rutas
+source("/home/bastian/Dataemprende/rutas_metadata.r") #cursos_tabla
+
 cat("datos cargados", fill=T)
 
 #colores ----
