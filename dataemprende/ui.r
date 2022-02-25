@@ -78,8 +78,8 @@ shinyUI(
                          #input$rubro
                          selectInput(inputId = "rubro", 
                                      label = "Rubro principal de su negocio o emprendimiento", 
-                                     #choices = c("", rubros_sii),
-                                     choices = c(rubros_sii),
+                                     choices = c("", rubros_sii),
+                                     #choices = c(rubros_sii),
                                      width = "100%"),
                          #input$subrubro
                          selectInput(inputId = "subrubro", 
@@ -111,8 +111,8 @@ shinyUI(
               column(8, #columna del lado derecho, todo el contenido
                      
                      #el gran condicional: oculta toda la página si no se han seleccionado rubros
-                     #conditionalPanel(selector_rubro_no_vacio,
-                     #                  id = "condicional_rubro_elegido",
+                     conditionalPanel(selector_rubro_no_vacio,
+                                      id = "condicional_rubro_elegido",
                      
                      #pestañas ----
                      
@@ -1214,7 +1214,7 @@ shinyUI(
                                               inputId = "v_nivel", label = NULL,
                                               choiceNames = c("nulo", "bajo", "medio", "alto", "muy alto"),
                                               choiceValues = 1:5,
-                                              #selected = NA,
+                                              selected = NA,
                                               width = 600, justified = T, size = "lg") |> 
                                               aos(animation = "fade-down", delay="100"),
                                             espaciador_interior(),
@@ -1225,7 +1225,7 @@ shinyUI(
                                               inputId = "v_deseo", label = NULL,
                                               choiceNames = c("sí", "no"),
                                               choiceValues = c(1, 0),
-                                              #selected = NA,
+                                              selected = NA,
                                               width = 600, justified = T, size = "lg") |> 
                                               aos(animation = "fade-down", delay="100"),
                                             espaciador_interior(),
@@ -1236,7 +1236,7 @@ shinyUI(
                                               inputId = "v_conoc", label = NULL,
                                               choiceNames = c("bajo", "medio", "alto"),
                                               choiceValues = 1:3,
-                                              #selected = NA,
+                                              selected = NA,
                                               width = 600, justified = T, size = "lg") |> 
                                               aos(animation = "fade-down", delay="100"),
                                             espaciador_interior(),
@@ -1247,7 +1247,7 @@ shinyUI(
                                               inputId = "v_recur", label = NULL,
                                               choiceNames = c("sí", "no"),
                                               choiceValues = c(1, 0),
-                                              #selected = NA,
+                                              selected = NA,
                                               width = 600, justified = T, size = "lg") |> 
                                               aos(animation = "fade-down", delay="100"),
                                             espaciador_interior(),
@@ -1258,7 +1258,7 @@ shinyUI(
                                               inputId = "v_compe", label = NULL,
                                               choiceNames = c("peor", "igual", "mejor"),
                                               choiceValues = 1:3,
-                                              #selected = NA,
+                                              selected = NA,
                                               width = 600, justified = T, size = "lg") |> 
                                               aos(animation = "fade-down", delay="100"),
                                             espaciador_interior(),
@@ -1462,7 +1462,7 @@ shinyUI(
                                           
                                  ) #fin pestaña
                      ) #fin tabset
-                     #) #fin condicional
+                     ) #fin condicional
                      
               ) #fin columna
             ), #fin fluidRow principal

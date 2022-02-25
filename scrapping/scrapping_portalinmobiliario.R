@@ -183,6 +183,13 @@ for (arch in archivos_y) {
 base_portal <- dplyr::bind_rows(bases_portal) %>% 
   distinct(subtitulo, ubicacion, .keep_all = T)
 
+
+# base_portal |>
+#   mutate(año = lubridate::year(fecha_scrapping),
+#          mes = lubridate::month(fecha_scrapping)) |>
+#   group_by(año, mes) |>
+#   count()
+
 #guardar base unificada
 save(base_portal, file = "/mnt/volumen/Dataemprende/scrapping/portalinmobiliario/bases_portal.rdata")
 save(base_portal, file = "/home/bastian/Dataemprende/dataemprende/scrapping_portal.rdata")

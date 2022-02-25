@@ -239,9 +239,14 @@ scrapping_yapo_terminar <- function(data) {
                              stringr::str_detect(fecha, "Nov") ~ 11,
                              stringr::str_detect(fecha, "Dic") ~ 12),
              #detectar días
-             dia = readr::parse_number(as.character(fecha))) %>% 
+             dia = case_when(fecha == "Hoy" ~ lubridate::today() |> lubridate::day() |> as.integer(),
+                             fecha == "Ayer" ~ lubridate::today() |> lubridate::day()-1 |> as.integer(),
+                             TRUE ~ readr::parse_number(as.character(fecha)) |> as.integer())
+             ) %>% 
       #armar fechas
-      mutate(fecha_p = lubridate::ymd(paste(2021, mes, dia, sep="-"))) %>% 
+      mutate(fecha_p = case_when(mes <= lubridate::month(lubridate::today()) ~ lubridate::ymd(paste(2022, mes, dia, sep="-")),
+                                 TRUE ~ lubridate::ymd(paste(2021, mes, dia, sep="-")))
+             ) %>% 
       #unir columnas de hoy/ayer con fechas armadas
       mutate(fecha = coalesce(fecha_p, fecha_f)) %>%
       #limpiar
@@ -267,7 +272,11 @@ descargar_yapo()
 cat("SCRAPPING...", fill=T)
 base_yapo_list <- scrapping_yapo()
 
+#base_yapo_list |> bind_rows() |> select(fecha) |> distinct()
+
 base_yapo <- scrapping_yapo_terminar(base_yapo_list)
+
+#base_yapo |> filter(is.na(fecha_p))
 
 #guardar base con fecha
 save(base_yapo, file = paste0("/mnt/volumen/Dataemprende/scrapping/yapo.cl/bases/base_yapo_", lubridate::today(), ".rdata"), compress = T)
@@ -289,6 +298,13 @@ for (arch in archivos_y) {
 #convertir lista a data frame
 bases_yapo <- dplyr::bind_rows(bases_yapo) %>% 
   distinct(producto, fecha, .keep_all = T)
+
+# bases_yapo |> arrange(desc(fecha))
+# bases_yapo |> 
+#   mutate(año = lubridate::year(fecha),
+#          mes = lubridate::month(fecha)) |> 
+#   group_by(año, mes) |> 
+#   count()
 
 #guardar base unificada
 save(bases_yapo, file = "/mnt/volumen/Dataemprende/scrapping/yapo.cl/bases_yapo.rdata")

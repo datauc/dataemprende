@@ -2,27 +2,19 @@ shinyServer(function(input, output, session) {
   options(shiny.sanitize.errors = FALSE)
   options(OutDec= ",") #decimales con coma
   
+  #el gran condicional
+  shinyjs::hide("condicional_rubro_elegido")  
+  reactive({
+    req(input$rubro)
+  if (input$rubro != "") { shinyjs::show("condicional_rubro_elegido") }
+    }) |> bindEvent(input$rubro)
+
+  
   #filtrar selector de subrubros
   observeEvent(input$rubro, {
     req(input$rubro != "")
-    #cat("observeEvent(input$rubro) 1")
-    # #entrega subrubros ordenados por cantidad de empresas
-    # #tictoc::tic()
-    # subrubros_filtrados <- datos$empresas_subrubros %>%
-    #   filter(rubro == input$rubro) %>%
-    #   arrange(desc(n)) %>%
-    #   select(subrubro) %>%
-    #   pull()
-    # #tictoc::toc()
-    
-    #browse()
-    #lo mismo pero preprocesado
-    #subrubros_sii$subrubro[subrubros_sii$rubro == rubros_sii[2]]
     subrubros_filtrados <- subrubros_sii$subrubro[subrubros_sii$rubro == input$rubro]
-    
-    #cat(fill=T, "observeEvent(input$rubro) 2")
-    updateSelectInput(session, "subrubro",
-                      choices = subrubros_filtrados)
+    updateSelectInput(session, "subrubro", choices = subrubros_filtrados)
   }) 
   
   #texto ----

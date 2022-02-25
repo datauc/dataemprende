@@ -1,9 +1,8 @@
 ---
 title: "Estudio ofertas laborales Tarapacá"
-#output: md_document
-#always_allow_html: true
-output: 
-  html_document: 
+output:
+  pdf_document: default
+  html_document:
     theme: null
     css: ~/Dataemprende/dataemprende/estilos.css
 ---
